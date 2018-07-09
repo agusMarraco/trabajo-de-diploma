@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/TrabajoDeCampo/TrabajoDeCampo/bin/Debug
+/TrabajoDeCampo/TrabajoDeCampo/obj/Debug
+/TrabajoDeCampo/.vs/TrabajoDeCampo
