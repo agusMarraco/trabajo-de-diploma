@@ -21,5 +21,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AltaModificacionUsuario user = new AltaModificacionUsuario();
+            user.Show();
+        }
     }
 }

@@ -16,5 +16,20 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         {
             InitializeComponent();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new AltaModificacionAlumno().Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new Inasistencias().Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new Amonestaciones().Show();
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace TrabajoDeCampo.Pantallas.Administración
         {
             InitializeComponent();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new AltaModificacionCurso().Show();
+        }
     }
 }

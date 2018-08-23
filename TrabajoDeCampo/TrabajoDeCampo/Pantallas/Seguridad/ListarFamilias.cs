@@ -26,5 +26,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Alta_ModificarFamilia familia = new Alta_ModificarFamilia();
+            familia.Show();
+        }
     }
 }

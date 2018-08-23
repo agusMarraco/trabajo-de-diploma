@@ -16,5 +16,10 @@ namespace TrabajoDeCampo.Pantallas.Administración
         {
             InitializeComponent();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new AltaModificacionHorario().Show();
+        }
     }
 }
