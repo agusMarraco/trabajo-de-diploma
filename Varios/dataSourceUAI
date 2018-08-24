@@ -1,0 +1,3 @@
+Ejemplo de como arma el string de conexion por windows authentication
+
+Data Source=090W10112-73744\SQL14_UAI;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
