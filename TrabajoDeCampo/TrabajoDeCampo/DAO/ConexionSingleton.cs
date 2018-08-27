@@ -12,7 +12,7 @@ namespace TrabajoDeCampo.DAO
         private static SqlConnection _conexion;
 
         private static SqlConnection constructor() {
-            return new SqlConnection ();
+            return new SqlConnection (TrabajoDeCampo.Properties.Resources.ConnectionString);
         }
 
         public static SqlConnection obtenerConexion()

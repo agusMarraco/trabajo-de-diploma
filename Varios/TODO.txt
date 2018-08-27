@@ -1,0 +1,42 @@
+change log
+
+--encriptacion md5 y aes
+--backup and restore
+--metodos de generacion de digitos verificadores
+--metodos de chequeos de integridad de digitos
+
+
+cambios a realizar debido a la encriptación
+	los valores encriptados con y despues pasados a base 64 ocupan el doble mas 8 entonces 50*2+8 = 108				
+	actualizar los valores de en el sql de creacion
+	crear orden de cambio.
+	Familia Nombre
+		pasar a text
+	Patente Descripción
+		pasar a text
+	Bitácora Mensaje
+		pasar a text
+	Usuario Alias
+		cambiar el dominio de interfaz a 20
+	Planilla de Evaluación Trimestre 1
+		pasar a varchar 50
+	Planilla de Evaluación Trimestre 2
+		pasar a varchar 50
+	Planilla de Evaluación Trimestre 3
+		pasar a varchar 50
+	Planilla de Evaluación Nota Final
+		pasar a varchar 50
+	Amonestación Motivo
+		esta como text--ok
+	Tutor Teléfono primario
+		pasar a varchar(100) en bd
+	Tutor Teléfono secundario
+		pasar a varchar(100) en bd
+	Alumno Dirección
+		ojo en la parte de seguridad se llama alumno direccion y en el dd se llama alumno domicilio.
+		cambiar por domicilio en seguridad
+		pasar a text en bd
+
+	
+	cambiar el security utils el nombre del parametro que recibe el metodo de md5 en el codigo en el dd y en el diagrama de clases.
+	

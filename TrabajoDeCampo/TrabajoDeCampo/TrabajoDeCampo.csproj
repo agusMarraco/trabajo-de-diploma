@@ -62,8 +62,14 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Smo, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -232,6 +238,12 @@
     <Compile Include="Pantallas\Seguridad\Restaurar Backup.Designer.cs">
       <DependentUpon>Restaurar Backup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\testeador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\testeador.Designer.cs">
+      <DependentUpon>testeador.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Pantallas\Seguridad\AltaModificacionUsuario.cs">
       <SubType>Form</SubType>
@@ -365,6 +377,9 @@
     <EmbeddedResource Include="Pantallas\Seguridad\Restaurar Backup.resx">
       <DependentUpon>Restaurar Backup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\testeador.resx">
+      <DependentUpon>testeador.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -373,6 +388,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="DiagramasDeClase\DCdeBO.cd" />
     <None Include="DiagramasDeClase\DCdeDatos.cd" />
