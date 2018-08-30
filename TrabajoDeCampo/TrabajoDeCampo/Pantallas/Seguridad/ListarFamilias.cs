@@ -32,5 +32,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             Alta_ModificarFamilia familia = new Alta_ModificarFamilia();
             familia.Show();
         }
+
+        private void ListarFamilias_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

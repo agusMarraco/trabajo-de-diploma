@@ -40,6 +40,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
 
         }
+
+        private void AltaModificacionUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class PEP {

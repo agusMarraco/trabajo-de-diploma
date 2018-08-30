@@ -441,7 +441,8 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Name = "AltaModificacionUsuario";
-            this.Text = "AltaModificacionUsuario";
+            this.Text = "Usuario";
+            this.Load += new System.EventHandler(this.AltaModificacionUsuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();

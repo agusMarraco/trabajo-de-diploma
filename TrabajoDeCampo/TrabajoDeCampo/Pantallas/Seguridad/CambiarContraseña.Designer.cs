@@ -124,7 +124,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Name = "CambiarContraseña";
-            this.Text = "CambiarContraseña";
+            this.Text = "Cambiar Contraseña";
             this.ResumeLayout(false);
             this.PerformLayout();
 

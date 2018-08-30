@@ -157,7 +157,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "AltaModificacionCurso";
-            this.Text = "AltaModificacionCurso";
+            this.Text = "Curso ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
