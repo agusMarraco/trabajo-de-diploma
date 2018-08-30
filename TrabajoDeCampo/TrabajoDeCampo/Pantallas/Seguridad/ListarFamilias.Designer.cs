@@ -37,6 +37,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -46,10 +47,10 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2});
-            this.dataGridView1.Location = new System.Drawing.Point(7, 94);
+            this.dataGridView1.Location = new System.Drawing.Point(13, 34);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(280, 391);
+            this.dataGridView1.Size = new System.Drawing.Size(333, 391);
             this.dataGridView1.TabIndex = 0;
             // 
             // Column2
@@ -60,33 +61,33 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(602, 93);
+            this.button1.Location = new System.Drawing.Point(13, 433);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 28);
             this.button1.TabIndex = 2;
-            this.button1.Text = "CREAR";
+            this.button1.Text = "Crear";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 74);
+            this.label1.Location = new System.Drawing.Point(10, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 16);
+            this.label1.Size = new System.Drawing.Size(57, 16);
             this.label1.TabIndex = 3;
-            this.label1.Text = "FAMILIAS";
+            this.label1.Text = "Familias";
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
-            this.dataGridView2.Location = new System.Drawing.Point(306, 94);
+            this.dataGridView2.Location = new System.Drawing.Point(352, 34);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(280, 391);
+            this.dataGridView2.Size = new System.Drawing.Size(333, 391);
             this.dataGridView2.TabIndex = 4;
             // 
             // Column1
@@ -97,40 +98,51 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(602, 146);
+            this.button2.Location = new System.Drawing.Point(124, 433);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(105, 28);
             this.button2.TabIndex = 5;
-            this.button2.Text = "MODIFICAR";
+            this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(602, 195);
+            this.button3.Location = new System.Drawing.Point(241, 433);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(105, 28);
             this.button3.TabIndex = 6;
-            this.button3.Text = "BORRAR";
+            this.button3.Text = "Borrar";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(302, 74);
+            this.label2.Location = new System.Drawing.Point(349, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(153, 16);
+            this.label2.Size = new System.Drawing.Size(124, 16);
             this.label2.TabIndex = 7;
-            this.label2.Text = "PATENTES ASIGNADAS";
+            this.label2.Text = "Patentes Asignadas";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(580, 433);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 28);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Cancelar";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // ListarFamilias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 525);
+            this.ClientSize = new System.Drawing.Size(695, 472);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -160,5 +172,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button4;
     }
 }

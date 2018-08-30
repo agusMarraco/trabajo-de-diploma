@@ -178,12 +178,6 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\Seguridad\ActualizarConexion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pantallas\Seguridad\ActualizarConexion.Designer.cs">
-      <DependentUpon>ActualizarConexion.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pantallas\Seguridad\Alta-ModificarFamilia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,18 +207,6 @@
     </Compile>
     <Compile Include="Pantallas\Seguridad\ListarFamilias.Designer.cs">
       <DependentUpon>ListarFamilias.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pantallas\Seguridad\Modificar Familia.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pantallas\Seguridad\Modificar Familia.Designer.cs">
-      <DependentUpon>Modificar Familia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pantallas\Seguridad\PantallaDeRestauracion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pantallas\Seguridad\PantallaDeRestauracion.Designer.cs">
-      <DependentUpon>PantallaDeRestauracion.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\Seguridad\Respaldo Base de Datos.cs">
       <SubType>Form</SubType>
@@ -335,9 +317,6 @@
     <EmbeddedResource Include="Pantallas\Alumnos\Tutores.resx">
       <DependentUpon>Tutores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\Seguridad\ActualizarConexion.resx">
-      <DependentUpon>ActualizarConexion.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Seguridad\Alta-ModificarFamilia.resx">
       <DependentUpon>Alta-ModificarFamilia.cs</DependentUpon>
     </EmbeddedResource>
@@ -364,12 +343,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\Seguridad\Modificar Familia.resx">
-      <DependentUpon>Modificar Familia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\Seguridad\PantallaDeRestauracion.resx">
-      <DependentUpon>PantallaDeRestauracion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Seguridad\Respaldo Base de Datos.resx">
       <DependentUpon>Respaldo Base de Datos.cs</DependentUpon>

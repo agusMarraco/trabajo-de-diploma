@@ -55,6 +55,7 @@
             this.inglesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.españolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,14 +88,14 @@
             // alumnosToolStripMenuItem1
             // 
             this.alumnosToolStripMenuItem1.Name = "alumnosToolStripMenuItem1";
-            this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.alumnosToolStripMenuItem1.Text = "Alumnos";
             this.alumnosToolStripMenuItem1.Click += new System.EventHandler(this.alumnosToolStripMenuItem1_Click);
             // 
             // tutoresToolStripMenuItem
             // 
             this.tutoresToolStripMenuItem.Name = "tutoresToolStripMenuItem";
-            this.tutoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tutoresToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.tutoresToolStripMenuItem.Text = "Tutores";
             this.tutoresToolStripMenuItem.Click += new System.EventHandler(this.tutoresToolStripMenuItem_Click);
             // 
@@ -197,14 +198,14 @@
             // respaldarToolStripMenuItem
             // 
             this.respaldarToolStripMenuItem.Name = "respaldarToolStripMenuItem";
-            this.respaldarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.respaldarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.respaldarToolStripMenuItem.Text = "Respaldar";
             this.respaldarToolStripMenuItem.Click += new System.EventHandler(this.respaldarToolStripMenuItem_Click);
             // 
             // restaurarToolStripMenuItem
             // 
             this.restaurarToolStripMenuItem.Name = "restaurarToolStripMenuItem";
-            this.restaurarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.restaurarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restaurarToolStripMenuItem.Text = "Restaurar";
             this.restaurarToolStripMenuItem.Click += new System.EventHandler(this.restaurarToolStripMenuItem_Click);
             // 
@@ -233,7 +234,8 @@
             this.opcionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cambiarContraseñaToolStripMenuItem,
             this.cambiarIdiomaToolStripMenuItem,
-            this.cerrarSesiónToolStripMenuItem});
+            this.cerrarSesiónToolStripMenuItem,
+            this.salirToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.opcionesToolStripMenuItem.Text = "Opciones";
@@ -272,6 +274,12 @@
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
             this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
             // 
             // Menu
             // 
@@ -319,5 +327,6 @@
         private System.Windows.Forms.ToolStripMenuItem materiasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem promociónDeAlumnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bitácoraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
     }
 }

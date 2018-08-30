@@ -34,9 +34,40 @@ cambios a realizar debido a la encriptación
 		pasar a varchar(100) en bd
 	Alumno Dirección
 		ojo en la parte de seguridad se llama alumno direccion y en el dd se llama alumno domicilio.
-		cambiar por domicilio en seguridad
+		cambiar a direccion los domicilios de alumno en el der fisico y y en el dd a direccion
 		pasar a text en bd
 
 	
 	cambiar el security utils el nombre del parametro que recibe el metodo de md5 en el codigo en el dd y en el diagrama de clases.
+	Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
+
+
+	chequear el header de cada form para que no se vea raro el nombre
+
+	hacer que el btn cancelar de cada uno cierre el form.
+
+
+	consultar sobre la pantalla de falla de conexion por la autenticacion por windows.
+
+
+	reportes
+		agregar los botones para 
+		Cursos: informando la situación de los distintos cursos, mostrando los alumnos
+		inscriptos y si el mismo esta excedido de capacidad.
+		Alumnos: en base a las amonestaciones o faltas de un alumno en particular.
+		Plan de estudios: este reporte apuntara a mostrar que materias están
+		asignadas a los distintos niveles.
+		Horario: es un reporte que indica el estado de los horarios ordenados por curso
+		y día.
+
+		Bitácora
+
+	Ver de agregarle iconos a los botones
+
+	actualizar las fotos de las pantallas en la carpeta
+
+	normalizar el crear/registrar
+
+	chequear el script de creacion
+
 	

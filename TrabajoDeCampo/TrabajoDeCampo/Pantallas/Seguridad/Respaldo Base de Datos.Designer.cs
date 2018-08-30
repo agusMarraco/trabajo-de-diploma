@@ -42,7 +42,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(62, 97);
+            this.label1.Location = new System.Drawing.Point(6, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 0;
@@ -51,16 +51,16 @@
             // pathtxt
             // 
             this.pathtxt.Enabled = false;
-            this.pathtxt.Location = new System.Drawing.Point(172, 46);
+            this.pathtxt.Location = new System.Drawing.Point(128, 47);
             this.pathtxt.Name = "pathtxt";
-            this.pathtxt.Size = new System.Drawing.Size(135, 20);
+            this.pathtxt.Size = new System.Drawing.Size(300, 20);
             this.pathtxt.TabIndex = 1;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(65, 156);
+            this.btnCancelar.Location = new System.Drawing.Point(460, 203);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(79, 23);
             this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -68,9 +68,9 @@
             // partesCB
             // 
             this.partesCB.FormattingEnabled = true;
-            this.partesCB.Location = new System.Drawing.Point(172, 89);
+            this.partesCB.Location = new System.Drawing.Point(128, 89);
             this.partesCB.Name = "partesCB";
-            this.partesCB.Size = new System.Drawing.Size(135, 21);
+            this.partesCB.Size = new System.Drawing.Size(300, 21);
             this.partesCB.TabIndex = 3;
             // 
             // groupBox1
@@ -84,16 +84,16 @@
             this.groupBox1.Controls.Add(this.btnCancelar);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(435, 212);
+            this.groupBox1.Size = new System.Drawing.Size(548, 232);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Generar Respaldo";
             // 
             // btnExaminar
             // 
-            this.btnExaminar.Location = new System.Drawing.Point(313, 44);
+            this.btnExaminar.Location = new System.Drawing.Point(460, 44);
             this.btnExaminar.Name = "btnExaminar";
-            this.btnExaminar.Size = new System.Drawing.Size(75, 23);
+            this.btnExaminar.Size = new System.Drawing.Size(79, 23);
             this.btnExaminar.TabIndex = 6;
             this.btnExaminar.Text = "Examinar";
             this.btnExaminar.UseVisualStyleBackColor = true;
@@ -102,7 +102,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(62, 53);
+            this.label2.Location = new System.Drawing.Point(6, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 5;
@@ -110,7 +110,7 @@
             // 
             // btnRespaldar
             // 
-            this.btnRespaldar.Location = new System.Drawing.Point(313, 156);
+            this.btnRespaldar.Location = new System.Drawing.Point(9, 203);
             this.btnRespaldar.Name = "btnRespaldar";
             this.btnRespaldar.Size = new System.Drawing.Size(75, 23);
             this.btnRespaldar.TabIndex = 4;
@@ -122,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 273);
+            this.ClientSize = new System.Drawing.Size(585, 273);
             this.Controls.Add(this.groupBox1);
             this.Name = "Respaldo_Base_de_Datos";
             this.Text = "Respaldo Base de Datos";
