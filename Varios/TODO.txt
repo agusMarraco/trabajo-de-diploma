@@ -68,6 +68,6 @@ cambios a realizar debido a la encriptación
 
 	normalizar el crear/registrar
 
-	chequear el script de creacion
+	adaptar el script de creacion para los nuevos campos encriptados.
 
 	
