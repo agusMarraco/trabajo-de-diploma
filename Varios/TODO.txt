@@ -3,11 +3,13 @@ preguntas para carlos
 consultar sobre la pantalla de falla de conexion por la autenticacion por windows.
 preguntar sobre los permisos de sql server para la creacion de bckp
 
-
-patentes interfaz usuario
+Notas de sobre las conversaciones con carlos
+	agregar el icono de filtro en las tablas porque queda el asc desc segun el filtro.
+	Permitir el multifiltro en la bitacora
+	patentes interfaz usuario
 	agregar una columna mas sacar la tabla al pedo de la solapa de patenes en el alta de usuario.
-los idiomas puede haber mas  hacer un combo
-pasar abm familias a una sola pantalla para evitar tener pantallas al pedo
+	los idiomas puede haber mas  hacer un combo
+	pasar abm familias a una sola pantalla para evitar tener pantallas al pedo
 
 
 change log
