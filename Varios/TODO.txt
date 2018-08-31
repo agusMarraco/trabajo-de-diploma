@@ -1,3 +1,15 @@
+preguntas para carlos
+
+consultar sobre la pantalla de falla de conexion por la autenticacion por windows.
+preguntar sobre los permisos de sql server para la creacion de bckp
+
+
+patentes interfaz usuario
+	agregar una columna mas sacar la tabla al pedo de la solapa de patenes en el alta de usuario.
+los idiomas puede haber mas  hacer un combo
+pasar abm familias a una sola pantalla para evitar tener pantallas al pedo
+
+
 change log
 
 --encriptacion md5 y aes
@@ -46,8 +58,6 @@ cambios a realizar debido a la encriptación
 
 	hacer que el btn cancelar de cada uno cierre el form.
 
-
-	consultar sobre la pantalla de falla de conexion por la autenticacion por windows.
 
 
 	reportes
