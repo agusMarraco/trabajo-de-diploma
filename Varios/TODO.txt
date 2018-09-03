@@ -22,7 +22,7 @@ change log
 
 
 	
-	
+	Cambiar en la carpeta la parte de backup y restore para dejarla actualizada.	
 	cambiar el security utils el nombre del parametro que recibe el metodo de md5 en el codigo en el dd y en el diagrama de clases.
 	Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
 
