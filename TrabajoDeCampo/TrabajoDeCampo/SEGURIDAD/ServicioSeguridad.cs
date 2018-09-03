@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using TrabajoDeCampo.BO;
 using TrabajoDeCampo.DAO;
-
+using System.IO;
 namespace TrabajoDeCampo.SERVICIO
 {
     public class ServicioSeguridad
     {
 
+
+        public ServicioSeguridad()
+        {
+            this.daoSeguridad = new DAOSeguridad();
+        }
         private DAOSeguridad _daoSeguridad;
 
         public DAOSeguridad daoSeguridad
@@ -82,9 +88,91 @@ namespace TrabajoDeCampo.SERVICIO
 
         //BACKUPS
 
-        public void realizarBackup(int partes, String directorio) { }
+        public void realizarBackup(int partes, String directorio) {
+            String date = DateTime.Now.Date.ToShortDateString();
+            date = date.Replace("/", "-");
+            String nombreDelBack = "TRABAJO-DIPLOMA-" + date + "-";
 
-        public void realizarRestore(String directorio) { }
+            foreach (String item in Directory.GetFiles(directorio, nombreDelBack+"*"))
+            {
+                File.Delete(item);
+            }
+
+            partes = partes - 1;
+            this.daoSeguridad.realizarBackup(partes, directorio);
+            //consulto filesize
+            FileInfo informacionDelArchivo = new FileInfo(directorio + "\\tempBackup.bak");
+
+            long size = informacionDelArchivo.Length;
+            //calculo el max size por parte
+            Double chunk = size / partes;
+
+            byte[] buffer = new byte[(int)Math.Round(chunk)];
+            
+
+            string archivoTemporal = directorio + "\\tempBackup.bak";
+            Stream tempBak = File.OpenRead(archivoTemporal);
+            Stream destino;
+            int index = 1;
+            while (tempBak.Position < tempBak.Length)
+            {
+                String nombreNuevo = nombreDelBack + index;
+                index++;
+                File.Create(directorio + "\\" + nombreNuevo + ".bak").Close();
+                destino = File.OpenWrite(directorio + "\\" + nombreNuevo +".bak");
+                    
+
+                while( destino.Position < chunk)
+                {
+                    int leerHasta= (int)Math.Min(chunk, buffer.Length);
+                    int cantidadLeida =  tempBak.Read(buffer, 0, leerHasta);
+                    destino.Write(buffer, 0, cantidadLeida);
+
+                    if (cantidadLeida < Math.Min(chunk, buffer.Length))
+                        break;
+                }
+
+                destino.Close();
+
+
+            }
+
+            tempBak.Close();
+            File.Delete(archivoTemporal);
+
+
+        }
+
+        public void realizarRestore(String directorio) {
+            String[] partesPath = directorio.Split('-');
+            String nombreBasico = "TRABAJO-DIPLOMA" + "-" + partesPath[2] + "-" + partesPath[3] + "-" + partesPath[4];
+            String regex = (nombreBasico +"-??"+".bak");
+
+
+
+            String directorioActual = partesPath[0].Replace("TRABAJO", "");
+            List<String> todosLosArchivos = Directory.GetFiles(directorioActual, regex).ToList();
+            todosLosArchivos.Sort((String a, String b) =>
+            { return long.Parse(a.Split('-')[5].Replace(".bak","")).CompareTo(long.Parse(b.Split('-')[5].Replace(".bak", ""))); });
+
+            
+            String directorioTemporal = directorioActual + "\\tempRestoreFile.bak";
+
+            Stream stream = File.Create(directorioTemporal);
+
+            foreach (String archivo in todosLosArchivos)
+            {
+                Stream parte = File.OpenRead(archivo);
+                parte.CopyTo(stream);
+                parte.Close();
+            }
+
+            stream.Close();
+            daoSeguridad.realizarRestore(directorioTemporal);
+
+            File.Delete(directorioTemporal);
+
+        }
 
         //IDIOMA
         public Dictionary<String,String> traerTraducciones(List<String> codigosMensajes, String codigoIdioma) { return null; }

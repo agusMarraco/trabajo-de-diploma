@@ -67,8 +67,10 @@
             // 
             // partesCB
             // 
+            this.partesCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.partesCB.FormattingEnabled = true;
             this.partesCB.Location = new System.Drawing.Point(128, 89);
+            this.partesCB.MaxDropDownItems = 10;
             this.partesCB.Name = "partesCB";
             this.partesCB.Size = new System.Drawing.Size(300, 21);
             this.partesCB.TabIndex = 3;

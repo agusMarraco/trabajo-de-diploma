@@ -12,36 +12,45 @@ using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
 using System.Data.SqlClient;
 using TrabajoDeCampo.DAO;
-
+using TrabajoDeCampo.SERVICIO;
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class Restaurar_Backup : Form
     {
         String usersFilePath = null;
+
+        private ServicioSeguridad servicioSeguridad;
         public Restaurar_Backup()
         {
             InitializeComponent();
+            servicioSeguridad = new ServicioSeguridad();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             if(usersFilePath != null){
-                Restore restore = new Restore();
-                restore.NoRecovery = false;
-                SqlConnection connection = ConexionSingleton.obtenerConexion();
-        
-                BackupDeviceItem restoreItem = new BackupDeviceItem(usersFilePath, DeviceType.File);
-                restore.Devices.Add(restoreItem);
-                restore.Database = "TRABAJO_DIPLOMA";
-                restore.SqlRestore(new Server());
-                
+
+
+                servicioSeguridad.realizarRestore(usersFilePath);
+                //Restore restore = new Restore();
+                //restore.NoRecovery = false;
+                //SqlConnection connection = ConexionSingleton.obtenerConexion();
+
+                //BackupDeviceItem restoreItem = new BackupDeviceItem(usersFilePath, DeviceType.File);
+                //restore.Devices.Add(restoreItem);
+                //restore.Database = "TRABAJO_DIPLOMA";
+                //restore.SqlRestore(new Server());
+
+                MessageBox.Show("Completado papu");
+
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "BackupFiles|*.bak|All Files|*";
+            dialog.Filter = "BackupFiles|*.bak";
 
             DialogResult result = dialog.ShowDialog();
             if(result == DialogResult.OK){

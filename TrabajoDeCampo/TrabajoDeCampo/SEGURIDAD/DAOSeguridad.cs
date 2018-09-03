@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using TrabajoDeCampo.BO;
 
 namespace TrabajoDeCampo.DAO
@@ -91,9 +92,46 @@ namespace TrabajoDeCampo.DAO
 
         //BACKUPS
 
-        public void realizarBackup(int partes, String directorio) { }
+        public void realizarBackup(int partes, String directorio) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            StringBuilder queryText = new StringBuilder();
+            
+            queryText.Append(" USE MASTER ");
+            queryText.Append(" BACKUP DATABASE TRABAJO_DIPLOMA TO DISK = '" + directorio + "\\tempBackup.bak' WITH init");
+            SqlCommand query = new SqlCommand(queryText.ToString(), connection);
+            try
+            {
+                query.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception e )
+            {
 
-        public void realizarRestore(String directorio) { }
+                connection.Close();
+                throw e;
+            }  
+        }
+
+        public void realizarRestore(String directorio) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            StringBuilder queryText = new StringBuilder();
+            queryText.Append(" USE MASTER ");
+            queryText.Append(" RESTORE DATABASE TRABAJO_DIPLOMA FROM  DISK = '"+ directorio +"' WITH REPLACE");
+            SqlCommand query = new SqlCommand(queryText.ToString(), connection);
+            try
+            {
+                query.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+
+                connection.Close();
+                throw e;
+            }
+        }
        
         
         //IDIOMA

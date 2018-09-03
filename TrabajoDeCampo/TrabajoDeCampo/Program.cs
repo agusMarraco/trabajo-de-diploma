@@ -36,27 +36,27 @@ namespace TrabajoDeCampo
             //pantallas.Add(new AltaModificacionHorario());
             //pantallas.Add(new AltaModificacionMateria());
             //pantallas.Add(new AsignacionDeMaterias());
-            pantallas.Add(new Cursos());
-            pantallas.Add(new Horarios());
-            pantallas.Add(new Materias());
-            pantallas.Add(new PromocionDeAlumnos());
-            //pantallas.Add(new AltaModificacionAlumno());
+            //pantallas.Add(new Cursos());
+            //pantallas.Add(new Horarios());
+            //pantallas.Add(new Materias());
+            //pantallas.Add(new PromocionDeAlumnos());
+            ////pantallas.Add(new AltaModificacionAlumno());
             //pantallas.Add(new AltaModificacionTutor());
-            pantallas.Add(new Alumnos());
-            pantallas.Add(new Amonestaciones());
-            pantallas.Add(new Inasistencias());
-            pantallas.Add(new Tutores());
+            //pantallas.Add(new Alumnos());
+            //pantallas.Add(new Amonestaciones());
+            //pantallas.Add(new Inasistencias());
+            //pantallas.Add(new Tutores());
             //pantallas.Add(new Alta_ModificarFamilia());
             //pantallas.Add(new AltaModificacionUsuario());
-            pantallas.Add(new Bitácora());
+            //pantallas.Add(new Bitácora());
             //pantallas.Add(new CambiarContraseña());
             //pantallas.Add(new FalloConexión());
-            pantallas.Add(new ListaDeUsuarios());
-            pantallas.Add(new ListarFamilias());
+            //pantallas.Add(new ListaDeUsuarios());
+            //pantallas.Add(new ListarFamilias());
             //pantallas.Add(new Login());
-            //pantallas.Add(new Respaldo_Base_de_Datos());
-            //pantallas.Add(new Restaurar_Backup());
-            pantallas.Add(new Pantallas.Seguridad.Menu());
+            pantallas.Add(new Respaldo_Base_de_Datos());
+            pantallas.Add(new Restaurar_Backup());
+            //pantallas.Add(new Pantallas.Seguridad.Menu());
 
             foreach (Form item in pantallas)
             {

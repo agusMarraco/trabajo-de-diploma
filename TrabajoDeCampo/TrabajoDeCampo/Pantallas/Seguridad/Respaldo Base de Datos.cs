@@ -14,14 +14,20 @@ using System.Windows.Forms;
 using TrabajoDeCampo.DAO;
 using Microsoft.SqlServer.Management.Common;
 using System.Data.SqlClient;
+using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class Respaldo_Base_de_Datos : Form
     {
+        private ServicioSeguridad servicioSeguridad;
+
         public Respaldo_Base_de_Datos()
         {
+            this.servicioSeguridad = new ServicioSeguridad();
             InitializeComponent();
+            int[] ints = { 1,2,3,4,5,6,7,8,9,10};
+            this.partesCB.DataSource = ints;
         }
 
 
@@ -37,24 +43,50 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void btnRespaldar_Click(object sender, EventArgs e)
         {
-            Backup backup = new Backup();
-            backup.Action = BackupActionType.Database;
-            backup.BackupSetDescription = "haciendo un backup de la base de datos";
-            backup.BackupSetName = "BackupBaseDeDatos" + System.DateTime.Now.ToLongDateString();
-            backup.Database = "TRABAJO_DIPLOMA";
-            string path = this.pathtxt.Text + "\\bk1.bak";
-            FileStream stream = File.Create(path);
-            stream.Close();
-            BackupDeviceItem deviceItem = new BackupDeviceItem(path, DeviceType.File);
-            backup.Devices.Add(deviceItem);
-            SqlConnection connection = ConexionSingleton.obtenerConexion();
-            ServerConnection Serverconnection = new ServerConnection(connection);
-            Server server = new Server(Serverconnection);
+
+
+
+            String path = this.pathtxt.Text;
             
-            backup.SqlBackup(server);
+            if (!String.IsNullOrEmpty(path)){
+                try
+                {
+                    servicioSeguridad.realizarBackup((int)this.partesCB.SelectedItem, path);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("String generico de mensaje de error , la excepcion es :" + ex.Message);
+                }
+                MessageBox.Show("Completado papu");
+            }
+            else
+            {
+                MessageBox.Show("selecciona algo papu");
+            }
+
+
+
+
+            //Backup backup = new Backup();
+            //backup.Action = BackupActionType.Database;
+            //backup.BackupSetDescription = "haciendo un backup de la base de datos";
+            //backup.BackupSetName = "BackupBaseDeDatos" + System.DateTime.Now.ToLongDateString();
+            //backup.Database = "TRABAJO_DIPLOMA";
+            //string path = this.pathtxt.Text + "\\bk1.bak";
+            //FileStream stream = File.Create(path);
+            //stream.Close();
+            //BackupDeviceItem deviceItem = new BackupDeviceItem(path, DeviceType.File);
+            //backup.Devices.Add(deviceItem);
+            //SqlConnection connection = ConexionSingleton.obtenerConexion();
+            //ServerConnection Serverconnection = new ServerConnection(connection);
+            //Server server = new Server(Serverconnection);
+            
+            //backup.SqlBackup(server);
             
 
 
         }
+
     }
 }
