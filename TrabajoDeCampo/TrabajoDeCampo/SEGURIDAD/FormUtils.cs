@@ -8,15 +8,15 @@ using System.Windows.Forms;
 
 namespace TrabajoDeCampo.SEGURIDAD
 {
-    public abstract class Traductor
+    public abstract class FormUtils
     {
-        public abstract void process(List<String> tags,Form formToTranslate, Dictionary<String, String> traduciones);
+        public abstract void process(List<String> tags, Form formToTranslate, Dictionary<String, String> traduciones,List<Control> controles);
     }
     //levanta las keys
-    public class TraductorIterador : Traductor
+    public class TraductorIterador : FormUtils
     {
 
-        public override void process(List<String> tags,Form formToTranslate, Dictionary<String, String> traduciones)
+        public override void process(List<String> tags, Form formToTranslate, Dictionary<String, String> traduciones, List<Control> controles)
         {
             //llamada de primer nivel, empiezo a recorrer el arbol
             foreach (Control control in formToTranslate.Controls)
@@ -108,12 +108,12 @@ namespace TrabajoDeCampo.SEGURIDAD
         }
     }
     //traduce
-    public class TraductorReal : Traductor
+    public class TraductorReal : FormUtils
     {
-        public override void process(List<String> tags, Form formToTranslate, Dictionary<String, String> traduciones)
+        public override void process(List<String> tags, Form formToTranslate, Dictionary<String, String> traduciones, List<Control> controles)
         {
             foreach (KeyValuePair<String, String> item in traduciones)
-            { 
+            {
                 //llamada de primer nivel, empiezo a recorrer el arbol
                 foreach (Control control in formToTranslate.Controls)
                 {
@@ -148,7 +148,7 @@ namespace TrabajoDeCampo.SEGURIDAD
 
         //iteracion especifica de controles
 
-        private void iterateControls(KeyValuePair<String,String> kvPair,  IList controles)
+        private void iterateControls(KeyValuePair<String, String> kvPair, IList controles)
         {
             if (controles.Count > 0)
             {
@@ -207,48 +207,22 @@ namespace TrabajoDeCampo.SEGURIDAD
         }
     }
 
+    public class Desbloqueador : FormUtils
+    {
+        public override void process(List<string> tags, Form formToTranslate, Dictionary<string, string> traduciones, List<Control> controles)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class Bloqueador : FormUtils
+    {
+        public override void process(List<string> tags, Form formToTranslate, Dictionary<string, string> traduciones, List<Control> controles)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 
 }
-
-
-
-
-
-////init traducciones;
-//string codigoIdioma = TrabajoDeCampo.Properties.Settings.Default.Idioma;
-//List<String> codigos = new List<string>();
-//iterateControls(codigos, formToTranslate.Controls, formToTranslate);
-//Dictionary<String, String> traducciones = traerTraducciones(codigos, codigoIdioma);
-//            foreach (KeyValuePair<String, String> item in traducciones)
-//            {
-//                foreach (Control control in formToTranslate.Controls)
-//                {
-//                    if (control.Tag != null && control.Tag.ToString() == item.Key)
-//                    {
-//                        control.Text = item.Value;
-//                    }
-//                    if (control.GetType() == typeof(MenuStrip))
-//                    {
-//                        foreach (ToolStripMenuItem menuItem in ((MenuStrip) control).Items)
-//                        {
-//                            if (menuItem.Tag != null && menuItem.Tag.ToString() == item.Key)
-//                            {
-//                                menuItem.Text = item.Value;
-
-//                            }
-//                            foreach (ToolStripItem subItem in menuItem.DropDownItems)
-//                            {
-//                                if (subItem.Tag != null && subItem.Tag.ToString() == item.Key)
-//                                    subItem.Text = item.Value;
-
-//                                foreach (ToolStripItem sideSubItem in ((ToolStripMenuItem) subItem).DropDownItems)
-//                                {
-//                                    if (sideSubItem.Tag != null && sideSubItem.Tag.ToString() == item.Key)
-//                                        sideSubItem.Text = item.Value;
-
-//                                }
-//                            }
-
-//                        }
-//                    }
-//                }

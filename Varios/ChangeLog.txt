@@ -1,8 +1,10 @@
 FEATURES IMPLEMENTADAS
 
 --encriptacion md5 y aes
+--backup and restore
+--algoritmos de traduccion
 
-
+cambiar el security utils el nombre del parametro que recibe el metodo de md5 en el codigo en el dd y en el diagrama de clases.(no hacia falta)
 -----------------------------------------------------------------------------------------------------
 CAMBIOS POR LA IMPLEMENTACION DE LA ENCRIPTACIÓN
 	LUGARES DONDE IMPACTA
@@ -14,37 +16,48 @@ CAMBIOS POR LA IMPLEMENTACION DE LA ENCRIPTACIÓN
 	actualizar los valores de en el sql de creacion	
     crear orden de cambio.
     Familia Nombre
-		pasar a text
+		pasar a nvarchar(300)
 	
     Patente Descripción
-		pasar a text
+		pasar a nvarchar(300)
 	
-    Bitácora Mensaje
-		pasar a text
+ 
 	
     Usuario Alias
-		cambiar el dominio de interfaz a 20
+		pasar a nvarchar(300)
 	
     Planilla de Evaluación Trimestre 1
-		pasar a varchar 50
+		pasar a NVARCHAR 50
 	
     Planilla de Evaluación Trimestre 2
-		pasar a varchar 50
+		pasar a NVARCHAR 50
 	
     Planilla de Evaluación Trimestre 3
-		pasar a varchar 50
+		pasar a NVARCHAR 50
 	
     Planilla de Evaluación Nota Final
-		pasar a varchar 50		
-    Amonestación Motivo
-		esta como text--ok
+		pasar a NVARCHAR 50		
+ 
     Tutor Teléfono primario
-		pasar a varchar(100) en bd
+		pasar a NVARCHAR(200) en bd
     Tutor Teléfono secundario
-    	pasar a varchar(100) en bd
-    Alumno Dirección
-		ojo en la parte de seguridad se llama alumno direccion y en el dd se llama alumno domicilio.
-		cambiar a direccion los domicilios de alumno en el der fisico y y en el dd a direccion
-		pasar a text en bd
-    --------------------------------------------------------------
-    chequear el header de cada form para que no se vea raro el nombre
+    	pasar aNVARCHAR(200) en bd
+   
+rollbackie los cambios a servicio seguirdad y para traducciar utilizo una clase nueva que implementa strategy
+asi que tengo que actualizar el diagrama de clases y el dd de clases.
+y el cu de traduccion
+
+
+
+-- lo hice tengo que actualizar pantallas y revisar el cu de uso de creacion de familias
+pasar abm familias a una sola pantalla para evitar tener pantallas al pedo
+
+-- lo hice revisar las pantallas y revisar el cu de creacion/modificacion de usuario.
+los idiomas puede haber mas  hacer un combo
+
+
+-- lo hice revisar las pantallas
+patentes interfaz usuario
+agregar una columna mas sacar la tabla al pedo de la solapa de patenes en el alta de usuario.
+
+Cambiar en la carpeta la parte de backup y restore para dejarla actualizada.	

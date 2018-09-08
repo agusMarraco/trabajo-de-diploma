@@ -278,12 +278,6 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\Seguridad\Alta-ModificarFamilia.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pantallas\Seguridad\Alta-ModificarFamilia.Designer.cs">
-      <DependentUpon>Alta-ModificarFamilia.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pantallas\Seguridad\Bitácora.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,7 +356,7 @@
     <Compile Include="SEGURIDAD\SeguridadUtiles.cs" />
     <Compile Include="BO\Nivel.cs" />
     <Compile Include="SEGURIDAD\Familia.cs" />
-    <Compile Include="SEGURIDAD\Traductor.cs" />
+    <Compile Include="SEGURIDAD\FormUtils.cs" />
     <Compile Include="SEGURIDAD\Usuario.cs" />
     <Compile Include="SEGURIDAD\Bitacora.cs" />
     <Compile Include="BO\Horario.cs" />
@@ -418,9 +412,6 @@
     <EmbeddedResource Include="Pantallas\Alumnos\Tutores.resx">
       <DependentUpon>Tutores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\Seguridad\Alta-ModificarFamilia.resx">
-      <DependentUpon>Alta-ModificarFamilia.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Seguridad\AltaModificacionUsuario.resx">
       <DependentUpon>AltaModificacionUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -469,6 +460,7 @@
     <None Include="DiagramasDeClase\DCdeDatos.cd" />
     <None Include="DiagramasDeClase\DCdeNegocio.cd" />
     <None Include="DiagramasDeClase\DCdeSeguridad.cd" />
+    <None Include="DiagramasDeClase\DCdeSeguridad2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

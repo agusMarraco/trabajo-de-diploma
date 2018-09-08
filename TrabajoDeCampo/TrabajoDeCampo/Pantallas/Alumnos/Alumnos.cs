@@ -43,12 +43,12 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.dataGridView1.Columns[1].Tag = "com.td.apellido";
             this.dataGridView1.Columns[2].Tag = "com.td.d.n.i";
             this.dataGridView1.Columns[3].Tag = "com.td.curso";
-            Traductor traductor = new TraductorIterador();
+            FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
-            traductor.process(tags, this, null);
+            traductor.process(tags, this, null, null);
             Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
-            traductor.process(null, this, traducciones);
+            traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
         }
     }

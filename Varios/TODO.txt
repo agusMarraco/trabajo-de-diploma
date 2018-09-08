@@ -4,38 +4,29 @@ consultar sobre la pantalla de falla de conexion por la autenticacion por window
 preguntar sobre los permisos de sql server para la creacion de bckp
 
 
-cambie la firma del metodo de traduccion y lo pase al servicio seguridad
-agregue un par de metodos que van a tener que ser agregado al diagrama de clases 
-y a los diagramas de clases de cada caso de uso y al diccionario de clases.
+sacar de la interfaz el menu de reportes
 
 
-asi que tengo que actualizar el diagrama de clases y el dd de clases.
 Notas de sobre las conversaciones con carlos
+	
+pantallas actualizadas.
+
+
+--lo hice voy a tener que implementar un custom sort en las datatables y saque los filtrar por asc desc de las paginas porque voy
+a usar el sorting de la datatable
 	agregar el icono de filtro en las tablas porque queda el asc desc segun el filtro.
 	Permitir el multifiltro en la bitacora
-	patentes interfaz usuario
-	agregar una columna mas sacar la tabla al pedo de la solapa de patenes en el alta de usuario.
-	los idiomas puede haber mas  hacer un combo
-	pasar abm familias a una sola pantalla para evitar tener pantallas al pedo
-
 
 change log
 
 AGREGA LAS CONSTRAINTS PELOTUDO
---backup and restore
+
 --metodos de generacion de digitos verificadores
 --metodos de chequeos de integridad de digitos
 
-
-
-	
-	Cambiar en la carpeta la parte de backup y restore para dejarla actualizada.	
-	cambiar el security utils el nombre del parametro que recibe el metodo de md5 en el codigo en el dd y en el diagrama de clases.
 	Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
 
 	hacer que el btn cancelar de cada uno cierre el form.
-
-
 
 	reportes
 		agregar los botones para 
@@ -50,8 +41,6 @@ AGREGA LAS CONSTRAINTS PELOTUDO
 		Bitácora
 
 	Ver de agregarle iconos a los botones
-
-	actualizar las fotos de las pantallas en la carpeta
 
 	normalizar el crear/registrar
 

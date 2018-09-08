@@ -15,7 +15,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
     public partial class Menu : Form
     {
         private ServicioSeguridad servicioSeguridad;
-        private Traductor traductor;
+        private FormUtils traductor;
         public Menu()
         {
             InitializeComponent();
@@ -128,10 +128,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             Properties.Settings.Default.Idioma = "en";
             List<String> tags = new List<string>();
-            traductor.process(tags, this, null);
+            traductor.process(tags, this, null, null);
             Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
-            traductor.process(null, this, traducciones);
+            traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
 
         }
@@ -140,10 +140,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             Properties.Settings.Default.Idioma = "es";
             List<String> tags = new List<string>();
-            traductor.process(tags, this, null);
+            traductor.process(tags, this, null, null);
             Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
-            traductor.process(null, this, traducciones);
+            traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
         }
 

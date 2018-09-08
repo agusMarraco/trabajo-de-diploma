@@ -34,7 +34,6 @@
             this.tutoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.docenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,7 +64,6 @@
             this.alumnosToolStripMenuItem,
             this.docenteToolStripMenuItem,
             this.notasToolStripMenuItem,
-            this.reportesToolStripMenuItem,
             this.administraciónToolStripMenuItem,
             this.seguridadToolStripMenuItem,
             this.ayudaToolStripMenuItem,
@@ -118,14 +116,6 @@
             this.notasToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.notasToolStripMenuItem.Tag = "com.td.notas";
             this.notasToolStripMenuItem.Text = "Notas";
-            // 
-            // reportesToolStripMenuItem
-            // 
-            this.reportesToolStripMenuItem.Enabled = false;
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.reportesToolStripMenuItem.Tag = "com.td.reportes";
-            this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // administraciónToolStripMenuItem
             // 
@@ -339,7 +329,6 @@
         private System.Windows.Forms.ToolStripMenuItem alumnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem docenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administraciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
