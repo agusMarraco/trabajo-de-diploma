@@ -34,6 +34,10 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -45,10 +49,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -113,8 +113,53 @@
             this.groupBox1.Size = new System.Drawing.Size(834, 161);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.busqueda";
             this.groupBox1.Text = "Búsqueda";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(724, 68);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(104, 33);
+            this.button3.TabIndex = 2;
+            this.button3.Tag = "com.td.exportar";
+            this.button3.Text = "Exportar";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(724, 123);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(104, 31);
+            this.button2.TabIndex = 13;
+            this.button2.Tag = "com.td.cancelar";
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(587, 92);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(102, 20);
+            this.radioButton4.TabIndex = 2;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Tag = "com.td.descendente";
+            this.radioButton4.Text = "Descendente";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(587, 63);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(95, 20);
+            this.radioButton5.TabIndex = 3;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Tag = "com.td.ascendente";
+            this.radioButton5.Text = "Ascendente";
+            this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -123,6 +168,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 16);
             this.label3.TabIndex = 12;
+            this.label3.Tag = "com.td.hasta";
             this.label3.Text = "Hasta";
             // 
             // label2
@@ -132,6 +178,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 16);
             this.label2.TabIndex = 11;
+            this.label2.Tag = "com.td.desde";
             this.label2.Text = "Desde";
             // 
             // comboBox1
@@ -150,6 +197,7 @@
             this.radioButton3.Size = new System.Drawing.Size(62, 20);
             this.radioButton3.TabIndex = 9;
             this.radioButton3.TabStop = true;
+            this.radioButton3.Tag = "com.td.fecha";
             this.radioButton3.Text = "Fecha";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
@@ -161,6 +209,7 @@
             this.radioButton2.Size = new System.Drawing.Size(80, 20);
             this.radioButton2.TabIndex = 8;
             this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "com.td.criticidad";
             this.radioButton2.Text = "Criticidad";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -179,6 +228,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 31);
             this.button1.TabIndex = 5;
+            this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -216,48 +266,9 @@
             this.radioButton1.Size = new System.Drawing.Size(70, 20);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.usuario";
             this.radioButton1.Text = "Usuario";
             this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(587, 92);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(102, 20);
-            this.radioButton4.TabIndex = 2;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Descendente";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(587, 63);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(95, 20);
-            this.radioButton5.TabIndex = 3;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Ascendente";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(724, 123);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 31);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(724, 68);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 33);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Exportar";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // Bitácora
             // 
@@ -270,6 +281,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Bitácora";
             this.Text = "Bitácora";
+            this.Load += new System.EventHandler(this.Bitácora_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

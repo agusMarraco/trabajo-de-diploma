@@ -70,6 +70,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 16);
             this.label1.TabIndex = 2;
+            this.label1.Tag = "com.td.nivel";
             this.label1.Text = "Nivel";
             // 
             // label2
@@ -80,6 +81,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 16);
             this.label2.TabIndex = 3;
+            this.label2.Tag = "com.td.curso";
             this.label2.Text = "Curso";
             // 
             // label3
@@ -90,6 +92,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 16);
             this.label3.TabIndex = 4;
+            this.label3.Tag = "com.td.docente";
             this.label3.Text = "Docente";
             // 
             // label4
@@ -100,6 +103,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 16);
             this.label4.TabIndex = 5;
+            this.label4.Tag = "com.td.materia";
             this.label4.Text = "Materia";
             // 
             // comboBox3
@@ -136,6 +140,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 16);
             this.label5.TabIndex = 9;
+            this.label5.Tag = "com.td.dia";
             this.label5.Text = "Día";
             // 
             // label6
@@ -146,6 +151,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 16);
             this.label6.TabIndex = 11;
+            this.label6.Tag = "com.td.modulo";
             this.label6.Text = "Módulo";
             // 
             // comboBox6
@@ -162,6 +168,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 12;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -171,6 +178,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -196,7 +204,9 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AltaModificacionHorario";
+            this.Tag = "com.td.horario";
             this.Text = "Horario";
+            this.Load += new System.EventHandler(this.AltaModificacionHorario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

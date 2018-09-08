@@ -57,5 +57,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 usersFilePath = dialog.FileName;
             }
         }
+
+        private void Restaurar_Backup_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

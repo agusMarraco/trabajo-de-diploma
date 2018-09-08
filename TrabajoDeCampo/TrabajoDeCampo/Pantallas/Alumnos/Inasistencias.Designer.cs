@@ -87,6 +87,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 28);
             this.button1.TabIndex = 1;
+            this.button1.Tag = "com.td.registrar";
             this.button1.Text = "Registrar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -103,6 +104,7 @@
             this.groupBox1.Size = new System.Drawing.Size(490, 241);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.informacion";
             this.groupBox1.Text = "Información";
             // 
             // button3
@@ -112,6 +114,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(87, 28);
             this.button3.TabIndex = 4;
+            this.button3.Tag = "com.td.guardar";
             this.button3.Text = "Guardar";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -125,6 +128,7 @@
             this.groupBox2.Size = new System.Drawing.Size(374, 100);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Tag = "com.td.tipo.de.falta";
             this.groupBox2.Text = "Tipo de Falta";
             // 
             // radioButton2
@@ -136,6 +140,7 @@
             this.radioButton2.Size = new System.Drawing.Size(61, 20);
             this.radioButton2.TabIndex = 6;
             this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "com.td.media";
             this.radioButton2.Text = "Media";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
@@ -149,6 +154,7 @@
             this.radioButton1.Size = new System.Drawing.Size(81, 20);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.completa";
             this.radioButton1.Text = "Completa";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -161,6 +167,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(88, 20);
             this.checkBox1.TabIndex = 2;
+            this.checkBox1.Tag = "com.td.justificada";
             this.checkBox1.Text = "Justificada";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -171,6 +178,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 4;
+            this.label2.Tag = "com.td.fecha";
             this.label2.Text = "Fecha";
             // 
             // dateTimePicker1
@@ -189,6 +197,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 28);
             this.button2.TabIndex = 3;
+            this.button2.Tag = "com.td.modificar";
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -199,6 +208,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(87, 28);
             this.button4.TabIndex = 8;
+            this.button4.Tag = "com.td.cancelar";
             this.button4.Text = "Cancelar";
             this.button4.UseVisualStyleBackColor = true;
             // 
@@ -209,6 +219,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(87, 28);
             this.button5.TabIndex = 8;
+            this.button5.Tag = "com.td.exportar";
             this.button5.Text = "Exportar";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -227,6 +238,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Inasistencias";
             this.Text = "Inasistencias";
+            this.Load += new System.EventHandler(this.Inasistencias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

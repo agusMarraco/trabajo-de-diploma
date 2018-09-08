@@ -362,6 +362,7 @@
     <Compile Include="SEGURIDAD\SeguridadUtiles.cs" />
     <Compile Include="BO\Nivel.cs" />
     <Compile Include="SEGURIDAD\Familia.cs" />
+    <Compile Include="SEGURIDAD\Traductor.cs" />
     <Compile Include="SEGURIDAD\Usuario.cs" />
     <Compile Include="SEGURIDAD\Bitacora.cs" />
     <Compile Include="BO\Horario.cs" />
@@ -486,6 +487,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlScripts\createDB.sql" />
+    <Content Include="SqlScripts\tablasParametricas.sql" />
+    <Content Include="SqlScripts\translationssql.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

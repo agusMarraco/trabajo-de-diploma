@@ -83,6 +83,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 16);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "com.td.nombre";
             this.label1.Text = "Nombre";
             // 
             // textBox1
@@ -107,6 +108,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 16);
             this.label2.TabIndex = 2;
+            this.label2.Tag = "com.td.apellido";
             this.label2.Text = "Apellido";
             // 
             // textBox3
@@ -124,6 +126,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 16);
             this.label3.TabIndex = 4;
+            this.label3.Tag = "com.td.d.n.i";
             this.label3.Text = "D.N.I.";
             // 
             // textBox4
@@ -141,6 +144,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 6;
+            this.label4.Tag = "com.td.direccion";
             this.label4.Text = "Dirección";
             // 
             // textBox5
@@ -158,6 +162,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 16);
             this.label5.TabIndex = 8;
+            this.label5.Tag = "com.td.email";
             this.label5.Text = "Email";
             // 
             // textBox6
@@ -175,6 +180,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 16);
             this.label6.TabIndex = 10;
+            this.label6.Tag = "com.td.alias";
             this.label6.Text = "Alias";
             // 
             // label8
@@ -185,6 +191,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 16);
             this.label8.TabIndex = 13;
+            this.label8.Tag = "com.td.telefono";
             this.label8.Text = "Teléfono";
             // 
             // maskedTextBox1
@@ -201,6 +208,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 23);
             this.button1.TabIndex = 16;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -210,6 +218,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(93, 23);
             this.button2.TabIndex = 21;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -393,6 +402,7 @@
             this.radioButton1.Size = new System.Drawing.Size(63, 17);
             this.radioButton1.TabIndex = 25;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.español";
             this.radioButton1.Text = "Español";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -405,6 +415,7 @@
             this.groupBox1.Size = new System.Drawing.Size(355, 59);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.idioma";
             this.groupBox1.Text = "Idioma";
             // 
             // radioButton2
@@ -414,6 +425,7 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(53, 17);
             this.radioButton2.TabIndex = 26;
+            this.radioButton2.Tag = "com.td.ingles";
             this.radioButton2.Text = "Ingles";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 

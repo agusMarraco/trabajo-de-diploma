@@ -69,6 +69,7 @@
             this.groupBox1.Size = new System.Drawing.Size(610, 193);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.informacion";
             this.groupBox1.Text = "Información";
             // 
             // button2
@@ -78,6 +79,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 28);
             this.button2.TabIndex = 16;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -120,6 +122,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 16);
             this.label5.TabIndex = 10;
+            this.label5.Tag = "com.td.telefono.secundario";
             this.label5.Text = "Teléfono Secundario";
             // 
             // label4
@@ -129,6 +132,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 16);
             this.label4.TabIndex = 8;
+            this.label4.Tag = "com.td.email";
             this.label4.Text = "Email";
             // 
             // label3
@@ -138,6 +142,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 16);
             this.label3.TabIndex = 6;
+            this.label3.Tag = "com.td.apellido";
             this.label3.Text = "Apellido";
             // 
             // textBox3
@@ -155,6 +160,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 16);
             this.label2.TabIndex = 4;
+            this.label2.Tag = "com.td.d.n.i";
             this.label2.Text = "D.N.I.";
             // 
             // textBox2
@@ -172,6 +178,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 28);
             this.button1.TabIndex = 2;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -182,6 +189,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 16);
             this.label1.TabIndex = 1;
+            this.label1.Tag = "com.td.nombre";
             this.label1.Text = "Nombre";
             // 
             // textBox1
@@ -202,6 +210,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AltaModificacionTutor";
             this.Text = "Tutor";
+            this.Load += new System.EventHandler(this.AltaModificacionTutor_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

@@ -7,14 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
+using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class Menu : Form
     {
+        private ServicioSeguridad servicioSeguridad;
+        private Traductor traductor;
         public Menu()
         {
             InitializeComponent();
+            traductor = new TraductorIterador();
+            servicioSeguridad = new SERVICIO.ServicioSeguridad();
+                
+            
         }
 
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -33,10 +41,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             usuarios.Show();
         }
 
-        private void Menu_Load(object sender, EventArgs e)
-        {
 
-        }
 
         private void restaurarBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -111,5 +116,37 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             new Alumnos.Tutores().Show();
         }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+         
+        }
+
+
+
+        private void inglesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Idioma = "en";
+            List<String> tags = new List<string>();
+            traductor.process(tags, this, null);
+            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones);
+            traductor = new TraductorIterador();
+
+        }
+
+        private void españolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Idioma = "es";
+            List<String> tags = new List<string>();
+            traductor.process(tags, this, null);
+            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones);
+            traductor = new TraductorIterador();
+        }
+
+       
     }
 }

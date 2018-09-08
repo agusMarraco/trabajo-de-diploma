@@ -71,6 +71,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 4;
+            this.label1.Tag = "com.td.nivel";
             this.label1.Text = "Nivel";
             // 
             // label2
@@ -80,6 +81,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 5;
+            this.label2.Tag = "com.td.letra";
             this.label2.Text = "Letra";
             // 
             // label3
@@ -89,6 +91,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 6;
+            this.label3.Tag = "com.td.capacidad";
             this.label3.Text = "Capacidad";
             // 
             // button1
@@ -97,6 +100,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 8;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -108,6 +112,7 @@
             this.radioButton1.Size = new System.Drawing.Size(64, 17);
             this.radioButton1.TabIndex = 9;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.mañana";
             this.radioButton1.Text = "Mañana";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -119,6 +124,7 @@
             this.radioButton2.Size = new System.Drawing.Size(53, 17);
             this.radioButton2.TabIndex = 10;
             this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "com.td.tarde";
             this.radioButton2.Text = "Tarde";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -131,6 +137,7 @@
             this.groupBox1.Size = new System.Drawing.Size(200, 100);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.turno";
             this.groupBox1.Text = "Turno";
             // 
             // button2
@@ -139,6 +146,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 12;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -157,7 +165,9 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "AltaModificacionCurso";
+            this.Tag = "com.td.curso";
             this.Text = "Curso ";
+            this.Load += new System.EventHandler(this.AltaModificacionCurso_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

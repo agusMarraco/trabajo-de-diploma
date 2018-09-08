@@ -1,8 +1,15 @@
-preguntas para carlos
+﻿preguntas para carlos
 
 consultar sobre la pantalla de falla de conexion por la autenticacion por windows.
 preguntar sobre los permisos de sql server para la creacion de bckp
 
+
+cambie la firma del metodo de traduccion y lo pase al servicio seguridad
+agregue un par de metodos que van a tener que ser agregado al diagrama de clases 
+y a los diagramas de clases de cada caso de uso y al diccionario de clases.
+
+
+asi que tengo que actualizar el diagrama de clases y el dd de clases.
 Notas de sobre las conversaciones con carlos
 	agregar el icono de filtro en las tablas porque queda el asc desc segun el filtro.
 	Permitir el multifiltro en la bitacora
@@ -14,7 +21,7 @@ Notas de sobre las conversaciones con carlos
 
 change log
 
-
+AGREGA LAS CONSTRAINTS PELOTUDO
 --backup and restore
 --metodos de generacion de digitos verificadores
 --metodos de chequeos de integridad de digitos

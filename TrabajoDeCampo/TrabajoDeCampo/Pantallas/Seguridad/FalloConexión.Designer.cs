@@ -53,6 +53,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(152, 16);
             this.label1.TabIndex = 1;
+            this.label1.Tag = "com.td.base.de.datos./.servidor";
             this.label1.Text = "Base de Datos / Servidor";
             // 
             // button1
@@ -62,6 +63,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 28);
             this.button1.TabIndex = 2;
+            this.button1.Tag = "com.td.conectar";
             this.button1.Text = "Conectar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -72,6 +74,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 16);
             this.label2.TabIndex = 4;
+            this.label2.Tag = "com.td.contraseña";
             this.label2.Text = "Contraseña";
             // 
             // textBox2
@@ -89,6 +92,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 16);
             this.label3.TabIndex = 6;
+            this.label3.Tag = "com.td.usuario";
             this.label3.Text = "Usuario";
             // 
             // textBox3
@@ -106,6 +110,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 28);
             this.button2.TabIndex = 7;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -126,6 +131,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FalloConexión";
             this.Text = "Fallo de Conexión";
+            this.Load += new System.EventHandler(this.FalloConexión_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -46,6 +46,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "com.td.cantidad.de.partes";
             this.label1.Text = "Cantidad de Partes";
             // 
             // pathtxt
@@ -62,6 +63,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(79, 23);
             this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.Tag = "com.td.cancelar";
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -89,6 +91,7 @@
             this.groupBox1.Size = new System.Drawing.Size(548, 232);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.generar.respaldo";
             this.groupBox1.Text = "Generar Respaldo";
             // 
             // btnExaminar
@@ -97,6 +100,7 @@
             this.btnExaminar.Name = "btnExaminar";
             this.btnExaminar.Size = new System.Drawing.Size(79, 23);
             this.btnExaminar.TabIndex = 6;
+            this.btnExaminar.Tag = "com.td.examinar";
             this.btnExaminar.Text = "Examinar";
             this.btnExaminar.UseVisualStyleBackColor = true;
             this.btnExaminar.Click += new System.EventHandler(this.btnExaminar_Click);
@@ -108,6 +112,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 5;
+            this.label2.Tag = "com.td.seleccione.destino";
             this.label2.Text = "Seleccione Destino";
             // 
             // btnRespaldar
@@ -116,6 +121,7 @@
             this.btnRespaldar.Name = "btnRespaldar";
             this.btnRespaldar.Size = new System.Drawing.Size(75, 23);
             this.btnRespaldar.TabIndex = 4;
+            this.btnRespaldar.Tag = "com.td.respaldar";
             this.btnRespaldar.Text = "Respaldar";
             this.btnRespaldar.UseVisualStyleBackColor = true;
             this.btnRespaldar.Click += new System.EventHandler(this.btnRespaldar_Click);
@@ -128,6 +134,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Respaldo_Base_de_Datos";
             this.Text = "Respaldo Base de Datos";
+            this.Load += new System.EventHandler(this.Respaldo_Base_de_Datos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

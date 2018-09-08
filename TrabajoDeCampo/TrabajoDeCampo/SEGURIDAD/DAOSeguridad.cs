@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using TrabajoDeCampo.BO;
@@ -135,7 +136,57 @@ namespace TrabajoDeCampo.DAO
        
         
         //IDIOMA
-        public Dictionary<String, String> traerTraducciones(List<String> codigosMensajes, String codigoIdioma) { return null; }
+        public Dictionary<String, String> traerTraducciones(List<String> codigosMensajes, String codigoIdioma)
+        {
+            Dictionary<String, String> traducciones = new Dictionary<string, string>();
+
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+
+            StringBuilder sb = new StringBuilder();
+            connection.Open();
+            foreach (String tag in codigosMensajes)
+            {
+                sb.Clear();
+                sb.Append(" SELECT MSJ.MSJ_TEXTO FROM MENSAJE MSJ INNER JOIN IDIOMA IDI ON IDI.IDI_ID = MSJ.MSJ_IDIOMA_ID ");
+                sb.Append(" WHERE MSJ.MSJ_CODIGO = @CODIGO AND IDI.IDI_CODIGO = @LANGCODE");
+                //sb.Append("select * from IDIOMA");
+                SqlCommand query = new SqlCommand(sb.ToString(), connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(query);
+                
+                query.CommandType = System.Data.CommandType.Text;                
+                query.Parameters.Add(new SqlParameter("@CODIGO",System.Data.SqlDbType.VarChar)).Value = tag;
+                query.Parameters.Add(new SqlParameter("@LANGCODE", System.Data.SqlDbType.VarChar)).Value = codigoIdioma;
+
+                try
+                {
+                    SqlDataReader reader = query.ExecuteReader();
+                    DataSet ds = new DataSet();
+                    //adapter.Fill(ds);
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        { 
+                            if(!traducciones.ContainsKey(tag))
+                            traducciones.Add(tag, reader.GetValue(0).ToString());
+                        }
+
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    connection.Close();
+                    throw ex;
+                }
+                
+            }
+
+            connection.Close();
+
+
+
+            return traducciones;
+        }
 
         public void actualizaConexión()
         {

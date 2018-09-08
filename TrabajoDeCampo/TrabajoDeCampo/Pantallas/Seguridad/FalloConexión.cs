@@ -16,5 +16,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             InitializeComponent();
         }
+
+        private void FalloConexión_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

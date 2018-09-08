@@ -36,6 +36,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -46,7 +47,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +91,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
+            this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -101,6 +102,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 2;
+            this.label1.Tag = "com.td.filtrar.por";
             this.label1.Text = "Filtrar por";
             // 
             // groupBox1
@@ -120,7 +122,17 @@
             this.groupBox1.Size = new System.Drawing.Size(576, 140);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.busqueda";
             this.groupBox1.Text = "Búsqueda";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(9, 111);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 12;
+            this.button6.Text = "Exportar";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -128,6 +140,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 12;
+            this.button5.Tag = "com.td.cancelar";
             this.button5.Text = "Cancelar";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -139,6 +152,7 @@
             this.radioButton2.Size = new System.Drawing.Size(89, 17);
             this.radioButton2.TabIndex = 9;
             this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "com.td.descendente";
             this.radioButton2.Text = "Descendente";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -150,6 +164,7 @@
             this.radioButton1.Size = new System.Drawing.Size(82, 17);
             this.radioButton1.TabIndex = 8;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.ascendente";
             this.radioButton1.Text = "Ascendente";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -168,6 +183,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 6;
+            this.label2.Tag = "com.td.ordenar.por";
             this.label2.Text = "Ordenar por";
             // 
             // textBox1
@@ -191,6 +207,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 9;
+            this.button2.Tag = "com.td.crear";
             this.button2.Text = "Crear";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -201,6 +218,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 10;
+            this.button3.Tag = "com.td.cancelar";
             this.button3.Text = "Borrar";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -210,17 +228,9 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 11;
+            this.button4.Tag = "com.td.modificar";
             this.button4.Text = "Modificar";
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(9, 111);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "Exportar";
-            this.button6.UseVisualStyleBackColor = true;
             // 
             // Cursos
             // 
@@ -234,6 +244,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Cursos";
             this.Text = "Cursos";
+            this.Load += new System.EventHandler(this.Cursos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

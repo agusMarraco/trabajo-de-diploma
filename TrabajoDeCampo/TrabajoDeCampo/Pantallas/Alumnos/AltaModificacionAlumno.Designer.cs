@@ -64,6 +64,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "com.td.nombre";
             this.label1.Text = "Nombre";
             // 
             // textBox1
@@ -87,6 +88,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 4;
+            this.label3.Tag = "com.td.domicilio";
             this.label3.Text = "Domicilio";
             // 
             // textBox4
@@ -111,6 +113,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 8;
+            this.label5.Tag = "com.td.apellido";
             this.label5.Text = "Apellido";
             // 
             // comboBox1
@@ -128,6 +131,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 11;
+            this.label6.Tag = "com.td.curso";
             this.label6.Text = "Curso";
             // 
             // label7
@@ -137,6 +141,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 13);
             this.label7.TabIndex = 13;
+            this.label7.Tag = "com.td.orientacion";
             this.label7.Text = "Orientación";
             // 
             // comboBox2
@@ -146,6 +151,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(174, 21);
             this.comboBox2.TabIndex = 12;
+            this.comboBox2.Tag = "com.td.informacion";
             // 
             // dateTimePicker1
             // 
@@ -162,6 +168,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(108, 13);
             this.label8.TabIndex = 15;
+            this.label8.Tag = "com.td.fecha.de.nacimiento";
             this.label8.Text = "Fecha de Nacimiento";
             // 
             // groupBox1
@@ -185,6 +192,7 @@
             this.groupBox1.Size = new System.Drawing.Size(740, 158);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.informacion";
             this.groupBox1.Text = "Información";
             // 
             // label4
@@ -194,6 +202,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 6;
+            this.label4.Tag = "com.td.d.n.i";
             this.label4.Text = "D.N.I.";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
@@ -256,6 +265,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 23);
             this.button1.TabIndex = 2;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -265,6 +275,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(107, 23);
             this.button2.TabIndex = 17;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -279,6 +290,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "AltaModificacionAlumno";
             this.Text = "Alumno";
+            this.Load += new System.EventHandler(this.AltaModificacionAlumno_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

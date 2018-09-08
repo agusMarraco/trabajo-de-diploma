@@ -46,6 +46,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 16);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "com.td.contraseña";
             this.label1.Text = "Contraseña Actual";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -69,6 +70,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -80,6 +82,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(189, 16);
             this.label2.TabIndex = 4;
+            this.label2.Tag = "com.td.reingrese.su.nueva.contraseña";
             this.label2.Text = "Reingrese su nueva contraseña";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
@@ -91,6 +94,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 16);
             this.label3.TabIndex = 5;
+            this.label3.Tag = "com.td.nueva.contraseña";
             this.label3.Text = "Nueva Contraseña";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
@@ -107,6 +111,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -125,6 +130,7 @@
             this.Controls.Add(this.label1);
             this.Name = "CambiarContraseña";
             this.Text = "Cambiar Contraseña";
+            this.Load += new System.EventHandler(this.CambiarContraseña_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

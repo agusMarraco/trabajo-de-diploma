@@ -44,8 +44,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +57,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 16);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "com.td.niveles";
             this.label1.Text = "Niveles";
             // 
             // comboBox1
@@ -75,6 +76,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 28);
             this.button1.TabIndex = 2;
+            this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -136,6 +138,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 16);
             this.label2.TabIndex = 4;
+            this.label2.Tag = "com.td.cursos";
             this.label2.Text = "Cursos";
             // 
             // comboBox2
@@ -154,6 +157,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 28);
             this.button2.TabIndex = 6;
+            this.button2.Tag = "com.td.borrar";
             this.button2.Text = "Borrar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -164,6 +168,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(87, 28);
             this.button3.TabIndex = 7;
+            this.button3.Tag = "com.td.modificar";
             this.button3.Text = "Modificar";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -174,6 +179,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(87, 28);
             this.button4.TabIndex = 8;
+            this.button4.Tag = "com.td.crear";
             this.button4.Text = "Crear";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -192,17 +198,8 @@
             this.groupBox1.Size = new System.Drawing.Size(851, 155);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.busqueda";
             this.groupBox1.Text = "Búsqueda";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(776, 427);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(87, 28);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Cancelar";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
@@ -211,8 +208,20 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(87, 28);
             this.button6.TabIndex = 9;
+            this.button6.Tag = "com.td.exportar";
             this.button6.Text = "Exportar";
             this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(776, 427);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(87, 28);
+            this.button5.TabIndex = 10;
+            this.button5.Tag = "com.td.cancelar";
+            this.button5.Text = "Cancelar";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // Horarios
             // 
@@ -228,6 +237,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Horarios";
             this.Text = "Horarios";
+            this.Load += new System.EventHandler(this.Horarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

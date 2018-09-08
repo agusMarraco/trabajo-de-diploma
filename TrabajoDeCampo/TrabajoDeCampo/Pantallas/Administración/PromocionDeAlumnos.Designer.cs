@@ -72,6 +72,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 16);
             this.label1.TabIndex = 2;
+            this.label1.Tag = "com.td.nivel";
             this.label1.Text = "Nivel";
             // 
             // label2
@@ -81,6 +82,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 16);
             this.label2.TabIndex = 3;
+            this.label2.Tag = "com.td.curso";
             this.label2.Text = "Curso";
             // 
             // dataGridView1
@@ -147,6 +149,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(139, 16);
             this.label3.TabIndex = 6;
+            this.label3.Tag = "com.td.promocionar.al.curso";
             this.label3.Text = "Promocionar al curso: ";
             // 
             // button1
@@ -156,6 +159,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 28);
             this.button1.TabIndex = 7;
+            this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -171,6 +175,7 @@
             this.groupBox1.Size = new System.Drawing.Size(852, 112);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.busqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
             // button2
@@ -180,6 +185,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 28);
             this.button2.TabIndex = 8;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -197,6 +203,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "PromocionDeAlumnos";
             this.Text = "Promoción de Alumnos";
+            this.Load += new System.EventHandler(this.PromocionDeAlumnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

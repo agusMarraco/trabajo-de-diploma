@@ -76,6 +76,7 @@
             this.groupBox1.Size = new System.Drawing.Size(511, 182);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.datos";
             this.groupBox1.Text = "Datos";
             // 
             // richTextBox1
@@ -101,6 +102,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 2;
+            this.label2.Tag = "com.td.fecha";
             this.label2.Text = "Fecha";
             // 
             // label3
@@ -110,6 +112,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 3;
+            this.label3.Tag = "com.td.ingrese.el.motivo";
             this.label3.Text = "Ingrese el motivo";
             // 
             // button2
@@ -118,6 +121,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -127,6 +131,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
+            this.button1.Tag = "com.td.registrar";
             this.button1.Text = "Registrar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -136,6 +141,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
+            this.button3.Tag = "com.td.exportar";
             this.button3.Text = "Exportar";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -151,6 +157,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Amonestaciones";
             this.Text = "Amonestaciones";
+            this.Load += new System.EventHandler(this.Amonestaciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

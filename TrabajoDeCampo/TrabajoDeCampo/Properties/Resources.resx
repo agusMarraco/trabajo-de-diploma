@@ -118,8 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConnectionString" xml:space="preserve">
-    <value>Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True</value>
+    <value>Data Source=DESKTOP-P2NMPG5;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True</value>
     <comment>DB ConnectionString</comment>
+  </data>
+  <data name="Idioma" xml:space="preserve">
+    <value>en</value>
+    <comment>ingles =1 español = 2</comment>
   </data>
   <data name="key" xml:space="preserve">
     <value>YmxpdHprcmllZw==</value>

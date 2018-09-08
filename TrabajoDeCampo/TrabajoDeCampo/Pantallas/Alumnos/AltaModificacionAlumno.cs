@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Alumnos
 {
     public partial class AltaModificacionAlumno : Form
     {
+        private ServicioSeguridad servicioSeguridad;
         public AltaModificacionAlumno()
         {
             InitializeComponent();
+            servicioSeguridad = new ServicioSeguridad();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -30,6 +33,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void AltaModificacionAlumno_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

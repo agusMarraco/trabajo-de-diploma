@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class AltaModificacionUsuario : Form
     {
+        private ServicioSeguridad servicioSeguridad;
         public AltaModificacionUsuario()
         {
             InitializeComponent();
+            this.servicioSeguridad = new ServicioSeguridad();
             List<PEP> lista = new List<PEP>();
             lista.Add(new PEP("A", true));
             lista.Add(new PEP("A", true));
@@ -43,7 +46,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void AltaModificacionUsuario_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 

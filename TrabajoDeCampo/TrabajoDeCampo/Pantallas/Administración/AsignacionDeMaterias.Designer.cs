@@ -63,6 +63,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 1;
+            this.label1.Tag = "com.td.niveles";
             this.label1.Text = "Niveles";
             // 
             // dataGridView1
@@ -103,6 +104,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
+            this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -112,6 +114,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
+            this.button2.Tag = "com.td.desasignar";
             this.button2.Text = "Desasignar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -121,6 +124,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 6;
+            this.button3.Tag = "com.td.desasignar";
             this.button3.Text = "Asignar";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -132,6 +136,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 7;
+            this.label2.Tag = "com.td.asignadas";
             this.label2.Text = "Asignadas";
             // 
             // label3
@@ -141,6 +146,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 8;
+            this.label3.Tag = "com.td.sin.asignar";
             this.label3.Text = "Sin Asignar";
             // 
             // button4
@@ -149,6 +155,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 9;
+            this.button4.Tag = "com.td.guardar";
             this.button4.Text = "Guardar";
             this.button4.UseVisualStyleBackColor = true;
             // 
@@ -163,6 +170,7 @@
             this.groupBox1.Size = new System.Drawing.Size(665, 100);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.busqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
             // button6
@@ -171,6 +179,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 5;
+            this.button6.Tag = "com.td.exportar";
             this.button6.Text = "Exportar";
             this.button6.UseVisualStyleBackColor = true;
             // 
@@ -180,6 +189,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 11;
+            this.button5.Tag = "com.td.cancelar";
             this.button5.Text = "Cancelar";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -198,6 +208,7 @@
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Name = "AsignacionDeMaterias";
+            this.Tag = "com.td.asignacion.de.materia";
             this.Text = "Asignación de Materias";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

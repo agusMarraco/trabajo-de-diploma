@@ -81,6 +81,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 16);
             this.label1.TabIndex = 2;
+            this.label1.Tag = "com.td.nombre";
             this.label1.Text = "Nombre";
             // 
             // button1
@@ -89,6 +90,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 3;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -101,6 +103,7 @@
             this.radioButton1.Size = new System.Drawing.Size(87, 20);
             this.radioButton1.TabIndex = 4;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.bloqueada";
             this.radioButton1.Text = "Bloqueada";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -110,6 +113,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 23);
             this.button2.TabIndex = 5;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -128,6 +132,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Alta_ModificarFamilia";
             this.Text = "Familia";
+            this.Load += new System.EventHandler(this.Alta_ModificarFamilia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

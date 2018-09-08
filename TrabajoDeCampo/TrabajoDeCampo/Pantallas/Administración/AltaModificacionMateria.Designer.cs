@@ -61,6 +61,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 28);
             this.button1.TabIndex = 2;
+            this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -71,6 +72,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 16);
             this.label1.TabIndex = 5;
+            this.label1.Tag = "com.td.nombre";
             this.label1.Text = "Nombre";
             // 
             // label2
@@ -80,6 +82,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 16);
             this.label2.TabIndex = 6;
+            this.label2.Tag = "com.td.descripcion";
             this.label2.Text = "Descripción";
             // 
             // radioButton1
@@ -90,6 +93,7 @@
             this.radioButton1.Size = new System.Drawing.Size(110, 20);
             this.radioButton1.TabIndex = 7;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.extracurricular";
             this.radioButton1.Text = "Extracurricular";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -101,6 +105,7 @@
             this.radioButton2.Size = new System.Drawing.Size(68, 20);
             this.radioButton2.TabIndex = 8;
             this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "com.td.troncal";
             this.radioButton2.Text = "Troncal";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -111,6 +116,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 28);
             this.button2.TabIndex = 9;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -130,7 +136,9 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AltaModificacionMateria";
+            this.Tag = "com.td.materia";
             this.Text = "Materia";
+            this.Load += new System.EventHandler(this.AltaModificacionMateria_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -28,6 +28,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             InitializeComponent();
             int[] ints = { 1,2,3,4,5,6,7,8,9,10};
             this.partesCB.DataSource = ints;
+
         }
 
 
@@ -65,28 +66,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 MessageBox.Show("selecciona algo papu");
             }
 
-
-
-
-            //Backup backup = new Backup();
-            //backup.Action = BackupActionType.Database;
-            //backup.BackupSetDescription = "haciendo un backup de la base de datos";
-            //backup.BackupSetName = "BackupBaseDeDatos" + System.DateTime.Now.ToLongDateString();
-            //backup.Database = "TRABAJO_DIPLOMA";
-            //string path = this.pathtxt.Text + "\\bk1.bak";
-            //FileStream stream = File.Create(path);
-            //stream.Close();
-            //BackupDeviceItem deviceItem = new BackupDeviceItem(path, DeviceType.File);
-            //backup.Devices.Add(deviceItem);
-            //SqlConnection connection = ConexionSingleton.obtenerConexion();
-            //ServerConnection Serverconnection = new ServerConnection(connection);
-            //Server server = new Server(Serverconnection);
-            
-            //backup.SqlBackup(server);
-            
-
-
         }
 
+        private void Respaldo_Base_de_Datos_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

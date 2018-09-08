@@ -103,6 +103,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 28);
             this.button1.TabIndex = 1;
+            this.button1.Tag = "com.td.bloquear";
             this.button1.Text = "Bloquear";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -113,6 +114,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(107, 28);
             this.button2.TabIndex = 2;
+            this.button2.Tag = "com.td.modificar";
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -124,6 +126,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(176, 28);
             this.button3.TabIndex = 3;
+            this.button3.Tag = "com.td.regenerar.password";
             this.button3.Text = "Regenerar Password";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -134,6 +137,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(107, 28);
             this.button4.TabIndex = 4;
+            this.button4.Tag = "com.td.borrar";
             this.button4.Text = "Borrar";
             this.button4.UseVisualStyleBackColor = true;
             // 
@@ -161,6 +165,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 28);
             this.button5.TabIndex = 7;
+            this.button5.Tag = "com.td.buscar";
             this.button5.Text = "Buscar";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -171,6 +176,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 28);
             this.button6.TabIndex = 8;
+            this.button6.Tag = "com.td.crear";
             this.button6.Text = "Crear";
             this.button6.UseVisualStyleBackColor = true;
             // 
@@ -193,6 +199,7 @@
             this.radioButton1.Size = new System.Drawing.Size(95, 20);
             this.radioButton1.TabIndex = 10;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.ascendente";
             this.radioButton1.Text = "Ascendente";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -204,6 +211,7 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(102, 20);
             this.radioButton2.TabIndex = 11;
+            this.radioButton2.Tag = "com.td.descendente";
             this.radioButton2.Text = "Descendente";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -215,6 +223,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 16);
             this.label1.TabIndex = 12;
+            this.label1.Tag = "com.td.filtrar.por";
             this.label1.Text = "Filtrar por:";
             // 
             // label3
@@ -225,6 +234,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 16);
             this.label3.TabIndex = 14;
+            this.label3.Tag = "com.td.ordenar.por";
             this.label3.Text = "Ordenar por:";
             // 
             // groupBox1
@@ -244,6 +254,7 @@
             this.groupBox1.Size = new System.Drawing.Size(704, 172);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.busqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
             // button7
@@ -253,6 +264,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 28);
             this.button7.TabIndex = 15;
+            this.button7.Tag = "com.td.cancelar";
             this.button7.Text = "Cancelar";
             this.button7.UseVisualStyleBackColor = true;
             // 
@@ -271,6 +283,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ListaDeUsuarios";
             this.Text = "Usuarios";
+            this.Load += new System.EventHandler(this.ListaDeUsuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

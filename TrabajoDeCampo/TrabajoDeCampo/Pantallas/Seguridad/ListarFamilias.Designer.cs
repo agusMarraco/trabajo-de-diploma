@@ -66,6 +66,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 28);
             this.button1.TabIndex = 2;
+            this.button1.Tag = "com.td.crear";
             this.button1.Text = "Crear";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -77,6 +78,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 16);
             this.label1.TabIndex = 3;
+            this.label1.Tag = "com.td.familias";
             this.label1.Text = "Familias";
             // 
             // dataGridView2
@@ -103,6 +105,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(105, 28);
             this.button2.TabIndex = 5;
+            this.button2.Tag = "com.td.modificar";
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -114,6 +117,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(105, 28);
             this.button3.TabIndex = 6;
+            this.button3.Tag = "com.td.borrar";
             this.button3.Text = "Borrar";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -125,6 +129,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 16);
             this.label2.TabIndex = 7;
+            this.label2.Tag = "com.td.patentes.asignadas";
             this.label2.Text = "Patentes Asignadas";
             // 
             // button4
@@ -134,6 +139,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 28);
             this.button4.TabIndex = 8;
+            this.button4.Tag = "com.td.cancelar";
             this.button4.Text = "Cancelar";
             this.button4.UseVisualStyleBackColor = true;
             // 

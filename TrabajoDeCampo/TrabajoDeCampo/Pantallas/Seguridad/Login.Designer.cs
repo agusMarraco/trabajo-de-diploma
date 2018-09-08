@@ -43,6 +43,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 28);
             this.button1.TabIndex = 0;
+            this.button1.Tag = "com.td.login";
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -69,6 +70,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 16);
             this.label1.TabIndex = 5;
+            this.label1.Tag = "com.td.usuario";
             this.label1.Text = "USUARIO";
             // 
             // label2
@@ -78,6 +80,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 16);
             this.label2.TabIndex = 6;
+            this.label2.Tag = "com.td.contraseña";
             this.label2.Text = "CONTRASEÑA";
             // 
             // button2
@@ -87,6 +90,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 28);
             this.button2.TabIndex = 7;
+            this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 

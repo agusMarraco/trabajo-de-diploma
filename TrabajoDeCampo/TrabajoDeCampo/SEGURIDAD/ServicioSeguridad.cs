@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TrabajoDeCampo.BO;
 using TrabajoDeCampo.DAO;
 using System.IO;
+using System.Windows.Forms;
 namespace TrabajoDeCampo.SERVICIO
 {
     public class ServicioSeguridad
@@ -175,8 +176,11 @@ namespace TrabajoDeCampo.SERVICIO
         }
 
         //IDIOMA
-        public Dictionary<String,String> traerTraducciones(List<String> codigosMensajes, String codigoIdioma) { return null; }
-
+        public Dictionary<String, String> traerTraducciones(List<String> codigosMensajes, String codigoIdioma)
+        {
+            return daoSeguridad.traerTraducciones(codigosMensajes, codigoIdioma);
+        }
+        
 
         public void enviarMail(String password, Usuario usuario) { }
 

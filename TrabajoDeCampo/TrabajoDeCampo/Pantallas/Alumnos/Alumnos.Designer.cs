@@ -38,17 +38,17 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -118,6 +118,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(136, 34);
             this.button1.TabIndex = 4;
+            this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -138,7 +139,42 @@
             this.groupBox1.Size = new System.Drawing.Size(703, 178);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(561, 138);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(136, 34);
+            this.button8.TabIndex = 13;
+            this.button8.Tag = "com.td.cancelar";
+            this.button8.Text = "Cancelar";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(453, 100);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(102, 20);
+            this.radioButton2.TabIndex = 12;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Tag = "com.td.descendente";
+            this.radioButton2.Text = "Descendente";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(280, 100);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(95, 20);
+            this.radioButton1.TabIndex = 11;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "com.td.ascendente";
+            this.radioButton1.Text = "Ascendente";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -147,7 +183,19 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 16);
             this.label2.TabIndex = 8;
+            this.label2.Tag = "com.td.ordenar.por";
             this.label2.Text = "Ordenar por:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(561, 86);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(136, 34);
+            this.button2.TabIndex = 10;
+            this.button2.Tag = "com.td.registrar";
+            this.button2.Text = "Registrar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -156,17 +204,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 16);
             this.label1.TabIndex = 7;
+            this.label1.Tag = "com.td.filtrar.por";
             this.label1.Text = "Filtrar por:";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(561, 86);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(136, 34);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Registrar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -174,6 +213,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(119, 34);
             this.button3.TabIndex = 11;
+            this.button3.Tag = "com.td.inasistencias";
             this.button3.Text = "Inasistencias";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -184,6 +224,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(119, 34);
             this.button4.TabIndex = 12;
+            this.button4.Tag = "com.td.repetir";
             this.button4.Text = "Repetir";
             this.button4.UseVisualStyleBackColor = true;
             // 
@@ -193,6 +234,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(119, 34);
             this.button5.TabIndex = 13;
+            this.button5.Tag = "com.td.amonestaciones";
             this.button5.Text = "Amonestaciones";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -203,6 +245,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(119, 34);
             this.button6.TabIndex = 14;
+            this.button6.Tag = "com.td.borrar";
             this.button6.Text = "Borrar";
             this.button6.UseVisualStyleBackColor = true;
             // 
@@ -212,39 +255,9 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(119, 34);
             this.button7.TabIndex = 15;
+            this.button7.Tag = "com.td.modificar";
             this.button7.Text = "Modificar";
             this.button7.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(280, 100);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(95, 20);
-            this.radioButton1.TabIndex = 11;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Ascendente";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(453, 100);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(102, 20);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Descendente";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(561, 138);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(136, 34);
-            this.button8.TabIndex = 13;
-            this.button8.Text = "Cancelar";
-            this.button8.UseVisualStyleBackColor = true;
             // 
             // Alumnos
             // 
@@ -261,6 +274,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Alumnos";
             this.Text = "Alumnos";
+            this.Load += new System.EventHandler(this.Alumnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
