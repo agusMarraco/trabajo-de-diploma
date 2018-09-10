@@ -28,174 +28,174 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.nombrelbl = new System.Windows.Forms.Label();
+            this.nombre = new System.Windows.Forms.TextBox();
+            this.apellido = new System.Windows.Forms.TextBox();
+            this.apellidolbl = new System.Windows.Forms.Label();
+            this.dni = new System.Windows.Forms.TextBox();
+            this.dnilbl = new System.Windows.Forms.Label();
+            this.direccion = new System.Windows.Forms.TextBox();
+            this.direccionlbl = new System.Windows.Forms.Label();
+            this.email = new System.Windows.Forms.TextBox();
+            this.emaillbl = new System.Windows.Forms.Label();
+            this.alias = new System.Windows.Forms.TextBox();
+            this.aliaslbl = new System.Windows.Forms.Label();
+            this.telefonolbl = new System.Windows.Forms.Label();
+            this.telefono = new System.Windows.Forms.MaskedTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgfamilias = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgpatentes = new System.Windows.Forms.DataGridView();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dgfamiliapatente = new System.Windows.Forms.DataGridView();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.Column6 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgfamilias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgpatentes)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgfamiliapatente)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // nombrelbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Tag = "com.td.nombre";
-            this.label1.Text = "Nombre";
+            this.nombrelbl.AutoSize = true;
+            this.nombrelbl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nombrelbl.Location = new System.Drawing.Point(7, 13);
+            this.nombrelbl.Name = "nombrelbl";
+            this.nombrelbl.Size = new System.Drawing.Size(53, 16);
+            this.nombrelbl.TabIndex = 0;
+            this.nombrelbl.Tag = "com.td.nombre";
+            this.nombrelbl.Text = "Nombre";
             // 
-            // textBox1
+            // nombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(84, 9);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(296, 20);
-            this.textBox1.TabIndex = 1;
+            this.nombre.Location = new System.Drawing.Point(84, 9);
+            this.nombre.Name = "nombre";
+            this.nombre.Size = new System.Drawing.Size(296, 20);
+            this.nombre.TabIndex = 1;
             // 
-            // textBox2
+            // apellido
             // 
-            this.textBox2.Location = new System.Drawing.Point(84, 35);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(296, 20);
-            this.textBox2.TabIndex = 3;
+            this.apellido.Location = new System.Drawing.Point(84, 35);
+            this.apellido.Name = "apellido";
+            this.apellido.Size = new System.Drawing.Size(296, 20);
+            this.apellido.TabIndex = 3;
             // 
-            // label2
+            // apellidolbl
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Tag = "com.td.apellido";
-            this.label2.Text = "Apellido";
+            this.apellidolbl.AutoSize = true;
+            this.apellidolbl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apellidolbl.Location = new System.Drawing.Point(7, 40);
+            this.apellidolbl.Name = "apellidolbl";
+            this.apellidolbl.Size = new System.Drawing.Size(54, 16);
+            this.apellidolbl.TabIndex = 2;
+            this.apellidolbl.Tag = "com.td.apellido";
+            this.apellidolbl.Text = "Apellido";
             // 
-            // textBox3
+            // dni
             // 
-            this.textBox3.Location = new System.Drawing.Point(84, 61);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(296, 20);
-            this.textBox3.TabIndex = 5;
+            this.dni.Location = new System.Drawing.Point(84, 61);
+            this.dni.Name = "dni";
+            this.dni.Size = new System.Drawing.Size(296, 20);
+            this.dni.TabIndex = 5;
             // 
-            // label3
+            // dnilbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(7, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 16);
-            this.label3.TabIndex = 4;
-            this.label3.Tag = "com.td.d.n.i";
-            this.label3.Text = "D.N.I.";
+            this.dnilbl.AutoSize = true;
+            this.dnilbl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dnilbl.Location = new System.Drawing.Point(7, 65);
+            this.dnilbl.Name = "dnilbl";
+            this.dnilbl.Size = new System.Drawing.Size(41, 16);
+            this.dnilbl.TabIndex = 4;
+            this.dnilbl.Tag = "com.td.d.n.i";
+            this.dnilbl.Text = "D.N.I.";
             // 
-            // textBox4
+            // direccion
             // 
-            this.textBox4.Location = new System.Drawing.Point(84, 87);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(296, 20);
-            this.textBox4.TabIndex = 7;
+            this.direccion.Location = new System.Drawing.Point(84, 87);
+            this.direccion.Name = "direccion";
+            this.direccion.Size = new System.Drawing.Size(296, 20);
+            this.direccion.TabIndex = 7;
             // 
-            // label4
+            // direccionlbl
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(7, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 16);
-            this.label4.TabIndex = 6;
-            this.label4.Tag = "com.td.direccion";
-            this.label4.Text = "Dirección";
+            this.direccionlbl.AutoSize = true;
+            this.direccionlbl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.direccionlbl.Location = new System.Drawing.Point(7, 91);
+            this.direccionlbl.Name = "direccionlbl";
+            this.direccionlbl.Size = new System.Drawing.Size(62, 16);
+            this.direccionlbl.TabIndex = 6;
+            this.direccionlbl.Tag = "com.td.dirección";
+            this.direccionlbl.Text = "Dirección";
             // 
-            // textBox5
+            // email
             // 
-            this.textBox5.Location = new System.Drawing.Point(466, 36);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(300, 20);
-            this.textBox5.TabIndex = 9;
+            this.email.Location = new System.Drawing.Point(466, 36);
+            this.email.Name = "email";
+            this.email.Size = new System.Drawing.Size(300, 20);
+            this.email.TabIndex = 9;
             // 
-            // label5
+            // emaillbl
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(408, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 16);
-            this.label5.TabIndex = 8;
-            this.label5.Tag = "com.td.email";
-            this.label5.Text = "Email";
+            this.emaillbl.AutoSize = true;
+            this.emaillbl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emaillbl.Location = new System.Drawing.Point(408, 40);
+            this.emaillbl.Name = "emaillbl";
+            this.emaillbl.Size = new System.Drawing.Size(41, 16);
+            this.emaillbl.TabIndex = 8;
+            this.emaillbl.Tag = "com.td.email";
+            this.emaillbl.Text = "Email";
             // 
-            // textBox6
+            // alias
             // 
-            this.textBox6.Location = new System.Drawing.Point(466, 9);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(300, 20);
-            this.textBox6.TabIndex = 11;
+            this.alias.Location = new System.Drawing.Point(466, 9);
+            this.alias.Name = "alias";
+            this.alias.Size = new System.Drawing.Size(300, 20);
+            this.alias.TabIndex = 11;
             // 
-            // label6
+            // aliaslbl
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(408, 13);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 16);
-            this.label6.TabIndex = 10;
-            this.label6.Tag = "com.td.alias";
-            this.label6.Text = "Alias";
+            this.aliaslbl.AutoSize = true;
+            this.aliaslbl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aliaslbl.Location = new System.Drawing.Point(408, 13);
+            this.aliaslbl.Name = "aliaslbl";
+            this.aliaslbl.Size = new System.Drawing.Size(37, 16);
+            this.aliaslbl.TabIndex = 10;
+            this.aliaslbl.Tag = "com.td.alias";
+            this.aliaslbl.Text = "Alias";
             // 
-            // label8
+            // telefonolbl
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(7, 114);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 16);
-            this.label8.TabIndex = 13;
-            this.label8.Tag = "com.td.telefono";
-            this.label8.Text = "Teléfono";
+            this.telefonolbl.AutoSize = true;
+            this.telefonolbl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telefonolbl.Location = new System.Drawing.Point(7, 114);
+            this.telefonolbl.Name = "telefonolbl";
+            this.telefonolbl.Size = new System.Drawing.Size(55, 16);
+            this.telefonolbl.TabIndex = 13;
+            this.telefonolbl.Tag = "com.td.teléfono";
+            this.telefonolbl.Text = "Teléfono";
             // 
-            // maskedTextBox1
+            // telefono
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(84, 110);
-            this.maskedTextBox1.Mask = "000-0000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(296, 20);
-            this.maskedTextBox1.TabIndex = 15;
+            this.telefono.Location = new System.Drawing.Point(84, 110);
+            this.telefono.Mask = "000-0000";
+            this.telefono.Name = "telefono";
+            this.telefono.Size = new System.Drawing.Size(296, 20);
+            this.telefono.TabIndex = 15;
             // 
             // button1
             // 
@@ -206,6 +206,7 @@
             this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -217,16 +218,21 @@
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgfamilias
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgfamilias.AllowUserToAddRows = false;
+            this.dgfamilias.AllowUserToDeleteRows = false;
+            this.dgfamilias.AllowUserToResizeColumns = false;
+            this.dgfamilias.AllowUserToResizeRows = false;
+            this.dgfamilias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgfamilias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 40);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(360, 230);
-            this.dataGridView1.TabIndex = 17;
+            this.dgfamilias.Location = new System.Drawing.Point(6, 40);
+            this.dgfamilias.Name = "dgfamilias";
+            this.dgfamilias.ShowEditingIcon = false;
+            this.dgfamilias.Size = new System.Drawing.Size(360, 230);
+            this.dgfamilias.TabIndex = 17;
             // 
             // Column1
             // 
@@ -241,17 +247,22 @@
             this.Column2.HeaderText = "ASIGNADA";
             this.Column2.Name = "Column2";
             // 
-            // dataGridView2
+            // dgpatentes
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgpatentes.AllowUserToAddRows = false;
+            this.dgpatentes.AllowUserToDeleteRows = false;
+            this.dgpatentes.AllowUserToResizeColumns = false;
+            this.dgpatentes.AllowUserToResizeRows = false;
+            this.dgpatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgpatentes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column4,
             this.Column6});
-            this.dataGridView2.Location = new System.Drawing.Point(6, 37);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(740, 233);
-            this.dataGridView2.TabIndex = 18;
+            this.dgpatentes.Location = new System.Drawing.Point(6, 37);
+            this.dgpatentes.Name = "dgpatentes";
+            this.dgpatentes.ShowEditingIcon = false;
+            this.dgpatentes.Size = new System.Drawing.Size(740, 233);
+            this.dgpatentes.TabIndex = 18;
             // 
             // Column3
             // 
@@ -268,6 +279,11 @@
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "NEGADA";
+            this.Column6.Name = "Column6";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -276,6 +292,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(57, 16);
             this.label7.TabIndex = 19;
+            this.label7.Tag = "com.td.familias";
             this.label7.Text = "Familias";
             // 
             // label9
@@ -286,6 +303,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 16);
             this.label9.TabIndex = 20;
+            this.label9.Tag = "com.td.patentes";
             this.label9.Text = "Patentes";
             // 
             // tabControl1
@@ -301,14 +319,15 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.dataGridView4);
+            this.tabPage1.Controls.Add(this.dgfamiliapatente);
             this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.dgfamilias);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(752, 276);
             this.tabPage1.TabIndex = 0;
+            this.tabPage1.Tag = "com.td.familias";
             this.tabPage1.Text = "Familias";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -320,17 +339,23 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(115, 16);
             this.label11.TabIndex = 21;
+            this.label11.Tag = "com.td.patentes.incluidas";
             this.label11.Text = "Patentes Incluidas";
             // 
-            // dataGridView4
+            // dgfamiliapatente
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgfamiliapatente.AllowUserToAddRows = false;
+            this.dgfamiliapatente.AllowUserToDeleteRows = false;
+            this.dgfamiliapatente.AllowUserToResizeColumns = false;
+            this.dgfamiliapatente.AllowUserToResizeRows = false;
+            this.dgfamiliapatente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgfamiliapatente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5});
-            this.dataGridView4.Location = new System.Drawing.Point(397, 40);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(349, 230);
-            this.dataGridView4.TabIndex = 20;
+            this.dgfamiliapatente.Location = new System.Drawing.Point(397, 40);
+            this.dgfamiliapatente.Name = "dgfamiliapatente";
+            this.dgfamiliapatente.ShowEditingIcon = false;
+            this.dgfamiliapatente.Size = new System.Drawing.Size(349, 230);
+            this.dgfamiliapatente.TabIndex = 20;
             // 
             // Column5
             // 
@@ -341,12 +366,13 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Controls.Add(this.dgpatentes);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(752, 276);
             this.tabPage2.TabIndex = 1;
+            this.tabPage2.Tag = "com.td.patentes";
             this.tabPage2.Text = "Patentes";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
@@ -369,11 +395,6 @@
             this.comboBox1.Size = new System.Drawing.Size(148, 21);
             this.comboBox1.TabIndex = 27;
             // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "NEGADA";
-            this.Column6.Name = "Column6";
-            // 
             // AltaModificacionUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,29 +404,29 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.maskedTextBox1);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.telefono);
+            this.Controls.Add(this.telefonolbl);
+            this.Controls.Add(this.alias);
+            this.Controls.Add(this.aliaslbl);
+            this.Controls.Add(this.email);
+            this.Controls.Add(this.emaillbl);
+            this.Controls.Add(this.direccion);
+            this.Controls.Add(this.direccionlbl);
+            this.Controls.Add(this.dni);
+            this.Controls.Add(this.dnilbl);
+            this.Controls.Add(this.apellido);
+            this.Controls.Add(this.apellidolbl);
+            this.Controls.Add(this.nombre);
+            this.Controls.Add(this.nombrelbl);
             this.Name = "AltaModificacionUsuario";
             this.Text = "Usuario";
             this.Load += new System.EventHandler(this.AltaModificacionUsuario_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgfamilias)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgpatentes)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgfamiliapatente)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -416,24 +437,24 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.Label nombrelbl;
+        private System.Windows.Forms.TextBox nombre;
+        private System.Windows.Forms.TextBox apellido;
+        private System.Windows.Forms.Label apellidolbl;
+        private System.Windows.Forms.TextBox dni;
+        private System.Windows.Forms.Label dnilbl;
+        private System.Windows.Forms.TextBox direccion;
+        private System.Windows.Forms.Label direccionlbl;
+        private System.Windows.Forms.TextBox email;
+        private System.Windows.Forms.Label emaillbl;
+        private System.Windows.Forms.TextBox alias;
+        private System.Windows.Forms.Label aliaslbl;
+        private System.Windows.Forms.Label telefonolbl;
+        private System.Windows.Forms.MaskedTextBox telefono;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgfamilias;
+        private System.Windows.Forms.DataGridView dgpatentes;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -442,7 +463,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dgfamiliapatente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox1;

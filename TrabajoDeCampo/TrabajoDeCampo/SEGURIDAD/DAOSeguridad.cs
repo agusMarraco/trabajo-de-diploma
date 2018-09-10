@@ -29,7 +29,7 @@ namespace TrabajoDeCampo.DAO
         //FAMILIA PATENTE
         public List<ComponentePermiso> listarFamiliasYPatentes() { return null; }
 
-        public void actualizarFamiliaPantente(List<Patente> pantentes,Familia familia) { }
+        public void actualizarFamiliaPantente(List<Patente> pantentes, Familia familia) { }
 
         public Boolean tienePatente(long idUsuario, String codigoPantente) { return true; }
 
@@ -56,14 +56,107 @@ namespace TrabajoDeCampo.DAO
 
         public void cambiarIdioma(long idUsuario, String codigoIdioma) { }
 
-        public Boolean chequearCamposUnicos(Usuario usuario) { return false; } // para chequear que no se repitan dni mail alias 
+        public Boolean chequearCamposUnicos(Usuario usuario)// para chequear que no se repitan dni mail alias 
+        {
+            bool repetido = false;
+
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" SELECT USU.USU_EMAIL , USU.USU_DNI, USU.USU_ALIAS ,USU.USU_ID FROM USUARIO USU ");
+           
+            SqlCommand query = new SqlCommand(sb.ToString(), connection);
+            SqlDataReader reader = null;
+            Usuario tempUsuario;
+            List<Usuario> usuarios = new List<Usuario>();
+
+
+            try
+            {
+                connection.Open();
+                reader = query.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        tempUsuario = new Usuario();
+                        tempUsuario.email = reader["USU_EMAIL"].ToString();
+                        tempUsuario.dni = reader["USU_DNI"].ToString();
+                        tempUsuario.alias = SeguridadUtiles.desencriptarAES(reader["USU_ALIAS"].ToString());
+                        tempUsuario.id = long.Parse(reader["USU_ID"].ToString());
+                        usuarios.Add(tempUsuario);
+                    }
+                
+
+                connection.Close();
+            }
+            catch (Exception exe)
+            {
+                connection.Close();
+                throw exe;
+            }
+            foreach (Usuario item in usuarios)
+            {
+                if((item.dni == usuario.dni && item.id != usuario.id) || (item.email == usuario.email && item.id != usuario.id) 
+                    || (item.alias == usuario.alias && item.id != usuario.id))
+                {
+                    repetido = true;
+                    break;
+                }
+            }
+
+            return repetido;
+        } 
 
         public String regenerarContraseña(long idUsuario) { return ""; }
         public Usuario buscarUsuario(long idUsuario) { return null; }
         public void bloquearUsuario(long idUsuario) { }
         public void desbloquearUsuario(long idUsuario) { }
 
-        public void crearUsuario(Usuario usuario) { }
+        public void crearUsuario(ref Usuario usuario) {
+
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            // query
+            StringBuilder sb = new StringBuilder();
+            sb.Append("insert into usuario(usu_dni,usu_email,usu_pass,usu_alias,usu_nombre,usu_apellido,usu_direccion,usu_telefono,usu_dvh,usu_idioma) ");
+            sb.Append(" values (@dni,@email,@pass,@alias,@nombre,@apellido,@direccion,@telefono,@dvh,@idioma)");
+            SqlCommand query = new SqlCommand(sb.ToString(), connection);
+            query.Transaction = tx;
+
+            //agregando los paramentros 
+
+            query.Parameters.Add(new SqlParameter("@dni", System.Data.SqlDbType.VarChar)).Value = usuario.dni;
+            query.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = usuario.email;
+            query.Parameters.Add(new SqlParameter("@pass", System.Data.SqlDbType.VarChar)).Value = SeguridadUtiles.encriptarMD5(usuario.pass);
+            query.Parameters.Add(new SqlParameter("@alias", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(usuario.alias);
+            query.Parameters.Add(new SqlParameter("@nombre", System.Data.SqlDbType.VarChar)).Value = usuario.nombre;
+            query.Parameters.Add(new SqlParameter("@apellido", System.Data.SqlDbType.VarChar)).Value = usuario.apellido;
+            query.Parameters.Add(new SqlParameter("@direccion", System.Data.SqlDbType.VarChar)).Value = usuario.direccion;
+            query.Parameters.Add(new SqlParameter("@telefono", System.Data.SqlDbType.VarChar)).Value = usuario.telefono;
+            query.Parameters.Add(new SqlParameter("@dvh", System.Data.SqlDbType.VarChar)).Value = " ";
+            query.Parameters.Add(new SqlParameter("@idioma", System.Data.SqlDbType.BigInt)).Value = usuario.idioma.id;
+
+            try
+            {
+                
+                int resultados = query.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception exe)
+            {
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception )
+                {
+                }
+                
+                connection.Close();
+                throw exe;
+            }
+
+        }
 
         public void modificarUsuario(Usuario usuario) { }
 
@@ -93,33 +186,14 @@ namespace TrabajoDeCampo.DAO
 
         //BACKUPS
 
-        public void realizarBackup(int partes, String directorio) {
+        public void realizarBackup(int partes, String directorio)
+        {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
             StringBuilder queryText = new StringBuilder();
-            
+
             queryText.Append(" USE MASTER ");
             queryText.Append(" BACKUP DATABASE TRABAJO_DIPLOMA TO DISK = '" + directorio + "\\tempBackup.bak' WITH init");
-            SqlCommand query = new SqlCommand(queryText.ToString(), connection);
-            try
-            {
-                query.ExecuteNonQuery();
-                connection.Close();
-            }
-            catch (Exception e )
-            {
-
-                connection.Close();
-                throw e;
-            }  
-        }
-
-        public void realizarRestore(String directorio) {
-            SqlConnection connection = ConexionSingleton.obtenerConexion();
-            connection.Open();
-            StringBuilder queryText = new StringBuilder();
-            queryText.Append(" USE MASTER ");
-            queryText.Append(" RESTORE DATABASE TRABAJO_DIPLOMA FROM  DISK = '"+ directorio +"' WITH REPLACE");
             SqlCommand query = new SqlCommand(queryText.ToString(), connection);
             try
             {
@@ -133,8 +207,29 @@ namespace TrabajoDeCampo.DAO
                 throw e;
             }
         }
-       
-        
+
+        public void realizarRestore(String directorio)
+        {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            StringBuilder queryText = new StringBuilder();
+            queryText.Append(" USE MASTER ");
+            queryText.Append(" RESTORE DATABASE TRABAJO_DIPLOMA FROM  DISK = '" + directorio + "' WITH REPLACE");
+            SqlCommand query = new SqlCommand(queryText.ToString(), connection);
+            try
+            {
+                query.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+
+                connection.Close();
+                throw e;
+            }
+        }
+
+
         //IDIOMA
         public Dictionary<String, String> traerTraducciones(List<String> codigosMensajes, String codigoIdioma)
         {
@@ -152,9 +247,9 @@ namespace TrabajoDeCampo.DAO
                 //sb.Append("select * from IDIOMA");
                 SqlCommand query = new SqlCommand(sb.ToString(), connection);
                 SqlDataAdapter adapter = new SqlDataAdapter(query);
-                
-                query.CommandType = System.Data.CommandType.Text;                
-                query.Parameters.Add(new SqlParameter("@CODIGO",System.Data.SqlDbType.VarChar)).Value = tag;
+
+                query.CommandType = System.Data.CommandType.Text;
+                query.Parameters.Add(new SqlParameter("@CODIGO", System.Data.SqlDbType.VarChar)).Value = tag;
                 query.Parameters.Add(new SqlParameter("@LANGCODE", System.Data.SqlDbType.VarChar)).Value = codigoIdioma;
 
                 try
@@ -165,9 +260,9 @@ namespace TrabajoDeCampo.DAO
                     if (reader.HasRows)
                     {
                         while (reader.Read())
-                        { 
-                            if(!traducciones.ContainsKey(tag))
-                            traducciones.Add(tag, reader.GetValue(0).ToString());
+                        {
+                            if (!traducciones.ContainsKey(tag))
+                                traducciones.Add(tag, reader.GetValue(0).ToString());
                         }
 
                     }
@@ -178,7 +273,7 @@ namespace TrabajoDeCampo.DAO
                     connection.Close();
                     throw ex;
                 }
-                
+
             }
 
             connection.Close();

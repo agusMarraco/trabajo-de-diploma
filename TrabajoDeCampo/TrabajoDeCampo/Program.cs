@@ -14,8 +14,8 @@ namespace TrabajoDeCampo
         public static void Main(string[] args)
         {
 
-            //Pantallas.Seguridad.Menu menu = new Pantallas.Seguridad.Menu();
-            //new Pantallas.Seguridad.Menu().Show();
+            Pantallas.Seguridad.Menu menu = new Pantallas.Seguridad.Menu();
+          new Pantallas.Seguridad.Menu().Show();
 
             //ActualizarConexion conec = new ActualizarConexion();
             //conec.Show();
@@ -24,7 +24,7 @@ namespace TrabajoDeCampo
             //fallo.Show();
 
             //new testeador().Show();
-            mostrarTodasLasPantallas();
+            //    mostrarTodasLasPantallas();
             Application.Run();
                 
         }

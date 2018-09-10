@@ -8,6 +8,17 @@ namespace TrabajoDeCampo.BO
 {
     public class Idioma
     {
+
+        public Idioma() {
+
+        }
+
+        public Idioma(long id, string codigo, String descripcion)
+        {
+            this.id = id;
+            this.codigo = codigo;
+            this.descripcion = descripcion;
+        }
         private long _id;
 
         public long id

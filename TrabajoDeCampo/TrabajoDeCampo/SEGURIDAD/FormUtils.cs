@@ -39,6 +39,12 @@ namespace TrabajoDeCampo.SEGURIDAD
                 {
                     iterateControls(tags, ((DataGridView)control).Columns);
                 }
+                else if (control.GetType() == typeof(TabControl))
+                {
+                    iterateControls(tags, ((TabControl)control).TabPages);
+                }
+
+
 
                 else
                 {
@@ -73,12 +79,16 @@ namespace TrabajoDeCampo.SEGURIDAD
                         }
                     }
                     else if (item.GetType() == typeof(DataGridViewTextBoxColumn) ||
-                        item.GetType() == typeof(DataGridViewButtonColumn))
+                        item.GetType() == typeof(DataGridViewButtonColumn) || item.GetType() == typeof(DataGridViewCheckBoxColumn))
                     {
                         if (((DataGridViewColumn)item).Tag != null)
                         {
                             tags.Add(((DataGridViewColumn)item).Tag.ToString());
                         }
+                    }
+                    else if (item.GetType() == typeof(DataGridView) )
+                    {
+                            iterateControls(tags, ((DataGridView)item).Columns);                        
                     }
                     else if (item.GetType() == typeof(Button))
                     {
@@ -99,6 +109,14 @@ namespace TrabajoDeCampo.SEGURIDAD
                         if (((Label)item).Tag != null)
                         {
                             tags.Add(((Label)item).Tag.ToString());
+                        }
+                    }
+                    else if (item.GetType() == typeof(TabPage))
+                    {
+                        if (((TabPage)item).Tag != null)
+                        {
+                            tags.Add(((TabPage)item).Tag.ToString());
+                            iterateControls(tags, ((TabPage)item).Controls);
                         }
                     }
                 }
@@ -134,6 +152,10 @@ namespace TrabajoDeCampo.SEGURIDAD
                     else if (control.GetType() == typeof(DataGridView))
                     {
                         iterateControls(item, ((DataGridView)control).Columns);
+                    }
+                    else if (control.GetType() == typeof(TabControl))
+                    {
+                        iterateControls(item, ((TabControl)control).TabPages);
                     }
 
                     else
@@ -172,12 +194,16 @@ namespace TrabajoDeCampo.SEGURIDAD
                         }
                     }
                     else if (item.GetType() == typeof(DataGridViewTextBoxColumn) ||
-                        item.GetType() == typeof(DataGridViewButtonColumn))
+                        item.GetType() == typeof(DataGridViewButtonColumn) || item.GetType() == typeof(DataGridViewCheckBoxColumn))
                     {
                         if (((DataGridViewColumn)item).Tag != null && ((DataGridViewColumn)item).Tag.ToString() == kvPair.Key)
                         {
                             ((DataGridViewColumn)item).HeaderText = kvPair.Value;
                         }
+                    }
+                    else if (item.GetType() == typeof(DataGridView))
+                    {
+                            iterateControls(kvPair, ((DataGridView)item).Columns);   
                     }
                     else if (item.GetType() == typeof(Button))
                     {
@@ -198,6 +224,17 @@ namespace TrabajoDeCampo.SEGURIDAD
                         if (((Label)item).Tag != null && ((Label)item).Tag.ToString() == kvPair.Key)
                         {
                             ((Label)item).Text = kvPair.Value;
+                        }
+                    }
+                    else if (item.GetType() == typeof(TabPage))
+                    {
+                        if (((TabPage)item).Tag != null)
+                        {
+                            if(((TabPage)item).Tag.ToString() == kvPair.Key){
+                                ((TabPage)item).Text = kvPair.Value;
+                            }
+                            
+                            iterateControls(kvPair, ((TabPage)item).Controls);
                         }
                     }
                 }

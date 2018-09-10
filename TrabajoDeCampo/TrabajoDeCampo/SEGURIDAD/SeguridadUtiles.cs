@@ -86,6 +86,20 @@ namespace TrabajoDeCampo
             return hash;
         }
 
-        public static String generarPassword() { return ""; }
+        public static String generarPassword()
+        {
+            const string caracteres = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz";
+            const int max = 8;
+            string[] chars = new string[max];
+            Random random = new Random();
+
+            for (int i = 0; i < max; i++)
+            {
+                chars[i] += caracteres[random.Next(0, caracteres.Length - 1)];
+            }
+
+
+            return String.Join("",chars);
+        }
     }
 }

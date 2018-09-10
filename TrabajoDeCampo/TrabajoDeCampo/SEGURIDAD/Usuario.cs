@@ -106,6 +106,13 @@ namespace TrabajoDeCampo
         }
 
 
+        private List<ComponentePermiso> _componentePermisos;
+
+        public List<ComponentePermiso> componentePermisos
+        {
+            get { return _componentePermisos; }
+            set { _componentePermisos = value; }
+        }
 
 
 

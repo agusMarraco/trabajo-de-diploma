@@ -12,6 +12,10 @@ Notas de sobre las conversaciones con carlos
 pantallas actualizadas.
 
 
+agregue la propiedad la componente permiso al usuario, tengo que actualizar el diagrama de clases
+pero safo del diccionario de datos porque las entidades no van.
+
+
 --lo hice voy a tener que implementar un custom sort en las datatables y saque los filtrar por asc desc de las paginas porque voy
 a usar el sorting de la datatable
 	agregar el icono de filtro en las tablas porque queda el asc desc segun el filtro.
@@ -19,11 +23,17 @@ a usar el sorting de la datatable
 
 change log
 
-AGREGA LAS CONSTRAINTS PELOTUDO
-
 --metodos de generacion de digitos verificadores
 --metodos de chequeos de integridad de digitos
-
+--hacer los inserts para las patatentes encriptadas
+--hacer el abm de usuarios, con bloqueo
+--log in log out
+--evaluar integridad de datos
+--abm de familias
+--logueo de bitacora
+--auditar bitacora
+--falla de conexion
+--
 	Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
 
 	hacer que el btn cancelar de cada uno cierre el form.
@@ -45,5 +55,14 @@ AGREGA LAS CONSTRAINTS PELOTUDO
 	normalizar el crear/registrar
 
 
+pegarle una revisada al diagrama de componentes y a el diagrama de navegación
 
-	
+
+llamadas agregadas que no estan en los ds
+	-traerdraccucciones en servicio seguridad se llama en grabar mail
+	-encriptar aes se llama en el alta de usuario
+	-encriptar aes se llama en el chequeo de repetidos del usuario.
+
+agregue la clase idiomas enum 
+	agregar al diagrama de clases y al diccionario de datos.
+	sobrecargo el constructor de idiomas

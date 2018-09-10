@@ -19,7 +19,7 @@ namespace TrabajoDeCampo.SERVICIO
             this.daoSeguridad = new DAOSeguridad();
         }
         private DAOSeguridad _daoSeguridad;
-
+        
         public DAOSeguridad daoSeguridad
         {
             get { return _daoSeguridad; }
@@ -61,7 +61,26 @@ namespace TrabajoDeCampo.SERVICIO
         public void bloquearUsuario(long idUsuario) { }
         public void desbloquearUsuario(Usuario usuario) { }
 
-        public void crearUsuario(Usuario usuario) { }
+        public void crearUsuario(Usuario usuario)
+        {
+            bool hayRepetidos = this.daoSeguridad.chequearCamposUnicos(usuario);
+            String contraseña = SeguridadUtiles.generarPassword();
+            String contraseñaEncriptada = SeguridadUtiles.encriptarMD5(contraseña);
+            usuario.pass = contraseñaEncriptada;
+
+            if (!hayRepetidos)
+            {
+                this.daoSeguridad.crearUsuario(ref usuario);
+                this.enviarMail(contraseña, usuario);
+
+            }
+            else
+            {
+                throw new Exception("El usuario tiene campos repetidos. Puede ser su email, dni o alias");
+            }
+
+            
+        }
 
         public Usuario buscarUsuario(long idUsuario) { return null; }
         public void modificarUsuario(Usuario usuario) { }
@@ -182,7 +201,40 @@ namespace TrabajoDeCampo.SERVICIO
         }
         
 
-        public void enviarMail(String password, Usuario usuario) { }
+        public void enviarMail(String password, Usuario usuario) {
+            List<String> codigos = new List<string> {"com.td.email.header", "com.td.email.body"};
+
+            String disco = Path.GetPathRoot(Environment.CurrentDirectory);
+            String currentUser = Environment.UserName;
+
+            String desktopPath = disco + "Users\\" + currentUser + "\\Desktop\\pass.txt";
+            
+            Dictionary<String, String> traducciones = this.daoSeguridad.traerTraducciones(codigos, usuario.idioma.codigo);
+            StringBuilder builder = new StringBuilder();
+            builder.Append(usuario.apellido + " " + usuario.nombre);
+            builder.Append(Environment.NewLine);
+            builder.Append(traducciones[codigos[0]]);
+            builder.Append(Environment.NewLine);
+            builder.Append(Environment.NewLine);
+            builder.Append(Environment.NewLine);
+            builder.Append(traducciones[codigos[1]] + " ");
+            builder.Append(password);
+            
+            try
+            {
+                FileStream mail = File.Create(desktopPath);
+                mail.Write(Encoding.UTF8.GetBytes(builder.ToString()),0, Encoding.UTF8.GetBytes(builder.ToString()).Length);
+                mail.Close();
+            }
+            catch (Exception ex )
+            {
+
+                throw ex;
+            }
+            
+
+
+        }
 
         public void actualizaConexión()
         {
