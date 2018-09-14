@@ -11,6 +11,9 @@ Notas de sobre las conversaciones con carlos
 	
 pantallas actualizadas.
 
+agregue un string como parametro al regenerar contraseña en daoSeguridad,
+cambiar en el diccionario de datos y el retorno tambien, es al pedo.
+cambiar el parametro del mismo metodo en el servicio y pasarle un usuario, por el tema del nombre e idioma.
 
 agregue la propiedad la componente permiso al usuario, tengo que actualizar el diagrama de clases
 pero safo del diccionario de datos porque las entidades no van.
@@ -22,14 +25,14 @@ a usar el sorting de la datatable
 	Permitir el multifiltro en la bitacora
 
 change log
-
---metodos de generacion de digitos verificadores
---metodos de chequeos de integridad de digitos
---hacer los inserts para las patatentes encriptadas
+------------------------CAMINIO CRITICO---------------------
 --hacer el abm de usuarios, con bloqueo
+--hacer los inserts para las patatentes encriptadas
+--abm de familias
+--incorporacion de permisos al usuario
+--metodos de generacion de digitos verificadores
 --log in log out
 --evaluar integridad de datos
---abm de familias
 --logueo de bitacora
 --auditar bitacora
 --falla de conexion
@@ -66,3 +69,5 @@ llamadas agregadas que no estan en los ds
 agregue la clase idiomas enum 
 	agregar al diagrama de clases y al diccionario de datos.
 	sobrecargo el constructor de idiomas
+
+revisar el sql de creacion

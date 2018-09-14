@@ -50,6 +50,9 @@ namespace TrabajoDeCampo
             set { _bloqueada = value; }
         }
 
+        public Familia() {
+            this.patentes = new List<ComponentePermiso>();
+            }
 
     }
 }

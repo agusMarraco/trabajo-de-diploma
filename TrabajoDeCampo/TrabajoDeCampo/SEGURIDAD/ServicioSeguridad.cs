@@ -41,24 +41,42 @@ namespace TrabajoDeCampo.SERVICIO
 
         public void actualizarPermisosUsuario(Usuario usuario, List<ComponentePermiso> familiasYPatentes) { }
 
-        public void crearFamilia(Familia familia) { }
+        public void crearFamilia(Familia familia) {
+            this.daoSeguridad.crearFamilia(familia);
+        }
 
-        public void modificarFamilia(Familia familia) { }
+        public void modificarFamilia(Familia familia) {
+            this.daoSeguridad.modificarFamilia(familia);
+        }
 
         public void borrarFamilia(long IdFamilia) { }
 
         public Familia buscarFamilia(long idFamilia) { return null; }
-        public List<Familia> listarFamilias() { return null; }
-        public List<Patente> listarPatentes() { return null; }
+        public List<Familia> listarFamilias() {
+            return this.daoSeguridad.listarFamilias();
+        }
+        public List<Patente> listarPatentes() {
+            return this.daoSeguridad.listarPatentes();
+        }
         //USUARIOS
 
         public void cambiarContraseña(long idUsuario, String contraseñaNueva) { }
 
         public void cambiarIdioma(long idUsuario, String codigoIdioma) { }
 
-        public void regenerarContraseña(long idUsuario){ }
+        public void regenerarContraseña(Usuario usuario){
 
-        public void bloquearUsuario(long idUsuario) { }
+            String nuevaContraseña = SeguridadUtiles.generarPassword();
+            String passEncriptado = SeguridadUtiles.encriptarMD5(nuevaContraseña);
+            this.daoSeguridad.regenerarContraseña(usuario.id, passEncriptado);
+            enviarMail(nuevaContraseña, usuario);
+            
+        }
+
+        public void bloquearUsuario(long idUsuario) {
+            this.daoSeguridad.bloquearUsuario(idUsuario);
+                
+        }
         public void desbloquearUsuario(Usuario usuario) { }
 
         public void crearUsuario(Usuario usuario)
@@ -85,11 +103,13 @@ namespace TrabajoDeCampo.SERVICIO
         public Usuario buscarUsuario(long idUsuario) { return null; }
         public void modificarUsuario(Usuario usuario) { }
 
-        public void borrarUsuario(Usuario usuario) { }
+        public void borrarUsuario(Usuario usuario) {
+            this.daoSeguridad.borrarUsuario(usuario);
+        }
 
         public List<Usuario> listarUsuarios(String filtro, String valor, String orden)
         {
-            return null;
+            return this.daoSeguridad.listarUsuarios(filtro,valor,orden);
         }
 
 
@@ -118,7 +138,7 @@ namespace TrabajoDeCampo.SERVICIO
                 File.Delete(item);
             }
 
-            partes = partes - 1;
+            partes = partes==10 ? partes - 1 : partes;
             this.daoSeguridad.realizarBackup(partes, directorio);
             //consulto filesize
             FileInfo informacionDelArchivo = new FileInfo(directorio + "\\tempBackup.bak");
@@ -176,7 +196,7 @@ namespace TrabajoDeCampo.SERVICIO
             { return long.Parse(a.Split('-')[5].Replace(".bak","")).CompareTo(long.Parse(b.Split('-')[5].Replace(".bak", ""))); });
 
             
-            String directorioTemporal = directorioActual + "\\tempRestoreFile.bak";
+            String directorioTemporal = directorioActual + "tempRestoreFile.bak";
 
             Stream stream = File.Create(directorioTemporal);
 

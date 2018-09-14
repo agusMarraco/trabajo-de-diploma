@@ -39,16 +39,235 @@ namespace TrabajoDeCampo.DAO
 
         public Boolean chequearNegada(long idUsuario, String codigoPatente) { return true; }
 
-        public void crearFamilia(Familia familia) { }
+        public void crearFamilia(Familia familia) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" INSERT INTO FAMILIA (FAM_NOMBRE, FAM_DVH) OUTPUT Inserted.FAM_ID VALUES(@NOMBRE, 0) ");
+            
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(familia.nombre);
+            
 
-        public void modificarFamilia(Familia familia) { }
+            try
+            {
+                SqlDataReader reader = query.ExecuteReader();
+                long id = 0;
+                if (reader.Read())
+                {
+                    id = (long)reader[0];
+                }
+
+                if(id != 0)
+                {
+                    reader.Close();
+                    query.CommandText = " INSERT INTO FAMILIA_PATENTE (FP_PATENTE_ID,FP_FAMILIA_ID) VALUES(@PATENTE,@FAMILIA) ";
+                    foreach (Patente item in familia.patentes)
+                    {
+                        query.Parameters.Clear();
+                        query.Parameters.Add(new SqlParameter("@PATENTE", System.Data.SqlDbType.BigInt)).Value = item.id;
+                        query.Parameters.Add(new SqlParameter("@FAMILIA", System.Data.SqlDbType.BigInt)).Value = id;
+                        query.ExecuteNonQuery();
+                    }
+                }
+
+                tx.Commit();
+
+            }
+            catch (Exception ex)
+            {
+
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    connection.Close();
+                    throw ex2;
+
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            
+
+
+        }
+
+        public void modificarFamilia(Familia familia) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" UPDATE FAMILIA SET FAM_NOMBRE = @NOMBRE WHERE FAM_ID = @ID ");
+
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(familia.nombre);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = familia.id;
+
+
+            try
+            {
+                query.ExecuteNonQuery();
+                query.Parameters.Clear();
+
+                query.CommandText = " DELETE FROM FAMILIA_PATENTE WHERE FP_FAMILIA_ID = @ID ";
+                query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = familia.id;
+
+                query.ExecuteNonQuery();
+
+                foreach (Patente item in familia.patentes)
+                {
+                    query.Parameters.Clear();
+
+                    query.CommandText = " INSERT INTO FAMILIA_PATENTE (FP_PATENTE_ID,FP_FAMILIA_ID) VALUES (@PATENTE,@FAMILIA) ";
+                    query.Parameters.Add(new SqlParameter("@PATENTE", System.Data.SqlDbType.BigInt)).Value = item.id;
+                    query.Parameters.Add(new SqlParameter("@FAMILIA", System.Data.SqlDbType.BigInt)).Value = familia.id;
+                    query.ExecuteNonQuery();
+                }
+
+                tx.Commit();
+
+            }
+            catch (Exception ex)
+            {
+
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    connection.Close();
+                    throw ex2;
+
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
 
         public void borrarFamilia(long IdFamilia) { }
 
         public Familia buscarFamilia(long idFamilia) { return null; }
 
-        public List<Familia> listarFamilias() { return null; }
-        public List<Patente> listarPatentes() { return null; }
+        public List<Familia> listarFamilias() {
+            
+            List<Familia> familias = new List<Familia>();
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" SELECT * FROM FAMILIA WHERE FAM_BLOQUEADA = 0  ");
+            SqlCommand query = new SqlCommand("", connection);
+            query.CommandText = sb.ToString();
+
+            connection.Open();
+            SqlDataReader reader;
+            Familia familia;
+            try
+            {
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    familia = new Familia();
+                    familia.id = (long)reader["FAM_ID"];
+                    familia.nombre = SeguridadUtiles.desencriptarAES(reader["FAM_NOMBRE"].ToString());
+                    familias.Add(familia);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            connection.Open();
+
+                try
+                {
+            
+                    foreach(Familia fam in familias)
+                    {
+                            query.Parameters.Clear();
+                            query.CommandText = " SELECT PAT_ID,PAT_DESC FROM PATENTE INNER JOIN FAMILIA_PATENTE ON FP_PATENTE_ID = PAT_ID WHERE FP_FAMILIA_ID = @ID";
+                            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = fam.id;
+
+                            reader = query.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+                                Patente pat = new Patente();
+                                pat.id = (long)reader["PAT_ID"];
+                                pat.descripcion = SeguridadUtiles.desencriptarAES(reader["PAT_DESC"].ToString());
+                                fam.patentes.Add(pat);
+                            }
+                             reader.Close();
+
+                        }
+                    }
+                catch (Exception ex)
+                {
+                    connection.Close();
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+
+
+            return familias;
+        }
+        public List<Patente> listarPatentes() {
+            List<Patente> patentes = new List<Patente>();
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" SELECT * FROM PATENTE  ");
+            SqlCommand query = new SqlCommand("", connection);
+            query.CommandText = sb.ToString();
+
+            connection.Open();
+            SqlDataReader reader;
+            Patente patente;
+            try
+            {
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    patente = new Patente();
+                    patente.id = (long)reader["PAT_ID"];
+                    patente.descripcion = SeguridadUtiles.desencriptarAES(reader["PAT_DESC"].ToString());
+                    patentes.Add(patente);
+                }
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            
+            return patentes;
+
+
+        }
         public Boolean chequearFamiliaDesasignada() { return true; }
         //USUARIOS
 
@@ -105,10 +324,120 @@ namespace TrabajoDeCampo.DAO
             return repetido;
         } 
 
-        public String regenerarContraseña(long idUsuario) { return ""; }
+        public void regenerarContraseña(long idUsuario, string passEncriptado) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" UPDATE USUARIO SET USU_PASS = @PASS WHERE USU_ID = @ID");
+
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+            query.Parameters.Add(new SqlParameter("@PASS", System.Data.SqlDbType.NVarChar)).Value = passEncriptado;
+
+            try
+            {
+                query.ExecuteNonQuery();
+                tx.Commit();
+
+            }
+            catch (Exception ex)
+            {
+
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    connection.Close();
+                    throw ex2;
+
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            desbloquearUsuario(idUsuario);
+
+        }
         public Usuario buscarUsuario(long idUsuario) { return null; }
-        public void bloquearUsuario(long idUsuario) { }
-        public void desbloquearUsuario(long idUsuario) { }
+        public void bloquearUsuario(long idUsuario)
+        {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" UPDATE USUARIO SET USU_INTENTOS = 3 WHERE USU_ID = @ID");
+
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+
+            try
+            {
+                query.ExecuteNonQuery();
+                tx.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    connection.Close();
+                    throw ex2;
+                    
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+
+        }
+        public void desbloquearUsuario(long idUsuario) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" UPDATE USUARIO SET USU_INTENTOS = 0 WHERE USU_ID = @ID");
+
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+
+            try
+            {
+                query.ExecuteNonQuery();
+                tx.Commit();
+
+            }
+            catch (Exception ex)
+            {
+
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    connection.Close();
+                    throw ex2;
+
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
 
         public void crearUsuario(ref Usuario usuario) {
 
@@ -160,11 +489,112 @@ namespace TrabajoDeCampo.DAO
 
         public void modificarUsuario(Usuario usuario) { }
 
-        public void borrarUsuario(Usuario usuario) { }
+        public void borrarUsuario(Usuario usuario)
+        {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" DELETE FROM USUARIO WHERE USU_ID = @ID");
+
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+
+            try
+            {
+                query.ExecuteNonQuery();
+                tx.Commit();
+
+            }
+            catch (Exception ex)
+            {
+
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    connection.Close();
+                    throw ex2;
+
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
 
         public List<Usuario> listarUsuarios(String filtro, String valor, String orden)
-        {
-            return null;
+        {   
+            
+            List<Usuario> usuarios = new List<Usuario>();
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" SELECT usu_dni,usu_alias,usu_nombre,usu_apellido, usu_intentos, usu_id, idi_id, idi_codigo FROM USUARIO  ");
+            sb.Append(" inner join IDIOMA on usu_idioma = idi_id");
+            sb.Append(" where usu_baja <> 1 ");
+
+            SqlCommand query = new SqlCommand("", connection);
+
+            query.CommandText = sb.ToString();
+
+            connection.Open();
+            SqlDataReader reader;
+            Usuario usu;
+            try
+            {
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    usu = new Usuario();
+                    usu.dni = reader["USU_DNI"].ToString();
+                    usu.alias = SeguridadUtiles.desencriptarAES(reader["USU_ALIAS"].ToString());
+                    usu.nombre = reader["USU_NOMBRE"].ToString();
+                    usu.apellido = reader["USU_APELLIDO"].ToString();
+                    Idioma idi = new Idioma();
+                    idi.codigo = reader["IDI_CODIGO"].ToString();
+                    idi.id = (long)reader["IDI_ID"];
+                    usu.idioma = idi;
+                    long intentos = (long)reader["USU_INTENTOS"];
+                    if (intentos == 3)
+                    {
+                        usu.baja = 1;
+                    }
+                    else
+                    {
+                        usu.baja = 0;
+                    }
+                    usu.id = (long)reader["USU_ID"];
+                    usuarios.Add(usu);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw  ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            List<Usuario> usuariosFiltrados = new List<Usuario>();
+            if (!String.IsNullOrEmpty(filtro) && !String.IsNullOrEmpty(valor))
+            {
+                foreach (Usuario current in usuarios)
+                {
+                    if (current.GetType().GetProperty(filtro).GetValue(current).ToString().Equals(valor, StringComparison.InvariantCultureIgnoreCase)){
+                        usuariosFiltrados.Add(current);
+                    }
+                }
+
+            }
+
+            return usuariosFiltrados.Count > 0 ? usuariosFiltrados : usuarios;
         }
 
 
@@ -210,7 +640,7 @@ namespace TrabajoDeCampo.DAO
 
         public void realizarRestore(String directorio)
         {
-            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            SqlConnection connection = new SqlConnection("Data Source="+Environment.MachineName+";Initial Catalog=master;Integrated Security=True");
             connection.Open();
             StringBuilder queryText = new StringBuilder();
             queryText.Append(" USE MASTER ");

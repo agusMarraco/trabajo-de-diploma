@@ -248,7 +248,10 @@ namespace TrabajoDeCampo.SEGURIDAD
     {
         public override void process(List<string> tags, Form formToTranslate, Dictionary<string, string> traduciones, List<Control> controles)
         {
-            throw new NotImplementedException();
+            foreach (Control item in controles)
+            {
+                item.Enabled = true;
+            }
         }
     }
 
@@ -257,7 +260,10 @@ namespace TrabajoDeCampo.SEGURIDAD
     {
         public override void process(List<string> tags, Form formToTranslate, Dictionary<string, string> traduciones, List<Control> controles)
         {
-            throw new NotImplementedException();
+            foreach (Control item in controles)
+            {
+                item.Enabled = false;
+            }
         }
     }
 

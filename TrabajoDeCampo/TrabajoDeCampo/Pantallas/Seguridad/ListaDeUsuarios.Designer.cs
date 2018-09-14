@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.gwUsuarios = new System.Windows.Forms.DataGridView();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,55 +42,66 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboFiltro = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gwUsuarios)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // gwUsuarios
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gwUsuarios.AllowUserToAddRows = false;
+            this.gwUsuarios.AllowUserToDeleteRows = false;
+            this.gwUsuarios.AllowUserToResizeColumns = false;
+            this.gwUsuarios.AllowUserToResizeRows = false;
+            this.gwUsuarios.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gwUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gwUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
             this.Column1,
             this.Column4,
             this.Column3,
             this.Column7});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 212);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(704, 196);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.gwUsuarios.Location = new System.Drawing.Point(12, 212);
+            this.gwUsuarios.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gwUsuarios.Name = "gwUsuarios";
+            this.gwUsuarios.ReadOnly = true;
+            this.gwUsuarios.ShowEditingIcon = false;
+            this.gwUsuarios.Size = new System.Drawing.Size(704, 196);
+            this.gwUsuarios.TabIndex = 0;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "Alias";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column1.HeaderText = "Apellido";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column4.HeaderText = "Nombre";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "DNI";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column7
             // 
             this.Column7.HeaderText = "Bloqueado";
             this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             // 
             // button1
             // 
@@ -102,6 +113,7 @@
             this.button1.Tag = "com.td.bloquear";
             this.button1.Text = "Bloquear";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -125,6 +137,7 @@
             this.button3.Tag = "com.td.regenerar.password";
             this.button3.Text = "Regenerar Password";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -136,6 +149,7 @@
             this.button4.Tag = "com.td.borrar";
             this.button4.Text = "Borrar";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox1
             // 
@@ -166,6 +180,7 @@
             this.button5.Tag = "com.td.buscar";
             this.button5.Text = "Buscar";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -177,15 +192,16 @@
             this.button6.Tag = "com.td.crear";
             this.button6.Text = "Crear";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // comboBox1
+            // comboFiltro
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(93, 32);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(187, 24);
-            this.comboBox1.TabIndex = 5;
+            this.comboFiltro.FormattingEnabled = true;
+            this.comboFiltro.Location = new System.Drawing.Point(93, 32);
+            this.comboFiltro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboFiltro.Name = "comboFiltro";
+            this.comboFiltro.Size = new System.Drawing.Size(187, 24);
+            this.comboFiltro.TabIndex = 5;
             // 
             // button7
             // 
@@ -197,11 +213,12 @@
             this.button7.Tag = "com.td.cancelar";
             this.button7.Text = "Cancelar";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.comboFiltro);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.label1);
@@ -224,13 +241,13 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.gwUsuarios);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ListaDeUsuarios";
             this.Text = "Usuarios";
             this.Load += new System.EventHandler(this.ListaDeUsuarios_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gwUsuarios)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -239,7 +256,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gwUsuarios;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -253,7 +270,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboFiltro;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox1;
     }
