@@ -8,6 +8,8 @@ using TrabajoDeCampo.BO;
 using TrabajoDeCampo.DAO;
 using System.IO;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
+
 namespace TrabajoDeCampo.SERVICIO
 {
     public class ServicioSeguridad
@@ -27,13 +29,21 @@ namespace TrabajoDeCampo.SERVICIO
         }
 
         //LOGIN
-        public void loguear(String user, String pass, String codigoIdioma) { } // ESTE CHEQUEA QUE TENGA X PANTENTE SI EL SISTEMA ESTA BLOQUEADO.
+        public void loguear(String user, String pass, String codigoIdioma) {
+            
+            this.daoSeguridad.loguear(user, pass, null);
+
+
+        } // ESTE CHEQUEA QUE TENGA X PANTENTE SI EL SISTEMA ESTA BLOQUEADO.
+
 
         public Boolean probarConexion() { return true; }
 
 
         //FAMILIA PATENTE
-        public List<ComponentePermiso> listarFamiliasYPatentes() { return null; }
+        public List<ComponentePermiso> listarFamiliasYPatentes() {
+            return this.daoSeguridad.listarFamiliasYPatentes();
+        }
 
         public void actualizarFamiliaPatente(List<Patente> pantentes) { }
 
@@ -49,7 +59,19 @@ namespace TrabajoDeCampo.SERVICIO
             this.daoSeguridad.modificarFamilia(familia);
         }
 
-        public void borrarFamilia(long IdFamilia) { }
+        public void borrarFamilia(long IdFamilia) {
+
+            bool estaDesasignada = this.daoSeguridad.chequearFamiliaDesasignada(IdFamilia);
+            if (estaDesasignada)
+            {
+                this.daoSeguridad.borrarFamilia(IdFamilia);
+            }
+            else
+            {
+                throw new Exception("La familia esta asignada.");
+            }
+            
+        }
 
         public Familia buscarFamilia(long idFamilia) { return null; }
         public List<Familia> listarFamilias() {
@@ -100,8 +122,13 @@ namespace TrabajoDeCampo.SERVICIO
             
         }
 
-        public Usuario buscarUsuario(long idUsuario) { return null; }
-        public void modificarUsuario(Usuario usuario) { }
+        public Usuario buscarUsuario(long idUsuario) {
+            return this.daoSeguridad.buscarUsuario(idUsuario);
+        }
+        public void modificarUsuario(Usuario usuario) {
+            this.daoSeguridad.modificarUsuario(usuario);
+                
+        }
 
         public void borrarUsuario(Usuario usuario) {
             this.daoSeguridad.borrarUsuario(usuario);
@@ -121,10 +148,19 @@ namespace TrabajoDeCampo.SERVICIO
 
         //DIGITOS VERIFICADORES
 
-        public void verificarDigitosVerificadores() { }
+        public void verificarDigitosVerificadores() {
+
+            this.daoSeguridad.verificarDigitosVerificadores();
+        }
 
 
-        public void recalcularDigitosVerificadores() { }
+        public void recalcularDigitosVerificadores() {
+            this.daoSeguridad.recalcularDigitosVerificadores();
+            foreach (KeyValuePair<string, KeyValuePair<string, string[]>> item in TablasDvhEnum.mapeoTablaCampo)
+            {
+                this.daoSeguridad.recalcularDigitoVertical(item.Key);
+            }
+        }
 
         //BACKUPS
 

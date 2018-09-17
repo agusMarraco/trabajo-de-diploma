@@ -21,6 +21,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private Dictionary<String, String> mensajesDeValidacion = new Dictionary<string, string>();
         private StringBuilder mensajesDeError = new StringBuilder();
         private Boolean isEdit;
+        private Usuario currentUsuario;
         public AltaModificacionUsuario()
         {
             
@@ -29,10 +30,54 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         public AltaModificacionUsuario(Boolean isEdit, Usuario usuario)
         {
             InitializeComponent();
+
+            //inicializando propiedades
+            this.KeyPreview = true;
             this.servicioSeguridad = new ServicioSeguridad();
+            this.dgfamiliapatente.DataSource = null;
             this.dgfamilias.DataSource = null;
             this.dgpatentes.DataSource = null;
+
+            this.dgfamiliapatente.AutoGenerateColumns = false ;
+            this.dgfamilias.AutoGenerateColumns = false;
+            this.dgpatentes.AutoGenerateColumns = false;
+            this.dgpatentes.Columns[0].DataPropertyName = "descripcion";
+            this.dgpatentes.Columns[2].DataPropertyName = "bloqueada";
+            this.dgfamiliapatente.Columns[0].DataPropertyName = "descripcion";
+            this.dgfamilias.Columns[0].DataPropertyName = "nombre";
+    
+            // event handlers
+            this.dgfamilias.SelectionChanged += actualizarPatentesMostradas;
+            this.dgpatentes.CellMouseUp += mouseLeaveCheckbox;
+            this.dgpatentes.CellValueChanged += cellValueChanged;
+            this.dgpatentes.CellEndEdit += endEditHandler;
+            this.dgpatentes.KeyUp += spaceHandler;
+
+            //cargo los dgv
+            List<ComponentePermiso> permisos = this.servicioSeguridad.listarFamiliasYPatentes();
+            List<Patente> patentes = new List<Patente>();
+            List<Familia> familias = new List<Familia>();
+
+            permisos.ForEach(x => { ComponentePermiso per = x;
+              if(per is Patente)
+                {
+                    patentes.Add((Patente)per);
+                }
+                else
+                {
+                    familias.Add((Familia)per);
+                }    
+            });
+
+            this.dgfamilias.DataSource = familias;
+            this.dgpatentes.DataSource = patentes;
+
+            //si es un edit guardo la referencia al usuario
             this.isEdit = isEdit;
+            if(usuario != null)
+                this.currentUsuario = this.servicioSeguridad.buscarUsuario(usuario.id);
+         
+            
         }
 
         private void label10_Click(object sender, EventArgs e)
@@ -42,8 +87,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void AltaModificacionUsuario_Load(object sender, EventArgs e)
         {
+            //inicializo propiedades
             this.dgfamilias.Columns[0].Tag = "com.td.familia";
             this.dgfamilias.Columns[0].ReadOnly = true;
+            this.dgfamilias.MultiSelect = false;
             this.dgfamilias.Columns[1].Tag = "com.td.asignada";
             this.dgfamiliapatente.Columns[0].Tag = "com.td.patente";
             this.dgfamiliapatente.Columns[0].ReadOnly= true;
@@ -51,6 +98,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgpatentes.Columns[0].ReadOnly= true;
             this.dgpatentes.Columns[1].Tag = "com.td.asignada";
             this.dgpatentes.Columns[2].Tag = "com.td.bloqueada";
+
+
+            mostrarPatentesDeFamilia();
+
+            //busco traducciones
             formUtils = new TraductorIterador();
             List<String> tags = new List<string>();
             formUtils.process(tags, this, null, null);
@@ -64,13 +116,67 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
             comboIdiomas.Add(new KeyValuePair<Idioma, string>(new Idioma(1,"es","Español"), traducciones["com.td.español"]));
             comboIdiomas.Add(new KeyValuePair<Idioma, string>(new Idioma(2, "en", "Ingles"), traducciones["com.td.ingles"]));
-            
+            //cargo los combos
             this.comboBox1.DataSource = null;
             this.comboBox1.DataSource = comboIdiomas;
             this.comboBox1.DisplayMember = "value";
 
-        }
+           if(currentUsuario != null)
+            {
+                //populate data si es un edit
+                this.nombre.Text = currentUsuario.nombre;
+                this.apellido.Text = currentUsuario.apellido;
+                this.dni.Text = currentUsuario.dni;
+                this.direccion.Text = currentUsuario.direccion;
+                this.telefono.Text = currentUsuario.telefono;
+                this.alias.Text = currentUsuario.alias;
+                this.email.Text = currentUsuario.email;
+                foreach(KeyValuePair<Idioma, string> item in this.comboBox1.Items)
+                {
+                    if(item.Key.codigo == currentUsuario.idioma.codigo)
+                    {
+                        this.comboBox1.SelectedItem = item;
+                    }
+                }
+                 // los permisos que tiene asignado el usuario
+                foreach(ComponentePermiso cp in currentUsuario.componentePermisos)
+                {
+                    if(cp is Familia)
+                    {
+                        foreach(DataGridViewRow item in dgfamilias.Rows)
+                        {
+                            if(((Familia)item.DataBoundItem).id == ((Familia)cp).id)
+                            {
+                                ((DataGridViewCheckBoxCell)item.Cells[1]).Value = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (DataGridViewRow item in dgpatentes.Rows)
+                        {
+                            if (((Patente)item.DataBoundItem).id == ((Patente)cp).id)
+                            {
+                                if (((Patente)cp).bloqueada)
+                                {
+                                    ((DataGridViewCheckBoxCell)item.Cells[2]).Value = true;
+                                }
+                                else
+                                {
+                                    ((DataGridViewCheckBoxCell)item.Cells[1]).Value = true;
+                                }
+                            }
 
+                        }
+                    }
+                }
+            }
+
+        }
+        /// <summary>
+        /// valida los inputs que ingresan los usuarios y agrega mensajes de error.
+        /// </summary>
+        /// <returns></returns>
         public Boolean validateInputs()
         {
             mensajesDeError = new StringBuilder();
@@ -132,16 +238,6 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 var email = new EmailAddressAttribute();
                 bool valid;
                 valid = email.IsValid(this.email.Text);
-                try
-                {
-                    var addr = new System.Net.Mail.MailAddress(this.email.Text);
-                    var trues = addr.Address == this.email.Text;
-                }
-                catch
-                {
-                    var falses = false;
-                }
-
                 if (!valid)
                 {
                     mensajesDeError.Append(this.emaillbl.Text);
@@ -167,6 +263,35 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 if (isEdit)
                 {//editando un usuario
 
+                    currentUsuario.nombre = this.nombre.Text;
+                    currentUsuario.apellido = this.apellido.Text;
+                    currentUsuario.dni = this.dni.Text;
+                    currentUsuario.direccion = this.direccion.Text;
+                    currentUsuario.telefono = this.telefono.Text;
+                    currentUsuario.alias = this.alias.Text;
+                    currentUsuario.email = this.email.Text;
+                    currentUsuario.nombre = this.nombre.Text;
+                    currentUsuario.idioma = ((KeyValuePair<Idioma, string>)this.comboBox1.SelectedItem).Key;
+
+                    currentUsuario.componentePermisos = new List<ComponentePermiso>();
+                    asociarPermisos(currentUsuario.componentePermisos);
+                    bool error = false;
+                    try
+                    {
+                        servicioSeguridad.modificarUsuario(currentUsuario);
+                    }
+                    catch (Exception exe)
+                    {
+                        error = true;
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append(mensajesDeValidacion["com.td.error.generico"]);
+                        sb.Append(Environment.NewLine);
+                        sb.Append(exe.Message);
+                        MessageBox.Show(sb.ToString(), mensajesDeValidacion["com.td.validacion.error"], MessageBoxButtons.OK);
+                    }
+                    if (!error)
+                        MessageBox.Show(mensajesDeValidacion["com.td.completado.generico"], mensajesDeValidacion["com.td.validacion.error"], MessageBoxButtons.OK);
+                  
                 }
                 else
                 {//creando uno nuevo
@@ -179,7 +304,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     usuario.alias= this.alias.Text;
                     usuario.email = this.email.Text;
                     usuario.nombre = this.nombre.Text;
-
+                    usuario.componentePermisos = new List<ComponentePermiso>();
+                    asociarPermisos(usuario.componentePermisos);
                     usuario.idioma = ((KeyValuePair<Idioma, string>)this.comboBox1.SelectedItem).Key;
                     bool error = false;
                     try
@@ -203,6 +329,120 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
 
         }
+        /// <summary>
+        /// se triggerea cuando cambio la seleccion de familia en el dgv
+        /// </summary>
+        public void mostrarPatentesDeFamilia()
+        {
+            List<Patente> currentPatentes = new List<Patente>();
+            (this.dgfamilias.CurrentRow.DataBoundItem as Familia).patentes.ForEach(x => {
+                ComponentePermiso per = x;
+                currentPatentes.Add((Patente)per);
+
+            });
+            this.dgfamiliapatente.DataSource = null;
+            this.dgfamiliapatente.DataSource = currentPatentes;
+
+        }
+
+        public void actualizarPatentesMostradas(Object sender, EventArgs e)
+        {
+            this.mostrarPatentesDeFamilia();
+        }
+
+        //marco los permisos del usuario
+        public void asociarPermisos( List<ComponentePermiso> permisos)
+        {
+            foreach (DataGridViewRow item in dgfamilias.Rows)
+            {
+                if (((DataGridViewCheckBoxCell)item.Cells[1]).Value != null && (bool)((DataGridViewCheckBoxCell)item.Cells[1]).Value == true)
+                {
+                    permisos.Add((Familia)item.DataBoundItem);
+                }
+            }
+            foreach (DataGridViewRow item in dgpatentes.Rows)
+            {
+                if ((((DataGridViewCheckBoxCell)item.Cells[1]).Value != null && (bool)((DataGridViewCheckBoxCell)item.Cells[1]).Value == true) || (((DataGridViewCheckBoxCell)item.Cells[2]).Value != null && (bool)((DataGridViewCheckBoxCell)item.Cells[2]).Value == true))
+                {
+                    Patente patente = (Patente)item.DataBoundItem;
+                    //chequeo si esta bloqueandose , si no esta bloqueada entra por el otro y la interpreto como un insert, no se puede tener los 2 estados al mismo tiempo.
+                    patente.bloqueada = (((DataGridViewCheckBoxCell)item.Cells[2]).Value != null && (bool)((DataGridViewCheckBoxCell)item.Cells[2]).Value == true) ? true : false;
+                    permisos.Add(patente);
+
+                }
+            }
+
+        }
+
+        //manejadores de eventos para garantizar que solo se puede bloquear o agregar una patente, no las 2 al mismo tiempo.
+
+        public void mouseLeaveCheckbox(object obj, DataGridViewCellMouseEventArgs eventArgs)
+        {
+            int rowIndex = eventArgs.RowIndex;
+            int columnIndex = eventArgs.ColumnIndex;
+            if ((columnIndex == 2 || columnIndex == 1) && rowIndex != -1)
+            {
+                this.dgpatentes.EndEdit();
+             
+            }
+
+
+        }
+
+        public void spaceHandler(object obj, KeyEventArgs eventArgs)
+        {
+            if(eventArgs.KeyCode == Keys.Space)
+            {
+                this.dgpatentes.EndEdit();
+            }
+
+        }
+
+
+        public void endEditHandler(object obj, DataGridViewCellEventArgs eventArgs)
+        {
+             int rowIndex = eventArgs.RowIndex;
+            int columnIndex = eventArgs.ColumnIndex;
+            if ((columnIndex == 2 || columnIndex == 1) && rowIndex != -1)
+            {
+                if (columnIndex == 2)
+                {
+                    DataGridViewCell currentCell = this.dgpatentes.Rows[rowIndex].Cells[columnIndex];
+                    if (currentCell.Value != null && (bool)currentCell.Value)
+                    {
+                        DataGridViewCell theOtherCell = this.dgpatentes.Rows[rowIndex].Cells[columnIndex - 1];
+                        theOtherCell.Value = false;
+                        InvokeLostFocus(this.dgpatentes, null);
+                    }
+                }
+                else
+                {
+                    DataGridViewCell currentCell = this.dgpatentes.Rows[rowIndex].Cells[columnIndex];
+                    if (currentCell.Value != null && (bool)currentCell.Value)
+                    {
+                        DataGridViewCell theOtherCell = this.dgpatentes.Rows[rowIndex].Cells[columnIndex + 1];
+                        theOtherCell.Value = false;
+
+                    }
+
+                }
+
+            }
+        }
+        
+
+        public void cellValueChanged(object obj, DataGridViewCellEventArgs eventArgs)
+        {
+            int rowIndex = eventArgs.RowIndex;
+            int columnIndex = eventArgs.ColumnIndex;
+            if ((columnIndex == 2 || columnIndex == 1) && rowIndex != -1)
+            {
+
+                this.dgpatentes.EndEdit();
+            }
+        }
+        
+
     }
 
     

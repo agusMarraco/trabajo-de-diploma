@@ -19,6 +19,10 @@ agregue la propiedad la componente permiso al usuario, tengo que actualizar el d
 pero safo del diccionario de datos porque las entidades no van.
 
 
+ahora el calcular digito horizontal devuelve un string, hacer la modificacion en el diccionario de datos.
+
+
+
 --lo hice voy a tener que implementar un custom sort en las datatables y saque los filtrar por asc desc de las paginas porque voy
 a usar el sorting de la datatable
 	agregar el icono de filtro en las tablas porque queda el asc desc segun el filtro.
@@ -26,17 +30,20 @@ a usar el sorting de la datatable
 
 change log
 ------------------------CAMINIO CRITICO---------------------
---hacer el abm de usuarios, con bloqueo
---hacer los inserts para las patatentes encriptadas
---abm de familias
---incorporacion de permisos al usuario
---metodos de generacion de digitos verificadores
---log in log out
---evaluar integridad de datos
+--hacer el abm de usuarios, con bloqueo						 (andando)	
+--hacer los inserts para las patatentes encriptadas			 (andando)
+--abm de familias											 (andando)
+--incorporacion de permisos al usuario						(andando) y cree  la vista para los permisos.	
+--metodos de generacion de digitos verificadores			andando
+--log in log out												log in andando
+--evaluar integridad de datos									(andando)
 --logueo de bitacora
 --auditar bitacora
 --falla de conexion
---
+--revisar 0 las interfaces para ver el manejo de errores, limites de campos, etc.
+--comparar los flujos de datos contra los diagramas  de secuencia para si hay que hacer cambios.
+
+
 	Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
 
 	hacer que el btn cancelar de cada uno cierre el form.
@@ -71,3 +78,5 @@ agregue la clase idiomas enum
 	sobrecargo el constructor de idiomas
 
 revisar el sql de creacion
+
+agregar en el dao de familiasypatentes la llamada a los listados de familias y patentes;

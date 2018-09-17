@@ -27,6 +27,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.gwUsuarios.DataSource = null;
             this.gwUsuarios.AutoGenerateColumns = false;
             this.gwUsuarios.CellFormatting += booleanFormatter;
+            this.gwUsuarios.ColumnHeaderMouseClick += customSort;
+   
         }
 
 
@@ -152,5 +154,42 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 searchUsuarios(this.servicioSeguridad.listarUsuarios(null, null, null));
             }
         }
+
+        private void customSort(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            foreach(DataGridViewColumn column in ((DataGridView)sender).Columns)
+            {
+                if(column.Index != e.ColumnIndex)
+                {
+                    column.HeaderCell.SortGlyphDirection = SortOrder.None;
+                    column.HeaderCell.Style.BackColor = Color.White;
+                }
+            }
+            //initialSorting
+            if(this.gwUsuarios.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || this.gwUsuarios.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+            {
+                List<Usuario> usuarios = (List<Usuario>)this.gwUsuarios.DataSource;
+                string propertyName = this.gwUsuarios.Columns[e.ColumnIndex].Name;
+                this.gwUsuarios.DataSource = usuarios.OrderBy(x => x.GetType().GetProperty(propertyName).GetValue(x)).ToList();
+                this.gwUsuarios.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                this.gwUsuarios.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+            }
+            else
+            {
+                List<Usuario> usuarios = (List<Usuario>)this.gwUsuarios.DataSource;
+                string propertyName = this.gwUsuarios.Columns[e.ColumnIndex].Name;
+                
+                this.gwUsuarios.DataSource = usuarios.OrderByDescending(x => x.GetType().GetProperty(propertyName).GetValue(x)).ToList();
+                this.gwUsuarios.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+                this.gwUsuarios.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+
+            }
+            
+               
+        }
+
+       
+
+
     }
 }

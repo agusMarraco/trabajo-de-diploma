@@ -77,10 +77,15 @@ namespace TrabajoDeCampo
 
         public static String encriptarMD5(String stringAEncriptar)
         {
-            MD5 md5 = MD5.Create();
-            byte[] bytes = Encoding.UTF8.GetBytes(stringAEncriptar);
-            byte[] datoEncodeado = md5.ComputeHash(bytes);
-            String hash = BitConverter.ToString(datoEncodeado).Replace("-","");
+            String hash = "";
+            if (!String.IsNullOrEmpty(stringAEncriptar))
+            {
+                MD5 md5 = MD5.Create();
+                byte[] bytes = Encoding.UTF8.GetBytes(stringAEncriptar);
+                byte[] datoEncodeado = md5.ComputeHash(bytes);
+                 hash = BitConverter.ToString(datoEncodeado).Replace("-", "");
+
+            }
 
 
             return hash;

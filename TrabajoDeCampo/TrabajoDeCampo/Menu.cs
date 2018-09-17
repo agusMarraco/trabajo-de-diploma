@@ -147,6 +147,14 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             traductor = new TraductorIterador();
         }
 
-       
+        private void recalcularDígitosVerificadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.servicioSeguridad.recalcularDigitosVerificadores();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            servicioSeguridad.verificarDigitosVerificadores();
+        }
     }
 }

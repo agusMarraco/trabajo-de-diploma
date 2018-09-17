@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TrabajoDeCampo.BO;
 
 namespace TrabajoDeCampo
 {
-    public class Usuario
+    public class Usuario 
     {
         private long _id;
 

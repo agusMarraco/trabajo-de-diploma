@@ -358,6 +358,7 @@
     <Compile Include="BO\Nivel.cs" />
     <Compile Include="SEGURIDAD\Familia.cs" />
     <Compile Include="SEGURIDAD\FormUtils.cs" />
+    <Compile Include="SEGURIDAD\TablasDvhEnum.cs" />
     <Compile Include="SEGURIDAD\Usuario.cs" />
     <Compile Include="SEGURIDAD\Bitacora.cs" />
     <Compile Include="BO\Horario.cs" />
@@ -480,6 +481,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlScripts\createDB.sql" />
+    <Content Include="SqlScripts\proceduresDVH.sql" />
     <Content Include="SqlScripts\tablasParametricas.sql" />
     <Content Include="SqlScripts\translationssql.sql" />
   </ItemGroup>
