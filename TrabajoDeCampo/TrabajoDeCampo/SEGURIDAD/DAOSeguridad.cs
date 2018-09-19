@@ -1045,9 +1045,100 @@ namespace TrabajoDeCampo.DAO
 
         //BITACORA
         //criticidad 1 baja; 2 media; 3 alta;
-        public void grabarBitacora(Usuario usuario, String mensaje, int criticidad) { }
+        public void grabarBitacora(Usuario usuario, String mensaje, int criticidad) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
 
-        public void listarBitacora(String filtro, String valor, String orden) { }
+            StringBuilder builder = new StringBuilder(" INSERT INTO BITACORA  (");
+            if (usuario != null)
+            {
+                builder.Append("BIT_USUARIO,");
+            }
+            builder.Append("BIT_MENSAJE,");
+            builder.Append("BIT_CRITICIDAD_ID,");
+            builder.Append("BIT_FECHA,");
+            builder.Append("BIT_DVH )");
+
+            builder.Append(" VALUES (");
+
+            if (usuario != null) { 
+                builder.Append(" @USUARIO,");
+            }
+
+
+            builder.Append(" @MENSAJE,");
+            builder.Append(" @CRITICIDAD");
+            builder.Append(" @FECHA");
+            builder.Append(" @DVH");
+            builder.Append(" ) ");
+            SqlCommand cmd = new SqlCommand(builder.ToString(), connection, tx);
+            cmd.Parameters.Add(new SqlParameter("@MENSAJE", System.Data.SqlDbType.Text)).Value = mensaje;
+            cmd.Parameters.Add(new SqlParameter("@CRITICIDAD", System.Data.SqlDbType.BigInt)).Value = criticidad;
+            cmd.Parameters.Add(new SqlParameter("@FECHA", System.Data.SqlDbType.Date)).Value = new DateTime();
+            cmd.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.VarChar)).Value = "";
+
+            if(usuario!= null)
+                cmd.Parameters.Add(new SqlParameter("@USUARIO", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception)
+                {
+
+                   
+                }
+                connection.Close();
+                throw;
+            }
+        }
+
+        public DataSet listarBitacora(String filtro, String valor, String orden) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            String query = " SELECT * FROM BITACORA ";
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+
+            SqlCommand cmd = new SqlCommand(query, connection, tx);
+            DataSet set = new DataSet();
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
+                adapter.Fill(set);
+                tx.Commit();
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+
+                try
+                {
+                    tx.Rollback();
+                }
+                catch (Exception)
+                {
+                    connection.Close();
+                  
+                }
+            }
+
+
+            return set;
+
+            
+        }
 
         //DIGITOS VERIFICADORES
 

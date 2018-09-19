@@ -9,6 +9,7 @@ using TrabajoDeCampo.DAO;
 using System.IO;
 using System.Windows.Forms;
 using TrabajoDeCampo.SEGURIDAD;
+using System.Data;
 
 namespace TrabajoDeCampo.SERVICIO
 {
@@ -144,7 +145,10 @@ namespace TrabajoDeCampo.SERVICIO
         //criticidad 1 baja; 2 media; 3 alta;
         public void grabarBitacora(Usuario usuario, String mensaje, int criticidad) { }
 
-        public void listarBitacora(String filtro, String valor, String orden) { }
+        public DataSet listarBitacora(String filtro, String valor, String orden) {
+            return this.daoSeguridad.listarBitacora(filtro, valor, orden);
+
+        }
 
         //DIGITOS VERIFICADORES
 

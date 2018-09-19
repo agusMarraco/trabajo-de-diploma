@@ -18,6 +18,17 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             InitializeComponent();
             this.servicioSeguridad = new ServicioSeguridad();
+            this.dataGridView1.DataSource = null;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.Columns[0].DataPropertyName = "BIT_FECHA";
+            this.dataGridView1.Columns[1].DataPropertyName = "BIT_USUARIO";
+            this.dataGridView1.Columns[2].DataPropertyName = "BIT_CRITICIDAD_ID";
+            this.dataGridView1.Columns[3].DataPropertyName = "BIT_MENSAJE";
+            this.dataGridView1.DataMember = "Table";
+            DataSet set = this.servicioSeguridad.listarBitacora("","","");
+            DataTable table = set.Tables[0];
+            table.AsEnumerable().
+            this.dataGridView1.DataSource = set;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
