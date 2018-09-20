@@ -1105,11 +1105,30 @@ namespace TrabajoDeCampo.DAO
 
         public DataSet listarBitacora(String filtro, String valor, String orden) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
-            String query = " SELECT * FROM BITACORA ";
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand cmd = new SqlCommand("", connection, tx);
+            String query = " SELECT * FROM vistaBitacora ";
+            if(filtro != null)
+            {
+                switch (filtro)
+                {
+                    case "FECHA":
+                        query += " where bit_fecha between @from and @to";
+                        cmd.Parameters.Add(new SqlParameter("@from", System.Data.SqlDbType.VarChar)).Value = valor.Split(';')[0];
+                        cmd.Parameters.Add(new SqlParameter("@to", System.Data.SqlDbType.VarChar)).Value = valor.Split(';')[1];
+                        break;
+                    case "CRITICIDAD":
+                        query += " where bit_criticidad_id = @criticidad";
+                        cmd.Parameters.Add(new SqlParameter("@criticidad", System.Data.SqlDbType.Int)).Value = int.Parse(valor);
+                        break;
 
-            SqlCommand cmd = new SqlCommand(query, connection, tx);
+                }
+            }
+
+            cmd.CommandText = query;
+
+            
             DataSet set = new DataSet();
             try
             {
@@ -1134,7 +1153,33 @@ namespace TrabajoDeCampo.DAO
                 }
             }
 
+            foreach (DataRow item in set.Tables[0].Rows)
+            {
+                String usuario = SeguridadUtiles.desencriptarAES(item.ItemArray[1].ToString());
+                item.BeginEdit();
+                item.ItemArray[1] = usuario;
+                item.SetField(1, usuario);
+                item.EndEdit();
+            }
 
+
+            if(filtro == "ALIAS")
+            {
+                DataSet filteredSet = new DataSet();
+                filteredSet = set.Clone();
+                filteredSet.Tables[0].Rows.Clear();
+                DataTable table = filteredSet.Tables[0];
+
+                foreach (DataRow item in set.Tables[0].Rows)
+                {
+                    if (item.ItemArray[1].ToString().Equals(valor))
+                    {
+                        table.Rows.Add(item.ItemArray);
+  
+                    }
+                }
+                set = filteredSet;
+            }
             return set;
 
             

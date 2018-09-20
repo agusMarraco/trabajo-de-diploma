@@ -29,78 +29,65 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.a = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chUsuario = new System.Windows.Forms.CheckBox();
+            this.chCriticidad = new System.Windows.Forms.CheckBox();
+            this.chFecha = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.toDatepicker = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.fromDatepicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_CRITICIDAD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_MENSAJE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.a,
-            this.Column1,
-            this.Column2,
-            this.Column3});
+            this.BIT_FECHA,
+            this.USU_ALIAS,
+            this.BIT_CRITICIDAD_ID,
+            this.BIT_MENSAJE});
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dataGridView1.Location = new System.Drawing.Point(12, 192);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(834, 248);
             this.dataGridView1.TabIndex = 0;
             // 
-            // a
-            // 
-            this.a.HeaderText = "Fecha";
-            this.a.Name = "a";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Usuario";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Criticidad";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "Descripción";
-            this.Column3.Name = "Column3";
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chUsuario);
+            this.groupBox1.Controls.Add(this.chCriticidad);
+            this.groupBox1.Controls.Add(this.chFecha);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
+            this.groupBox1.Controls.Add(this.toDatepicker);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.fromDatepicker);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 13);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -112,6 +99,38 @@
             this.groupBox1.Tag = "com.td.busqueda";
             this.groupBox1.Text = "Búsqueda";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // chUsuario
+            // 
+            this.chUsuario.AutoSize = true;
+            this.chUsuario.Location = new System.Drawing.Point(22, 30);
+            this.chUsuario.Name = "chUsuario";
+            this.chUsuario.Size = new System.Drawing.Size(71, 20);
+            this.chUsuario.TabIndex = 16;
+            this.chUsuario.Text = "Usuario";
+            this.chUsuario.UseVisualStyleBackColor = true;
+            // 
+            // chCriticidad
+            // 
+            this.chCriticidad.AutoSize = true;
+            this.chCriticidad.Location = new System.Drawing.Point(202, 30);
+            this.chCriticidad.Name = "chCriticidad";
+            this.chCriticidad.Size = new System.Drawing.Size(81, 20);
+            this.chCriticidad.TabIndex = 15;
+            this.chCriticidad.Tag = "com.td.criticidad";
+            this.chCriticidad.Text = "Criticidad";
+            this.chCriticidad.UseVisualStyleBackColor = true;
+            // 
+            // chFecha
+            // 
+            this.chFecha.AutoSize = true;
+            this.chFecha.Location = new System.Drawing.Point(342, 30);
+            this.chFecha.Name = "chFecha";
+            this.chFecha.Size = new System.Drawing.Size(63, 20);
+            this.chFecha.TabIndex = 14;
+            this.chFecha.Tag = "com.td.fecha";
+            this.chFecha.Text = "Fecha";
+            this.chFecha.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -155,44 +174,25 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(202, 60);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 10;
             // 
-            // radioButton3
+            // toDatepicker
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(342, 30);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(62, 20);
-            this.radioButton3.TabIndex = 9;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Tag = "com.td.fecha";
-            this.radioButton3.Text = "Fecha";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(202, 32);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(80, 20);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Tag = "com.td.criticidad";
-            this.radioButton2.Text = "Criticidad";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(414, 93);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(148, 22);
-            this.dateTimePicker2.TabIndex = 6;
+            this.toDatepicker.CustomFormat = "";
+            this.toDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.toDatepicker.Location = new System.Drawing.Point(414, 93);
+            this.toDatepicker.MaxDate = new System.DateTime(2018, 9, 19, 0, 0, 0, 0);
+            this.toDatepicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.toDatepicker.Name = "toDatepicker";
+            this.toDatepicker.Size = new System.Drawing.Size(148, 22);
+            this.toDatepicker.TabIndex = 6;
+            this.toDatepicker.Value = new System.DateTime(2018, 9, 19, 0, 0, 0, 0);
+            this.toDatepicker.ValueChanged += new System.EventHandler(this.toDatepicker_ValueChanged);
             // 
             // button1
             // 
@@ -203,15 +203,18 @@
             this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dateTimePicker1
+            // fromDatepicker
             // 
-            this.dateTimePicker1.CustomFormat = "";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(414, 63);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(148, 22);
-            this.dateTimePicker1.TabIndex = 3;
+            this.fromDatepicker.CustomFormat = "";
+            this.fromDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.fromDatepicker.Location = new System.Drawing.Point(414, 63);
+            this.fromDatepicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.fromDatepicker.Name = "fromDatepicker";
+            this.fromDatepicker.Size = new System.Drawing.Size(148, 22);
+            this.fromDatepicker.TabIndex = 3;
+            this.fromDatepicker.ValueChanged += new System.EventHandler(this.fromDatepicker_ValueChanged);
             // 
             // label1
             // 
@@ -230,17 +233,34 @@
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 1;
             // 
-            // radioButton1
+            // BIT_FECHA
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(22, 34);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(70, 20);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Tag = "com.td.usuario";
-            this.radioButton1.Text = "Usuario";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.BIT_FECHA.HeaderText = "Fecha";
+            this.BIT_FECHA.Name = "BIT_FECHA";
+            this.BIT_FECHA.ReadOnly = true;
+            this.BIT_FECHA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // USU_ALIAS
+            // 
+            this.USU_ALIAS.HeaderText = "Usuario";
+            this.USU_ALIAS.Name = "USU_ALIAS";
+            this.USU_ALIAS.ReadOnly = true;
+            this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_CRITICIDAD_ID
+            // 
+            this.BIT_CRITICIDAD_ID.HeaderText = "Criticidad";
+            this.BIT_CRITICIDAD_ID.Name = "BIT_CRITICIDAD_ID";
+            this.BIT_CRITICIDAD_ID.ReadOnly = true;
+            this.BIT_CRITICIDAD_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_MENSAJE
+            // 
+            this.BIT_MENSAJE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BIT_MENSAJE.HeaderText = "Descripción";
+            this.BIT_MENSAJE.Name = "BIT_MENSAJE";
+            this.BIT_MENSAJE.ReadOnly = true;
+            this.BIT_MENSAJE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // Bitácora
             // 
@@ -265,22 +285,22 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn a;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker toDatepicker;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker fromDatepicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox chUsuario;
+        private System.Windows.Forms.CheckBox chCriticidad;
+        private System.Windows.Forms.CheckBox chFecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BIT_FECHA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn USU_ALIAS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BIT_CRITICIDAD_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BIT_MENSAJE;
     }
 }

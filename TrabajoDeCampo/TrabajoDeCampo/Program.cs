@@ -33,8 +33,8 @@ namespace TrabajoDeCampo
 
             //new testeador().Show();
             //    mostrarTodasLasPantallas();
-            Login login = new Login();
-            login.Show();
+            //Login login = new Login();
+            //login.Show();
             Application.Run();
                 
         }
