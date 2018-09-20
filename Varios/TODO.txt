@@ -43,7 +43,7 @@ change log
 --revisar 0 las interfaces para ver el manejo de errores, limites de campos, etc.
 --comparar los flujos de datos contra los diagramas  de secuencia para si hay que hacer cambios.
 
-
+cambiar el retorno de los metodos de bitacora en el diccionario de datos
 	Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
 
 	hacer que el btn cancelar de cada uno cierre el form.
