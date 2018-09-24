@@ -24,6 +24,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             InitializeComponent();
             servicioSeguridad = new ServicioSeguridad();
             this.comboFiltro.DataSource = null;
+            this.gwUsuarios.Columns[0].Tag = "com.td.alias";
+            this.gwUsuarios.Columns[1].Tag = "com.td.apellido";
+            this.gwUsuarios.Columns[2].Tag = "com.td.nombre";
+            this.gwUsuarios.Columns[3].Tag = "com.td.d.n.i.";
+            this.gwUsuarios.Columns[4].Tag = "com.td.bloqueado";
             this.gwUsuarios.DataSource = null;
             this.gwUsuarios.AutoGenerateColumns = false;
             this.gwUsuarios.CellFormatting += booleanFormatter;
