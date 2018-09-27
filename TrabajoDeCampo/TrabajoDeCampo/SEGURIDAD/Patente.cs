@@ -46,6 +46,14 @@ namespace TrabajoDeCampo
             set { _bloqueada = value; }
         }
 
+        private Boolean _asignada;
+
+        public Boolean asignada
+        {
+            get { return _asignada; }
+            set { _asignada = value; }
+        }
+
 
 
     }

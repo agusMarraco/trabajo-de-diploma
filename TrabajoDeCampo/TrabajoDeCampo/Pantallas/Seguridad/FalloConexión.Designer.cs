@@ -42,6 +42,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(167, 22);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox1.MaxLength = 100;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(358, 22);
             this.textBox1.TabIndex = 0;
@@ -66,6 +67,7 @@
             this.button1.Tag = "com.td.conectar";
             this.button1.Text = "Conectar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -81,7 +83,9 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(167, 85);
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox2.MaxLength = 50;
             this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(358, 22);
             this.textBox2.TabIndex = 3;
             // 
@@ -97,8 +101,10 @@
             // 
             // textBox3
             // 
+            this.textBox3.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.textBox3.Location = new System.Drawing.Point(167, 56);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox3.MaxLength = 50;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(358, 22);
             this.textBox3.TabIndex = 5;
@@ -113,6 +119,7 @@
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FalloConexión
             // 

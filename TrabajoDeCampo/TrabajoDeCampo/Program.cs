@@ -8,19 +8,20 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using TrabajoDeCampo.DAO;
+using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo
 {
     class Program
     {
+        private static  ServicioSeguridad servicioSeguridad = new ServicioSeguridad();
         [STAThreadAttribute]
         public static void Main(string[] args)
         {
 
-
-            TrabajoDeCampo.Properties.Settings.Default.ConnectionString = "Data Source = " + Environment.MachineName + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
-            Pantallas.Seguridad.Menu menu = new Pantallas.Seguridad.Menu();
-            new Pantallas.Seguridad.Menu().Show();
+            String machineName = (Environment.UserName == "Navegador") ? Environment.UserDomainName + @"\" + Environment.UserName : Environment.MachineName;
+            TrabajoDeCampo.Properties.Settings.Default.ConnectionString = "Data Source = " + machineName + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
+       
 
             //ActualizarConexion conec = new ActualizarConexion();
             //conec.Show();
@@ -33,8 +34,40 @@ namespace TrabajoDeCampo
 
             //new testeador().Show();
             //    mostrarTodasLasPantallas();
-            //Login login = new Login();
-            //login.Show();
+
+            Boolean seConecto = true;
+            try
+            {
+                servicioSeguridad.probarConexion();
+            }
+            catch (Exception )
+            {
+                //no se puedo conectar a la base, muestro falla de conexion.
+                FalloConexión conexión = new FalloConexión();
+                conexión.ShowDialog();
+                seConecto = false;  
+            }
+
+            if (seConecto)
+            {
+                try
+                {
+                 //   servicioSeguridad.verificarDigitosVerificadores();
+                    TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 0;
+                }
+                catch (Exception)
+                {
+
+               //     TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 1;
+                }
+
+                //Login login = new Login();
+                //login.Show();
+                Pantallas.Seguridad.Menu menu = new Pantallas.Seguridad.Menu();
+                new Pantallas.Seguridad.Menu().Show();
+
+            }
+
             Application.Run();
                 
         }

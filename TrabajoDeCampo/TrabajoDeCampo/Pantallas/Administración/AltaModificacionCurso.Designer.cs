@@ -28,41 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtCapacidad = new System.Windows.Forms.TextBox();
+            this.txtLetra = new System.Windows.Forms.TextBox();
+            this.comboNiveles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbTurnoMañana = new System.Windows.Forms.RadioButton();
+            this.rbTurnoTarde = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtCapacidad
             // 
-            this.textBox1.Location = new System.Drawing.Point(82, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(44, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtCapacidad.Location = new System.Drawing.Point(82, 23);
+            this.txtCapacidad.MaxLength = 2;
+            this.txtCapacidad.Name = "txtCapacidad";
+            this.txtCapacidad.Size = new System.Drawing.Size(44, 20);
+            this.txtCapacidad.TabIndex = 1;
             // 
-            // textBox2
+            // txtLetra
             // 
-            this.textBox2.Location = new System.Drawing.Point(199, 23);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(49, 20);
-            this.textBox2.TabIndex = 2;
+            this.txtLetra.Location = new System.Drawing.Point(199, 23);
+            this.txtLetra.MaxLength = 1;
+            this.txtLetra.Name = "txtLetra";
+            this.txtLetra.Size = new System.Drawing.Size(49, 20);
+            this.txtLetra.TabIndex = 2;
             // 
-            // comboBox1
+            // comboNiveles
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(324, 22);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(161, 21);
-            this.comboBox1.TabIndex = 3;
+            this.comboNiveles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboNiveles.FormattingEnabled = true;
+            this.comboNiveles.Location = new System.Drawing.Point(324, 22);
+            this.comboNiveles.Name = "comboNiveles";
+            this.comboNiveles.Size = new System.Drawing.Size(161, 21);
+            this.comboNiveles.TabIndex = 3;
             // 
             // label1
             // 
@@ -103,35 +106,36 @@
             this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // radioButton1
+            // rbTurnoMañana
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 29);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(64, 17);
-            this.radioButton1.TabIndex = 9;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Tag = "com.td.mañana";
-            this.radioButton1.Text = "Mañana";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbTurnoMañana.AutoSize = true;
+            this.rbTurnoMañana.Location = new System.Drawing.Point(6, 29);
+            this.rbTurnoMañana.Name = "rbTurnoMañana";
+            this.rbTurnoMañana.Size = new System.Drawing.Size(64, 17);
+            this.rbTurnoMañana.TabIndex = 9;
+            this.rbTurnoMañana.TabStop = true;
+            this.rbTurnoMañana.Tag = "com.td.mañana";
+            this.rbTurnoMañana.Text = "Mañana";
+            this.rbTurnoMañana.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbTurnoTarde
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 64);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(53, 17);
-            this.radioButton2.TabIndex = 10;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Tag = "com.td.tarde";
-            this.radioButton2.Text = "Tarde";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbTurnoTarde.AutoSize = true;
+            this.rbTurnoTarde.Location = new System.Drawing.Point(6, 64);
+            this.rbTurnoTarde.Name = "rbTurnoTarde";
+            this.rbTurnoTarde.Size = new System.Drawing.Size(53, 17);
+            this.rbTurnoTarde.TabIndex = 10;
+            this.rbTurnoTarde.TabStop = true;
+            this.rbTurnoTarde.Tag = "com.td.tarde";
+            this.rbTurnoTarde.Text = "Tarde";
+            this.rbTurnoTarde.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.rbTurnoMañana);
+            this.groupBox1.Controls.Add(this.rbTurnoTarde);
             this.groupBox1.Location = new System.Drawing.Point(21, 66);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 100);
@@ -149,6 +153,7 @@
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AltaModificacionCurso
             // 
@@ -161,9 +166,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.comboNiveles);
+            this.Controls.Add(this.txtLetra);
+            this.Controls.Add(this.txtCapacidad);
             this.Name = "AltaModificacionCurso";
             this.Tag = "com.td.curso";
             this.Text = "Curso ";
@@ -176,16 +181,16 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtCapacidad;
+        private System.Windows.Forms.TextBox txtLetra;
+        private System.Windows.Forms.ComboBox comboNiveles;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rbTurnoTarde;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton rbTurnoMañana;
     }
 }

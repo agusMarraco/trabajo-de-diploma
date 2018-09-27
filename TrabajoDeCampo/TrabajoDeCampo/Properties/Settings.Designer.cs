@@ -50,13 +50,36 @@ namespace TrabajoDeCampo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int Bloqueado {
             get {
                 return ((int)(this["Bloqueado"]));
             }
             set {
                 this["Bloqueado"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public long SessionUser {
+            get {
+                return ((long)(this["SessionUser"]));
+            }
+            set {
+                this["SessionUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-SL9JPN8;Initial Catalog=master;Integrated Security=True")]
+        public string MasterString {
+            get {
+                return ((string)(this["MasterString"]));
+            }
+            set {
+                this["MasterString"] = value;
             }
         }
     }

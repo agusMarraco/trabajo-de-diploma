@@ -30,11 +30,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dataGridView1.Columns[2].DataPropertyName = "BIT_CRITICIDAD_ID";
             this.dataGridView1.Columns[3].DataPropertyName = "BIT_MENSAJE";
             this.dataGridView1.DataMember = "Table";
+            this.dataGridView1.CellFormatting += criticidadFormatter;
             DataSet set = this.servicioSeguridad.listarBitacora("","","");
             DataTable table = set.Tables[0];
-            this.chCriticidad.CheckStateChanged += handleCheckboxChange;
-            this.chUsuario.CheckStateChanged += handleCheckboxChange;
-            this.chFecha.CheckStateChanged += handleCheckboxChange;
             this.dataGridView1.ColumnHeaderMouseClick += sorting;
             this.dataGridView1.DataMember = "";
             this.dataGridView1.DataSource = table;
@@ -65,8 +63,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
             this.comboBox1.DataSource = criticidad;
             this.comboBox1.SelectedItem = this.comboBox1.Items[0];
-            this.toDatepicker.MaxDate = DateTime.Now;
-            this.fromDatepicker.MaxDate = DateTime.Now;
+            this.toDatepicker.MaxDate = DateTime.Now.AddMilliseconds(5);
+            this.fromDatepicker.MaxDate = DateTime.Now.AddMilliseconds(5);
+            this.toDatepicker.Value = this.toDatepicker.MaxDate;
+            this.fromDatepicker.Value  = this.fromDatepicker.MaxDate;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -77,47 +77,34 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             currentSortMode = " ASC ";
             DataSet response = new DataSet();
             DataTable table;
-            if (chCriticidad.Checked)
+            String userText = this.textBox1.Text.Trim().Replace(" ", "");
+            response = this.servicioSeguridad.listarBitacora(null, null, null);
+            table = response.Tables[0];
+            StringBuilder sb = new StringBuilder();
+            if (this.chCriticidad.Checked)
             {
                 long id = ((KeyValuePair<long, String>)this.comboBox1.SelectedItem).Key;
-                response = this.servicioSeguridad.listarBitacora("CRITICIDAD", id.ToString() , null);
-                table = response.Tables[0];
+                sb.Append(" BIT_CRITICIDAD_ID = " + id);
+            }
+            if (this.chFecha.Checked)
+            {
+                long id = ((KeyValuePair<long, String>)this.comboBox1.SelectedItem).Key;
+                if (sb.Length > 0)
+                    sb.Append(" AND ");
+
+                sb.Append(" BIT_FECHA > #" + this.fromDatepicker.Value + "# AND BIT_FECHA < #" + this.toDatepicker.Value+ "#");
+            }
+            if (this.chUsuario.Checked)
+            {
+                if (sb.Length > 0)
+                    sb.Append(" AND ");
+                sb.Append(" USU_ALIAS = '" + userText + "'");
+            }
+
+                table.DefaultView.RowFilter = sb.ToString();
                 this.dataGridView1.DataSource = null;
                 this.dataGridView1.DataSource = table;
 
-            }
-            else if (chUsuario.Checked)
-            {
-                if (!String.IsNullOrEmpty(this.textBox1.Text))
-                {
-                    response = this.servicioSeguridad.listarBitacora("ALIAS", this.textBox1.Text, null);
-                    table = response.Tables[0];
-                    this.dataGridView1.DataSource = null;
-                    this.dataGridView1.DataSource = table;
-                }
-            }else if (chFecha.Checked)
-            {
-                if(this.fromDatepicker.Value > this.toDatepicker.Value)
-                {
-                    MessageBox.Show("Rango de fechas invalido");
-                }
-                else
-                {
-                    response = this.servicioSeguridad.listarBitacora("FECHA", this.fromDatepicker.Value.ToShortDateString() + ";" + this.toDatepicker.Value.ToShortDateString(), null);
-                    table = response.Tables[0];
-                    this.dataGridView1.DataSource = null;
-                    this.dataGridView1.DataSource = table;
-                }             
-
-            }
-            else
-            {
-
-                response = this.servicioSeguridad.listarBitacora(null, null, null);
-                table = response.Tables[0];
-                this.dataGridView1.DataSource = null;
-                this.dataGridView1.DataSource = table;
-            }
         }
 
         private void fromDatepicker_ValueChanged(object sender, EventArgs e)
@@ -130,55 +117,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.fromDatepicker.MaxDate = this.toDatepicker.Value;
         }
 
-        private void handleCheckboxChange(object sender, EventArgs e)
-        {
-            CheckBox trigger = (CheckBox)sender;
-            if(trigger.Name == "chFecha")
-            {
-                if (trigger.Checked)
-                {
-                    this.chUsuario.Checked = false;
-                    this.chCriticidad.Checked = false;
-                    this.chUsuario.Enabled = false;
-                    this.chCriticidad.Enabled = false;
-                }
-                else
-                {
-                    this.chUsuario.Enabled = true;
-                    this.chCriticidad.Enabled = true;
-                }
-
-            }else if(trigger.Name == "chUsuario")
-            {
-                if (trigger.Checked)
-                {
-                    this.chFecha.Checked = false;
-                    this.chCriticidad.Checked = false;
-                    this.chFecha.Enabled = false;
-                    this.chCriticidad.Enabled = false;
-                }
-                else
-                {
-                    this.chFecha.Enabled = true;
-                    this.chCriticidad.Enabled = true;
-                }
-            }
-            else
-            {
-                if (trigger.Checked)
-                {
-                    this.chUsuario.Checked = false;
-                    this.chFecha.Checked = false;
-                    this.chUsuario.Enabled = false;
-                    this.chFecha.Enabled = false;
-                }
-                else
-                {
-                    this.chUsuario.Enabled = true;
-                    this.chFecha.Enabled = true;
-                }
-            }
-        }
+      
 
         private void sorting(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -237,13 +176,41 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
 
                     table.DefaultView.Sort = previousSort.Name + previousSortMode + " , " + currentSort.Name + currentSortMode;
-                   // table.DefaultView.Sort = previousSort.Name + " , " + currentSort.Name;
+                   
                 }
 
 
             }
 
 
+        }
+
+        private void criticidadFormatter(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            {
+                String translation = "";
+                switch ((long)e.Value)
+                {
+                    case 1:
+                        translation = "BAJA";
+                        break;
+                    case 2:
+                        translation = "MEDIA";
+                        break;
+                    case 3:
+                        translation = "ALTA";
+                        break;
+                }
+
+
+                e.Value = translation;
+
+
+            }
+
+
+            
         }
     }
 }

@@ -30,6 +30,9 @@ namespace TrabajoDeCampo.DAO
             Boolean existe = false;
             long idUsuario = 0;
             long intentos = 0;
+            string alias = "";
+            string savedPass = "";
+            string dni = "";
 
             SqlCommand queryUser = new SqlCommand("", connection, tx);
             SqlCommand queryPass = new SqlCommand("", connection, tx);
@@ -38,7 +41,7 @@ namespace TrabajoDeCampo.DAO
             SqlCommand queryBloqueado = new SqlCommand("", connection, tx);
             SqlCommand queryLoginExitoso = new SqlCommand("", connection, tx);
 
-            queryUser.CommandText = "SELECT USU_ID,USU_ALIAS FROM USUARIO WHERE USU_BAJA = 0";
+            queryUser.CommandText = "SELECT USU_ID,USU_ALIAS,USU_PASS, USU_DNI FROM USUARIO WHERE USU_BAJA = 0";
 
             queryPass.CommandText = "SELECT COUNT (*) FROM USUARIO WHERE USU_PASS = @PASS AND USU_BAJA = 0 AND USU_ID = @ID";
             String encodeado = SeguridadUtiles.encriptarMD5(pass);
@@ -51,9 +54,9 @@ namespace TrabajoDeCampo.DAO
 
             queryPermisos.CommandText = "Select count(*) from PERMISOS_USUARIO WHERE USU_ID = @ID AND PAT_ID IN (16,17,18,19)";
 
-
+            bool refrescarDigitoPorLoginExitoso = false;
             SqlDataReader reader = null;
-            SqlDataReader readerPass;
+            
             //CHEQUEO SI EXISTE
             try
             {
@@ -68,6 +71,9 @@ namespace TrabajoDeCampo.DAO
                     {
                         existe = true;
                         idUsuario = (long)reader.GetValue(0);
+                        alias = !reader.IsDBNull(1) ? reader.GetValue(1).ToString() : "" ;
+                        savedPass = !reader.IsDBNull(2) ? reader.GetValue(2).ToString() : ""; ;
+                        dni = !reader.IsDBNull(3) ? reader.GetValue(3).ToString() : ""; ;
                     }
                     
                 }
@@ -90,7 +96,7 @@ namespace TrabajoDeCampo.DAO
                 reader.Close();
 
                 //bloqueado
-                queryBloqueado.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.NVarChar)).Value = idUsuario;
+                queryBloqueado.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
                 reader = queryBloqueado.ExecuteReader();
                 while (reader.Read())
                 {
@@ -106,9 +112,12 @@ namespace TrabajoDeCampo.DAO
                 {
                     if(intentos != 3)
                     {
-                        queryIntentos.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.NVarChar)).Value = idUsuario;
+                        queryIntentos.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
                         queryIntentos.ExecuteNonQuery();
-                   
+                        String dvh = this.recalcularDigitoHorizontal(new String[] { alias, savedPass, (intentos + 1).ToString(),dni });
+                        queryIntentos.CommandText = " UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID ";
+                        queryIntentos.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                        queryIntentos.ExecuteNonQuery();
                     }
                     throw new Exception("PASS");
                 }
@@ -121,7 +130,7 @@ namespace TrabajoDeCampo.DAO
 
                 if (sistemaBloqueado == 1)
                 {
-                    queryPermisos.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.NVarChar)).Value = idUsuario;
+                    queryPermisos.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
                     reader = queryPermisos.ExecuteReader();
                     int readerReturn = 0;
                     while (reader.Read())
@@ -135,15 +144,20 @@ namespace TrabajoDeCampo.DAO
                     }
                 }
 
-
+               
                 if(intentos != 0)
                 {
-                    queryLoginExitoso.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.NVarChar)).Value = idUsuario;
+                    queryLoginExitoso.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
                     queryLoginExitoso.ExecuteNonQuery();
+                    String dvh = this.recalcularDigitoHorizontal(new String[] { alias, savedPass, (0).ToString(), dni });
+                    queryLoginExitoso.CommandText = " UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID ";
+                    queryLoginExitoso.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                    queryLoginExitoso.ExecuteNonQuery();
+                    refrescarDigitoPorLoginExitoso = true;
                 }
 
                 tx.Commit();
-
+                TrabajoDeCampo.Properties.Settings.Default.SessionUser = idUsuario;
             }
             catch (Exception e)
             {
@@ -154,10 +168,27 @@ namespace TrabajoDeCampo.DAO
                 {
                     tx.Commit();
                     connection.Close();
+                    if(e.Message == "PASS")
+                    {
+                        this.recalcularDigitoVertical("USUARIO");
+                    }
                 }
                 else{
-                    tx.Rollback();
-                    connection.Close();
+                    try
+                    {
+                        tx.Rollback();
+                       
+                    }
+                    catch (Exception)
+                    {
+
+                        throw e;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    
                 }
                
               
@@ -165,13 +196,40 @@ namespace TrabajoDeCampo.DAO
             }
             finally{
                 connection.Close();
+                if (refrescarDigitoPorLoginExitoso)
+                {
+                    this.recalcularDigitoVertical("USUARIO");
+                }
             }
             
         }
 
-        public Boolean chequearSistemaBloqueado() { return true; }
+        public Boolean chequearSistemaBloqueado() {
+            return TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1;
+        }
 
-        public Boolean probarConexion() { return true; }
+        public Boolean probarConexion() {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            Boolean sePudoConectar = false;
+            try
+            {
+                connection.Open();
+                SqlCommand query = new SqlCommand(" SELECT * FROM USUARIO", connection);
+                query.ExecuteReader();
+                connection.Close();
+                sePudoConectar = true;  
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+
+            return sePudoConectar;
+          
+
+
+
+        }
 
         //FAMILIA PATENTE
         public List<ComponentePermiso> listarFamiliasYPatentes() {
@@ -188,7 +246,41 @@ namespace TrabajoDeCampo.DAO
 
         public void actualizarFamiliaPantente(List<Patente> pantentes, Familia familia) { }
 
-        public Boolean tienePatente(long idUsuario, String codigoPantente) { return true; }
+        public Boolean tienePatente(long idUsuario, String codigoPantente)
+        {
+
+            bool tienePantente = false;
+
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" SELECT COUNT(*) FROM PERMISOS_USUARIO WHERE USU_ID = @ID AND PAT_ID = @PAT ");
+
+            SqlCommand query = new SqlCommand(sb.ToString(), connection);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+            query.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = long.Parse(codigoPantente);
+            SqlDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+                reader = query.ExecuteReader();
+                while (reader.Read())
+                {
+                    int relaciones = (int)reader.GetValue(0);
+                    tienePantente = (relaciones == 1);
+                }
+
+
+                connection.Close();
+            }
+            catch (Exception exe)
+            {
+                connection.Close();
+                throw exe;
+            }
+
+            return tienePantente;
+        }
 
         public void actualizarPermisosUsuario(Usuario usuario, List<ComponentePermiso> familiasYPatentes)
         {
@@ -207,15 +299,18 @@ namespace TrabajoDeCampo.DAO
             int i = 0;
             foreach(ComponentePermiso item in usuario.componentePermisos)
             {
-                if(item is Familia)
+                if (item is Familia)
                 {
-                    sb.Append(" insert into usuario_familia (uf_usuario_id,uf_familia_id) values (@id,@idGenerico" + i + ") ");
-                    query.Parameters.Add(new SqlParameter("@idGenerico"+i, System.Data.SqlDbType.BigInt)).Value = ((Familia)item).id;
+                    sb.Append(" insert into usuario_familia (uf_usuario_id,uf_familia_id,uf_dvh) values (@id,@idGenerico" + i + ",@dvh" + i + ") ");
+                    query.Parameters.Add(new SqlParameter("@idGenerico" + i, System.Data.SqlDbType.BigInt)).Value = ((Familia)item).id;
+                    query.Parameters.Add(new SqlParameter("@dvh" + i, System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { ((Familia)item).id.ToString(), usuario.id.ToString() });
                 }
                 else
                 {
-                    sb.Append(" insert into usuario_patente (up_usuario_id,up_patente_id,up_dvh,up_bloqueada) values (@id,@idGenerico" + i + ",' ',@bloqueadaGenerico"+i+") ");
+                    sb.Append(" insert into usuario_patente (up_usuario_id,up_patente_id,up_dvh,up_bloqueada) values (@id,@idGenerico" + i + ",@dvh"+ i +",@bloqueadaGenerico"+i+") ");
                     query.Parameters.Add(new SqlParameter("@idGenerico" + i, System.Data.SqlDbType.BigInt)).Value = ((Patente)item).id;
+                    query.Parameters.Add(new SqlParameter("@dvh" + i, System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { usuario.id.ToString(),
+                        ((Patente)item).id.ToString(), (((Patente)item).bloqueada ? 1 : 0).ToString() });
                     query.Parameters.Add(new SqlParameter("@bloqueadaGenerico" + i, System.Data.SqlDbType.BigInt)).Value = ((Patente)item).bloqueada ? 1 : 0;
 
                 }
@@ -238,37 +333,298 @@ namespace TrabajoDeCampo.DAO
                 query.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                this.recalcularDigitoVertical("USUARIO_FAMILIA");
+                this.recalcularDigitoVertical("USUARIO_PATENTE");
             }
             catch (Exception exe)
             {
-                try
-                {
-                    tx.Rollback();
-                }
-                catch (Exception)
-                {
+                     tx.Rollback();
                     connection.Close();
                     throw exe;
-                }
-
+                
               
             }
         }
 
-        public Boolean verificarPermisosEsenciales(long idUsuario) { return true; } //al cambiar permisos chequear que quede un usuario distinto a este con permisos clave.
+        public Boolean verificarPermisosEsenciales(Usuario usuario) {
+            //al cambiar permisos chequear que quede un usuario distinto a este con permisos clave.
+            //logica de chequeo
+            List<Patente> patentes = new List<Patente>();
+            List<Patente> filtradas = new List<Patente>();
+            List<Patente> negadas = new List<Patente>();
 
-        public Boolean chequearNegada(long idUsuario, String codigoPatente) { return true; }
+            foreach (ComponentePermiso item in usuario.componentePermisos)
+            {
+                if(item.GetType() == typeof(Patente))
+                {
+                    Patente pat = (Patente)item;
+                    if (pat.bloqueada)
+                    {
+                        negadas.Add(pat);
+                    }
+                    else
+                    {
+                        patentes.Add(pat);
+                    }
+                   
+                }
+                else
+                {
+                    foreach (Patente patente in ((Familia)item).patentes)
+                    {
+                        patentes.Add(patente);
+                    }
+                }
+            }
+            bool estaNegada;
+            foreach(Patente pat in patentes)
+            {
+                estaNegada = false;
+                foreach (Patente negada in negadas)
+                {
+                    if(negada.id == pat.id)
+                    {
+                        estaNegada = true;
+                        break;
+                    }
+                    if (!estaNegada)
+                    {
+                        filtradas.Add(pat);
+
+                    }
+                }
+            }
+            // que patentes esenciales va a tener
+            bool CrearUsuario = false;
+            bool ModificarUsuario = false;
+            bool ListarUsuarios = false;
+            bool GenerarBackups = false;
+            bool RestaurarBackup = false;
+            bool RecalcularDígitosVerificadores = false;
+            bool ModificarFamilias = false;
+            bool ListarFamilias = false;
+            bool CrearFamilia = false;
+
+
+            foreach (Patente pat in filtradas)
+            {
+                if(pat.id == EnumPatentes.CrearUsuario)
+                {
+                    CrearUsuario = true;
+                }
+                if (pat.id == EnumPatentes.ModificarUsuario)
+                {
+                    ModificarUsuario = true;
+                }
+                if (pat.id == EnumPatentes.ListarUsuarios)
+                {
+                    ListarUsuarios = true;
+                }
+                if (pat.id == EnumPatentes.GenerarBackups)
+                {
+                    GenerarBackups = true;
+                }
+                if (pat.id == EnumPatentes.RestaurarBackup)
+                {
+                    RestaurarBackup = true;
+                }
+                if (pat.id == EnumPatentes.RecalcularDígitosVerificadores)
+                {
+                    RecalcularDígitosVerificadores = true;
+                }
+                if (pat.id == EnumPatentes.ModificarFamilias)
+                {
+                    ModificarFamilias = true;
+                }
+                if (pat.id == EnumPatentes.ListarFamilias)
+                {
+                    ListarFamilias = true;
+                }
+                if (pat.id == EnumPatentes.CrearFamilia)
+                {
+                    CrearFamilia = true;
+                }
+            }
+            //consultas sobre base
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            SqlCommand cmd = new SqlCommand("SELECT count(*) FROM PERMISOS_USUARIO WHERE PAT_ID = @PAT AND USU_ID <> @ID");
+            
+            cmd.Connection = connection;
+            SqlDataReader reader;
+            Boolean seguirBuscando = true;
+            Boolean errorEsenciales = false;
+            if (!CrearUsuario && seguirBuscando)
+            {
+
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.CrearUsuario;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if(value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+            }
+            if (!ModificarUsuario && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ModificarUsuario;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+
+            }
+            if (!ListarUsuarios && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ListarUsuarios;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+            }
+            if (!GenerarBackups && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.GenerarBackups;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+            }
+            if (!RestaurarBackup && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.RestaurarBackup;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+            }
+            if (!RecalcularDígitosVerificadores && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.RecalcularDígitosVerificadores;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+            }
+            if (!ModificarFamilias && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ModificarFamilias;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+            }
+            if (!ListarFamilias && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ListarFamilias;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+
+            }
+            if (!CrearFamilia && seguirBuscando)
+            {
+                cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+                cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.CrearFamilia;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int value = (int)reader.GetValue(0);
+                    if (value == 0)
+                    {
+                        errorEsenciales = true;
+                        seguirBuscando = false;
+
+                    }
+                }
+                reader.Close();
+
+            }
+            return errorEsenciales;
+        }
+
+        public Boolean chequearNegada(long idUsuario, String codigoPatente) { return true; } //deprecado se usa la vista.
 
         public void crearFamilia(Familia familia) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" INSERT INTO FAMILIA (FAM_NOMBRE, FAM_DVH) OUTPUT Inserted.FAM_ID VALUES(@NOMBRE, 0) ");
+            sb.Append(" INSERT INTO FAMILIA (FAM_NOMBRE, FAM_DVH) OUTPUT Inserted.FAM_ID VALUES(@NOMBRE, @DVHFAMILIA) ");
             
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
             SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
             query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(familia.nombre);
-            
+            query.Parameters.Add(new SqlParameter("@DVHFAMILIA", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new string[] { familia.nombre, familia.bloqueada.ToString() });
 
             try
             {
@@ -282,12 +638,13 @@ namespace TrabajoDeCampo.DAO
                 if(id != 0)
                 {
                     reader.Close();
-                    query.CommandText = " INSERT INTO FAMILIA_PATENTE (FP_PATENTE_ID,FP_FAMILIA_ID) VALUES(@PATENTE,@FAMILIA) ";
+                    query.CommandText = " INSERT INTO FAMILIA_PATENTE (FP_PATENTE_ID,FP_FAMILIA_ID,FP_DVH) VALUES(@PATENTE,@FAMILIA,@DVH) ";
                     foreach (Patente item in familia.patentes)
                     {
                         query.Parameters.Clear();
                         query.Parameters.Add(new SqlParameter("@PATENTE", System.Data.SqlDbType.BigInt)).Value = item.id;
                         query.Parameters.Add(new SqlParameter("@FAMILIA", System.Data.SqlDbType.BigInt)).Value = id;
+                        query.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { id.ToString(), item.id.ToString() });
                         query.ExecuteNonQuery();
                     }
                 }
@@ -308,12 +665,17 @@ namespace TrabajoDeCampo.DAO
                     throw ex2;
 
                 }
+                connection.Close();
+                throw ex;
             }
             finally
             {
                 connection.Close();
             }
-            
+            this.recalcularDigitoVertical("FAMILIA");
+            this.recalcularDigitoVertical("FAMILIA_PATENTE");
+
+
 
 
         }
@@ -321,13 +683,14 @@ namespace TrabajoDeCampo.DAO
         public void modificarFamilia(Familia familia) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" UPDATE FAMILIA SET FAM_NOMBRE = @NOMBRE WHERE FAM_ID = @ID ");
+            sb.Append(" UPDATE FAMILIA SET FAM_NOMBRE = @NOMBRE, FAM_DVH = @DVH WHERE FAM_ID = @ID ");
 
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
             SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
             query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(familia.nombre);
             query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = familia.id;
+            query.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { familia.nombre, familia.bloqueada.ToString() });
 
 
             try
@@ -344,9 +707,10 @@ namespace TrabajoDeCampo.DAO
                 {
                     query.Parameters.Clear();
 
-                    query.CommandText = " INSERT INTO FAMILIA_PATENTE (FP_PATENTE_ID,FP_FAMILIA_ID) VALUES (@PATENTE,@FAMILIA) ";
+                    query.CommandText = " INSERT INTO FAMILIA_PATENTE (FP_PATENTE_ID,FP_FAMILIA_ID,FP_DVH) VALUES (@PATENTE,@FAMILIA,@DVH) ";
                     query.Parameters.Add(new SqlParameter("@PATENTE", System.Data.SqlDbType.BigInt)).Value = item.id;
                     query.Parameters.Add(new SqlParameter("@FAMILIA", System.Data.SqlDbType.BigInt)).Value = familia.id;
+                    query.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { familia.id.ToString(), item.id.ToString() });
                     query.ExecuteNonQuery();
                 }
 
@@ -366,10 +730,15 @@ namespace TrabajoDeCampo.DAO
                     throw ex2;
 
                 }
+                connection.Close();
+                throw ex;
             }
             finally
             {
                 connection.Close();
+                this.recalcularDigitoVertical("FAMILIA");
+                this.recalcularDigitoVertical("FAMILIA_PATENTE");
+
             }
 
         }
@@ -405,15 +774,20 @@ namespace TrabajoDeCampo.DAO
                     throw ex2;
 
                 }
+                connection.Close();
+                throw ex;
             }
             finally
             {
                 connection.Close();
+                this.recalcularDigitoVertical("FAMILIA");
+                this.recalcularDigitoVertical("FAMILIA_PATENTE");
+
             }
 
         }
 
-        public Familia buscarFamilia(long idFamilia) { return null; }
+        public Familia buscarFamilia(long idFamilia) { return null; } //deprecado
 
         public List<Familia> listarFamilias() {
             
@@ -561,9 +935,13 @@ namespace TrabajoDeCampo.DAO
         }
         //USUARIOS
 
-        public void cambiarContraseña(long idUsuario, String contraseñaNueva) { }
+        public void cambiarContraseña(long idUsuario, String contraseñaNueva) {
 
-        public void cambiarIdioma(long idUsuario, String codigoIdioma) { }
+        }
+
+        public void cambiarIdioma(long idUsuario, String codigoIdioma) {
+
+        }
 
         public Boolean chequearCamposUnicos(Usuario usuario)// para chequear que no se repitan dni mail alias 
         {
@@ -624,11 +1002,35 @@ namespace TrabajoDeCampo.DAO
             query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
             query.Parameters.Add(new SqlParameter("@PASS", System.Data.SqlDbType.NVarChar)).Value = passEncriptado;
 
+            SqlCommand dataQuery = new SqlCommand(" SELECT USU_ALIAS, USU_PASS, USU_INTENTOS,USU_DNI FROM USUARIO WHERE USU_ID = @ID", connection);
+            dataQuery.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
 
-            
+            SqlDataReader reader;
+           
+
+
             try
             {
                 query.ExecuteNonQuery();
+                tx.Commit();
+                String dvh = "";
+                reader = dataQuery.ExecuteReader();
+                while (reader.Read())
+                {
+                    string alias = reader.GetValue(0).ToString();
+                    string pass = reader.GetValue(1).ToString();
+                    string intentos = reader.GetValue(2).ToString();
+                    string dni = reader.GetValue(3).ToString();
+
+                    dvh = this.recalcularDigitoHorizontal(new string[] { alias, pass, intentos, dni });
+
+                }
+                reader.Close();
+                tx = connection.BeginTransaction();
+                SqlCommand updateDVH = new SqlCommand(" UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID",connection, tx);
+                updateDVH.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+                updateDVH.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                updateDVH.ExecuteNonQuery();
                 tx.Commit();
 
             }
@@ -638,19 +1040,22 @@ namespace TrabajoDeCampo.DAO
                 try
                 {
                     tx.Rollback();
-                }
-                catch (Exception ex2)
-                {
-                    connection.Close();
-                    throw ex2;
 
                 }
+                catch (Exception )
+                {
+                   
+                }
+                connection.Close();
+                throw ex;
             }
             finally
             {
                 connection.Close();
             }
+            this.recalcularDigitoVertical("USUARIO");
             desbloquearUsuario(idUsuario);
+
 
         }
         public Usuario buscarUsuario(long idUsuario) {
@@ -664,7 +1069,6 @@ namespace TrabajoDeCampo.DAO
 
             query.CommandText = sb.ToString();
 
-            int idIdioma;
 
             connection.Open();
             SqlDataReader reader;
@@ -760,9 +1164,32 @@ namespace TrabajoDeCampo.DAO
             SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
             query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
 
+            SqlCommand dataQuery = new SqlCommand(" SELECT USU_ALIAS, USU_PASS, USU_INTENTOS,USU_DNI FROM USUARIO WHERE USU_ID = @ID", connection);
+            dataQuery.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+
+            SqlDataReader reader;
             try
             {
                 query.ExecuteNonQuery();
+                tx.Commit();
+                String dvh = "";
+                reader = dataQuery.ExecuteReader();
+                while (reader.Read())
+                {
+                    string alias = reader.GetValue(0).ToString();
+                    string pass = reader.GetValue(1).ToString();
+                    string intentos = reader.GetValue(2).ToString();
+                    string dni = reader.GetValue(3).ToString();
+
+                    dvh = this.recalcularDigitoHorizontal(new string[] { alias, pass, intentos, dni });
+
+                }
+                reader.Close();
+                tx = connection.BeginTransaction();
+                SqlCommand updateDVH = new SqlCommand(" UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID", connection, tx);
+                updateDVH.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+                updateDVH.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                updateDVH.ExecuteNonQuery();
                 tx.Commit();
 
             }
@@ -772,17 +1199,19 @@ namespace TrabajoDeCampo.DAO
                 try
                 {
                     tx.Rollback();
+
                 }
-                catch (Exception ex2)
+                catch (Exception )
                 {
-                    connection.Close();
-                    throw ex2;
-                    
+            
                 }
+                connection.Close();
+                throw ex;
             }
             finally
             {
                 connection.Close();
+                this.recalcularDigitoVertical("USUARIO");
             }
 
 
@@ -798,9 +1227,35 @@ namespace TrabajoDeCampo.DAO
             SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
             query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
 
+            SqlCommand dataQuery = new SqlCommand(" SELECT USU_ALIAS, USU_PASS, USU_INTENTOS,USU_DNI FROM USUARIO WHERE USU_ID = @ID", connection);
+            dataQuery.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+            SqlDataReader reader;
+           
+
+
             try
             {
                 query.ExecuteNonQuery();
+                tx.Commit();
+
+                String dvh = "";
+                reader = dataQuery.ExecuteReader();
+                while (reader.Read())
+                {
+                    string alias = reader.GetValue(0).ToString();
+                    string pass = reader.GetValue(1).ToString();
+                    string intentos = reader.GetValue(2).ToString();
+                    string dni = reader.GetValue(3).ToString();
+
+                    dvh = this.recalcularDigitoHorizontal(new string[] { alias, pass, intentos, dni });
+
+                }
+                reader.Close();
+                tx = connection.BeginTransaction();
+                SqlCommand updateDVH = new SqlCommand(" UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID", connection, tx);
+                updateDVH.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+                updateDVH.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                updateDVH.ExecuteNonQuery();
                 tx.Commit();
 
             }
@@ -810,19 +1265,20 @@ namespace TrabajoDeCampo.DAO
                 try
                 {
                     tx.Rollback();
-                }
-                catch (Exception ex2)
-                {
-                    connection.Close();
-                    throw ex2;
 
                 }
+                catch (Exception )
+                {
+
+                }
+                connection.Close();
+                throw ex;
             }
             finally
             {
                 connection.Close();
             }
-
+            this.recalcularDigitoVertical("USUARIO");
         }
 
         public void crearUsuario(ref Usuario usuario) {
@@ -841,13 +1297,15 @@ namespace TrabajoDeCampo.DAO
 
             query.Parameters.Add(new SqlParameter("@dni", System.Data.SqlDbType.VarChar)).Value = usuario.dni;
             query.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = usuario.email;
-            query.Parameters.Add(new SqlParameter("@pass", System.Data.SqlDbType.VarChar)).Value = SeguridadUtiles.encriptarMD5(usuario.pass);
-            query.Parameters.Add(new SqlParameter("@alias", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(usuario.alias);
+            string pass = SeguridadUtiles.encriptarMD5(usuario.pass);
+            string alias = SeguridadUtiles.encriptarAES(usuario.alias);
+            query.Parameters.Add(new SqlParameter("@pass", System.Data.SqlDbType.VarChar)).Value = pass;
+            query.Parameters.Add(new SqlParameter("@alias", System.Data.SqlDbType.NVarChar)).Value = alias;
             query.Parameters.Add(new SqlParameter("@nombre", System.Data.SqlDbType.VarChar)).Value = usuario.nombre;
             query.Parameters.Add(new SqlParameter("@apellido", System.Data.SqlDbType.VarChar)).Value = usuario.apellido;
             query.Parameters.Add(new SqlParameter("@direccion", System.Data.SqlDbType.VarChar)).Value = usuario.direccion;
             query.Parameters.Add(new SqlParameter("@telefono", System.Data.SqlDbType.VarChar)).Value = usuario.telefono;
-            query.Parameters.Add(new SqlParameter("@dvh", System.Data.SqlDbType.VarChar)).Value = " ";
+            query.Parameters.Add(new SqlParameter("@dvh", System.Data.SqlDbType.VarChar)).Value = this.recalcularDigitoHorizontal(new string[] { alias, pass, 0.ToString(), usuario.dni });
             query.Parameters.Add(new SqlParameter("@idioma", System.Data.SqlDbType.BigInt)).Value = usuario.idioma.id;
 
             try
@@ -896,20 +1354,36 @@ namespace TrabajoDeCampo.DAO
             sb.Append("where usu_id = @id");
             SqlCommand query = new SqlCommand(sb.ToString(), connection);
             query.Transaction = tx;
+            //trayendo el pass y los intentos.
+            SqlCommand dataQuery = new SqlCommand(" SELECT USU_PASS, USU_INTENTOS FROM USUARIO WHERE USU_ID = @ID", connection,tx);
+            dataQuery.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
+            SqlDataReader reader;
 
+
+            string savedPass = "";
+            string savedIntentos = "";
+            reader = dataQuery.ExecuteReader();
+            while (reader.Read())
+            {
+                savedPass = reader.GetValue(0).ToString();
+                savedIntentos = reader.GetValue(1).ToString();
+            }
+            reader.Close();
             //agregando los paramentros 
 
             query.Parameters.Add(new SqlParameter("@dni", System.Data.SqlDbType.VarChar)).Value = usuario.dni;
             query.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = usuario.email;
-            query.Parameters.Add(new SqlParameter("@alias", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(usuario.alias);
+            string alias = SeguridadUtiles.encriptarAES(usuario.alias);
+            query.Parameters.Add(new SqlParameter("@alias", System.Data.SqlDbType.NVarChar)).Value = alias;
             query.Parameters.Add(new SqlParameter("@nombre", System.Data.SqlDbType.VarChar)).Value = usuario.nombre;
             query.Parameters.Add(new SqlParameter("@apellido", System.Data.SqlDbType.VarChar)).Value = usuario.apellido;
             query.Parameters.Add(new SqlParameter("@direccion", System.Data.SqlDbType.VarChar)).Value = usuario.direccion;
             query.Parameters.Add(new SqlParameter("@telefono", System.Data.SqlDbType.VarChar)).Value = usuario.telefono;
-            query.Parameters.Add(new SqlParameter("@dvh", System.Data.SqlDbType.VarChar)).Value = " ";
+            query.Parameters.Add(new SqlParameter("@dvh", System.Data.SqlDbType.VarChar)).Value = this.recalcularDigitoHorizontal(new string[] { alias, savedPass, savedIntentos, usuario.dni });
             query.Parameters.Add(new SqlParameter("@idioma", System.Data.SqlDbType.BigInt)).Value = usuario.idioma.id;
             query.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.BigInt)).Value = usuario.id;
 
+           
             try
             {
 
@@ -930,6 +1404,7 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 throw exe;
             }
+            this.recalcularDigitoVertical("USUARIO");
             actualizarPermisosUsuario(usuario, usuario.componentePermisos);
 
         }
@@ -938,7 +1413,7 @@ namespace TrabajoDeCampo.DAO
         {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" DELETE FROM USUARIO WHERE USU_ID = @ID");
+            sb.Append(" UPDATE  USUARIO SET USU_BAJA = 1 WHERE USU_ID = @ID");
 
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
@@ -964,6 +1439,8 @@ namespace TrabajoDeCampo.DAO
                     throw ex2;
 
                 }
+                connection.Close();
+                throw ex;
             }
             finally
             {
@@ -1019,7 +1496,7 @@ namespace TrabajoDeCampo.DAO
             }
             catch (Exception ex)
             {
-
+                connection.Close();
                 throw  ex;
             }
             finally
@@ -1068,15 +1545,16 @@ namespace TrabajoDeCampo.DAO
 
 
             builder.Append(" @MENSAJE,");
-            builder.Append(" @CRITICIDAD");
-            builder.Append(" @FECHA");
+            builder.Append(" @CRITICIDAD,");
+            builder.Append(" @FECHA,");
             builder.Append(" @DVH");
             builder.Append(" ) ");
             SqlCommand cmd = new SqlCommand(builder.ToString(), connection, tx);
+            DateTime fecha = DateTime.Now;
             cmd.Parameters.Add(new SqlParameter("@MENSAJE", System.Data.SqlDbType.Text)).Value = mensaje;
-            cmd.Parameters.Add(new SqlParameter("@CRITICIDAD", System.Data.SqlDbType.BigInt)).Value = criticidad;
-            cmd.Parameters.Add(new SqlParameter("@FECHA", System.Data.SqlDbType.Date)).Value = new DateTime();
-            cmd.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.VarChar)).Value = "";
+            cmd.Parameters.Add(new SqlParameter("@CRITICIDAD", System.Data.SqlDbType.BigInt)).Value = (long)criticidad;
+            cmd.Parameters.Add(new SqlParameter("@FECHA", System.Data.SqlDbType.DateTime)).Value = fecha;
+            cmd.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.VarChar)).Value = this.recalcularDigitoHorizontal(new string[] { fecha.ToString(), mensaje, criticidad.ToString()});
 
             if(usuario!= null)
                 cmd.Parameters.Add(new SqlParameter("@USUARIO", System.Data.SqlDbType.BigInt)).Value = usuario.id;
@@ -1086,8 +1564,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                this.recalcularDigitoVertical("BITACORA");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 try
                 {
@@ -1099,7 +1578,7 @@ namespace TrabajoDeCampo.DAO
                    
                 }
                 connection.Close();
-                throw;
+                throw ex;
             }
         }
 
@@ -1108,7 +1587,7 @@ namespace TrabajoDeCampo.DAO
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
             SqlCommand cmd = new SqlCommand("", connection, tx);
-            String query = " SELECT * FROM vistaBitacora ";
+            String query = " SELECT * FROM vistaBitacora";
             if(filtro != null)
             {
                 switch (filtro)
@@ -1151,6 +1630,8 @@ namespace TrabajoDeCampo.DAO
                     connection.Close();
                   
                 }
+                connection.Close();
+                throw;
             }
 
             foreach (DataRow item in set.Tables[0].Rows)
@@ -1217,6 +1698,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(usuDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1251,6 +1734,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1285,6 +1770,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1320,6 +1807,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1358,6 +1847,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1393,6 +1884,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1425,6 +1918,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1457,6 +1952,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1490,6 +1987,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1521,6 +2020,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(patDVH))
                 {
                     reader.GetValue(0);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1550,6 +2051,8 @@ namespace TrabajoDeCampo.DAO
                 if (!md5Base.Equals(md5Calculado))
                 {
                     reader.GetValue(1);
+                    reader.Close();
+                    connection.Close();
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1679,15 +2182,16 @@ namespace TrabajoDeCampo.DAO
                         }
                         clavesAInsertar.Clear();
                         cmd.CommandText = insertBuilder.ToString();
-                        if(!String.IsNullOrEmpty(cmd.CommandText))
+                        if (!String.IsNullOrEmpty(cmd.CommandText))
                             cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex)
                     {
+                        
                         tx.Rollback();
                         connection.Close();
 
-                        throw;
+                        throw ex;
                     }
                     
                     
@@ -1732,7 +2236,7 @@ namespace TrabajoDeCampo.DAO
             SqlCommand query = new SqlCommand("", connection, tx);
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(" SELECT STRING_AGG("+ campo +",'') FROM " +tabla );
+            sb.Append(" SELECT "+ campo +" FROM " +tabla );
             
 
             query.CommandText = sb.ToString();
@@ -1746,7 +2250,7 @@ namespace TrabajoDeCampo.DAO
                 {
                     if (!reader.IsDBNull(0))
                     {
-                        sumaDeDVH = reader.GetString(0);
+                        sumaDeDVH += reader.GetString(0);
                     }
                 }
                 reader.Close();
@@ -1761,7 +2265,7 @@ namespace TrabajoDeCampo.DAO
                 }
                 
                 tx.Commit();
-
+                connection.Close();
             }
             catch (Exception ex)
             {
@@ -1776,6 +2280,8 @@ namespace TrabajoDeCampo.DAO
                     throw ex2;
 
                 }
+                connection.Close();
+                throw ex;
             }
             finally
             {
@@ -1791,9 +2297,23 @@ namespace TrabajoDeCampo.DAO
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
             StringBuilder queryText = new StringBuilder();
-
+            directorio = directorio.Replace("//", "\\");
             queryText.Append(" USE MASTER ");
-            queryText.Append(" BACKUP DATABASE TRABAJO_DIPLOMA TO DISK = '" + directorio + "\\tempBackup.bak' WITH init");
+            queryText.Append(" BACKUP DATABASE TRABAJO_DIPLOMA ");
+
+            for (int i = 0; i < partes; i++)
+            {
+                if (i == 0)
+                {
+                    queryText.Append(" TO DISK = '" + directorio + (i+1) +".bak '");
+                }
+                else
+                {
+                    queryText.Append(" , DISK = '" + directorio + (i + 1) + ".bak '");
+                }
+            }
+
+            queryText.Append(" WITH init ");
             SqlCommand query = new SqlCommand(queryText.ToString(), connection);
             try
             {
@@ -1809,12 +2329,19 @@ namespace TrabajoDeCampo.DAO
         }
 
         public void realizarRestore(String directorio)
+
         {
-            SqlConnection connection = new SqlConnection("Data Source="+Environment.MachineName+";Initial Catalog=master;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(TrabajoDeCampo.Properties.Settings.Default.MasterString);
             connection.Open();
             StringBuilder queryText = new StringBuilder();
             queryText.Append(" USE MASTER ");
-            queryText.Append(" RESTORE DATABASE TRABAJO_DIPLOMA FROM  DISK = '" + directorio + "' WITH REPLACE");
+
+            queryText.Append(" alter database [TRABAJO_DIPLOMA]  ");
+            queryText.Append(" set offline with rollback immediate ");
+            queryText.Append(" RESTORE DATABASE TRABAJO_DIPLOMA ");
+            //FROM  DISK = '" + directorio + "' WITH REPLACE");
+            queryText.Append(directorio);
+            queryText.Append(" WITH REPLACE ");
             SqlCommand query = new SqlCommand(queryText.ToString(), connection);
             try
             {
@@ -1883,7 +2410,7 @@ namespace TrabajoDeCampo.DAO
             return traducciones;
         }
 
-        public void actualizaConexión()
+        public void actualizaConexión() // VER
         {
             throw new System.NotImplementedException();
         }

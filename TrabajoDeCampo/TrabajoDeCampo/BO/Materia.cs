@@ -41,6 +41,15 @@ namespace TrabajoDeCampo
             set { _nivel = value; }
         }
 
+        private string _nombre;
+
+        public string nombre
+        {
+            get { return _nombre; }
+            set { _nombre = value; }
+        }
+
+
 
 
 

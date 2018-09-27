@@ -55,7 +55,7 @@
             this.españolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.asignaciónDeMateriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +88,7 @@
             // alumnosToolStripMenuItem1
             // 
             this.alumnosToolStripMenuItem1.Name = "alumnosToolStripMenuItem1";
-            this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
+            this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.alumnosToolStripMenuItem1.Tag = "com.td.alumnos";
             this.alumnosToolStripMenuItem1.Text = "Alumnos";
             this.alumnosToolStripMenuItem1.Click += new System.EventHandler(this.alumnosToolStripMenuItem1_Click);
@@ -96,7 +96,7 @@
             // tutoresToolStripMenuItem
             // 
             this.tutoresToolStripMenuItem.Name = "tutoresToolStripMenuItem";
-            this.tutoresToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.tutoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tutoresToolStripMenuItem.Tag = "com.td.tutores";
             this.tutoresToolStripMenuItem.Text = "Tutores";
             this.tutoresToolStripMenuItem.Click += new System.EventHandler(this.tutoresToolStripMenuItem_Click);
@@ -124,7 +124,8 @@
             this.cursosToolStripMenuItem,
             this.horariosToolStripMenuItem,
             this.materiasToolStripMenuItem,
-            this.promociónDeAlumnosToolStripMenuItem});
+            this.promociónDeAlumnosToolStripMenuItem,
+            this.asignaciónDeMateriasToolStripMenuItem});
             this.administraciónToolStripMenuItem.Name = "administraciónToolStripMenuItem";
             this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.administraciónToolStripMenuItem.Tag = "com.td.administración";
@@ -302,22 +303,18 @@
             this.salirToolStripMenuItem.Tag = "com.td.salir";
             this.salirToolStripMenuItem.Text = "Salir";
             // 
-            // button1
+            // asignaciónDeMateriasToolStripMenuItem
             // 
-            this.button1.Location = new System.Drawing.Point(350, 164);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.asignaciónDeMateriasToolStripMenuItem.Name = "asignaciónDeMateriasToolStripMenuItem";
+            this.asignaciónDeMateriasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.asignaciónDeMateriasToolStripMenuItem.Text = "Asignación de Materias";
+            this.asignaciónDeMateriasToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeMateriasToolStripMenuItem_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 368);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Menu";
@@ -359,6 +356,6 @@
         private System.Windows.Forms.ToolStripMenuItem promociónDeAlumnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bitácoraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem asignaciónDeMateriasToolStripMenuItem;
     }
 }

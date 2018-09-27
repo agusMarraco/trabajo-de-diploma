@@ -47,10 +47,6 @@
             this.dgfamilias = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgpatentes = new System.Windows.Forms.DataGridView();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -61,13 +57,17 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dgpatentes = new System.Windows.Forms.DataGridView();
+            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asignada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.negada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgfamilias)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpatentes)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgfamiliapatente)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgpatentes)).BeginInit();
             this.SuspendLayout();
             // 
             // nombrelbl
@@ -84,6 +84,7 @@
             // nombre
             // 
             this.nombre.Location = new System.Drawing.Point(84, 9);
+            this.nombre.MaxLength = 20;
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(296, 20);
             this.nombre.TabIndex = 1;
@@ -91,6 +92,7 @@
             // apellido
             // 
             this.apellido.Location = new System.Drawing.Point(84, 35);
+            this.apellido.MaxLength = 20;
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(296, 20);
             this.apellido.TabIndex = 3;
@@ -109,6 +111,7 @@
             // dni
             // 
             this.dni.Location = new System.Drawing.Point(84, 61);
+            this.dni.MaxLength = 20;
             this.dni.Name = "dni";
             this.dni.Size = new System.Drawing.Size(296, 20);
             this.dni.TabIndex = 5;
@@ -127,6 +130,7 @@
             // direccion
             // 
             this.direccion.Location = new System.Drawing.Point(84, 87);
+            this.direccion.MaxLength = 50;
             this.direccion.Name = "direccion";
             this.direccion.Size = new System.Drawing.Size(296, 20);
             this.direccion.TabIndex = 7;
@@ -145,6 +149,7 @@
             // email
             // 
             this.email.Location = new System.Drawing.Point(466, 36);
+            this.email.MaxLength = 50;
             this.email.Name = "email";
             this.email.Size = new System.Drawing.Size(300, 20);
             this.email.TabIndex = 9;
@@ -163,6 +168,7 @@
             // alias
             // 
             this.alias.Location = new System.Drawing.Point(466, 9);
+            this.alias.MaxLength = 50;
             this.alias.Name = "alias";
             this.alias.Size = new System.Drawing.Size(300, 20);
             this.alias.TabIndex = 11;
@@ -192,7 +198,7 @@
             // telefono
             // 
             this.telefono.Location = new System.Drawing.Point(84, 110);
-            this.telefono.Mask = "000-0000";
+            this.telefono.Mask = "00-0000-0000";
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(296, 20);
             this.telefono.TabIndex = 15;
@@ -217,6 +223,7 @@
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // dgfamilias
             // 
@@ -246,43 +253,6 @@
             this.Column2.DataPropertyName = "_ck";
             this.Column2.HeaderText = "ASIGNADA";
             this.Column2.Name = "Column2";
-            // 
-            // dgpatentes
-            // 
-            this.dgpatentes.AllowUserToAddRows = false;
-            this.dgpatentes.AllowUserToDeleteRows = false;
-            this.dgpatentes.AllowUserToResizeColumns = false;
-            this.dgpatentes.AllowUserToResizeRows = false;
-            this.dgpatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpatentes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column3,
-            this.Column4,
-            this.Column6});
-            this.dgpatentes.Location = new System.Drawing.Point(6, 37);
-            this.dgpatentes.Name = "dgpatentes";
-            this.dgpatentes.ShowEditingIcon = false;
-            this.dgpatentes.Size = new System.Drawing.Size(740, 233);
-            this.dgpatentes.TabIndex = 18;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.DataPropertyName = "MyProperty";
-            this.Column3.HeaderText = "PATENTE";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "_ck";
-            this.Column4.HeaderText = "ASIGNADA";
-            this.Column4.Name = "Column4";
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "NEGADA";
-            this.Column6.Name = "Column6";
             // 
             // label7
             // 
@@ -365,8 +335,8 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.dgpatentes);
+            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -395,6 +365,38 @@
             this.comboBox1.Size = new System.Drawing.Size(148, 21);
             this.comboBox1.TabIndex = 27;
             // 
+            // dgpatentes
+            // 
+            this.dgpatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgpatentes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.desc,
+            this.asignada,
+            this.negada});
+            this.dgpatentes.Location = new System.Drawing.Point(9, 47);
+            this.dgpatentes.Name = "dgpatentes";
+            this.dgpatentes.ShowCellErrors = false;
+            this.dgpatentes.ShowCellToolTips = false;
+            this.dgpatentes.ShowEditingIcon = false;
+            this.dgpatentes.ShowRowErrors = false;
+            this.dgpatentes.Size = new System.Drawing.Size(737, 211);
+            this.dgpatentes.TabIndex = 21;
+            // 
+            // desc
+            // 
+            this.desc.HeaderText = "desc";
+            this.desc.Name = "desc";
+            this.desc.ReadOnly = true;
+            // 
+            // asignada
+            // 
+            this.asignada.HeaderText = "asignada";
+            this.asignada.Name = "asignada";
+            // 
+            // negada
+            // 
+            this.negada.HeaderText = "negada";
+            this.negada.Name = "negada";
+            // 
             // AltaModificacionUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -422,7 +424,6 @@
             this.Text = "Usuario";
             this.Load += new System.EventHandler(this.AltaModificacionUsuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgfamilias)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpatentes)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -430,6 +431,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgpatentes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,13 +456,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView dgfamilias;
-        private System.Windows.Forms.DataGridView dgpatentes;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView dgfamiliapatente;
@@ -468,7 +467,10 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column6;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridView dgpatentes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desc;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn asignada;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn negada;
     }
 }

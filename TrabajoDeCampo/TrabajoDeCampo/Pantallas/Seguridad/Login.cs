@@ -20,7 +20,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            if(TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1)
+            {
+                this.label3.Visible = true;
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -36,6 +39,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             try
             {
                 servicioSeguridad.loguear(user, pass, null);
+
+                Seguridad.Menu menu = new Seguridad.Menu();
+                this.Close();
+                menu.ShowDialog();
             }
             catch (Exception ex)
             {

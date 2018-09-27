@@ -78,7 +78,16 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             if(dgFamilia.CurrentRow != null)
             {
                 Familia fami = (Familia)dgFamilia.CurrentRow.DataBoundItem;
-                this.servicioSeguridad.borrarFamilia(fami.id);
+                try
+                {
+                    this.servicioSeguridad.borrarFamilia(fami.id);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+                
                 listarElementos();
                 if (dgFamilia.Rows.Count < 1)
                     this.limpiarPatentesSeleccionadas();
@@ -175,6 +184,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 this.txtNombre.Text = "";
                 utils = new Desbloqueador();
                 utils.process(null, null, null, new List<Control> { this.btnCrear, this.btnModificar, this.btnBorrar});
+                listarElementos();
+
 
             }
             else

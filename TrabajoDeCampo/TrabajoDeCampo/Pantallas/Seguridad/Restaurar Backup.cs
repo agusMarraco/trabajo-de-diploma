@@ -31,18 +31,18 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
             if(usersFilePath != null){
 
+                try
+                {
+                    servicioSeguridad.realizarRestore(usersFilePath);
 
-                servicioSeguridad.realizarRestore(usersFilePath);
-                //Restore restore = new Restore();
-                //restore.NoRecovery = false;
-                //SqlConnection connection = ConexionSingleton.obtenerConexion();
+                    MessageBox.Show("Backup Completado");
+                }
+                catch (Exception ex)
+                {
 
-                //BackupDeviceItem restoreItem = new BackupDeviceItem(usersFilePath, DeviceType.File);
-                //restore.Devices.Add(restoreItem);
-                //restore.Database = "TRABAJO_DIPLOMA";
-                //restore.SqlRestore(new Server());
-
-                MessageBox.Show("Completado papu");
+                    MessageBox.Show("Ocurrio un error :" + ex.Message);
+                }
+               
 
             }
         }
@@ -55,12 +55,19 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             DialogResult result = dialog.ShowDialog();
             if(result == DialogResult.OK){
                 usersFilePath = dialog.FileName;
+                this.textBox1.Text = usersFilePath;
             }
         }
 
         private void Restaurar_Backup_Load(object sender, EventArgs e)
         {
+            this.textBox1.ReadOnly = true;
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

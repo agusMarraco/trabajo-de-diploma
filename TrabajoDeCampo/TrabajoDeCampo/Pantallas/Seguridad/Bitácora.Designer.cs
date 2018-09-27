@@ -229,12 +229,14 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(84, 62);
+            this.textBox1.MaxLength = 30;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 1;
             // 
             // BIT_FECHA
             // 
+            this.BIT_FECHA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.BIT_FECHA.HeaderText = "Fecha";
             this.BIT_FECHA.Name = "BIT_FECHA";
             this.BIT_FECHA.ReadOnly = true;

@@ -66,6 +66,7 @@
             this.btnCancelar.Tag = "com.td.cancelar";
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // partesCB
             // 

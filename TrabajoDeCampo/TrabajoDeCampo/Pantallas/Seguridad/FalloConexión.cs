@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
@@ -20,6 +21,72 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void FalloConexión_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("Por favor ingrese un servidor o nombre de base de datos.");
+            }
+            else
+            {
+                if(!String.IsNullOrEmpty(this.textBox2.Text) && !String.IsNullOrEmpty(this.textBox3.Text))
+                {
+                    String prevConnectionString = TrabajoDeCampo.Properties.Settings.Default.ConnectionString;
+                    String connectionString = "Data Source = "  + this.textBox1.Text + "; Initial Catalog = TRABAJO_DIPLOMA; User ID = " + this.textBox2.Text + " ; Password = " + this.textBox3.Text;
+                    TrabajoDeCampo.Properties.Settings.Default.ConnectionString = connectionString;
+                    TrabajoDeCampo.Properties.Settings.Default.MasterString = connectionString.Replace("TRABAJO_DIPLOMA","master");
+                    ServicioSeguridad servicioSeguridad = new ServicioSeguridad();
+
+                    Boolean  conecto = servicioSeguridad.probarConexion();
+                    if(!conecto){
+                        TrabajoDeCampo.Properties.Settings.Default.ConnectionString = prevConnectionString;
+                        MessageBox.Show("No se pudo establecer una conexión con la base de datos");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Conexión exitosa");
+                        Login login = new Login();
+
+                        login.ShowDialog();
+                        this.Close();
+                        
+                    }
+                }
+                else
+                {
+
+                    String prevConnectionString = TrabajoDeCampo.Properties.Settings.Default.ConnectionString;
+                    
+                    TrabajoDeCampo.Properties.Settings.Default.ConnectionString = "Data Source = " + this.textBox1.Text + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
+                    TrabajoDeCampo.Properties.Settings.Default.MasterString = "Data Source = " + this.textBox1.Text + " ; Initial Catalog = master ; Integrated Security = True";
+
+                    ServicioSeguridad servicioSeguridad = new ServicioSeguridad();
+
+                    Boolean conecto = servicioSeguridad.probarConexion();
+                    if (!conecto)
+                    {
+                        TrabajoDeCampo.Properties.Settings.Default.ConnectionString = prevConnectionString;
+                        MessageBox.Show("No se pudo establecer una conexión con la base de datos");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Conexión exitosa");
+                        Login login = new Login();
+
+                        login.ShowDialog();
+                        this.Close();
+
+                    }
+
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

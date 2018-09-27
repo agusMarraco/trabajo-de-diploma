@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.Pantallas.Administración;
 using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
@@ -38,7 +39,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void recalcularDVToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListaDeUsuarios usuarios = new ListaDeUsuarios();
-            usuarios.Show();
+            usuarios.ShowDialog();
         }
 
 
@@ -46,75 +47,77 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void restaurarBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListarFamilias familias = new ListarFamilias();
-            familias.Show();
+            familias.ShowDialog();
         }
 
         private void respaldarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Respaldo_Base_de_Datos respaldo = new Respaldo_Base_de_Datos();
-            respaldo.Show();
+            respaldo.ShowDialog();
         }
 
         private void restaurarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Restaurar_Backup restore = new Restaurar_Backup();
-            restore.Show();
+            restore.ShowDialog();
         }
 
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CambiarContraseña contra = new CambiarContraseña();
-            contra.Show();
+            contra.ShowDialog();
         }
 
         private void bitácoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Bitácora bitacora = new Bitácora();
-            bitacora.Show();
+            bitacora.ShowDialog();
 
         }
        
         private void cursosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Administración.Cursos cursos = new Administración.Cursos();
-            cursos.Show();
+            cursos.ShowDialog();
         }
 
         private void horariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Administración.Horarios horarios = new Administración.Horarios();
-            horarios.Show();
+            horarios.ShowDialog();
 
         }
 
         private void materiasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Administración.Materias().Show();
+            Administración.Materias form = new Administración.Materias();
+            form.ShowDialog();
+            
         }
 
         private void promociónDeAlumnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Administración.PromocionDeAlumnos().Show();
+            new Administración.PromocionDeAlumnos().ShowDialog();
         }
 
         private void alumnosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            new Alumnos.Alumnos().Show();
+            new Alumnos.Alumnos().ShowDialog();
         }
 
         private void amonestacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Alumnos.Amonestaciones().Show();
+            new Alumnos.Amonestaciones().ShowDialog();
         }
 
         private void inasistenciasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Alumnos.Inasistencias().Show();
+            new Alumnos.Inasistencias().ShowDialog();
         }
 
         private void tutoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Alumnos.Tutores().Show();
+            new Alumnos.Tutores().ShowDialog();
         }
 
         private void Menu_Load(object sender, EventArgs e)
@@ -155,6 +158,12 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void button1_Click(object sender, EventArgs e)
         {
             servicioSeguridad.verificarDigitosVerificadores();
+        }
+
+        private void asignaciónDeMateriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsignacionDeMaterias asignacionDematerias = new AsignacionDeMaterias();
+            asignacionDematerias.ShowDialog();
         }
     }
 }

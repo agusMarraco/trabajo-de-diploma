@@ -20,11 +20,12 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private FormUtils formUtils;
         private Dictionary<String, String> mensajesDeValidacion = new Dictionary<string, string>();
         private StringBuilder mensajesDeError = new StringBuilder();
+        
         private Boolean isEdit;
         private Usuario currentUsuario;
         public AltaModificacionUsuario()
         {
-            
+        
         }
 
         public AltaModificacionUsuario(Boolean isEdit, Usuario usuario)
@@ -38,11 +39,35 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgfamilias.DataSource = null;
             this.dgpatentes.DataSource = null;
 
+
             this.dgfamiliapatente.AutoGenerateColumns = false ;
             this.dgfamilias.AutoGenerateColumns = false;
             this.dgpatentes.AutoGenerateColumns = false;
+
+            //cargo los dgv
+            List<ComponentePermiso> permisos = this.servicioSeguridad.listarFamiliasYPatentes();
+            List<Patente> patentes = new List<Patente>();
+            List<Familia> familias = new List<Familia>();
+
+            permisos.ForEach(x => {
+                ComponentePermiso per = x;
+                if (per is Patente)
+                {
+                    patentes.Add((Patente)per);
+                }
+                else
+                {
+                    familias.Add((Familia)per);
+                }
+            });
+
+            this.dgfamilias.DataSource = familias;
+            this.dgpatentes.DataSource = patentes;
+
+
             this.dgpatentes.Columns[0].DataPropertyName = "descripcion";
             this.dgpatentes.Columns[2].DataPropertyName = "bloqueada";
+            this.dgpatentes.Columns[1].DataPropertyName = "asignada";
             this.dgfamiliapatente.Columns[0].DataPropertyName = "descripcion";
             this.dgfamilias.Columns[0].DataPropertyName = "nombre";
     
@@ -53,24 +78,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgpatentes.CellEndEdit += endEditHandler;
             this.dgpatentes.KeyUp += spaceHandler;
 
-            //cargo los dgv
-            List<ComponentePermiso> permisos = this.servicioSeguridad.listarFamiliasYPatentes();
-            List<Patente> patentes = new List<Patente>();
-            List<Familia> familias = new List<Familia>();
 
-            permisos.ForEach(x => { ComponentePermiso per = x;
-              if(per is Patente)
-                {
-                    patentes.Add((Patente)per);
-                }
-                else
-                {
-                    familias.Add((Familia)per);
-                }    
-            });
-
-            this.dgfamilias.DataSource = familias;
-            this.dgpatentes.DataSource = patentes;
 
             //si es un edit guardo la referencia al usuario
             this.isEdit = isEdit;
@@ -164,6 +172,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                                 else
                                 {
                                     ((DataGridViewCheckBoxCell)item.Cells[1]).Value = true;
+
                                 }
                             }
 
@@ -441,8 +450,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 this.dgpatentes.EndEdit();
             }
         }
-        
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 
     

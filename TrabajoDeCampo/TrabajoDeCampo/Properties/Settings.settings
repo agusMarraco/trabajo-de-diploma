@@ -9,7 +9,13 @@
       <Value Profile="(Default)">Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True</Value>
     </Setting>
     <Setting Name="Bloqueado" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SessionUser" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MasterString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=DESKTOP-SL9JPN8;Initial Catalog=master;Integrated Security=True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
