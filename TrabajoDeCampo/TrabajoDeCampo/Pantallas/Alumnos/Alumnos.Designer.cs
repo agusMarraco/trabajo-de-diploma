@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,7 +41,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnRepetir = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -51,42 +51,59 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
+            this.nombre,
+            this.apellido,
+            this.dni,
+            this.curso});
             this.dataGridView1.Location = new System.Drawing.Point(14, 241);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
             this.dataGridView1.Size = new System.Drawing.Size(703, 331);
             this.dataGridView1.TabIndex = 0;
             // 
-            // Column1
+            // nombre
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "Nombre";
-            this.Column1.Name = "Column1";
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // Column2
+            // apellido
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Apellido";
-            this.Column2.Name = "Column2";
+            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.apellido.HeaderText = "Apellido";
+            this.apellido.Name = "apellido";
+            this.apellido.ReadOnly = true;
+            this.apellido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // Column3
+            // dni
             // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "DNI";
-            this.Column3.Name = "Column3";
+            this.dni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dni.HeaderText = "DNI";
+            this.dni.Name = "dni";
+            this.dni.ReadOnly = true;
+            this.dni.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // Column4
+            // curso
             // 
-            this.Column4.HeaderText = "Curso";
-            this.Column4.Name = "Column4";
+            this.curso.HeaderText = "Curso";
+            this.curso.Name = "curso";
+            this.curso.ReadOnly = true;
+            this.curso.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(92, 26);
             this.comboBox2.Name = "comboBox2";
@@ -110,6 +127,7 @@
             this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
@@ -169,15 +187,16 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // btnRepetir
             // 
-            this.button4.Location = new System.Drawing.Point(598, 588);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(119, 34);
-            this.button4.TabIndex = 12;
-            this.button4.Tag = "com.td.repetir";
-            this.button4.Text = "Repetir";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnRepetir.Location = new System.Drawing.Point(598, 588);
+            this.btnRepetir.Name = "btnRepetir";
+            this.btnRepetir.Size = new System.Drawing.Size(119, 34);
+            this.btnRepetir.TabIndex = 12;
+            this.btnRepetir.Tag = "com.td.repetir";
+            this.btnRepetir.Text = "Repetir";
+            this.btnRepetir.UseVisualStyleBackColor = true;
+            this.btnRepetir.Click += new System.EventHandler(this.btnRepetir_Click);
             // 
             // button5
             // 
@@ -199,6 +218,7 @@
             this.button6.Tag = "com.td.borrar";
             this.button6.Text = "Borrar";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -209,6 +229,7 @@
             this.button7.Tag = "com.td.modificar";
             this.button7.Text = "Modificar";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Alumnos
             // 
@@ -218,7 +239,7 @@
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnRepetir);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -243,14 +264,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnRepetir;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn curso;
     }
 }

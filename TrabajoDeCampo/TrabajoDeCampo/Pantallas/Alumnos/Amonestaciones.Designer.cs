@@ -36,8 +36,8 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
+            this.registrar = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -45,12 +45,21 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
             this.dataGridView1.Location = new System.Drawing.Point(16, 257);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
             this.dataGridView1.Size = new System.Drawing.Size(511, 379);
             this.dataGridView1.TabIndex = 0;
             // 
@@ -58,12 +67,14 @@
             // 
             this.Column1.HeaderText = "Fecha";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column2.HeaderText = "Motivo";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -116,25 +127,27 @@
             this.label3.Tag = "com.td.ingrese.el.motivo";
             this.label3.Text = "Ingrese el motivo";
             // 
-            // button2
+            // cancelar
             // 
-            this.button2.Location = new System.Drawing.Point(452, 642);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Tag = "com.td.cancelar";
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cancelar.Location = new System.Drawing.Point(452, 642);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(75, 23);
+            this.cancelar.TabIndex = 3;
+            this.cancelar.Tag = "com.td.cancelar";
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
-            // button1
+            // registrar
             // 
-            this.button1.Location = new System.Drawing.Point(16, 642);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Tag = "com.td.registrar";
-            this.button1.Text = "Registrar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.registrar.Location = new System.Drawing.Point(16, 642);
+            this.registrar.Name = "registrar";
+            this.registrar.Size = new System.Drawing.Size(75, 23);
+            this.registrar.TabIndex = 1;
+            this.registrar.Tag = "com.td.registrar";
+            this.registrar.Text = "Registrar";
+            this.registrar.UseVisualStyleBackColor = true;
+            this.registrar.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -152,10 +165,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 674);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.cancelar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.registrar);
             this.Name = "Amonestaciones";
             this.Text = "Amonestaciones";
             this.Load += new System.EventHandler(this.Amonestaciones_Load);
@@ -176,8 +189,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cancelar;
+        private System.Windows.Forms.Button registrar;
         private System.Windows.Forms.Button button3;
     }
 }

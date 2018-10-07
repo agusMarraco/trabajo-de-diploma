@@ -39,6 +39,7 @@
             this.horariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.promociónDeAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignaciónDeMateriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recalcularDVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restaurarBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +56,6 @@
             this.españolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignaciónDeMateriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +88,7 @@
             // alumnosToolStripMenuItem1
             // 
             this.alumnosToolStripMenuItem1.Name = "alumnosToolStripMenuItem1";
-            this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.alumnosToolStripMenuItem1.Tag = "com.td.alumnos";
             this.alumnosToolStripMenuItem1.Text = "Alumnos";
             this.alumnosToolStripMenuItem1.Click += new System.EventHandler(this.alumnosToolStripMenuItem1_Click);
@@ -96,7 +96,7 @@
             // tutoresToolStripMenuItem
             // 
             this.tutoresToolStripMenuItem.Name = "tutoresToolStripMenuItem";
-            this.tutoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tutoresToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.tutoresToolStripMenuItem.Tag = "com.td.tutores";
             this.tutoresToolStripMenuItem.Text = "Tutores";
             this.tutoresToolStripMenuItem.Click += new System.EventHandler(this.tutoresToolStripMenuItem_Click);
@@ -162,6 +162,13 @@
             this.promociónDeAlumnosToolStripMenuItem.Tag = "com.td.promoción.de.alumnos";
             this.promociónDeAlumnosToolStripMenuItem.Text = "Promoción de Alumnos";
             this.promociónDeAlumnosToolStripMenuItem.Click += new System.EventHandler(this.promociónDeAlumnosToolStripMenuItem_Click);
+            // 
+            // asignaciónDeMateriasToolStripMenuItem
+            // 
+            this.asignaciónDeMateriasToolStripMenuItem.Name = "asignaciónDeMateriasToolStripMenuItem";
+            this.asignaciónDeMateriasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.asignaciónDeMateriasToolStripMenuItem.Text = "Asignación de Materias";
+            this.asignaciónDeMateriasToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeMateriasToolStripMenuItem_Click);
             // 
             // seguridadToolStripMenuItem
             // 
@@ -276,7 +283,7 @@
             // inglesToolStripMenuItem
             // 
             this.inglesToolStripMenuItem.Name = "inglesToolStripMenuItem";
-            this.inglesToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.inglesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.inglesToolStripMenuItem.Tag = "com.td.ingles";
             this.inglesToolStripMenuItem.Text = "Ingles";
             this.inglesToolStripMenuItem.Click += new System.EventHandler(this.inglesToolStripMenuItem_Click);
@@ -284,7 +291,7 @@
             // españolToolStripMenuItem
             // 
             this.españolToolStripMenuItem.Name = "españolToolStripMenuItem";
-            this.españolToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.españolToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.españolToolStripMenuItem.Tag = "com.td.español";
             this.españolToolStripMenuItem.Text = "Español";
             this.españolToolStripMenuItem.Click += new System.EventHandler(this.españolToolStripMenuItem_Click);
@@ -295,6 +302,7 @@
             this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.cerrarSesiónToolStripMenuItem.Tag = "com.td.cerrar.sesion";
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
@@ -302,13 +310,7 @@
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.salirToolStripMenuItem.Tag = "com.td.salir";
             this.salirToolStripMenuItem.Text = "Salir";
-            // 
-            // asignaciónDeMateriasToolStripMenuItem
-            // 
-            this.asignaciónDeMateriasToolStripMenuItem.Name = "asignaciónDeMateriasToolStripMenuItem";
-            this.asignaciónDeMateriasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.asignaciónDeMateriasToolStripMenuItem.Text = "Asignación de Materias";
-            this.asignaciónDeMateriasToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeMateriasToolStripMenuItem_Click);
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // Menu
             // 

@@ -66,6 +66,15 @@ namespace TrabajoDeCampo
             set { _email = value; }
         }
 
+        private bool _asignado;
+
+        public bool asignado
+        {
+            get { return _asignado; }
+            set { _asignado = value; }
+        }
+
+
 
     }
 }

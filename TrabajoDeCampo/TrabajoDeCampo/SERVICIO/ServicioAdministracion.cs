@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,131 @@ namespace TrabajoDeCampo.SERVICIO
             this.daoAdministracion = new DAOAdministracion();
         }
         //HORARIOS
-        public List<Horario> listarHorarios(String filtro, String valor, String orden) { return null; }
+        public DataTable listarHorarios(String filtro, String valor, String orden) {
+            List<Horario> horarios = this.daoAdministracion.listarHorarios(filtro, valor, orden);
 
-        public void guardarHorario(Horario horario) { }
+            DataTable datatable = new DataTable("horarios");
+            datatable.Columns.Add(new DataColumn()
+            {
+                ColumnName = "modulo",
+                DataType = typeof(Modulo),
+                
+            });
+            datatable.Columns.Add(new DataColumn()
+            {
+                ColumnName = "lunes",
+                DataType = typeof(Horario)
+            });
+            datatable.Columns.Add(new DataColumn()
+            {
+                ColumnName = "martes",
+                DataType = typeof(Horario)
+            });
+            datatable.Columns.Add(new DataColumn()
+            {
+                ColumnName = "miercoles",
+                DataType = typeof(Horario)
+            });
+            datatable.Columns.Add(new DataColumn()
+            {
+                ColumnName = "jueves",
+                DataType = typeof(Horario)
+            });
+            datatable.Columns.Add(new DataColumn()
+            {
+                ColumnName = "viernes",
+                DataType = typeof(Horario)
+            });
 
-        public void actualizarHorario(Horario horario) { }
 
-        public void borrarHorario(Horario horario) { }
+            Dictionary<long, List<Horario>> horariosPorCurso = new Dictionary<long, List<Horario>>();
+            foreach (Horario hor in horarios)
+            {
+                if (horariosPorCurso.ContainsKey(hor.curso.id))
+                {
+                    horariosPorCurso[(int)hor.curso.id].Add(hor);
+                }
+                else
+                {
+                    List<Horario> temp = new List<Horario>();
+                    temp.Add(hor);
+                    horariosPorCurso.Add(hor.curso.id, temp);
+                }
+            }
+
+            foreach (KeyValuePair<long,List<Horario>> iter in horariosPorCurso)
+            {
+                Dictionary<long, List<Horario>> horariosPorModulo = new Dictionary<long, List<Horario>>();
+                horariosPorModulo.Add(1,new List<Horario>());
+                horariosPorModulo.Add(2, new List<Horario>());
+                horariosPorModulo.Add(3, new List<Horario>());
+                horariosPorModulo.Add(4, new List<Horario>());
+                horariosPorModulo.Add(5, new List<Horario>());
+
+                foreach (Horario horario in iter.Value)
+                {
+                    horariosPorModulo[horario.modulo.id].Add(horario);
+                }
+
+                foreach (KeyValuePair<long, List<Horario>> item in horariosPorModulo)
+                {
+                    DataRow row = datatable.NewRow();
+                    row.BeginEdit();
+                    foreach (Horario hor in item.Value)
+                    {
+
+                        row.SetField(hor.dia, hor);
+                        //DataRowExtensions.SetField(row, hor.dia, hor);
+                        
+                        
+                    }
+                    row.EndEdit();
+                    if(item.Value.Count > 0)
+                    {
+
+                        row.BeginEdit();
+                        row.SetField(0, item.Value.First().modulo);
+                        row.EndEdit();
+                        datatable.Rows.Add(row);
+                    }
+                        
+                }
+                    
+            }
+
+            return datatable;
+
+        }
+
+        public void guardarHorario(Horario horario) {
+            Boolean disponible = this.daoAdministracion.verificarRestricciones(horario.curso.id, horario.materia.id, 
+                horario.dia, horario.docente.legajo , horario.modulo.id,horario.id);
+            if (disponible)
+            {
+                this.daoAdministracion.guardarHorario(horario);
+            }
+            else
+            {
+                throw new Exception("Horario No Disponible");
+            }
+        }
+
+        public void actualizarHorario(Horario horario) {
+            Boolean disponible = this.daoAdministracion.verificarRestricciones(horario.curso.id, horario.materia.id, horario.docente.legajo, 
+                horario.dia, horario.modulo.id,horario.id);
+            if (disponible)
+            {
+                this.daoAdministracion.actualizarHorario(horario);
+            }
+            else
+            {
+                throw new Exception("Horario No Disponible");
+            }
+        }
+
+        public void borrarHorario(Horario horario) {
+            this.daoAdministracion.borrarHorario(horario);
+        }
 
         //Cursos
 
@@ -130,9 +249,14 @@ namespace TrabajoDeCampo.SERVICIO
             return this.daoAdministracion.listarNiveles(filtro,valor,orden);
         }
         //Alumnos
-        public List<Alumno> listarAlumnosPorCursoYNivel(Nivel nivel, Curso curso) { return null; }
+        public List<Alumno> listarAlumnosPorCursoYNivel(Nivel nivel, Curso curso) {
 
-        public void promocionarAlumno(Alumno alumno, Curso curso) { }
+            return daoAdministracion.listarAlumnosPorCursoYNivel(nivel,curso);
+        }
+
+        public void promocionarAlumno(Alumno alumno, Curso curso) {
+            this.daoAdministracion.promocionarAlumno(alumno, curso);
+        }
 
 
 

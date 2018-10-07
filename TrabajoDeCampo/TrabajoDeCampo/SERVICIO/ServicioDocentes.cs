@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TrabajoDeCampo.BO;
 using TrabajoDeCampo.DAO;
-
+using System.Data;
+using System.Data.SqlClient;
 namespace TrabajoDeCampo.SERVICIO
 {
     public class ServicioDocentes
@@ -18,11 +19,18 @@ namespace TrabajoDeCampo.SERVICIO
             set { _daoDocentes = value; }
         }
 
+        public ServicioDocentes()
+        {
+            this.daoDocentes = new DAODocentes();
+        }
         public void guardarDocente(Docente docente) { }
         public void modificarDocente(Docente docente) { }
         public void borrarDocente(Docente docente) { }
 
-        public void listarDocentes(String filtro, String valor, String orden) { }
+        public List<Docente> listarDocentes(String filtro, String valor, String orden) {
+       
+            return daoDocentes.listarDocentes(filtro,valor,orden);
+        }
 
         public List<InasistenciaDocente> listarInasistenciasPorDocente(Docente docente) { return null; }
 

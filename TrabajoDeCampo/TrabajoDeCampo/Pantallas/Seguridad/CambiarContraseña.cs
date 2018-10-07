@@ -20,24 +20,47 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.servicioSeguridad = new ServicioSeguridad() ;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+   
 
         private void CambiarContraseña_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(this.actual.Text != null && this.nueva.Text != null && this.nuevaRepetido.Text != null)
+            {
+                //verificacion de regex
+
+                if (this.actual.Text.Equals(this.nueva))
+                {
+                    MessageBox.Show("Las contraseñas no son distintas");
+                }
+                else
+                {
+                    if (this.nueva.Text.Equals(this.nuevaRepetido.Text))
+                    {
+                        long usuario = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                        this.servicioSeguridad.cambiarContraseña(usuario, this.nueva.Text);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Las contraseñas nuevas no coincided");
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Todos los campos son obligatorios");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

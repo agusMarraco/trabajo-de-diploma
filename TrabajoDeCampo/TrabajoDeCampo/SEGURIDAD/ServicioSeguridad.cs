@@ -92,8 +92,10 @@ namespace TrabajoDeCampo.SERVICIO
         //USUARIOS
 
         public void cambiarContraseña(long idUsuario, String contraseñaNueva) {
+            Usuario usu = daoSeguridad.buscarUsuario(idUsuario);
             String contraseñaEncriptada = SeguridadUtiles.encriptarMD5(contraseñaNueva);
             this.daoSeguridad.cambiarContraseña(idUsuario, contraseñaEncriptada);
+            enviarMail(contraseñaNueva, usu); 
         }
 
         public void cambiarIdioma(long idUsuario, String codigoIdioma) {

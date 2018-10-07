@@ -11,23 +11,291 @@ namespace TrabajoDeCampo.DAO
     public class DAOAdministracion
     {
         //HORARIOS
-        public List<Horario> listarHorarios(String filtro, String valor, String orden) { return null; }
+        public List<Horario> listarHorarios(String filtro, String valor, String orden) {
+
+            List<Horario> horarios = new List<Horario>();
+            SqlDataReader reader = null;
+
+            StringBuilder sb = new StringBuilder();
+            sb. Append(" select hor.HOR_ID,hor.HOR_DIA,mo.MOD_ID, ").
+                Append(" mo.MOD_HORA_INICIO, mo.MOD_HORA_FINAL, ").
+                Append(" cur.CUR_ID, cur.CUR_CODIGO, ").
+                Append(" mat.MAT_ID, mat.MAT_NOMBRE, ").
+                Append(" doc.DOC_LEGAJO, doc.DOC_NOMBRE, doc.DOC_APELLIDO, niv.NIV_ID ").
+                Append(" from horario hor ").
+                Append(" inner join CURSO cur  ").
+                Append(" on cur.CUR_ID = hor.HOR_CURSO ").
+                Append(" inner join NIVEL niv  ").
+                Append(" on niv.NIV_ID = cur.CUR_NIVEL_ID ").
+                Append(" inner join MATERIA mat  ").
+                Append(" on mat.MAT_ID = hor.HOR_MATERIA_ID ").
+                Append(" inner join docente doc  ").
+                Append(" on doc.DOC_LEGAJO = hor.HOR_DOCENTE_ID ").
+                Append(" inner join MODULO mo  ").
+                Append(" on mo.MOD_ID = hor.HOR_MODULO_ID ");
+
+            if (!String.IsNullOrEmpty(filtro) && !String.IsNullOrEmpty(valor))
+            {
+                // nivel curso
+                switch (filtro)
+                {
+                    case "nivel":
+                        sb.Append( " where niv.niv_id = @VALOR ");
+                        break;
+                    case "curso":
+                        sb.Append(" where cur_id = @VALOR ");
+                        break;
+                    
+                }
+            }
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+
+            //chequeando docentes
+            SqlCommand cmd = new SqlCommand(sb.ToString(), connection, tx);
+            if (!String.IsNullOrEmpty(filtro) && !String.IsNullOrEmpty(valor))
+            {
+                cmd.Parameters.Add(new SqlParameter("@VALOR", SqlDbType.BigInt)).Value = long.Parse(valor);
+            }
+
+            try
+            {
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Modulo mod = new Modulo();
+                    mod.id = (long)reader["MOD_ID"];
+                    mod.horaInicio = DateTime.Parse(reader["MOD_HORA_INICIO"].ToString());
+                    mod.horaFin = DateTime.Parse(reader["MOD_HORA_FINAL"].ToString());
+                    Docente doc = new Docente();
+                    doc.nombre = reader["DOC_NOMBRE"].ToString();
+                    doc.apellido = reader["DOC_APELLIDO"].ToString();
+                    doc.legajo = (long)reader["DOC_LEGAJO"];
+                    Materia mat = new Materia();
+                    mat.id = (long)reader["MAT_ID"];
+                    mat.nombre = reader["MAT_NOMBRE"].ToString();
+                    Curso curso = new Curso();
+                    curso.id = (long)reader["CUR_ID"];
+                    curso.codigo = reader["CUR_CODIGO"].ToString();
+                    Nivel nivel = new Nivel();
+                    nivel.id = (long)reader["NIV_ID"];
+                    curso.nivel = nivel;
+                    Horario hor = new Horario();
+                    hor.modulo = mod;
+                    hor.docente = doc;
+                    hor.materia = mat;
+                    hor.curso = curso;
+                    hor.id = (long)reader["HOR_ID"];
+                    hor.dia = (int)(long)reader["HOR_DIA"];
+                    horarios.Add(hor);
+                }
+                reader.Close();
+                tx.Commit();
+                connection.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+             
+                tx.Rollback();
+                connection.Close();
+                throw ex;
+            }
+           return horarios;
+        }
 
         //VERIFICAR QUE EL HORARIO SEA VALIDO
-        public Boolean verificarRestricciones(long idCurso, long idMateria, long dia, long idDocente, long idModulo) { return true; }
+        public Boolean verificarRestricciones(long idCurso, long idMateria, long dia, long idDocente, long idModulo,long idHorario) {
+            Boolean disponibles = false ;
+            Boolean docenteDisponible = false;
+            Boolean cursoDisponible = false;
 
-        public void guardarHorario(Horario horario) { }
+            SqlDataReader reader = null;
 
-        public void actualizarHorario(Horario horario) { }
+            String queryDocentes = " select count(*) from horario where hor_docente_id = @docente and hor_modulo_id = @modulo" +
+                " and hor_dia = @dia ";
 
-        public void borrarHorario(Horario horario) { }
+            String queryCurso = " select count(*) from horario where hor_curso = @curso and hor_modulo_id = @modulo" +
+                " and hor_dia = @dia ";
+
+            if(idHorario != 0)
+            {
+                queryCurso += " and hor_id <> @id";
+                queryDocentes += " and hor_id <> @id";
+            }
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+
+            //chequeando docentes
+            SqlCommand cmd = new SqlCommand(queryDocentes, connection, tx);
+            cmd.Parameters.Add(new SqlParameter("@docente",SqlDbType.BigInt)).Value = idDocente;
+            cmd.Parameters.Add(new SqlParameter("@modulo", SqlDbType.BigInt)).Value = idModulo;
+            cmd.Parameters.Add(new SqlParameter("@dia", SqlDbType.BigInt)).Value = dia;
+            cmd.Parameters.Add(new SqlParameter("@curso", SqlDbType.BigInt)).Value = idCurso;
+            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.BigInt)).Value = idHorario;
+            try
+            {
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int count = (int)reader.GetValue(0);
+                    if(count == 0)
+                    {
+                        docenteDisponible = true;
+                    }
+
+                }
+                reader.Close();
+
+                //chequeando cursos
+                cmd.CommandText = queryCurso;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    int count = (int)reader.GetValue(0);
+                    if (count == 0)
+                    {
+                        cursoDisponible = true;
+                    }
+
+                }
+                reader.Close();
+
+                if(docenteDisponible && cursoDisponible)
+                {
+                    disponibles = true;
+                }
+                tx.Commit();
+                connection.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                reader.Close();
+                tx.Rollback();
+                connection.Close();
+                throw ex;
+            }
+
+
+
+
+            return disponibles ;
+        }
+
+        public void guardarHorario(Horario horario) {
+            StringBuilder query = new StringBuilder(" insert into horario ");
+            query.Append(" (")
+                .Append(" hor_dia, ")
+                .Append(" hor_curso, ")
+                .Append(" hor_materia_id, ")
+                .Append(" hor_docente_id ,")
+                .Append(" hor_modulo_id ) ");
+
+            query.Append(" values  (")
+                .Append(" @dia,     ")
+                .Append(" @curso,   ")
+                .Append(" @materia, ")
+                .Append(" @docente, ")
+                .Append(" @modulo)  ");
+
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand cmd = new SqlCommand(query.ToString(), connection, tx);
+            cmd.Parameters.Add(new SqlParameter("@dia", SqlDbType.BigInt)).Value = horario.dia;
+            cmd.Parameters.Add(new SqlParameter("@curso", SqlDbType.BigInt)).Value = horario.curso.id;
+            cmd.Parameters.Add(new SqlParameter("@materia", SqlDbType.BigInt)).Value = horario.materia.id;
+            cmd.Parameters.Add(new SqlParameter("@docente", SqlDbType.BigInt)).Value = horario.docente.legajo;
+            cmd.Parameters.Add(new SqlParameter("@modulo", SqlDbType.BigInt)).Value = horario.modulo.id;
+            try
+            {
+                cmd.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                tx.Rollback();
+                connection.Close();
+                throw ex;
+            }
+        }
+
+        public void actualizarHorario(Horario horario) {
+            StringBuilder query = new StringBuilder(" update horario set ");
+            query.Append(" hor_dia = @dia, ")
+                .Append(" hor_curso = @curso, ")
+                .Append(" hor_materia_id = @materia, ")
+                .Append(" hor_docente_id = @docente,")
+                .Append(" hor_modulo_id = @modulo ");
+
+            query.Append(" where hor_id = @id ");
+            
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand cmd = new SqlCommand(query.ToString(), connection, tx);
+            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.BigInt)).Value = horario.id;
+            cmd.Parameters.Add(new SqlParameter("@dia", SqlDbType.BigInt)).Value = horario.dia;
+            cmd.Parameters.Add(new SqlParameter("@curso", SqlDbType.BigInt)).Value = horario.curso.id;
+            cmd.Parameters.Add(new SqlParameter("@materia", SqlDbType.BigInt)).Value = horario.materia.id;
+            cmd.Parameters.Add(new SqlParameter("@docente", SqlDbType.BigInt)).Value = horario.docente.legajo;
+            cmd.Parameters.Add(new SqlParameter("@modulo", SqlDbType.BigInt)).Value = horario.modulo.id;
+            try
+            {
+                cmd.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                tx.Rollback();
+                connection.Close();
+                throw ex;
+            }
+        }
+
+        public void borrarHorario(Horario horario) {
+            StringBuilder query = new StringBuilder(" delete horario  ");
+            query.Append(" where hor_id = @id ");
+
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand cmd = new SqlCommand(query.ToString(), connection, tx);
+            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.BigInt)).Value = horario.id;
+            
+            try
+            {
+                cmd.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                tx.Rollback();
+                connection.Close();
+                throw ex;
+            }
+
+
+
+
+        }
 
         //Cursos
 
         public List<Curso> listarCursos(String filtro, String valor, String orden) {
             SqlDataReader reader = null;
             List<Curso> cursos = new List<Curso>();
-            String query = " SELECT NIV.NIV_ID,NIV.NIV_CODIGO, CUR.* FROM CURSO CUR INNER JOIN NIVEL NIV ON NIV.NIV_ID = CUR.CUR_NIVEL_ID WHERE CUR.CUR_BORRADO IS NULL ";
+            String query = " SELECT NIV.NIV_ID,NIV.NIV_CODIGO, CUR.* , ORI_CODIGO FROM CURSO CUR INNER JOIN NIVEL NIV ON NIV.NIV_ID = CUR.CUR_NIVEL_ID " +
+                " LEFT JOIN ORIENTACION ON ORI_CODIGO = NIV.NIV_ORIENTACION " +
+                " WHERE CUR.CUR_BORRADO IS NULL ";
             if (!String.IsNullOrEmpty(filtro) && !String.IsNullOrEmpty(valor))
             {
                 // nivel codigo capacidad turno
@@ -77,6 +345,12 @@ namespace TrabajoDeCampo.DAO
                     Nivel niv = new Nivel();
                     niv.id = (long)reader.GetValue(0);  
                     niv.codigo = reader.GetValue(1).ToString();
+                    if (!reader.IsDBNull(9))
+                    {
+                        Orientacion orientacion = new Orientacion();
+                        orientacion.codigo = reader["ORI_CODIGO"].ToString();
+                        niv.orientacion = orientacion;
+                    }
                     cur.id = (long)reader.GetValue(2);
                     cur.capacidad = Convert.ToInt32(reader.GetValue(4));
                     cur.codigo = reader.GetValue(5).ToString();
@@ -662,9 +936,15 @@ namespace TrabajoDeCampo.DAO
                     nivel.id = (long)reader.GetValue(0);
                     nivel.codigo = reader.GetValue(1).ToString();
                     nivel.descripcion = reader.GetValue(2).ToString();
-                    if(reader.IsDBNull(3)){
+                    if(!reader.IsDBNull(3)){
                         Orientacion ori = new Orientacion();
                         ori.codigo = reader.GetValue(3).ToString();
+                        nivel.orientacion = ori;
+                    }
+                    else
+                    {
+                        Orientacion ori = new Orientacion();
+                        ori.codigo = "null";
                         nivel.orientacion = ori;
                     }
                     niveles.Add(nivel);
@@ -687,9 +967,166 @@ namespace TrabajoDeCampo.DAO
         }
 
         //Alumnos
-        public List<Alumno> listarAlumnosPorCursoYNivel(Nivel nivel, Curso curso) { return null; }
 
-        public void promocionarAlumno(Alumno alumno, Curso curso) { }
+        public void generarPlanillasDeEvaluacion(Alumno alumno)
+        {
+            Nivel nivel = alumno.curso.nivel;
+         
+            List<Materia> materias = this.traerMateriasPorNivel(nivel);
+            if(materias.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                SqlConnection connection = ConexionSingleton.obtenerConexion();
+                connection.Open();
+                SqlTransaction tx = connection.BeginTransaction();
+
+                SqlCommand cmd = new SqlCommand("", connection, tx);
+                Random rand = new Random();
+                int iter = 0;
+                cmd.Parameters.Add(new SqlParameter("@nivel", SqlDbType.BigInt)).Value = nivel.id;
+                cmd.Parameters.Add(new SqlParameter("@alumno", SqlDbType.BigInt)).Value = alumno.legajo;
+                foreach (Materia materia in materias)
+                {
+                    iter++;
+                    sb.Append(" insert into planilla_de_evaluacion " +
+                        "(pde_alumno_id,pde_nivel_id,pde_trimestre_1,pde_trimestre_2,pde_trimestre_3,pde_nota_final,pde_condicion,pde_dvh,pde_materia_id) ");
+                    sb.Append(" values(@alumno,@nivel, ");
+                    int tri1 = rand.Next(1, 10);
+                    int tri2 = rand.Next(1, 10);
+                    int tri3 = rand.Next(1, 10);
+                    Double promedio = (tri1 + tri2 + tri3) / 3;
+                    int condicion = promedio >= 7 ? 1 : 0;
+                    sb.Append("@tri1" + iter + ", " + "@tri2" + iter + ", " + "@tri3" + iter + ", " + "@promedio" + iter + ", " + "@condicion" + iter + ", ");
+                    sb.Append(" @dvh" + iter + " , @materia" + iter + ")");
+                    String trim1 = SeguridadUtiles.encriptarAES(tri1.ToString());
+                    String trim2 = SeguridadUtiles.encriptarAES(tri2.ToString());
+                    String trim3 = SeguridadUtiles.encriptarAES(tri3.ToString());
+                    cmd.Parameters.Add(new SqlParameter("@tri1" + iter, SqlDbType.NVarChar)).Value = trim1;
+                    cmd.Parameters.Add(new SqlParameter("@tri2" + iter, SqlDbType.NVarChar)).Value = trim2;
+                    cmd.Parameters.Add(new SqlParameter("@tri3" + iter, SqlDbType.NVarChar)).Value = trim3;
+                    cmd.Parameters.Add(new SqlParameter("@promedio" + iter, SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(promedio.ToString());
+                    cmd.Parameters.Add(new SqlParameter("@condicion" + iter, SqlDbType.BigInt)).Value = condicion;
+                    cmd.Parameters.Add(new SqlParameter("@dvh" + iter, SqlDbType.NVarChar)).Value = new DAOSeguridad().recalcularDigitoHorizontal(new String[] { trim1, trim2, trim3, alumno.legajo.ToString() });
+                    cmd.Parameters.Add(new SqlParameter("@materia" + iter, SqlDbType.BigInt)).Value = materia.id;
+                }
+                cmd.CommandText = sb.ToString();
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    tx.Commit();
+                    connection.Close();
+                    new DAOSeguridad().recalcularDigitoVertical("PLANILLA_DE_EVALUACION");
+                }
+                catch (Exception ex)
+                {
+                    tx.Rollback();
+                    connection.Close();
+                    throw;
+                }
+
+            }
+           
+        }
+
+        public List<Alumno> listarAlumnosPorCursoYNivel(Nivel nivel, Curso curso) {
+            List<Alumno> alumnos = new List<Alumno>();
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            String queryAlumnosPromocionables = " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_condicion = 0) < 3 ";
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select alu.alu_legajo, alu.alu_apellido, alu.alu_nombre, alu.alu_dni, alu.alu_curso, " +
+                " alu.alu_orientacion, " +
+                " ori.ori_codigo, cur.cur_codigo , cur.cur_id, cur.cur_nivel_id, niv.niv_codigo, ori.ori_nombre ");
+            sb.Append(" from alumno alu ");
+            sb.Append(" left join orientacion ori on ori.ori_codigo = alu.alu_orientacion ");
+            sb.Append(" inner join curso cur on cur.cur_id = alu.alu_curso ");
+            sb.Append(" inner join nivel niv  on cur.cur_nivel_id = niv.niv_id ");
+            sb.Append(" where alu.alu_borrado is null and " + queryAlumnosPromocionables);
+            if(curso!= null)
+                sb.Append(" and alu.alu_curso = @curso ");
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand cmd = new SqlCommand(sb.ToString(), connection, tx);
+            if (curso != null)
+                cmd.Parameters.Add(new SqlParameter("@curso", SqlDbType.BigInt)).Value = curso.id;
+            SqlDataReader reader = null;
+            try
+            {
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Alumno alu = new Alumno();
+                    Orientacion ori = new Orientacion();
+                    Curso cur = new Curso();
+                    alu.legajo          = (long)reader["ALU_LEGAJO"];
+                    alu.apellido        = reader["ALU_APELLIDO"].ToString();
+                    alu.nombre          = reader["ALU_NOMBRE"].ToString();
+                    alu.dni             = reader["ALU_DNI"].ToString();
+                    cur.id              = (long)reader["CUR_ID"];
+                    cur.codigo          = reader["CUR_CODIGO"].ToString();
+                    cur.nivel           = new Nivel();
+                    cur.nivel.codigo        = reader["NIV_CODIGO"].ToString();
+                    cur.nivel.id        = (long)reader["CUR_NIVEL_ID"];
+                    alu.curso           = cur;
+                    if (reader.IsDBNull(5))
+                    {
+                        ori.codigo = "null";
+                    }
+                    else
+                    {
+                        ori.codigo = reader["ORI_CODIGO"].ToString();
+                        ori.nombre = reader["ORI_NOMBRE"].ToString();
+                    }
+
+                    alu.orientacion = ori;
+                    alumnos.Add(alu);
+                }
+
+                reader.Close();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                if (reader != null)
+                    reader.Close();
+                tx.Rollback();
+                connection.Close();
+                throw ex;
+            }
+            return alumnos;
+
+        }
+
+        public void promocionarAlumno(Alumno alumno, Curso curso) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+
+            SqlCommand cmd = new SqlCommand(" UPDATE ALUMNO SET ALU_CURSO = @CURSO, ALU_ORIENTACION = @ORIENTACION WHERE ALU_LEGAJO = @LEGAJO ",connection,tx);
+            cmd.Parameters.Add(new SqlParameter("@CURSO", SqlDbType.BigInt)).Value = curso.id;
+            cmd.Parameters.Add(new SqlParameter("@LEGAJO", SqlDbType.BigInt)).Value = alumno.legajo;
+            cmd.Parameters.Add(new SqlParameter("@ORIENTACION", SqlDbType.BigInt)).Value = curso.nivel.orientacion != null ? Convert.DBNull : long.Parse(curso.nivel.orientacion.codigo);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+
+                alumno.curso = curso;
+                this.generarPlanillasDeEvaluacion(alumno);
+            }
+            catch (Exception)
+            {
+                tx.Rollback();
+                connection.Close();
+                throw;
+            }
+
+
+        }
 
     }
 }

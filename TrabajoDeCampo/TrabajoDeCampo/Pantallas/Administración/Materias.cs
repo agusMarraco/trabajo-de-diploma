@@ -26,7 +26,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.dataGridView1.Columns[0].DataPropertyName = "nombre";
             this.dataGridView1.Columns[1].DataPropertyName = "tipo";
             this.dataGridView1.Columns[2].DataPropertyName = "descripcion";
-
+            this.dataGridView1.ColumnHeaderMouseClick += customSort;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,6 +95,45 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 }
                 
             }
+        }
+
+        private void customSort(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            foreach (DataGridViewColumn column in ((DataGridView)sender).Columns)
+            {
+                if (column.Index != e.ColumnIndex)
+                {
+                    column.HeaderCell.SortGlyphDirection = SortOrder.None;
+                    column.HeaderCell.Style.BackColor = Color.White;
+                }
+            }
+            //initialSorting
+            if (this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+            {
+                List<Materia> materias = (List<Materia>)this.dataGridView1.DataSource;
+                string propertyName = this.dataGridView1.Columns[e.ColumnIndex].Name;
+                this.dataGridView1.DataSource = null;
+                    materias.Sort((x, y) => x.GetType().GetProperty(propertyName).GetValue(x).ToString().CompareTo
+                     (y.GetType().GetProperty(propertyName).GetValue(y).ToString()));
+                    this.dataGridView1.DataSource = materias;
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+
+            }
+            else
+            {
+                List<Materia> materias = (List<Materia>)this.dataGridView1.DataSource;
+                this.dataGridView1.DataSource = null;
+                string propertyName = this.dataGridView1.Columns[e.ColumnIndex].Name;
+                    materias.Sort((x, y) => y.GetType().GetProperty(propertyName).GetValue(y).ToString().CompareTo
+                     (x.GetType().GetProperty(propertyName).GetValue(x).ToString()));
+                    this.dataGridView1.DataSource = materias;                
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+
+            }
+
+
         }
     }
 }

@@ -32,18 +32,18 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.registrar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.media = new System.Windows.Forms.RadioButton();
+            this.completa = new System.Windows.Forms.RadioButton();
+            this.chJustificado = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.modificar = new System.Windows.Forms.Button();
+            this.cancelar = new System.Windows.Forms.Button();
+            this.btnExportar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -80,20 +80,21 @@
             this.Column3.HeaderText = "Justificada";
             this.Column3.Name = "Column3";
             // 
-            // button1
+            // registrar
             // 
-            this.button1.Location = new System.Drawing.Point(12, 626);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 28);
-            this.button1.TabIndex = 1;
-            this.button1.Tag = "com.td.registrar";
-            this.button1.Text = "Registrar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.registrar.Location = new System.Drawing.Point(12, 626);
+            this.registrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.registrar.Name = "registrar";
+            this.registrar.Size = new System.Drawing.Size(87, 28);
+            this.registrar.TabIndex = 1;
+            this.registrar.Tag = "com.td.registrar";
+            this.registrar.Text = "Registrar";
+            this.registrar.UseVisualStyleBackColor = true;
+            this.registrar.Click += new System.EventHandler(this.registrar_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
@@ -107,22 +108,23 @@
             this.groupBox1.Tag = "com.td.informacion";
             this.groupBox1.Text = "Información";
             // 
-            // button3
+            // btnGuardar
             // 
-            this.button3.Location = new System.Drawing.Point(15, 205);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 28);
-            this.button3.TabIndex = 4;
-            this.button3.Tag = "com.td.guardar";
-            this.button3.Text = "Guardar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnGuardar.Location = new System.Drawing.Point(15, 205);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(87, 28);
+            this.btnGuardar.TabIndex = 4;
+            this.btnGuardar.Tag = "com.td.guardar";
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.media);
+            this.groupBox2.Controls.Add(this.completa);
+            this.groupBox2.Controls.Add(this.chJustificado);
             this.groupBox2.Location = new System.Drawing.Point(15, 93);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(374, 100);
@@ -131,45 +133,45 @@
             this.groupBox2.Tag = "com.td.tipo.de.falta";
             this.groupBox2.Text = "Tipo de Falta";
             // 
-            // radioButton2
+            // media
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(9, 66);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(61, 20);
-            this.radioButton2.TabIndex = 6;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Tag = "com.td.media";
-            this.radioButton2.Text = "Media";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.media.AutoSize = true;
+            this.media.Location = new System.Drawing.Point(9, 66);
+            this.media.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.media.Name = "media";
+            this.media.Size = new System.Drawing.Size(61, 20);
+            this.media.TabIndex = 6;
+            this.media.TabStop = true;
+            this.media.Tag = "com.td.media";
+            this.media.Text = "Media";
+            this.media.UseVisualStyleBackColor = true;
+            this.media.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
-            // radioButton1
+            // completa
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(9, 38);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(81, 20);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Tag = "com.td.completa";
-            this.radioButton1.Text = "Completa";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.completa.AutoSize = true;
+            this.completa.Location = new System.Drawing.Point(9, 38);
+            this.completa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.completa.Name = "completa";
+            this.completa.Size = new System.Drawing.Size(81, 20);
+            this.completa.TabIndex = 0;
+            this.completa.TabStop = true;
+            this.completa.Tag = "com.td.completa";
+            this.completa.Text = "Completa";
+            this.completa.UseVisualStyleBackColor = true;
+            this.completa.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // checkBox1
+            // chJustificado
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(280, 66);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(88, 20);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Tag = "com.td.justificada";
-            this.checkBox1.Text = "Justificada";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chJustificado.AutoSize = true;
+            this.chJustificado.Location = new System.Drawing.Point(280, 66);
+            this.chJustificado.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.chJustificado.Name = "chJustificado";
+            this.chJustificado.Size = new System.Drawing.Size(88, 20);
+            this.chJustificado.TabIndex = 2;
+            this.chJustificado.Tag = "com.td.justificada";
+            this.chJustificado.Text = "Justificada";
+            this.chJustificado.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -190,50 +192,52 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(302, 22);
             this.dateTimePicker1.TabIndex = 1;
             // 
-            // button2
+            // modificar
             // 
-            this.button2.Location = new System.Drawing.Point(210, 626);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 28);
-            this.button2.TabIndex = 3;
-            this.button2.Tag = "com.td.modificar";
-            this.button2.Text = "Modificar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.modificar.Location = new System.Drawing.Point(210, 626);
+            this.modificar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.modificar.Name = "modificar";
+            this.modificar.Size = new System.Drawing.Size(87, 28);
+            this.modificar.TabIndex = 3;
+            this.modificar.Tag = "com.td.modificar";
+            this.modificar.Text = "Modificar";
+            this.modificar.UseVisualStyleBackColor = true;
+            this.modificar.Click += new System.EventHandler(this.modificar_Click);
             // 
-            // button4
+            // cancelar
             // 
-            this.button4.Location = new System.Drawing.Point(415, 626);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(87, 28);
-            this.button4.TabIndex = 8;
-            this.button4.Tag = "com.td.cancelar";
-            this.button4.Text = "Cancelar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.cancelar.Location = new System.Drawing.Point(415, 626);
+            this.cancelar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(87, 28);
+            this.cancelar.TabIndex = 8;
+            this.cancelar.Tag = "com.td.cancelar";
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
-            // button5
+            // btnExportar
             // 
-            this.button5.Location = new System.Drawing.Point(27, 253);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(87, 28);
-            this.button5.TabIndex = 8;
-            this.button5.Tag = "com.td.exportar";
-            this.button5.Text = "Exportar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnExportar.Location = new System.Drawing.Point(27, 253);
+            this.btnExportar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(87, 28);
+            this.btnExportar.TabIndex = 8;
+            this.btnExportar.Tag = "com.td.exportar";
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseVisualStyleBackColor = true;
             // 
             // Inasistencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 664);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnExportar);
+            this.Controls.Add(this.cancelar);
+            this.Controls.Add(this.modificar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.registrar);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Inasistencias";
@@ -251,20 +255,20 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button registrar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chJustificado;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton completa;
+        private System.Windows.Forms.Button modificar;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.RadioButton media;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button cancelar;
+        private System.Windows.Forms.Button btnExportar;
     }
 }

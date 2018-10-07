@@ -22,8 +22,16 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             InitializeComponent();
             traductor = new TraductorIterador();
             servicioSeguridad = new SERVICIO.ServicioSeguridad();
-                
+
             
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.servicioSeguridad.cambiarIdioma(id, Properties.Settings.Default.Idioma);
+            traductor.process(tags, this, null, null);
+            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
         }
 
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -131,6 +139,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             Properties.Settings.Default.Idioma = "en";
             List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.servicioSeguridad.cambiarIdioma(id, "en");
             traductor.process(tags, this, null, null);
             Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
@@ -143,6 +153,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             Properties.Settings.Default.Idioma = "es";
             List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.servicioSeguridad.cambiarIdioma(id, "es");
             traductor.process(tags, this, null, null);
             Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
@@ -164,6 +176,18 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             AsignacionDeMaterias asignacionDematerias = new AsignacionDeMaterias();
             asignacionDematerias.ShowDialog();
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Login login = new Login();
+            login.Show();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

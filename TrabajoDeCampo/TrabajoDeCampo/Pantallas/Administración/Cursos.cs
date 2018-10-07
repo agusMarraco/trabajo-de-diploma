@@ -21,6 +21,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             InitializeComponent();
             this.servicioSeguridad = new ServicioSeguridad();
             this.servicioAdministracion = new ServicioAdministracion();
+            this.dataGridView1.ColumnHeaderMouseClick += customSort;
             
         }
         
@@ -117,6 +118,66 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 Nivel valor = (Nivel) e.Value;
                 e.Value = valor.codigo;
             }
+        }
+
+        private void customSort(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            foreach (DataGridViewColumn column in ((DataGridView)sender).Columns)
+            {
+                if (column.Index != e.ColumnIndex)
+                {
+                    column.HeaderCell.SortGlyphDirection = SortOrder.None;
+                    column.HeaderCell.Style.BackColor = Color.White;
+                }
+            }
+            //initialSorting
+            if (this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+            {
+                List<Curso> cursos = (List<Curso>)this.dataGridView1.DataSource;
+                string propertyName = this.dataGridView1.Columns[e.ColumnIndex].Name;
+                this.dataGridView1.DataSource = null;
+                if (propertyName.Equals("nivel"))
+                {
+
+                    cursos.Sort((x, y) => (x.nivel.GetType().GetProperty("codigo").GetValue(x.nivel).ToString().CompareTo
+                     (y.nivel.GetType().GetProperty("codigo").GetValue(y.nivel).ToString())));
+                    this.dataGridView1.DataSource = cursos;
+                }
+                else
+                {
+
+                    cursos.Sort((x, y) => x.GetType().GetProperty(propertyName).GetValue(x).ToString().CompareTo
+                     (y.GetType().GetProperty(propertyName).GetValue(y).ToString()));
+                    this.dataGridView1.DataSource = cursos;
+                }
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+
+            }
+            else
+            {
+                List<Curso> cursos = (List<Curso>)this.dataGridView1.DataSource;
+                this.dataGridView1.DataSource = null;
+                string propertyName = this.dataGridView1.Columns[e.ColumnIndex].Name;
+                if (propertyName.Equals("nivel"))
+                {
+                    cursos.Sort((x, y) => y.nivel.GetType().GetProperty("codigo").GetValue(y.nivel).ToString().CompareTo
+                     (x.nivel.GetType().GetProperty("codigo").GetValue(x.nivel).ToString()));
+                    this.dataGridView1.DataSource = cursos;
+                }
+                else
+                {
+
+                    cursos.Sort((x, y) => y.GetType().GetProperty(propertyName).GetValue(y).ToString().CompareTo
+                     (x.GetType().GetProperty(propertyName).GetValue(x).ToString()));
+                    this.dataGridView1.DataSource = cursos;
+                }
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.LightSkyBlue;
+                this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+
+            }
+
+
         }
     }
 }

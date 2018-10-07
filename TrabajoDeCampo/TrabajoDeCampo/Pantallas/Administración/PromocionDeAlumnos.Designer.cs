@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboNivel = new System.Windows.Forms.ComboBox();
+            this.comboCurso = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -47,23 +47,25 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // comboNivel
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(47, 35);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(186, 24);
-            this.comboBox1.TabIndex = 0;
+            this.comboNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboNivel.FormattingEnabled = true;
+            this.comboNivel.Location = new System.Drawing.Point(47, 35);
+            this.comboNivel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboNivel.Name = "comboNivel";
+            this.comboNivel.Size = new System.Drawing.Size(186, 24);
+            this.comboNivel.TabIndex = 0;
             // 
-            // comboBox2
+            // comboCurso
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(315, 34);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(254, 24);
-            this.comboBox2.TabIndex = 1;
+            this.comboCurso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCurso.FormattingEnabled = true;
+            this.comboCurso.Location = new System.Drawing.Point(315, 34);
+            this.comboCurso.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboCurso.Name = "comboCurso";
+            this.comboCurso.Size = new System.Drawing.Size(254, 24);
+            this.comboCurso.TabIndex = 1;
             // 
             // label1
             // 
@@ -87,6 +89,11 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -97,6 +104,10 @@
             this.dataGridView1.Location = new System.Drawing.Point(17, 163);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
             this.dataGridView1.Size = new System.Drawing.Size(852, 317);
             this.dataGridView1.TabIndex = 4;
             // 
@@ -162,12 +173,13 @@
             this.button1.Tag = "com.td.buscar";
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.comboCurso);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.comboNivel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(17, 12);
@@ -214,8 +226,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboNivel;
+        private System.Windows.Forms.ComboBox comboCurso;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;

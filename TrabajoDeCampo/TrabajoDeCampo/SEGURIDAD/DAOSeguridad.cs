@@ -33,7 +33,7 @@ namespace TrabajoDeCampo.DAO
             string alias = "";
             string savedPass = "";
             string dni = "";
-
+            string idioma = "es";
             SqlCommand queryUser = new SqlCommand("", connection, tx);
             SqlCommand queryPass = new SqlCommand("", connection, tx);
             SqlCommand queryPermisos = new SqlCommand("", connection, tx);
@@ -41,7 +41,8 @@ namespace TrabajoDeCampo.DAO
             SqlCommand queryBloqueado = new SqlCommand("", connection, tx);
             SqlCommand queryLoginExitoso = new SqlCommand("", connection, tx);
 
-            queryUser.CommandText = "SELECT USU_ID,USU_ALIAS,USU_PASS, USU_DNI FROM USUARIO WHERE USU_BAJA = 0";
+            queryUser.CommandText = "SELECT USU_ID,USU_ALIAS,USU_PASS, USU_DNI, (select idi_codigo from idioma where idi_id = usu_idioma)" +
+                " FROM USUARIO WHERE USU_BAJA = 0";
 
             queryPass.CommandText = "SELECT COUNT (*) FROM USUARIO WHERE USU_PASS = @PASS AND USU_BAJA = 0 AND USU_ID = @ID";
             String encodeado = SeguridadUtiles.encriptarMD5(pass);
@@ -53,8 +54,6 @@ namespace TrabajoDeCampo.DAO
             queryBloqueado.CommandText = " SELECT USU_INTENTOS FROM USUARIO WHERE USU_ID = @ID ";
 
             queryPermisos.CommandText = "Select count(*) from PERMISOS_USUARIO WHERE USU_ID = @ID AND PAT_ID IN (16,17,18,19)";
-
-            bool refrescarDigitoPorLoginExitoso = false;
             SqlDataReader reader = null;
             
             //CHEQUEO SI EXISTE
@@ -72,8 +71,9 @@ namespace TrabajoDeCampo.DAO
                         existe = true;
                         idUsuario = (long)reader.GetValue(0);
                         alias = !reader.IsDBNull(1) ? reader.GetValue(1).ToString() : "" ;
-                        savedPass = !reader.IsDBNull(2) ? reader.GetValue(2).ToString() : ""; ;
-                        dni = !reader.IsDBNull(3) ? reader.GetValue(3).ToString() : ""; ;
+                        savedPass = !reader.IsDBNull(2) ? reader.GetValue(2).ToString() : "";
+                        dni = !reader.IsDBNull(3) ? reader.GetValue(3).ToString() : "";
+                        idioma = !reader.IsDBNull(4) ? reader.GetValue(4).ToString() : "es";
                     }
                     
                 }
@@ -114,9 +114,10 @@ namespace TrabajoDeCampo.DAO
                     {
                         queryIntentos.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
                         queryIntentos.ExecuteNonQuery();
-                        String dvh = this.recalcularDigitoHorizontal(new String[] { alias, savedPass, (intentos + 1).ToString(),dni });
+                        intentos++;
+                        String digito = this.recalcularDigitoHorizontal(new String[] { alias, savedPass, intentos.ToString(), dni });
                         queryIntentos.CommandText = " UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID ";
-                        queryIntentos.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                        queryIntentos.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = digito;
                         queryIntentos.ExecuteNonQuery();
                     }
                     throw new Exception("PASS");
@@ -144,20 +145,22 @@ namespace TrabajoDeCampo.DAO
                     }
                 }
 
-               
-                if(intentos != 0)
+                queryLoginExitoso.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+                if (intentos != 0)
                 {
-                    queryLoginExitoso.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+                    
                     queryLoginExitoso.ExecuteNonQuery();
-                    String dvh = this.recalcularDigitoHorizontal(new String[] { alias, savedPass, (0).ToString(), dni });
-                    queryLoginExitoso.CommandText = " UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID ";
-                    queryLoginExitoso.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
-                    queryLoginExitoso.ExecuteNonQuery();
-                    refrescarDigitoPorLoginExitoso = true;
+                    intentos = 0;
                 }
+                String dvh = this.recalcularDigitoHorizontal(new String[] { alias, savedPass, intentos.ToString(), dni });
+                queryLoginExitoso.CommandText = " UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID ";
+                
+                queryLoginExitoso.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                queryLoginExitoso.ExecuteNonQuery();
 
                 tx.Commit();
                 TrabajoDeCampo.Properties.Settings.Default.SessionUser = idUsuario;
+                TrabajoDeCampo.Properties.Settings.Default.Idioma = idioma;
             }
             catch (Exception e)
             {
@@ -196,10 +199,7 @@ namespace TrabajoDeCampo.DAO
             }
             finally{
                 connection.Close();
-                if (refrescarDigitoPorLoginExitoso)
-                {
-                    this.recalcularDigitoVertical("USUARIO");
-                }
+                  this.recalcularDigitoVertical("USUARIO");
             }
             
         }
@@ -936,10 +936,78 @@ namespace TrabajoDeCampo.DAO
         //USUARIOS
 
         public void cambiarContraseña(long idUsuario, String contraseñaNueva) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" UPDATE USUARIO SET USU_PASS = @PASS, USU_INTENTOS = 0 WHERE USU_ID = @ID");
 
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+            query.Parameters.Add(new SqlParameter("@PASS", System.Data.SqlDbType.NVarChar)).Value = contraseñaNueva;
+
+            SqlCommand dataQuery = new SqlCommand(" SELECT USU_ALIAS, USU_PASS, USU_INTENTOS,USU_DNI FROM USUARIO WHERE USU_ID = @ID", connection);
+            dataQuery.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+
+            SqlDataReader reader;
+            try
+            {
+                query.ExecuteNonQuery();
+                tx.Commit();
+                String dvh = "";
+                reader = dataQuery.ExecuteReader();
+                while (reader.Read())
+                {
+                    string alias = reader.GetValue(0).ToString();
+                    string pass = reader.GetValue(1).ToString();
+                    string intentos = reader.GetValue(2).ToString();
+                    string dni = reader.GetValue(3).ToString();
+                    dvh = this.recalcularDigitoHorizontal(new string[] { alias, pass, intentos, dni });
+                }
+                reader.Close();
+                tx = connection.BeginTransaction();
+                SqlCommand updateDVH = new SqlCommand(" UPDATE USUARIO SET USU_DVH = @DVH WHERE USU_ID = @ID", connection, tx);
+                updateDVH.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+                updateDVH.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = dvh;
+                updateDVH.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                tx.Rollback();
+                connection.Close();
+                throw ex;
+            }
+            
+            this.recalcularDigitoVertical("USUARIO");
         }
 
         public void cambiarIdioma(long idUsuario, String codigoIdioma) {
+            SqlConnection connection = ConexionSingleton.obtenerConexion();
+            connection.Open();
+            SqlTransaction tx = connection.BeginTransaction();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" UPDATE USUARIO SET USU_IDIOMA = ( SELECT IDI_ID FROM IDIOMA WHERE IDI_CODIGO = @CODIGO) WHERE USU_ID = @ID");
+
+            SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
+            query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
+            query.Parameters.Add(new SqlParameter("@CODIGO", System.Data.SqlDbType.VarChar)).Value = codigoIdioma;
+            
+
+            try
+            {
+                query.ExecuteNonQuery();
+                tx.Commit();
+                connection.Close();
+            }
+            catch (Exception exe)
+            {
+                tx.Rollback();
+                connection.Close();
+                throw exe;
+            }
 
         }
 
@@ -1697,7 +1765,7 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(usuDVH))
                 {
-                    reader.GetValue(0);
+                    long id = (long) reader.GetValue(0);
                     reader.Close();
                     connection.Close();
                     throw new Exception("fallo la integridad de datos");
@@ -1795,10 +1863,12 @@ namespace TrabajoDeCampo.DAO
             while (reader.Read())
             {
                 builder.Clear();
-
-                builder.Append(reader.GetValue(1).ToString());
-                builder.Append(reader.GetValue(2).ToString());
-                builder.Append(reader.GetValue(3).ToString());
+                if(!reader.IsDBNull(1))
+                    builder.Append(reader.GetValue(1).ToString());
+                if (!reader.IsDBNull(2))
+                    builder.Append(reader.GetValue(2).ToString());
+                if (!reader.IsDBNull(3))
+                    builder.Append(reader.GetValue(3).ToString());
                 builder.Append(reader.GetValue(4).ToString());
 
                 String md5 = SeguridadUtiles.encriptarMD5(builder.ToString());
@@ -1864,7 +1934,7 @@ namespace TrabajoDeCampo.DAO
             //mapeoTablaCampo.Add("INASISTENCIA_DE_ALUMNO", new KeyValuePair<String, String[]>("INA_DVH", new String[] { "INA_ALUMNO_ID", "INA_FECHA", "INA_VALOR", "INA_JUSTIFICADA" }));
 
 
-            query = "SELECT INA_ALUMNO_ID, INA_FECHA , INA_DVH FROM INASISTENCIA_DE_ALUMNO ";
+            query = "SELECT INA_ALUMNO_ID, INA_FECHA, INA_DVH FROM INASISTENCIA_DE_ALUMNO ";
 
             cmd.CommandText = query;
             builder = new StringBuilder();
@@ -1875,8 +1945,7 @@ namespace TrabajoDeCampo.DAO
                 builder.Clear();
 
                 builder.Append(reader.GetValue(0).ToString());
-                builder.Append(reader.GetValue(1).ToString());
-
+                builder.Append(DateTime.Parse(reader.GetValue(1).ToString()).ToString("yyyy-MM-dd"));
 
                 String md5 = SeguridadUtiles.encriptarMD5(builder.ToString());
                 String patDVH = reader.GetString(2);
@@ -1909,7 +1978,7 @@ namespace TrabajoDeCampo.DAO
                 builder.Clear();
 
                 builder.Append(reader.GetValue(0).ToString());
-                builder.Append(reader.GetValue(1).ToString());
+                builder.Append(DateTime.Parse(reader.GetValue(1).ToString()).ToString("yyyy-MM-dd"));
 
 
                 String md5 = SeguridadUtiles.encriptarMD5(builder.ToString());
@@ -2179,11 +2248,14 @@ namespace TrabajoDeCampo.DAO
                                     break;
 
                             }
+
+
                         }
                         clavesAInsertar.Clear();
                         cmd.CommandText = insertBuilder.ToString();
                         if (!String.IsNullOrEmpty(cmd.CommandText))
                             cmd.ExecuteNonQuery();
+                       
                     }
                     catch (Exception ex)
                     {
@@ -2217,7 +2289,7 @@ namespace TrabajoDeCampo.DAO
             StringBuilder builder = new StringBuilder();
             for(int x = 0; x< campos.Length; x++)
             {
-                builder.Append(campos[0]);
+                builder.Append(campos[x]);
             }
             return SeguridadUtiles.encriptarMD5(builder.ToString());
         }
@@ -2254,15 +2326,13 @@ namespace TrabajoDeCampo.DAO
                     }
                 }
                 reader.Close();
-                if (!String.IsNullOrEmpty(sumaDeDVH))
-                {
+                
                     query.Parameters.Clear();
                     query.CommandText = updateCommand;
                     query.Parameters.Add(new SqlParameter("@HASH", System.Data.SqlDbType.VarChar)).Value = SeguridadUtiles.encriptarMD5(sumaDeDVH);
                     query.Parameters.Add(new SqlParameter("@NOMBRE_TABLA", System.Data.SqlDbType.VarChar)).Value = tabla;
 
                     query.ExecuteNonQuery();
-                }
                 
                 tx.Commit();
                 connection.Close();

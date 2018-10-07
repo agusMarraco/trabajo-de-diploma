@@ -27,6 +27,18 @@ a materia le faltaba el nombre,agregar diagrama de clases.
 agregue un parametro 
 chequearCodigoUnico(String codigoCurso,long cursoId) admin dao, curso id
 
+agregue la propiedad asignado al tutor
+	agregar al diagrama de clases.
+
+agregue el metodo generarPlanillas(Alumno alumno)
+en el administracionDAO ds, diagrama diccionario
+se llama en el promocionar alumno
+
+agregue un parametro 
+verificarDNI(String dni, String tipo)  alumno dao, entity id
+
+cambie el listarhorarios del servicio devuelve una datatable;
+
 
 --lo hice voy a tener que implementar un custom sort en las datatables y saque los filtrar por asc desc de las paginas porque voy
 a usar el sorting de la datatable

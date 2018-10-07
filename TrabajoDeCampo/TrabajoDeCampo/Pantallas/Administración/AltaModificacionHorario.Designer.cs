@@ -28,39 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbCurso = new System.Windows.Forms.ComboBox();
+            this.cbNivel = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.cbMateria = new System.Windows.Forms.ComboBox();
+            this.cbDocente = new System.Windows.Forms.ComboBox();
+            this.cbDia = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.cbModulo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // cbCurso
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(258, 25);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 24);
-            this.comboBox1.TabIndex = 0;
+            this.cbCurso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCurso.FormattingEnabled = true;
+            this.cbCurso.Location = new System.Drawing.Point(258, 25);
+            this.cbCurso.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbCurso.Name = "cbCurso";
+            this.cbCurso.Size = new System.Drawing.Size(140, 24);
+            this.cbCurso.TabIndex = 0;
             // 
-            // comboBox2
+            // cbNivel
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(53, 25);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(140, 24);
-            this.comboBox2.TabIndex = 1;
+            this.cbNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNivel.FormattingEnabled = true;
+            this.cbNivel.Location = new System.Drawing.Point(53, 25);
+            this.cbNivel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbNivel.Name = "cbNivel";
+            this.cbNivel.Size = new System.Drawing.Size(140, 24);
+            this.cbNivel.TabIndex = 1;
+            this.cbNivel.SelectedIndexChanged += new System.EventHandler(this.cbNivel_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -106,31 +109,34 @@
             this.label4.Tag = "com.td.materia";
             this.label4.Text = "Materia";
             // 
-            // comboBox3
+            // cbMateria
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(681, 25);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(140, 24);
-            this.comboBox3.TabIndex = 6;
+            this.cbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMateria.FormattingEnabled = true;
+            this.cbMateria.Location = new System.Drawing.Point(681, 25);
+            this.cbMateria.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbMateria.Name = "cbMateria";
+            this.cbMateria.Size = new System.Drawing.Size(140, 24);
+            this.cbMateria.TabIndex = 6;
             // 
-            // comboBox4
+            // cbDocente
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(469, 25);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(140, 24);
-            this.comboBox4.TabIndex = 7;
+            this.cbDocente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDocente.FormattingEnabled = true;
+            this.cbDocente.Location = new System.Drawing.Point(469, 25);
+            this.cbDocente.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbDocente.Name = "cbDocente";
+            this.cbDocente.Size = new System.Drawing.Size(140, 24);
+            this.cbDocente.TabIndex = 7;
             // 
-            // comboBox5
+            // cbDia
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(53, 110);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(140, 24);
-            this.comboBox5.TabIndex = 8;
+            this.cbDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDia.FormattingEnabled = true;
+            this.cbDia.Location = new System.Drawing.Point(53, 110);
+            this.cbDia.Name = "cbDia";
+            this.cbDia.Size = new System.Drawing.Size(140, 24);
+            this.cbDia.TabIndex = 8;
             // 
             // label5
             // 
@@ -154,13 +160,14 @@
             this.label6.Tag = "com.td.modulo";
             this.label6.Text = "Módulo";
             // 
-            // comboBox6
+            // cbModulo
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(258, 110);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(140, 24);
-            this.comboBox6.TabIndex = 10;
+            this.cbModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbModulo.FormattingEnabled = true;
+            this.cbModulo.Location = new System.Drawing.Point(258, 110);
+            this.cbModulo.Name = "cbModulo";
+            this.cbModulo.Size = new System.Drawing.Size(140, 24);
+            this.cbModulo.TabIndex = 10;
             // 
             // button1
             // 
@@ -171,6 +178,7 @@
             this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -181,6 +189,7 @@
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AltaModificacionHorario
             // 
@@ -190,17 +199,17 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.comboBox6);
+            this.Controls.Add(this.cbModulo);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.cbDia);
+            this.Controls.Add(this.cbDocente);
+            this.Controls.Add(this.cbMateria);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbNivel);
+            this.Controls.Add(this.cbCurso);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AltaModificacionHorario";
@@ -214,19 +223,19 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbCurso;
+        private System.Windows.Forms.ComboBox cbNivel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox cbMateria;
+        private System.Windows.Forms.ComboBox cbDia;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox cbModulo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cbDocente;
     }
 }

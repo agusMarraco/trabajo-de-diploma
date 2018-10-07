@@ -52,19 +52,19 @@ namespace TrabajoDeCampo
             {
                 try
                 {
-                 //   servicioSeguridad.verificarDigitosVerificadores();
+                   servicioSeguridad.verificarDigitosVerificadores();
                     TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 0;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-               //     TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 1;
+                    MessageBox.Show(ex.Message);
+                    TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 1;
                 }
 
-                //Login login = new Login();
-                //login.Show();
-                Pantallas.Seguridad.Menu menu = new Pantallas.Seguridad.Menu();
-                new Pantallas.Seguridad.Menu().Show();
+                Login login = new Login();
+                login.Show();
+                //Pantallas.Seguridad.Menu menu = new Pantallas.Seguridad.Menu();
+                //new Pantallas.Seguridad.Menu().Show();
 
             }
 
