@@ -129,6 +129,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
+            if((!this.completa.Checked && !this.media.Checked))
+            {
+                MessageBox.Show("Complete los campos requeridos");
+            }
             if(this.current != null)
             {
                 this.current.fecha = this.dateTimePicker1.Value;

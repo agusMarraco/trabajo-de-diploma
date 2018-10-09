@@ -58,6 +58,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             }
             else
             {
+                if (String.IsNullOrEmpty(this.richTextBox1.Text))
+                {
+                    MessageBox.Show("Complete los campos requeridos");
+                    return;
+                }
                 editando = false;
                 this.registrar.Text = "Registrar";
                 this.groupBox1.Enabled = false;

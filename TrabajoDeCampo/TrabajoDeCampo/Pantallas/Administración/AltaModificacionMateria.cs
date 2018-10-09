@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.SERVICIO;
@@ -17,6 +18,9 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private ServicioAdministracion administracion;
         private bool esEdit = false;
         private Materia currentMateria = null;
+        private Boolean valido = false;
+        private Regex onlyLetters = new Regex("[a-zA-Z]");
+
 
         private Materias callerForm = null;
         public AltaModificacionMateria()
@@ -44,19 +48,34 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     this.rbExtracurricular.Checked = true;
                 }
             }
+            else
+            {
+                this.rbTroncal.Checked = true;
+            }
         }
         private void AltaModificacionMateria_Load(object sender, EventArgs e)
         {
             this.servicioSeguridad = new ServicioSeguridad();
             this.administracion = new ServicioAdministracion();
+            this.textBox1.KeyDown += TextBox1_KeyDown;
+            this.textBox1.KeyPress += TextBox1_KeyPress;
+            this.textBox2.KeyPress += TextBox2_KeyPress;
+            this.textBox2.KeyDown += TextBox2_KeyDown; ;
         }
+
+        
+
         //troncal 1 extra 0
         private void button1_Click(object sender, EventArgs e)
         {
             String nombreMateria = this.textBox1.Text;
             String descripcion = this.textBox2.Text;
             Boolean esTroncal = this.rbTroncal.Checked ?  true : false;
-
+            if(String.IsNullOrEmpty(nombreMateria.Trim()) || String.IsNullOrEmpty(descripcion.Trim()) || 
+                (!this.rbExtracurricular.Checked && !this.rbTroncal.Checked))
+            {
+                MessageBox.Show("complete todos los campos.");
+            }
             try
             {
                 if (!esEdit)
@@ -107,6 +126,48 @@ namespace TrabajoDeCampo.Pantallas.Administración
         {
             callerForm.actualizarLista();
             this.Close();
+        }
+
+        //validaciones de ingreso
+        private void TextBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!onlyLetters.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+
+        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!onlyLetters.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
         }
     }
 }

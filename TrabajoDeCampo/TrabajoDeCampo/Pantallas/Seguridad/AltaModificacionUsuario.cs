@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.BO;
@@ -23,6 +24,12 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         
         private Boolean isEdit;
         private Usuario currentUsuario;
+
+        private Regex lettersRegex = new Regex("[a-zA-z]");
+        private Regex numbersRegex = new Regex("[0-9]");
+        private Regex alphanumericRegex = new Regex("[a-zA-Z0-9]");
+
+        private Boolean valido = false;
         public AltaModificacionUsuario()
         {
         
@@ -39,6 +46,18 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgfamilias.DataSource = null;
             this.dgpatentes.DataSource = null;
 
+            this.nombre.KeyDown += validarLetrasKD;
+            this.nombre.KeyPress += validarLetrasKP;
+            this.apellido.KeyDown += validarLetrasKD;
+            this.apellido.KeyPress += validarLetrasKP;
+            this.dni.KeyPress += validarNumerosKP;
+            this.dni.KeyDown += validarNumerosKD;
+            this.direccion.KeyPress += validarAlphaKP;
+            this.direccion.KeyDown += validarAlphaKD;
+            this.alias.KeyPress += validarAlphaKP;
+            this.alias.KeyDown += validarAlphaKD;
+            this.telefono.KeyPress += validarNumerosKP;
+            this.telefono.KeyDown += validarNumerosKD;
 
             this.dgfamiliapatente.AutoGenerateColumns = false ;
             this.dgfamilias.AutoGenerateColumns = false;
@@ -88,10 +107,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             
         }
 
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void AltaModificacionUsuario_Load(object sender, EventArgs e)
         {
@@ -138,6 +154,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 this.direccion.Text = currentUsuario.direccion;
                 this.telefono.Text = currentUsuario.telefono;
                 this.alias.Text = currentUsuario.alias;
+                this.alias.Enabled = false;
                 this.email.Text = currentUsuario.email;
                 foreach(KeyValuePair<Idioma, string> item in this.comboBox1.Items)
                 {
@@ -200,43 +217,43 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
             mensajesDeError.Append(mensajesDeValidacion["com.td.validacion.alerta"]);
             mensajesDeError.Append(Environment.NewLine);
-            if (this.nombre.Text == null || this.nombre.Text == "")
+            if (String.IsNullOrEmpty(this.nombre.Text))
             {
                 mensajesDeError.Append(this.nombrelbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
                 hayErrores = true;
             }
-            if (this.apellido.Text == null || this.apellido.Text == "")
+            if (String.IsNullOrEmpty(this.apellido.Text))
             {
                 mensajesDeError.Append(this.apellidolbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
                 hayErrores = true;
             }
-            if (this.dni.Text == null || this.dni.Text == "")
+            if (String.IsNullOrEmpty(this.dni.Text))
             {
                 mensajesDeError.Append(this.dnilbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
                 hayErrores = true;
             }
-            if (this.direccion.Text == null || this.direccion.Text == "")
+            if (String.IsNullOrEmpty(this.direccion.Text))
             {
                 mensajesDeError.Append(this.direccionlbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
                 hayErrores = true;
             }
-            if (this.telefono.Text == null || this.telefono.Text == "" || !this.telefono.MaskCompleted)
+            if (String.IsNullOrEmpty(this.telefono.Text) || !this.telefono.MaskCompleted)
             {
                 mensajesDeError.Append(this.telefonolbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
                 hayErrores = true;
             }
-            if (this.alias.Text == null || this.alias.Text == "")
+            if (String.IsNullOrEmpty(this.alias.Text))
             {
                 mensajesDeError.Append(this.aliaslbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
                 hayErrores = true;
             }
-            if (this.email.Text == null || this.email.Text == "")
+            if (String.IsNullOrEmpty(this.email.Text))
             {
                 mensajesDeError.Append(this.emaillbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
@@ -454,6 +471,67 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+
+        private void validarNumerosKD(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!numbersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+        private void validarNumerosKP(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void validarAlphaKD(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+        private void validarAlphaKP(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void validarLetrasKP(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void validarLetrasKD(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!lettersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
         }
     }
 

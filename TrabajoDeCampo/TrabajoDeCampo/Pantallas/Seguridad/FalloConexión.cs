@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.SERVICIO;
@@ -13,9 +14,38 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class FalloConexión : Form
     {
+        private Regex regex = new Regex("([A-Za-z0-9\\.-])");
+        private Boolean valido = false;
         public FalloConexión()
         {
             InitializeComponent();
+            this.textBox1.KeyPress += validateKP;
+            this.textBox1.KeyDown += validateKD;
+            this.textBox2.KeyPress += validateKP;
+            this.textBox2.KeyDown += validateKD;
+            this.textBox3.KeyPress += validateKP;
+            this.textBox3.KeyDown += validateKD;
+
+        }
+
+        private void validateKD(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!regex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+
+            }
+        }
+        private void validateKP(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
         }
 
         private void FalloConexión_Load(object sender, EventArgs e)

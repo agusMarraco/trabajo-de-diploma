@@ -166,7 +166,7 @@ namespace TrabajoDeCampo.Pantallas
             }
             else
             {
-                MessageBox.Show("Seleccione todos los checkboxes");
+                MessageBox.Show("Seleccione todos los items");
             }
         }
         public void displayCursos(long nivelId)

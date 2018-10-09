@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.SERVICIO;
@@ -20,6 +21,10 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Alumno currentAlumno = null;
         private Alumnos parentForm = null;
 
+        private Regex lettersRegex = new Regex("[a-zA-z]");
+        private Regex numbersRegex = new Regex("[0-9]");
+        private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
+        private Boolean valido = false;
         public AltaModificacionAlumno()
         {
             InitializeComponent();
@@ -38,7 +43,17 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             {
                 this.currentAlumno = alumno;
             }
+            this.nombretx.KeyDown += validarLetrasKeyDown;
+            this.nombretx.KeyPress += validarLetrasKeyPress;
+            this.apellidotx.KeyDown += validarLetrasKeyDown;
+            this.apellidotx.KeyPress += validarLetrasKeyPress;
+            this.dnitx.KeyDown += Dnitx_KeyDown;
+            this.dnitx.KeyPress += Dnitx_KeyPress;
+            this.domicilotx.KeyPress += Domicilotx_KeyPress;
+            this.domicilotx.KeyDown += Domicilotx_KeyDown;
         }
+
+        
 
         private void label4_Click(object sender, EventArgs e)
         {
@@ -128,7 +143,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private void button1_Click(object sender, EventArgs e)
         {
             //validaciones
-
+            if(String.IsNullOrEmpty(this.nombretx.Text) || String.IsNullOrEmpty(this.apellidotx.Text) || String.IsNullOrEmpty(this.dnitx.Text) 
+                || String.IsNullOrEmpty(this.domicilotx.Text))
+            {
+                MessageBox.Show("complete los campos requeridos");
+            }
 
             Boolean hayQueValidarCursoOrientacion = false;
             hayQueValidarCursoOrientacion = (((Curso)cursocombo.SelectedItem).codigo.Contains("4") || ((Curso)cursocombo.SelectedItem).codigo.Contains("5") ||
@@ -280,6 +299,68 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.dataGridView1.DataSource = tutores.OrderBy(x => x.GetType().GetProperty(propertyName).GetValue(x)).ToList();
                 this.dataGridView1.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
 
+            }
+        }
+
+
+        //validaciones 
+        private void Domicilotx_KeyDown(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+        private void Domicilotx_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Dnitx_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Dnitx_KeyDown(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!numbersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+        private void validarLetrasKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void validarLetrasKeyDown(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!lettersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
             }
         }
     }

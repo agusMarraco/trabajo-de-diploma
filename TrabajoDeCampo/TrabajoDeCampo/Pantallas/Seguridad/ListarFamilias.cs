@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.SEGURIDAD;
@@ -17,6 +18,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private ServicioSeguridad servicioSeguridad;
         FormUtils utils;
         private Familia currentFamilia;
+
+        private Regex lettersOnly = new Regex("[a-zA-z]");
+        private Boolean valido = false;
         public ListarFamilias()
         {
             InitializeComponent();
@@ -35,12 +39,36 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgFamilia.ReadOnly = true;
             this.dgPatentes.Columns[0].DataPropertyName = "descripcion";
             this.dgFamilia.Columns[0].DataPropertyName = "nombre";
+            this.txtNombre.KeyDown += TxtNombre_KeyDown;
+            this.txtNombre.KeyPress += TxtNombre_KeyPress;
 
 
         }
-          /// <summary>
-          /// lista las familias y las patentes. 
-          /// </summary>
+
+        private void TxtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!lettersOnly.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// lista las familias y las patentes. 
+        /// </summary>
         public void listarElementos()
         {
 
@@ -134,6 +162,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(this.txtNombre.Text))
+            {
+                MessageBox.Show("Complete los campos requeridos");
+            }
             String nombreFamilia = this.txtNombre.Text;
             Familia familia = currentFamilia;
             if (familia== null)

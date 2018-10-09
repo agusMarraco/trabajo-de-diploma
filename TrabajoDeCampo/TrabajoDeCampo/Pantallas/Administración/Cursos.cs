@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.SERVICIO;
@@ -16,15 +17,38 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
         private ServicioSeguridad servicioSeguridad;
         private ServicioAdministracion servicioAdministracion;
+        private Boolean valido  = false;
+        private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
         public Cursos()
         {
             InitializeComponent();
             this.servicioSeguridad = new ServicioSeguridad();
             this.servicioAdministracion = new ServicioAdministracion();
             this.dataGridView1.ColumnHeaderMouseClick += customSort;
-            
+            this.textBox1.KeyDown += TextBox1_KeyDown;
+            this.textBox1.KeyPress += TextBox1_KeyPress;
         }
-        
+
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
  

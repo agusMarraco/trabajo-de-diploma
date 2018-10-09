@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.SERVICIO;
@@ -17,6 +19,10 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private ServicioAlumnos  servicioAlumnos;
         private Tutores parentForm;
         private Tutor currentTutor = null;
+
+        private Regex lettersRegex = new Regex("[a-zA-z]");
+        private Regex numbersRegex = new Regex("[0-9]");
+        private Boolean valido = false;
         public AltaModificacionTutor(){ }
 
         public AltaModificacionTutor(Tutor tutor, Tutores parentForm)
@@ -38,11 +44,76 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.txtTel1.Text = currentTutor.telefono1;
                 this.txtTel2.Text = currentTutor.telefono2;
 
+                this.txtNombre.KeyPress += validarLetrasKP;
+                this.txtNombre.KeyDown += validarLetrasKD;
+                this.txtApellido.KeyPress += validarLetrasKP;
+                this.txtApellido.KeyDown += validarLetrasKD;
+                this.txtDni.KeyPress += validarNumerosKP;
+                this.txtDni.KeyDown += validarNumerosKD;
+                this.txtTel1.KeyPress += validarNumerosKP;
+                this.txtTel1.KeyDown += validarNumerosKD;
+                this.txtTel2.KeyPress += validarNumerosKP;
+                this.txtTel2.KeyDown += validarNumerosKD;
+
+
+            }
+        }
+
+        private void validarNumerosKD(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!numbersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+        private void validarNumerosKP(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void validarLetrasKD(object sender, KeyEventArgs e)
+        {
+            valido = true;
+            if (!e.KeyValue.Equals(8))//tecla borrar
+            {
+                if (!lettersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                {
+                    valido = false;
+                }
+            }
+        }
+
+        private void validarLetrasKP(object sender, KeyPressEventArgs e)
+        {
+            if (!valido)
+            {
+                e.Handled = true;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(String.IsNullOrEmpty(this.txtNombre.Text.Trim()) || String.IsNullOrEmpty(this.txtApellido.Text.Trim()) || String.IsNullOrEmpty(this.txtDni.Text.Trim()) ||
+                String.IsNullOrEmpty(this.txtEmail.Text.Trim()) || String.IsNullOrEmpty(this.txtTel1.Text.Trim())){
+                MessageBox.Show("Complete los campos requeridos");
+                return;
+            }
+            var email = new EmailAddressAttribute();
+            bool valid;
+            valid = email.IsValid(this.txtEmail.Text);
+            if (!valid)
+            {
+                MessageBox.Show("Formato de mail invalido");
+                return;
+            }
             if(currentTutor != null)
             {
                 currentTutor.nombre = this.txtNombre.Text;

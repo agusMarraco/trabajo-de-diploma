@@ -46,7 +46,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
 
 
-
+            if (String.IsNullOrEmpty(this.pathtxt.Text))
+            {
+                MessageBox.Show("Complete los campos requeridos");
+                return;
+            }
             String path = this.pathtxt.Text;
             
             if (!String.IsNullOrEmpty(path)){

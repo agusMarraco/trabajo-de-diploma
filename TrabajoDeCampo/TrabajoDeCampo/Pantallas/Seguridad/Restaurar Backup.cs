@@ -29,7 +29,13 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void button3_Click(object sender, EventArgs e)
         {
 
-            if(usersFilePath != null){
+
+            if (String.IsNullOrEmpty(this.usersFilePath))
+            {
+                MessageBox.Show("Complete los campos requeridos");
+                return;
+            }
+            if (usersFilePath != null){
 
                 try
                 {
