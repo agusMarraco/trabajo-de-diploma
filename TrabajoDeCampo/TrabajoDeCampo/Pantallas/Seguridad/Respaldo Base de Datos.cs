@@ -8,11 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
-using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Server;
 using System.Windows.Forms;
 using TrabajoDeCampo.DAO;
-using Microsoft.SqlServer.Management.Common;
+
 using System.Data.SqlClient;
 using TrabajoDeCampo.SERVICIO;
 

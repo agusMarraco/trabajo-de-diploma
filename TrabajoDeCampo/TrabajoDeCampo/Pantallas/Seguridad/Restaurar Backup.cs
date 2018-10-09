@@ -8,8 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.SqlServer.Management.Smo;
-using Microsoft.SqlServer.Management.Common;
 using System.Data.SqlClient;
 using TrabajoDeCampo.DAO;
 using TrabajoDeCampo.SERVICIO;

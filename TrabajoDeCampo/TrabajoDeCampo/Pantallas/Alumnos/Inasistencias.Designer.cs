@@ -226,6 +226,7 @@
             this.btnExportar.Tag = "com.td.exportar";
             this.btnExportar.Text = "Exportar";
             this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // Inasistencias
             // 

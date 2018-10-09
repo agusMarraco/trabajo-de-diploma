@@ -24,14 +24,14 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             servicioSeguridad = new SERVICIO.ServicioSeguridad();
 
             
-            List<String> tags = new List<string>();
-            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-            this.servicioSeguridad.cambiarIdioma(id, Properties.Settings.Default.Idioma);
-            traductor.process(tags, this, null, null);
-            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
-            traductor = new TraductorReal();
-            traductor.process(null, this, traducciones, null);
-            traductor = new TraductorIterador();
+            //List<String> tags = new List<string>();
+            //long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            //this.servicioSeguridad.cambiarIdioma(id, Properties.Settings.Default.Idioma);
+            //traductor.process(tags, this, null, null);
+            //Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            //traductor = new TraductorReal();
+            //traductor.process(null, this, traducciones, null);
+            //traductor = new TraductorIterador();
         }
 
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
