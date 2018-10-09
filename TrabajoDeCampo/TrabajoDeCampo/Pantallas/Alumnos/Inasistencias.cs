@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.Pantallas.Reports;
 using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
@@ -237,6 +238,12 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
             return hayRepetidas;
 
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            ReporteInasistencias reporte = new ReporteInasistencias(new DataSet());
+            reporte.Show();
         }
     }
 }
