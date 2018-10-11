@@ -23,6 +23,7 @@ ahora el calcular digito horizontal devuelve un string, hacer la modificacion en
 
 a materia le faltaba el nombre,agregar diagrama de clases.
 
+agregue el orientacion string a nivel por el tema del reporte
 
 agregue un parametro 
 chequearCodigoUnico(String codigoCurso,long cursoId) admin dao, curso id

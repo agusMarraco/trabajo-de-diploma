@@ -35,7 +35,7 @@ namespace TrabajoDeCampo.Pantallas.Reports
           
             
             this.reportViewer1.LocalReport.DataSources.Clear();
-            this.reportViewer1.LocalReport.ReportPath = @"C:\\Users\\Agustin\\Documents\\Trabajo-De-Campo\trabajo-de-diploma\\TrabajoDeCampo\\TrabajoDeCampo\\Pantallas\\Reports\\PlanDeEstudios.rdlc";
+            this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\PlanDeEstudios.rdlc";
             this.reportViewer1.LocalReport.DataSources.Add(source);
             this.reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("nombreDelColegio","Mariano Moreno"));
