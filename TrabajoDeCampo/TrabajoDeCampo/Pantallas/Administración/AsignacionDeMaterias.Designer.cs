@@ -203,6 +203,7 @@
             this.btExport.Tag = "com.td.exportar";
             this.btExport.Text = "Exportar";
             this.btExport.UseVisualStyleBackColor = true;
+            this.btExport.Click += new System.EventHandler(this.btExport_Click);
             // 
             // btCancelar
             // 

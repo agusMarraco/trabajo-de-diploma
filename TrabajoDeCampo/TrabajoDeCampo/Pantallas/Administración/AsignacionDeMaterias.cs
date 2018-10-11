@@ -232,5 +232,25 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
             }
         }
+
+        private void btExport_Click(object sender, EventArgs e)
+        {
+            List<Nivel> nivelesParaElReporte = new List<Nivel>();
+
+            foreach (Nivel iter in this.comboNiveles.DataSource as List<Nivel>)
+            {
+                Nivel nivel = new Nivel();
+                nivel.id = iter.id;
+                nivel.descripcion = iter.descripcion;
+                nivel.orientacion = iter.orientacion;
+                nivel.orientacionCodigo = nivel.orientacion.nombre;
+                nivel.codigo = iter.codigo;
+                List<Materia> materiasDelNivel = this.administracion.traerMateriasPorNivel(nivel);
+                nivel.materia = materiasDelNivel;
+                nivelesParaElReporte.Add(nivel);
+            }
+            DataSet set = new ServicioReportes().ejecutarReporte<Nivel>("materias", nivelesParaElReporte);
+            new Reports.ReportePlanDeEstudios(set, nivelesParaElReporte).ShowDialog();
+        }
     }
 }

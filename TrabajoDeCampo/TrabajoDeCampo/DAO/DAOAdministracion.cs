@@ -925,7 +925,7 @@ namespace TrabajoDeCampo.DAO
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
-            SqlCommand cmd = new SqlCommand(" SELECT * FROM NIVEL ", connection, tx);
+            SqlCommand cmd = new SqlCommand(" select * from nivel left join orientacion ori on ori.ORI_CODIGO = NIV_ORIENTACION ", connection, tx);
 
             try
             {
@@ -940,11 +940,13 @@ namespace TrabajoDeCampo.DAO
                         Orientacion ori = new Orientacion();
                         ori.codigo = reader.GetValue(3).ToString();
                         nivel.orientacion = ori;
+                        ori.nombre = reader.GetValue(5).ToString();
                     }
                     else
                     {
                         Orientacion ori = new Orientacion();
                         ori.codigo = "null";
+                        ori.nombre = "";
                         nivel.orientacion = ori;
                     }
                     niveles.Add(nivel);

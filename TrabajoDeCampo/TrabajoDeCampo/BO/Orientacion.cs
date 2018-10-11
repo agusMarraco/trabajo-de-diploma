@@ -24,6 +24,9 @@ namespace TrabajoDeCampo
             set { _nombre = value; }
         }
 
-
+        public override string ToString()
+        {
+            return this.nombre;
+        }
     }
 }

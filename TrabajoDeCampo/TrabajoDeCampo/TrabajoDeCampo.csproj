@@ -198,11 +198,18 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\Reports\ProgramaDTO.cs" />
     <Compile Include="Pantallas\Reports\ReporteInasistencias.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pantallas\Reports\ReporteInasistencias.Designer.cs">
       <DependentUpon>ReporteInasistencias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReportePlanDeEstudios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReportePlanDeEstudios.Designer.cs">
+      <DependentUpon>ReportePlanDeEstudios.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\Seguridad\Bitácora.cs">
       <SubType>Form</SubType>
@@ -342,8 +349,13 @@
       <DependentUpon>Tutores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Reports\Inasistencias.rdlc" />
+    <EmbeddedResource Include="Pantallas\Reports\Materias.rdlc" />
+    <EmbeddedResource Include="Pantallas\Reports\PlanDeEstudios.rdlc" />
     <EmbeddedResource Include="Pantallas\Reports\ReporteInasistencias.resx">
       <DependentUpon>ReporteInasistencias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Reports\ReportePlanDeEstudios.resx">
+      <DependentUpon>ReportePlanDeEstudios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Seguridad\AltaModificacionUsuario.resx">
       <DependentUpon>AltaModificacionUsuario.cs</DependentUpon>
@@ -396,6 +408,9 @@
     <None Include="DiagramasDeClase\DCdeSeguridad2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\Materia.datasource" />
+    <None Include="Properties\DataSources\Nivel.datasource" />
+    <None Include="Properties\DataSources\TrabajoDeCampo.Pantallas.Reports.ProgramaDTO.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -808,5 +823,6 @@
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -40,6 +40,15 @@ namespace TrabajoDeCampo
             set { _orientacion = value; }
         }
 
+        private String _orientacionCodigo;
+
+        public String orientacionCodigo
+        {
+            get { return _orientacionCodigo; }
+            set { _orientacionCodigo = value; }
+        }
+
+
         private List<Curso> _cursos;
 
         public List<Curso> cursos
