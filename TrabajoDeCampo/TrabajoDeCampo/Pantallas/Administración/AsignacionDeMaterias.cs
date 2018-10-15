@@ -249,8 +249,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 nivel.materia = materiasDelNivel;
                 nivelesParaElReporte.Add(nivel);
             }
-            DataSet set = new ServicioReportes().ejecutarReporte<Nivel>("materias", nivelesParaElReporte);
-            new Reports.ReportePlanDeEstudios(set, nivelesParaElReporte).ShowDialog();
+            new ServicioReportes().ejecutarReporte<Nivel>("ReportePlanDeEstudios", nivelesParaElReporte);
         }
     }
 }

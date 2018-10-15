@@ -199,6 +199,24 @@
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\Reports\ProgramaDTO.cs" />
+    <Compile Include="Pantallas\Reports\ReporteAmonestaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReporteAmonestaciones.Designer.cs">
+      <DependentUpon>ReporteAmonestaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReporteBitacora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReporteBitacora.Designer.cs">
+      <DependentUpon>ReporteBitacora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReporteHorarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReporteHorarios.Designer.cs">
+      <DependentUpon>ReporteHorarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\Reports\ReporteInasistencias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -271,6 +289,32 @@
     </Compile>
     <Compile Include="Pantallas\Seguridad\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\DataSources\Bitacora.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bitacora.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\DataSources\InfoColegio.cs">
+      <DependentUpon>InfoColegio.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\DataSources\InfoColegio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoColegio.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\DataSources\SetHorario.cs">
+      <DependentUpon>SetHorario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\DataSources\SetHorario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SetHorario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\DataSources\Traducciones.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traducciones.xsd</DependentUpon>
     </Compile>
     <Compile Include="SEGURIDAD\DAOSeguridad.cs" />
     <Compile Include="SEGURIDAD\ComponentePermiso.cs" />
@@ -357,6 +401,33 @@
     <Content Include="Pantallas\Reports\PlanDeEstudios.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pantallas\Reports\Header.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pantallas\Reports\DetallesAlumno.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pantallas\Reports\Horarios.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pantallas\Reports\Amonestaciones.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pantallas\Reports\Bitacora.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pantallas\Reports\Footer.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Pantallas\Reports\ReporteAmonestaciones.resx">
+      <DependentUpon>ReporteAmonestaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Reports\ReporteBitacora.resx">
+      <DependentUpon>ReporteBitacora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Reports\ReporteHorarios.resx">
+      <DependentUpon>ReporteHorarios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Reports\ReporteInasistencias.resx">
       <DependentUpon>ReporteInasistencias.cs</DependentUpon>
     </EmbeddedResource>
@@ -414,9 +485,56 @@
     <None Include="DiagramasDeClase\DCdeSeguridad2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\Alumno.datasource" />
+    <None Include="Properties\DataSources\Bitacora.xsc">
+      <DependentUpon>Bitacora.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Bitacora.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Bitacora.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\Bitacora.xss">
+      <DependentUpon>Bitacora.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Curso.datasource" />
+    <None Include="Properties\DataSources\InasistenciaAlumno.datasource" />
+    <None Include="Properties\DataSources\InfoColegio.xsc">
+      <DependentUpon>InfoColegio.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\InfoColegio.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InfoColegio.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\InfoColegio.xss">
+      <DependentUpon>InfoColegio.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\Materia.datasource" />
     <None Include="Properties\DataSources\Nivel.datasource" />
+    <None Include="Properties\DataSources\SetHorario.xsc">
+      <DependentUpon>SetHorario.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\SetHorario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SetHorario.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\SetHorario.xss">
+      <DependentUpon>SetHorario.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\TrabajoDeCampo.Pantallas.Reports.ProgramaDTO.datasource" />
+    <None Include="Properties\DataSources\Traducciones.xsc">
+      <DependentUpon>Traducciones.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Traducciones.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Traducciones.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\Traducciones.xss">
+      <DependentUpon>Traducciones.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

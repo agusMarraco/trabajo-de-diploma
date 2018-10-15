@@ -158,6 +158,7 @@
             this.button3.Tag = "com.td.exportar";
             this.button3.Text = "Exportar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Amonestaciones
             // 

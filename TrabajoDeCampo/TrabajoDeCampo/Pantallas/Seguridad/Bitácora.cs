@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.Pantallas.Reports;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
@@ -16,6 +17,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private ServicioSeguridad servicioSeguridad;
         private DataGridViewColumn previousSort;
         private String previousSortMode = " ASC ";
+        private Boolean seBuscoForFecha = false;
         
         private DataGridViewColumn currentSort;
         private String currentSortMode = " ASC ";
@@ -71,6 +73,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void button1_Click(object sender, EventArgs e)
         {
+            seBuscoForFecha = false;
             previousSort = null;
             currentSort = null;
             previousSortMode = " ASC ";
@@ -88,6 +91,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             }
             if (this.chFecha.Checked)
             {
+                seBuscoForFecha = true;
                 long id = ((KeyValuePair<long, String>)this.comboBox1.SelectedItem).Key;
                 if (sb.Length > 0)
                     sb.Append(" AND ");
@@ -211,6 +215,26 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
 
             
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataTable datatable = this.dataGridView1.DataSource as DataTable;
+            DataTable view = datatable.DefaultView.ToTable();
+            String desde = "";
+            String hasta = "";
+            if (this.seBuscoForFecha)
+            {
+                desde = this.fromDatepicker.Value.ToShortDateString();
+                hasta = this.toDatepicker.Value.ToShortDateString();
+            }
+            
+            List<Object> objetos = new List<object>();
+            objetos.Add(view);
+            objetos.Add(desde);
+            objetos.Add(hasta);
+            new ServicioReportes().ejecutarReporte("ReporteBitacora", objetos);
+
         }
     }
 }

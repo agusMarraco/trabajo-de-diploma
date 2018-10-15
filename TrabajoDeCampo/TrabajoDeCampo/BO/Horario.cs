@@ -56,6 +56,11 @@ namespace TrabajoDeCampo
             set { _modulo = value; }
         }
 
+        public override string ToString()
+        {
+            return new StringBuilder(this.curso.codigo).Append(Environment.NewLine).Append(this.materia.nombre).
+                                Append(Environment.NewLine).Append(this.docente.apellido + ", " + this.docente.nombre).ToString();
+        }
 
 
 

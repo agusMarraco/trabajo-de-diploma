@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Traducciones" targetNamespace="http://tempuri.org/Traducciones.xsd" xmlns:mstns="http://tempuri.org/Traducciones.xsd" xmlns="http://tempuri.org/Traducciones.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Traducciones" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Traducciones" msprop:Generator_UserDSName="Traducciones">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="justificadaLbl" msprop:Generator_ColumnVarNameInTable="columnjustificadaLbl" msprop:Generator_ColumnPropNameInRow="justificadaLbl" msprop:Generator_ColumnPropNameInTable="justificadaLblColumn" msprop:Generator_UserColumnName="justificadaLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="fechaLbl" msprop:Generator_ColumnVarNameInTable="columnfechaLbl" msprop:Generator_ColumnPropNameInRow="fechaLbl" msprop:Generator_ColumnPropNameInTable="fechaLblColumn" msprop:Generator_UserColumnName="fechaLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="tipoLbl" msprop:Generator_ColumnVarNameInTable="columntipoLbl" msprop:Generator_ColumnPropNameInRow="tipoLbl" msprop:Generator_ColumnPropNameInTable="tipoLblColumn" msprop:Generator_UserColumnName="tipoLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="motivoLbl" msprop:Generator_ColumnVarNameInTable="columnmotivoLbl" msprop:Generator_ColumnPropNameInRow="motivoLbl" msprop:Generator_ColumnPropNameInTable="motivoLblColumn" msprop:Generator_UserColumnName="motivoLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="apellidoLbl" msprop:Generator_ColumnVarNameInTable="columnapellidoLbl" msprop:Generator_ColumnPropNameInRow="apellidoLbl" msprop:Generator_ColumnPropNameInTable="apellidoLblColumn" msprop:Generator_UserColumnName="apellidoLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="nombreLbl" msprop:Generator_ColumnVarNameInTable="columnnombreLbl" msprop:Generator_ColumnPropNameInRow="nombreLbl" msprop:Generator_ColumnPropNameInTable="nombreLblColumn" msprop:Generator_UserColumnName="nombreLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="dniLbl" msprop:Generator_ColumnVarNameInTable="columndniLbl" msprop:Generator_ColumnPropNameInRow="dniLbl" msprop:Generator_ColumnPropNameInTable="dniLblColumn" msprop:Generator_UserColumnName="dniLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="faltasTotalesLbl" msprop:Generator_ColumnVarNameInTable="columnfaltasTotalesLbl" msprop:Generator_ColumnPropNameInRow="faltasTotalesLbl" msprop:Generator_ColumnPropNameInTable="faltasTotalesLblColumn" msprop:Generator_UserColumnName="faltasTotalesLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="descripcionLbl" msprop:Generator_ColumnVarNameInTable="columndescripcionLbl" msprop:Generator_ColumnPropNameInRow="descripcionLbl" msprop:Generator_ColumnPropNameInTable="descripcionLblColumn" msprop:Generator_UserColumnName="descripcionLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="siLbl" msprop:Generator_ColumnVarNameInTable="columnsiLbl" msprop:Generator_ColumnPropNameInRow="siLbl" msprop:Generator_ColumnPropNameInTable="siLblColumn" msprop:Generator_UserColumnName="siLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="noLbl" msprop:Generator_ColumnVarNameInTable="columnnoLbl" msprop:Generator_ColumnPropNameInRow="noLbl" msprop:Generator_ColumnPropNameInTable="noLblColumn" msprop:Generator_UserColumnName="noLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="moduloLbl" msprop:Generator_ColumnVarNameInTable="columnmoduloLbl" msprop:Generator_ColumnPropNameInRow="moduloLbl" msprop:Generator_ColumnPropNameInTable="moduloLblColumn" msprop:Generator_UserColumnName="moduloLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="lunesLbl" msprop:Generator_ColumnVarNameInTable="columnlunesLbl" msprop:Generator_ColumnPropNameInRow="lunesLbl" msprop:Generator_ColumnPropNameInTable="lunesLblColumn" msprop:Generator_UserColumnName="lunesLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="martesLbl" msprop:Generator_ColumnVarNameInTable="columnmartesLbl" msprop:Generator_ColumnPropNameInRow="martesLbl" msprop:Generator_ColumnPropNameInTable="martesLblColumn" msprop:Generator_UserColumnName="martesLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="miercolesLbl" msprop:Generator_ColumnVarNameInTable="columnmiercolesLbl" msprop:Generator_ColumnPropNameInRow="miercolesLbl" msprop:Generator_ColumnPropNameInTable="miercolesLblColumn" msprop:Generator_UserColumnName="miercolesLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="juevesLbl" msprop:Generator_ColumnVarNameInTable="columnjuevesLbl" msprop:Generator_ColumnPropNameInRow="juevesLbl" msprop:Generator_ColumnPropNameInTable="juevesLblColumn" msprop:Generator_UserColumnName="juevesLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="viernesLbl" msprop:Generator_ColumnVarNameInTable="columnviernesLbl" msprop:Generator_ColumnPropNameInRow="viernesLbl" msprop:Generator_ColumnPropNameInTable="viernesLblColumn" msprop:Generator_UserColumnName="viernesLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="desdeLbl" msprop:Generator_ColumnVarNameInTable="columndesdeLbl" msprop:Generator_ColumnPropNameInRow="desdeLbl" msprop:Generator_ColumnPropNameInTable="desdeLblColumn" msprop:Generator_UserColumnName="desdeLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="hastaLbl" msprop:Generator_ColumnVarNameInTable="columnhastaLbl" msprop:Generator_ColumnPropNameInRow="hastaLbl" msprop:Generator_ColumnPropNameInTable="hastaLblColumn" msprop:Generator_UserColumnName="hastaLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="criticidadLbl" msprop:Generator_ColumnVarNameInTable="columncriticidadLbl" msprop:Generator_ColumnPropNameInRow="criticidadLbl" msprop:Generator_ColumnPropNameInTable="criticidadLblColumn" msprop:Generator_UserColumnName="criticidadLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="usuarioLbl" msprop:Generator_ColumnVarNameInTable="columnusuarioLbl" msprop:Generator_ColumnPropNameInRow="usuarioLbl" msprop:Generator_ColumnPropNameInTable="usuarioLblColumn" msprop:Generator_UserColumnName="usuarioLbl" type="xs:string" minOccurs="0" />
+              <xs:element name="mensajeLbl" msprop:Generator_ColumnVarNameInTable="columnmensajeLbl" msprop:Generator_ColumnPropNameInRow="mensajeLbl" msprop:Generator_ColumnPropNameInTable="mensajeLblColumn" msprop:Generator_UserColumnName="mensajeLbl" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

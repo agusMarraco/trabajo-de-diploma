@@ -211,18 +211,12 @@ namespace TrabajoDeCampo.DAO
         public Boolean probarConexion() {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             Boolean sePudoConectar = false;
-            try
-            {
                 connection.Open();
                 SqlCommand query = new SqlCommand(" SELECT * FROM USUARIO", connection);
                 query.ExecuteReader();
                 connection.Close();
                 sePudoConectar = true;  
-            }
-            catch (Exception)
-            {
-                connection.Close();
-            }
+            
 
             return sePudoConectar;
           

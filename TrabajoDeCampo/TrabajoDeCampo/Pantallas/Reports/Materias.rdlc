@@ -9,6 +9,13 @@
       </ConnectionProperties>
       <rd:DataSourceID>41c3d63b-10fa-4fb1-a5d1-76cf0f7f4d4b</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="Traducciones">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>c2153a7d-5e87-4b07-901f-5b3fe309b63b</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
@@ -44,6 +51,58 @@
         <rd:ObjectDataSourceType>TrabajoDeCampo.Materia, TrabajoDeCampo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=404a0cd63fbff1b5</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>Traducciones</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="justificadaLbl">
+          <DataField>justificadaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fechaLbl">
+          <DataField>fechaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tipoLbl">
+          <DataField>tipoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="motivoLbl">
+          <DataField>motivoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="apellidoLbl">
+          <DataField>apellidoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nombreLbl">
+          <DataField>nombreLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dniLbl">
+          <DataField>dniLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="faltasTotalesLbl">
+          <DataField>faltasTotalesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="descripcionLbl">
+          <DataField>descripcionLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Traducciones</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Agustin\Documents\Trabajo-De-Campo\trabajo-de-diploma\TrabajoDeCampo\TrabajoDeCampo\Properties\DataSources\Traducciones.xsd</rd:SchemaPath>
+        <rd:TableName>DataTable1</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -53,13 +112,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.16667in</Width>
+                  <Width>2.3622in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16667in</Width>
+                  <Width>2.3622in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16667in</Width>
+                  <Width>2.3622in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -75,7 +134,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>nombre</Value>
+                                  <Value>=First(Fields!descripcionLbl.Value, "DataSet2")</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -94,6 +153,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -105,7 +165,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>tipo</Value>
+                                  <Value>=First(Fields!tipoLbl.Value, "DataSet2")</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -135,7 +195,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>descripcion</Value>
+                                  <Value>=First(Fields!descripcionLbl.Value, "DataSet2")</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -274,7 +334,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Height>0.48958in</Height>
-            <Width>6.50001in</Width>
+            <Width>7.08661in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -285,7 +345,7 @@
         <Height>0.5in</Height>
         <Style />
       </Body>
-      <Width>6.50001in</Width>
+      <Width>18cm</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

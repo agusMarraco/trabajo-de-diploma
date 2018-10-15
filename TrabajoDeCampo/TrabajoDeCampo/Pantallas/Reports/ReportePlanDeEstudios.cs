@@ -10,30 +10,54 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.Properties.DataSources;
 
 namespace TrabajoDeCampo.Pantallas.Reports
 {
     public partial class ReportePlanDeEstudios : Form
     {
-        private DataSet niveles;
-        private List<Nivel> lista;
+        private DataSet _informacion;
+
+        private DataSet _colegio;
+
+        public DataSet colegio
+        {
+            get { return _colegio; }
+            set { _colegio = value; }
+        }
+
+
+        public DataSet informacion
+        {
+            get { return _informacion; }
+            set { _informacion = value; }
+        }
+
+
         public ReportePlanDeEstudios()
         {
             InitializeComponent();
         }
-        public ReportePlanDeEstudios(DataSet  niveles, List<Nivel> nivels)
+        public ReportePlanDeEstudios(List<Nivel> nivels)
         {
             InitializeComponent();
-            this.niveles = niveles;
             this.lista = nivels;
         }
+     
+
+        private List<Nivel> _lista;
+
+        public List<Nivel> lista
+        {
+            get { return _lista; }
+            set { _lista = value; }
+        }
+
         private void ReportePlanDeEstudios_Load(object sender, EventArgs e)
         {
 
             this.reportViewer1.Reset();
             ReportDataSource source = new ReportDataSource("DataSet1", this.lista);
-          
-            
             this.reportViewer1.LocalReport.DataSources.Clear();
             this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\PlanDeEstudios.rdlc";
             this.reportViewer1.LocalReport.DataSources.Add(source);
@@ -51,12 +75,28 @@ namespace TrabajoDeCampo.Pantallas.Reports
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
         {
-            String pepe = "pepe";
-            int nivelId = int.Parse(e.Parameters["nivelId"].Values[0].ToString());
-            Nivel nivel = this.lista.Where(x => x.id == nivelId).First();
-            ReportDataSource source = new ReportDataSource("DataSet1", nivel.materia);
-            e.DataSources.Clear();
-            e.DataSources.Add(source);
+
+            if(e.ReportPath != "Header")
+            {
+                int nivelId = int.Parse(e.Parameters["nivelId"].Values[0].ToString());
+                Nivel nivel = this.lista.Where(x => x.id == nivelId).First();
+                ReportDataSource source = new ReportDataSource("DataSet1", nivel.materia);
+                DataTable table = (this.informacion as Traducciones).DataTable1;
+                ReportDataSource source2 = new ReportDataSource("DataSet2", table);
+                e.DataSources.Clear();
+                e.DataSources.Add(source);
+                e.DataSources.Add(source2);
+            }
+            else
+            {
+                DataTable table = (this.colegio as InfoColegio).DataTable1;
+                ReportDataSource source = new ReportDataSource("DataSet1",table);
+                e.DataSources.Clear();
+                e.DataSources.Add((source));
+                
+            }
+
+
         }
     }
 }

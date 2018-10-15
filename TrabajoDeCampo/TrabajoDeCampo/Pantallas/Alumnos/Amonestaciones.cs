@@ -73,7 +73,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 amonestacion.fecha = this.dateTimePicker1.Value;
                 amonestacion.alumno = alumno;
                 this.richTextBox1.Text = "";
-                this.dateTimePicker1.Value = DateTime.Now;
+                this.dateTimePicker1.Value = this.dateTimePicker1.MaxDate;
                 try
                 {
                     this.servicioAlumnos.guardarAmonestacion(amonestacion);
@@ -110,6 +110,14 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             {
                 this.Close();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<Alumno> alumno = new List<Alumno>();
+            this.alumno.amonestaciones = this.dataGridView1.DataSource as List<Amonestacion>;
+            alumno.Add(this.alumno);
+            new ServicioReportes().ejecutarReporte<Alumno>("ReporteAmonestaciones", alumno);
         }
     }
 }

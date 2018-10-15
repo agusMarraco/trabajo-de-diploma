@@ -242,8 +242,10 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void btnExportar_Click(object sender, EventArgs e)
         {
-            ReporteInasistencias reporte = new ReporteInasistencias(new DataSet());
-            reporte.Show();
+            List<Alumno> alumno = new List<Alumno>();
+            this.alumno.inasistencias = this.dataGridView1.DataSource as List<InasistenciaAlumno>;
+            alumno.Add(this.alumno);
+            new ServicioReportes().ejecutarReporte<Alumno>("ReporteInasistencias", alumno);
         }
     }
 }

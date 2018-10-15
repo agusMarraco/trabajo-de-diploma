@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_CRITICIDAD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_MENSAJE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chUsuario = new System.Windows.Forms.CheckBox();
             this.chCriticidad = new System.Windows.Forms.CheckBox();
@@ -43,10 +47,6 @@
             this.fromDatepicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BIT_CRITICIDAD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BIT_MENSAJE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +72,36 @@
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(834, 248);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // BIT_FECHA
+            // 
+            this.BIT_FECHA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BIT_FECHA.HeaderText = "Fecha";
+            this.BIT_FECHA.Name = "BIT_FECHA";
+            this.BIT_FECHA.ReadOnly = true;
+            this.BIT_FECHA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // USU_ALIAS
+            // 
+            this.USU_ALIAS.HeaderText = "Usuario";
+            this.USU_ALIAS.Name = "USU_ALIAS";
+            this.USU_ALIAS.ReadOnly = true;
+            this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_CRITICIDAD_ID
+            // 
+            this.BIT_CRITICIDAD_ID.HeaderText = "Criticidad";
+            this.BIT_CRITICIDAD_ID.Name = "BIT_CRITICIDAD_ID";
+            this.BIT_CRITICIDAD_ID.ReadOnly = true;
+            this.BIT_CRITICIDAD_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_MENSAJE
+            // 
+            this.BIT_MENSAJE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BIT_MENSAJE.HeaderText = "Descripción";
+            this.BIT_MENSAJE.Name = "BIT_MENSAJE";
+            this.BIT_MENSAJE.ReadOnly = true;
+            this.BIT_MENSAJE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // groupBox1
             // 
@@ -141,6 +171,7 @@
             this.button3.Tag = "com.td.exportar";
             this.button3.Text = "Exportar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -233,36 +264,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 1;
-            // 
-            // BIT_FECHA
-            // 
-            this.BIT_FECHA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BIT_FECHA.HeaderText = "Fecha";
-            this.BIT_FECHA.Name = "BIT_FECHA";
-            this.BIT_FECHA.ReadOnly = true;
-            this.BIT_FECHA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // USU_ALIAS
-            // 
-            this.USU_ALIAS.HeaderText = "Usuario";
-            this.USU_ALIAS.Name = "USU_ALIAS";
-            this.USU_ALIAS.ReadOnly = true;
-            this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // BIT_CRITICIDAD_ID
-            // 
-            this.BIT_CRITICIDAD_ID.HeaderText = "Criticidad";
-            this.BIT_CRITICIDAD_ID.Name = "BIT_CRITICIDAD_ID";
-            this.BIT_CRITICIDAD_ID.ReadOnly = true;
-            this.BIT_CRITICIDAD_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // BIT_MENSAJE
-            // 
-            this.BIT_MENSAJE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BIT_MENSAJE.HeaderText = "Descripción";
-            this.BIT_MENSAJE.Name = "BIT_MENSAJE";
-            this.BIT_MENSAJE.ReadOnly = true;
-            this.BIT_MENSAJE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // Bitácora
             // 

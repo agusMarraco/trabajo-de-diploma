@@ -33,6 +33,10 @@ namespace TrabajoDeCampo
         }
 
 
-
+        public override string ToString()
+        {
+            return new StringBuilder(this.horaInicio.TimeOfDay.ToString()).Append(Environment.NewLine).
+                            Append(this.horaFin.TimeOfDay.ToString()).ToString();
+        }
     }
 }

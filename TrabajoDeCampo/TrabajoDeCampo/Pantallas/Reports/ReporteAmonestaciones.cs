@@ -12,16 +12,8 @@ using TrabajoDeCampo.Properties.DataSources;
 
 namespace TrabajoDeCampo.Pantallas.Reports
 {
-    public partial class ReporteInasistencias : Form
+    public partial class ReporteAmonestaciones : Form
     {
-        private DataSet source = null;
-        private List<InasistenciaAlumno> _inasistencias;
-
-        public List<InasistenciaAlumno> inasistencias
-        {
-            get { return _inasistencias; }
-            set { _inasistencias = value; }
-        }
 
         private Alumno _alumno;
 
@@ -29,6 +21,30 @@ namespace TrabajoDeCampo.Pantallas.Reports
         {
             get { return _alumno; }
             set { _alumno = value; }
+        }
+
+        private List<Amonestacion> _amonestaciones;
+
+        public List<Amonestacion> amonestaciones
+        {
+            get { return _amonestaciones; }
+            set { _amonestaciones = value; }
+        }
+
+        private DataSet _traducciones;
+
+        public DataSet traducciones
+        {
+            get { return _traducciones; }
+            set { _traducciones = value; }
+        }
+
+        private DataSet _info;
+
+        public DataSet info
+        {
+            get { return _info; }
+            set { _info = value; }
         }
 
         private Nivel _nivel;
@@ -39,64 +55,39 @@ namespace TrabajoDeCampo.Pantallas.Reports
             set { _nivel = value; }
         }
 
-        private Traducciones _traducciones;
-
-        public Traducciones traducciones
-        {
-            get { return _traducciones; }
-            set { _traducciones = value; }
-        }
 
 
-        private InfoColegio _info;
 
-        public InfoColegio info
-        {
-            get { return _info; }
-            set { _info = value; }
-        }
-
-
-        public ReporteInasistencias()
+        public ReporteAmonestaciones()
         {
             InitializeComponent();
         }
 
-
-        public ReporteInasistencias(DataSet data)
-        {
-            InitializeComponent();
-        }
-
-        private void ReporteInasistencias_Load(object sender, EventArgs e)
+        private void ReporteAmonestaciones_Load(object sender, EventArgs e)
         {
 
-            this.reportViewer1.Reset();
-            ReportDataSource source = new ReportDataSource("DataSet1", this.inasistencias);
-            DataTable dt = this.traducciones.DataTable1;
-            ReportDataSource source2 = new ReportDataSource("DataSet2", dt);
-            this.reportViewer1.LocalReport.DataSources.Clear();
-            this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\Inasistencias.rdlc";
-            this.reportViewer1.LocalReport.DataSources.Add(source);
-            this.reportViewer1.LocalReport.DataSources.Add(source2);
-            this.reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
-            this.reportViewer1.RefreshReport();
 
-
-
-
-
+                this.reportViewer1.Reset();
+                ReportDataSource source = new ReportDataSource("DataSet1", this.amonestaciones);
+                ReportDataSource source2 = new ReportDataSource("DataSet2", this.traducciones.Tables[0]);
+                this.reportViewer1.LocalReport.DataSources.Clear();
+                this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\Amonestaciones.rdlc";
+                this.reportViewer1.LocalReport.DataSources.Add(source);
+                this.reportViewer1.LocalReport.DataSources.Add(source2);
+                this.reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
+                this.reportViewer1.RefreshReport();
         }
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
         {
+
 
             if (e.ReportPath != "Header")
             {
                 List<Alumno> list = new List<Alumno>() { this.alumno };
                 List<Curso> cursos = new List<Curso>() { this.alumno.curso };
                 this.nivel.orientacionCodigo = this.alumno.orientacion.nombre;
-                List<Nivel> niveles = new List<Nivel>() { this.nivel};
+                List<Nivel> niveles = new List<Nivel>() { this.nivel };
                 ReportDataSource source = new ReportDataSource("DataSet1", list);
                 DataTable table = (this.traducciones as Traducciones).DataTable1;
                 ReportDataSource source2 = new ReportDataSource("DataSet4", table);

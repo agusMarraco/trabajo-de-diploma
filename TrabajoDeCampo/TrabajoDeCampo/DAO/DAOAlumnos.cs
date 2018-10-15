@@ -311,12 +311,13 @@ namespace TrabajoDeCampo.DAO
             StringBuilder sb = new StringBuilder();
             sb.Append(" select alu.alu_legajo, alu.alu_apellido, alu.alu_nombre, alu.alu_fecha_nacimiento, alu.alu_dni, alu.alu_curso, " +
                 " alu.alu_domicilio, alu.alu_orientacion, " +
-                " ori.ori_codigo, cur.cur_codigo , cur.cur_id, cur.cur_nivel_id, " +
+                " ori.ori_codigo, cur.cur_codigo , cur.cur_id, cur.cur_nivel_id, nivel.niv_codigo, " +
                 queryInasistencias +
                 " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_condicion = 0) as desaprobadas ");
             sb.Append(" from alumno alu ");
             sb.Append(" left join orientacion ori on ori.ori_codigo = alu.alu_orientacion ");
             sb.Append(" inner join curso cur on cur.cur_id = alu.alu_curso ");
+            sb.Append(" inner join nivel nivel on cur.cur_nivel_id = nivel.niv_id");
             sb.Append(" where alu.alu_borrado is null ");
             if(!String.IsNullOrEmpty(filtro) && !String.IsNullOrEmpty(valor))
             {
@@ -365,9 +366,10 @@ namespace TrabajoDeCampo.DAO
                     cur.codigo = reader["CUR_CODIGO"].ToString();
                     cur.nivel = new Nivel();
                     cur.nivel.id = (long)reader["CUR_NIVEL_ID"];
+                    cur.nivel.codigo = reader["NIV_CODIGO"].ToString();
                     alu.curso = cur;
                     alu.domicilio = SeguridadUtiles.desencriptarAES(reader["ALU_DOMICILIO"].ToString());
-                    decimal faltas = reader.IsDBNull(12) ? 0 : (decimal)reader[12];
+                    decimal faltas = reader.IsDBNull(13) ? 0 : (decimal)reader[13];
                     alu.puedeRepetir = (1 < faltas) || 2 < (int)reader["desaprobadas"];
                     if (reader.IsDBNull(8))
                     {
@@ -435,7 +437,7 @@ namespace TrabajoDeCampo.DAO
 
             SqlCommand cmd = new SqlCommand(sb.ToString(), connection, tx);
             cmd.Parameters.Add(new SqlParameter("@alu", SqlDbType.BigInt)).Value = amonestacion.alumno.legajo;
-            cmd.Parameters.Add(new SqlParameter("@fecha", SqlDbType.DateTime)).Value = amonestacion.fecha;
+            cmd.Parameters.Add(new SqlParameter("@fecha", SqlDbType.Date)).Value = amonestacion.fecha;
             cmd.Parameters.Add(new SqlParameter("@motivo", SqlDbType.Text)).Value =  SeguridadUtiles.encriptarAES(amonestacion.motivo);
             cmd.Parameters.Add(new SqlParameter("@dvh", SqlDbType.VarChar)).Value = dvh;
             

@@ -33,7 +33,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             valido = true;
             if (!e.KeyValue.Equals(8))//tecla borrar
             {
-                if (!regex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!regex.IsMatch(e.KeyData.ToString()) || (e.KeyData.ToString().Contains("Oem") && !e.KeyData.ToString().Contains("OemMinus")))
                 {
                     valido = false;
                 }

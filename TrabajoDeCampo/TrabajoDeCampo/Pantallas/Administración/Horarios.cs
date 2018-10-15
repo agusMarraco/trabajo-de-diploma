@@ -179,5 +179,12 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            new ServicioReportes().ejecutarReporte<DataTable>("ReporteHorarios", new List<DataTable>()
+            { (this.dataGridView1.DataSource as DataTable).DefaultView.ToTable() });
+        }
     }
 }
