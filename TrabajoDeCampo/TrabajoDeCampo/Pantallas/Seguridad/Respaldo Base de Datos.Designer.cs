@@ -92,7 +92,7 @@
             this.groupBox1.Size = new System.Drawing.Size(548, 232);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "com.td.generar.respaldo";
+            this.groupBox1.Tag = "com.td.generate.respaldo";
             this.groupBox1.Text = "Generar Respaldo";
             // 
             // btnExaminar
@@ -134,6 +134,7 @@
             this.ClientSize = new System.Drawing.Size(585, 273);
             this.Controls.Add(this.groupBox1);
             this.Name = "Respaldo_Base_de_Datos";
+            this.Tag = "com.td.generate.respaldo";
             this.Text = "Respaldo Base de Datos";
             this.Load += new System.EventHandler(this.Respaldo_Base_de_Datos_Load);
             this.groupBox1.ResumeLayout(false);

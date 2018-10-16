@@ -123,12 +123,9 @@ namespace TrabajoDeCampo.DAO
                     throw new Exception("PASS");
                 }
                 //bloqueado
-                if (intentos == 3)
-                    throw new Exception("BLOQUEADO");
-
 
                 int sistemaBloqueado = TrabajoDeCampo.Properties.Settings.Default.Bloqueado;
-
+                int permisosEsencialesCount = 0;
                 if (sistemaBloqueado == 1)
                 {
                     queryPermisos.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
@@ -143,7 +140,11 @@ namespace TrabajoDeCampo.DAO
                     {
                         throw new Exception("PERMISOS");
                     }
+                    permisosEsencialesCount = readerReturn;
                 }
+                if (intentos == 3 && permisosEsencialesCount != 4)
+                    throw new Exception("BLOQUEADO");
+
 
                 queryLoginExitoso.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
                 if (intentos != 0)
@@ -445,11 +446,12 @@ namespace TrabajoDeCampo.DAO
             
             cmd.Connection = connection;
             SqlDataReader reader;
+            connection.Open();
             Boolean seguirBuscando = true;
             Boolean errorEsenciales = false;
             if (!CrearUsuario && seguirBuscando)
             {
-
+                
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.CrearUsuario;
                 reader = cmd.ExecuteReader();
@@ -604,6 +606,9 @@ namespace TrabajoDeCampo.DAO
                 reader.Close();
 
             }
+
+            connection.Close();
+
             return errorEsenciales;
         }
 
@@ -617,8 +622,9 @@ namespace TrabajoDeCampo.DAO
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
             SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
-            query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(familia.nombre);
-            query.Parameters.Add(new SqlParameter("@DVHFAMILIA", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new string[] { familia.nombre, familia.bloqueada.ToString() });
+            String nombreAES = SeguridadUtiles.encriptarAES(familia.nombre);
+            query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = nombreAES;
+            query.Parameters.Add(new SqlParameter("@DVHFAMILIA", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new string[] { nombreAES, familia.bloqueada.ToString() });
 
             try
             {
@@ -682,9 +688,10 @@ namespace TrabajoDeCampo.DAO
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
             SqlCommand query = new SqlCommand(sb.ToString(), connection, tx);
-            query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(familia.nombre);
+            String nombreAES = SeguridadUtiles.encriptarAES(familia.nombre);
+            query.Parameters.Add(new SqlParameter("@NOMBRE", System.Data.SqlDbType.NVarChar)).Value = nombreAES;
             query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = familia.id;
-            query.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { familia.nombre, familia.bloqueada.ToString() });
+            query.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { nombreAES, familia.bloqueada.ToString() });
 
 
             try
@@ -1522,12 +1529,16 @@ namespace TrabajoDeCampo.DAO
             sb.Append(" inner join IDIOMA on usu_idioma = idi_id");
             sb.Append(" where usu_baja <> 1 ");
 
+            StringBuilder queryVista = new StringBuilder();
+            queryVista.Append("SELECT * FROM PERMISOS_USUARIO WHERE USU_ID = @ID ");
             SqlCommand query = new SqlCommand("", connection);
-
+            SqlCommand cmd = new SqlCommand(queryVista.ToString(), connection);
             query.CommandText = sb.ToString();
 
+            
+
             connection.Open();
-            SqlDataReader reader;
+            SqlDataReader reader = null;
             Usuario usu;
             try
             {
@@ -1555,9 +1566,31 @@ namespace TrabajoDeCampo.DAO
                     usu.id = (long)reader["USU_ID"];
                     usuarios.Add(usu);
                 }
+                reader.Close();
+                foreach (Usuario user in usuarios)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@ID", SqlDbType.BigInt)).Value = user.id;
+                    reader = cmd.ExecuteReader();
+                    user.componentePermisos = new List<ComponentePermiso>();
+                    while (reader.Read())
+                    {
+                        Patente pat = new Patente();
+                        pat.id = (long)reader["PAT_ID"];
+                        user.componentePermisos.Add(pat);
+                    }
+                    reader.Close();
+                }
+                
             }
+           
+
             catch (Exception ex)
             {
+                if(reader != null && !reader.IsClosed)
+                {
+                    reader.Close();
+                }
                 connection.Close();
                 throw  ex;
             }
@@ -2395,7 +2428,8 @@ namespace TrabajoDeCampo.DAO
         public void realizarRestore(String directorio)
 
         {
-            SqlConnection connection = new SqlConnection(TrabajoDeCampo.Properties.Settings.Default.MasterString);
+            String cs = Encoding.UTF8.GetString(Convert.FromBase64String(TrabajoDeCampo.Properties.Settings.Default.MasterString));
+            SqlConnection connection = new SqlConnection(cs);
             connection.Open();
             StringBuilder queryText = new StringBuilder();
             queryText.Append(" USE MASTER ");

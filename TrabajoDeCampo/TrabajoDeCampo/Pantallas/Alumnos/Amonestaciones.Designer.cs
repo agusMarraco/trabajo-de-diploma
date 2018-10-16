@@ -171,6 +171,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.registrar);
             this.Name = "Amonestaciones";
+            this.Tag = "com.td.amonestaciones";
             this.Text = "Amonestaciones";
             this.Load += new System.EventHandler(this.Amonestaciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

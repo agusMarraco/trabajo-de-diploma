@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
@@ -17,6 +18,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private ServicioSeguridad servicioSeguridad;
         private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
         private Boolean valido = false;
+        private Dictionary<string, string> traducciones;
+
         public CambiarContraseña()
         {
             InitializeComponent();
@@ -33,6 +36,20 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.nueva.KeyPress += validarAlphaKP;
             this.nuevaRepetido.KeyDown += validarAlphaKD;
             this.nuevaRepetido.KeyPress += validarAlphaKP;
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.Add("com.td.char.count");
+            tags.Add("com.td.pass.no.coinciden");
+            tags.Add("com.td.pass.iguales");
+            tags.Add("com.td.complete.campos");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
 
         }
 
@@ -64,12 +81,12 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 //verificacion de regex
                 if (this.actual.Text.Length < 8 && this.nueva.Text.Length < 8 && this.nuevaRepetido.Text.Length < 8)
                 {
-                    MessageBox.Show("Se requieren como minimo 8 caracteres");
+                    MessageBox.Show(traducciones["com.td.char.count"]);
                 }
 
                     if (this.actual.Text.Equals(this.nueva))
                 {
-                    MessageBox.Show("Las contraseñas no son distintas");
+                    MessageBox.Show(traducciones["com.td.pass.iguales"]);
                 }
                 else
                 {
@@ -81,14 +98,14 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     }
                     else
                     {
-                        MessageBox.Show("Las contraseñas nuevas no coincided");
+                        MessageBox.Show(traducciones["com.td.pass.no.coinciden"]);
                     }
 
                 }
             }
             else
             {
-                MessageBox.Show("Todos los campos son obligatorios");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
         }
 

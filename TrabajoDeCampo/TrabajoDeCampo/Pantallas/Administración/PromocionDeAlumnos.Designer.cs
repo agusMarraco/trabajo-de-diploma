@@ -188,7 +188,7 @@
             this.groupBox1.Size = new System.Drawing.Size(852, 112);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "com.td.busqueda";
+            this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
             // button2
@@ -201,6 +201,7 @@
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // PromocionDeAlumnos
             // 
@@ -215,6 +216,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "PromocionDeAlumnos";
+            this.Tag = "com.td.promoción.de.alumnos";
             this.Text = "Promoción de Alumnos";
             this.Load += new System.EventHandler(this.PromocionDeAlumnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -311,7 +311,7 @@ namespace TrabajoDeCampo.DAO
             StringBuilder sb = new StringBuilder();
             sb.Append(" select alu.alu_legajo, alu.alu_apellido, alu.alu_nombre, alu.alu_fecha_nacimiento, alu.alu_dni, alu.alu_curso, " +
                 " alu.alu_domicilio, alu.alu_orientacion, " +
-                " ori.ori_codigo, cur.cur_codigo , cur.cur_id, cur.cur_nivel_id, nivel.niv_codigo, " +
+                " ori.ori_codigo, cur.cur_codigo , cur.cur_id, cur.cur_nivel_id, nivel.niv_codigo,ORI.ORI_NOMBRE, " +
                 queryInasistencias +
                 " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_condicion = 0) as desaprobadas ");
             sb.Append(" from alumno alu ");
@@ -369,7 +369,7 @@ namespace TrabajoDeCampo.DAO
                     cur.nivel.codigo = reader["NIV_CODIGO"].ToString();
                     alu.curso = cur;
                     alu.domicilio = SeguridadUtiles.desencriptarAES(reader["ALU_DOMICILIO"].ToString());
-                    decimal faltas = reader.IsDBNull(13) ? 0 : (decimal)reader[13];
+                    decimal faltas = reader.IsDBNull(14) ? 0 : (decimal)reader[14];
                     alu.puedeRepetir = (1 < faltas) || 2 < (int)reader["desaprobadas"];
                     if (reader.IsDBNull(8))
                     {
@@ -378,6 +378,7 @@ namespace TrabajoDeCampo.DAO
                     else
                     {
                          ori.codigo = reader["ORI_CODIGO"].ToString();
+                        ori.nombre = reader["ORI_NOMBRE"].ToString();
                     }
                    
                     alu.orientacion = ori;

@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(1013, 552);
             this.Controls.Add(this.reportViewer1);
             this.Name = "ReporteHorarios";
+            this.Tag = "com.td.reportes";
             this.Text = "ReporteHorarios";
             this.Load += new System.EventHandler(this.ReporteHorarios_Load);
             this.ResumeLayout(false);

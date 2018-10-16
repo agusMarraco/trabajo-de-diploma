@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.Pantallas.Reports;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
@@ -21,6 +22,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         
         private DataGridViewColumn currentSort;
         private String currentSortMode = " ASC ";
+        private Dictionary<string, string> traducciones;
+
         public Bitácora()
         {
             InitializeComponent();
@@ -31,6 +34,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dataGridView1.Columns[1].DataPropertyName = "USU_ALIAS";
             this.dataGridView1.Columns[2].DataPropertyName = "BIT_CRITICIDAD_ID";
             this.dataGridView1.Columns[3].DataPropertyName = "BIT_MENSAJE";
+            this.dataGridView1.Columns[0].Tag = "com.td.fecha";
+            this.dataGridView1.Columns[1].Tag = "com.td.alias";
+            this.dataGridView1.Columns[2].Tag = "com.td.criticidad";
+            this.dataGridView1.Columns[3].Tag = "com.td.mensaje";
             this.dataGridView1.DataMember = "Table";
             this.dataGridView1.CellFormatting += criticidadFormatter;
             DataSet set = this.servicioSeguridad.listarBitacora("","","");
@@ -57,10 +64,24 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void Bitácora_Load(object sender, EventArgs e)
         {
+
+
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.AddRange(new string[] { "com.td.criticidad.alta", "com.td.criticidad.media", "com.td.criticidad.baja" });
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
             List<KeyValuePair<long, String>> criticidad = new List<KeyValuePair<long, string>>();
-            criticidad.Add(new KeyValuePair<long, string>(1, "ALTA"));
-            criticidad.Add(new KeyValuePair<long, string>(2, "MEDIA"));
-            criticidad.Add(new KeyValuePair<long, string>(3, "BAJA"));
+
+            criticidad.Add(new KeyValuePair<long, string>(1, traducciones["com.td.criticidad.alta"]));
+            criticidad.Add(new KeyValuePair<long, string>(2, traducciones["com.td.criticidad.media"]));
+            criticidad.Add(new KeyValuePair<long, string>(3, traducciones["com.td.criticidad.baja"]));
             this.comboBox1.DisplayMember = "value";
 
             this.comboBox1.DataSource = criticidad;
@@ -69,6 +90,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.fromDatepicker.MaxDate = DateTime.Now.AddMilliseconds(5);
             this.toDatepicker.Value = this.toDatepicker.MaxDate;
             this.fromDatepicker.Value  = this.fromDatepicker.MaxDate;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -197,13 +219,13 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 switch ((long)e.Value)
                 {
                     case 1:
-                        translation = "BAJA";
+                        translation = traducciones["com.td.criticidad.alta"];
                         break;
                     case 2:
-                        translation = "MEDIA";
+                        translation = traducciones["com.td.criticidad.media"];
                         break;
                     case 3:
-                        translation = "ALTA";
+                        translation = traducciones["com.td.criticidad.baja"];
                         break;
                 }
 
@@ -235,6 +257,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             objetos.Add(hasta);
             new ServicioReportes().ejecutarReporte("ReporteBitacora", objetos);
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

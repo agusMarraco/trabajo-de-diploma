@@ -85,7 +85,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 16);
             this.label2.TabIndex = 7;
-            this.label2.Tag = "com.td.descripcion";
+            this.label2.Tag = "com.td.descripción";
             this.label2.Text = "Descripción";
             // 
             // rbExtracurricular

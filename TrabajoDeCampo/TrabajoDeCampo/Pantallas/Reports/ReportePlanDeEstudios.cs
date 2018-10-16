@@ -55,16 +55,23 @@ namespace TrabajoDeCampo.Pantallas.Reports
 
         private void ReportePlanDeEstudios_Load(object sender, EventArgs e)
         {
+            String code = TrabajoDeCampo.Properties.Settings.Default.Idioma;
+            this.Text = (code.Equals("es")) ? "Reporte" : "Report";
 
             this.reportViewer1.Reset();
             ReportDataSource source = new ReportDataSource("DataSet1", this.lista);
             this.reportViewer1.LocalReport.DataSources.Clear();
             this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\PlanDeEstudios.rdlc";
+            DataTable table = (this.colegio as InfoColegio).DataTable1;
+            ReportDataSource source2 = new ReportDataSource("DataSet2", table);
+            
             this.reportViewer1.LocalReport.DataSources.Add(source);
+            this.reportViewer1.LocalReport.DataSources.Add(source2);
+
             this.reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
-            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("nombreDelColegio","Mariano Moreno"));
-            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("nombreDelReporte", "Programa"));
-            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("fecha", DateTime.Now.ToShortDateString()));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("nombreDelReporte", table.Rows[0].ItemArray[0].ToString()));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("nombreDelColegio",table.Rows[0].ItemArray[1].ToString()));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("fecha", table.Rows[0].ItemArray[2].ToString()));
             this.reportViewer1.RefreshReport();
             
             
@@ -87,15 +94,6 @@ namespace TrabajoDeCampo.Pantallas.Reports
                 e.DataSources.Add(source);
                 e.DataSources.Add(source2);
             }
-            else
-            {
-                DataTable table = (this.colegio as InfoColegio).DataTable1;
-                ReportDataSource source = new ReportDataSource("DataSet1",table);
-                e.DataSources.Clear();
-                e.DataSources.Add((source));
-                
-            }
-
 
         }
     }

@@ -31,6 +31,8 @@ chequearCodigoUnico(String codigoCurso,long cursoId) admin dao, curso id
 agregue la propiedad asignado al tutor
 	agregar al diagrama de clases.
 
+cambiar el parametro que recibe servicio borrar ususario/bloquear usuario
+
 agregue el metodo generarPlanillas(Alumno alumno)
 en el administracionDAO ds, diagrama diccionario
 se llama en el promocionar alumno

@@ -26,7 +26,7 @@
     <ProductName>Gestion de Alumnado</ProductName>
     <PublisherName>Agustin Marraco</PublisherName>
     <SuiteName>Aplicacion Diploma</SuiteName>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>20</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -211,6 +211,12 @@
     <Compile Include="Pantallas\Reports\ReporteBitacora.Designer.cs">
       <DependentUpon>ReporteBitacora.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\Reports\ReporteCursos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Reports\ReporteCursos.Designer.cs">
+      <DependentUpon>ReporteCursos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\Reports\ReporteHorarios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,12 +271,6 @@
     <Compile Include="Pantallas\Seguridad\Restaurar Backup.Designer.cs">
       <DependentUpon>Restaurar Backup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\testeador.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pantallas\testeador.Designer.cs">
-      <DependentUpon>testeador.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Pantallas\Seguridad\AltaModificacionUsuario.cs">
       <SubType>Form</SubType>
@@ -294,6 +294,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Bitacora.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\DataSources\Curso.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Curso.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\DataSources\InfoColegio.cs">
       <DependentUpon>InfoColegio.xsd</DependentUpon>
@@ -399,7 +404,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Pantallas\Reports\PlanDeEstudios.rdlc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Pantallas\Reports\Header.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -419,11 +424,23 @@
     <Content Include="Pantallas\Reports\Footer.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pantallas\Reports\Cursos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pantallas\Reports\DetalleAlumnoCurso.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pantallas\Reports\DetalleCurso.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Pantallas\Reports\ReporteAmonestaciones.resx">
       <DependentUpon>ReporteAmonestaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Reports\ReporteBitacora.resx">
       <DependentUpon>ReporteBitacora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Reports\ReporteCursos.resx">
+      <DependentUpon>ReporteCursos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Reports\ReporteHorarios.resx">
       <DependentUpon>ReporteHorarios.cs</DependentUpon>
@@ -464,9 +481,6 @@
     <EmbeddedResource Include="Pantallas\Seguridad\Restaurar Backup.resx">
       <DependentUpon>Restaurar Backup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\testeador.resx">
-      <DependentUpon>testeador.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -498,6 +512,17 @@
       <DependentUpon>Bitacora.xsd</DependentUpon>
     </None>
     <None Include="Properties\DataSources\Curso.datasource" />
+    <None Include="Properties\DataSources\Curso.xsc">
+      <DependentUpon>Curso.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Curso.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Curso.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\Curso.xss">
+      <DependentUpon>Curso.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\InasistenciaAlumno.datasource" />
     <None Include="Properties\DataSources\InfoColegio.xsc">
       <DependentUpon>InfoColegio.xsd</DependentUpon>
@@ -524,6 +549,7 @@
       <DependentUpon>SetHorario.xsd</DependentUpon>
     </None>
     <None Include="Properties\DataSources\TrabajoDeCampo.Pantallas.Reports.ProgramaDTO.datasource" />
+    <None Include="Properties\DataSources\TrabajoDeCampo.Properties.DataSources.Curso.datasource" />
     <None Include="Properties\DataSources\Traducciones.xsc">
       <DependentUpon>Traducciones.xsd</DependentUpon>
     </None>

@@ -36,14 +36,14 @@
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.baja = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnBloq = new System.Windows.Forms.Button();
+            this.btnMod = new System.Windows.Forms.Button();
+            this.btnRegen = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnCrear = new System.Windows.Forms.Button();
             this.comboFiltro = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -128,53 +128,53 @@
             this.baja.ReadOnly = true;
             this.baja.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // button1
+            // btnBloq
             // 
-            this.button1.Location = new System.Drawing.Point(238, 416);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 1;
-            this.button1.Tag = "com.td.bloquear";
-            this.button1.Text = "Bloquear";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnBloq.Location = new System.Drawing.Point(238, 416);
+            this.btnBloq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnBloq.Name = "btnBloq";
+            this.btnBloq.Size = new System.Drawing.Size(105, 28);
+            this.btnBloq.TabIndex = 1;
+            this.btnBloq.Tag = "com.td.bloquear";
+            this.btnBloq.Text = "Bloquear";
+            this.btnBloq.UseVisualStyleBackColor = true;
+            this.btnBloq.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btnMod
             // 
-            this.button2.Location = new System.Drawing.Point(12, 416);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 28);
-            this.button2.TabIndex = 2;
-            this.button2.Tag = "com.td.modificar";
-            this.button2.Text = "Modificar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnMod.Location = new System.Drawing.Point(12, 416);
+            this.btnMod.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMod.Name = "btnMod";
+            this.btnMod.Size = new System.Drawing.Size(107, 28);
+            this.btnMod.TabIndex = 2;
+            this.btnMod.Tag = "com.td.modificar";
+            this.btnMod.Text = "Modificar";
+            this.btnMod.UseVisualStyleBackColor = true;
+            this.btnMod.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // btnRegen
             // 
-            this.button3.Location = new System.Drawing.Point(540, 416);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(176, 28);
-            this.button3.TabIndex = 3;
-            this.button3.Tag = "com.td.regenerar.password";
-            this.button3.Text = "Regenerar Password";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnRegen.Location = new System.Drawing.Point(540, 416);
+            this.btnRegen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRegen.Name = "btnRegen";
+            this.btnRegen.Size = new System.Drawing.Size(176, 28);
+            this.btnRegen.TabIndex = 3;
+            this.btnRegen.Tag = "com.td.regenerar.password";
+            this.btnRegen.Text = "Regenerar Password";
+            this.btnRegen.UseVisualStyleBackColor = true;
+            this.btnRegen.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // btnDel
             // 
-            this.button4.Location = new System.Drawing.Point(125, 416);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(107, 28);
-            this.button4.TabIndex = 4;
-            this.button4.Tag = "com.td.borrar";
-            this.button4.Text = "Borrar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnDel.Location = new System.Drawing.Point(125, 416);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(107, 28);
+            this.btnDel.TabIndex = 4;
+            this.btnDel.Tag = "com.td.borrar";
+            this.btnDel.Text = "Borrar";
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox1
             // 
@@ -208,17 +208,17 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // btnCrear
             // 
-            this.button6.Location = new System.Drawing.Point(598, 84);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 28);
-            this.button6.TabIndex = 8;
-            this.button6.Tag = "com.td.crear";
-            this.button6.Text = "Crear";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btnCrear.Location = new System.Drawing.Point(598, 84);
+            this.btnCrear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCrear.Name = "btnCrear";
+            this.btnCrear.Size = new System.Drawing.Size(100, 28);
+            this.btnCrear.TabIndex = 8;
+            this.btnCrear.Tag = "com.td.crear";
+            this.btnCrear.Text = "Crear";
+            this.btnCrear.UseVisualStyleBackColor = true;
+            this.btnCrear.Click += new System.EventHandler(this.button6_Click);
             // 
             // comboFiltro
             // 
@@ -246,7 +246,7 @@
             // 
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.comboFiltro);
-            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.btnCrear);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -255,7 +255,7 @@
             this.groupBox1.Size = new System.Drawing.Size(704, 172);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "com.td.busqueda";
+            this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
             // ListaDeUsuarios
@@ -264,14 +264,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 457);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnDel);
+            this.Controls.Add(this.btnRegen);
+            this.Controls.Add(this.btnMod);
+            this.Controls.Add(this.btnBloq);
             this.Controls.Add(this.gwUsuarios);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ListaDeUsuarios";
+            this.Tag = "com.td.usuarios";
             this.Text = "Usuarios";
             this.Load += new System.EventHandler(this.ListaDeUsuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gwUsuarios)).EndInit();
@@ -284,14 +285,14 @@
         #endregion
 
         private System.Windows.Forms.DataGridView gwUsuarios;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnBloq;
+        private System.Windows.Forms.Button btnMod;
+        private System.Windows.Forms.Button btnRegen;
+        private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnCrear;
         private System.Windows.Forms.ComboBox comboFiltro;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox1;

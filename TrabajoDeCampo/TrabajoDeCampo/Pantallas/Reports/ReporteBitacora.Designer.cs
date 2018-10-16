@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.reportViewer1);
             this.Name = "ReporteBitacora";
+            this.Tag = "com.td.reportes";
             this.Text = "ReporteBitacora";
             this.Load += new System.EventHandler(this.ReporteBitacora_Load);
             this.ResumeLayout(false);

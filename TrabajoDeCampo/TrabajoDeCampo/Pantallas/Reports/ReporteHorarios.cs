@@ -47,6 +47,9 @@ namespace TrabajoDeCampo.Pantallas.Reports
 
         private void ReporteHorarios_Load(object sender, EventArgs e)
         {
+            String code = TrabajoDeCampo.Properties.Settings.Default.Idioma;
+            this.Text = (code.Equals("es")) ? "Reporte" : "Report";
+
 
             this.reportViewer1.Reset();
             ReportDataSource source = new ReportDataSource("DataSet1", this.horarios);

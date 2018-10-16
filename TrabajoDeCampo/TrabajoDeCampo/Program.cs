@@ -19,21 +19,12 @@ namespace TrabajoDeCampo
         public static void Main(string[] args)
         {
 
-            String machineName = (Environment.UserName == "Navegador") ? Environment.UserDomainName + @"\" + Environment.UserName : Environment.MachineName;
-            TrabajoDeCampo.Properties.Settings.Default.ConnectionString = "Data Source = " + machineName + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
-       
-
-            //ActualizarConexion conec = new ActualizarConexion();
-            //conec.Show();
-
-            //FalloConexión fallo = new FalloConexión();
-            //fallo.Show();
-            //   encriptarUsuarios();
-            //ListarFamilias familias = new ListarFamilias();
-            //familias.Show();
-
-            //new testeador().Show();
-            //    mostrarTodasLasPantallas();
+            String machineName = (Environment.UserName == "Navegador") ? Environment.UserDomainName + @"\" + "SQL14_UAI" : Environment.MachineName;
+            String connection = "Data Source = " + machineName + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
+            TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(connection));
+            String master = "Data Source = " + machineName + " ; Initial Catalog = master ; Integrated Security = True";
+            TrabajoDeCampo.Properties.Settings.Default.MasterString = Convert.ToBase64String(Encoding.UTF8.GetBytes(master));
+          
 
             Boolean seConecto = true;
             try

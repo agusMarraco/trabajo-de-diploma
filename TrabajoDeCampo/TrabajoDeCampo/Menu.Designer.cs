@@ -41,8 +41,8 @@
             this.promociónDeAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignaciónDeMateriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recalcularDVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restaurarBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuarioMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.permisoMenuITem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.respaldarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restaurarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,6 +80,7 @@
             this.alumnosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alumnosToolStripMenuItem1,
             this.tutoresToolStripMenuItem});
+            this.alumnosToolStripMenuItem.Enabled = false;
             this.alumnosToolStripMenuItem.Name = "alumnosToolStripMenuItem";
             this.alumnosToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.alumnosToolStripMenuItem.Tag = "com.td.alumnos";
@@ -87,6 +88,7 @@
             // 
             // alumnosToolStripMenuItem1
             // 
+            this.alumnosToolStripMenuItem1.Enabled = false;
             this.alumnosToolStripMenuItem1.Name = "alumnosToolStripMenuItem1";
             this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.alumnosToolStripMenuItem1.Tag = "com.td.alumnos";
@@ -95,6 +97,7 @@
             // 
             // tutoresToolStripMenuItem
             // 
+            this.tutoresToolStripMenuItem.Enabled = false;
             this.tutoresToolStripMenuItem.Name = "tutoresToolStripMenuItem";
             this.tutoresToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.tutoresToolStripMenuItem.Tag = "com.td.tutores";
@@ -126,6 +129,7 @@
             this.materiasToolStripMenuItem,
             this.promociónDeAlumnosToolStripMenuItem,
             this.asignaciónDeMateriasToolStripMenuItem});
+            this.administraciónToolStripMenuItem.Enabled = false;
             this.administraciónToolStripMenuItem.Name = "administraciónToolStripMenuItem";
             this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.administraciónToolStripMenuItem.Tag = "com.td.administración";
@@ -133,6 +137,7 @@
             // 
             // cursosToolStripMenuItem
             // 
+            this.cursosToolStripMenuItem.Enabled = false;
             this.cursosToolStripMenuItem.Name = "cursosToolStripMenuItem";
             this.cursosToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.cursosToolStripMenuItem.Tag = "com.td.cursos";
@@ -141,6 +146,7 @@
             // 
             // horariosToolStripMenuItem
             // 
+            this.horariosToolStripMenuItem.Enabled = false;
             this.horariosToolStripMenuItem.Name = "horariosToolStripMenuItem";
             this.horariosToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.horariosToolStripMenuItem.Tag = "com.td.horarios";
@@ -149,6 +155,7 @@
             // 
             // materiasToolStripMenuItem
             // 
+            this.materiasToolStripMenuItem.Enabled = false;
             this.materiasToolStripMenuItem.Name = "materiasToolStripMenuItem";
             this.materiasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.materiasToolStripMenuItem.Tag = "com.td.materias";
@@ -157,6 +164,7 @@
             // 
             // promociónDeAlumnosToolStripMenuItem
             // 
+            this.promociónDeAlumnosToolStripMenuItem.Enabled = false;
             this.promociónDeAlumnosToolStripMenuItem.Name = "promociónDeAlumnosToolStripMenuItem";
             this.promociónDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.promociónDeAlumnosToolStripMenuItem.Tag = "com.td.promoción.de.alumnos";
@@ -165,45 +173,51 @@
             // 
             // asignaciónDeMateriasToolStripMenuItem
             // 
+            this.asignaciónDeMateriasToolStripMenuItem.Enabled = false;
             this.asignaciónDeMateriasToolStripMenuItem.Name = "asignaciónDeMateriasToolStripMenuItem";
             this.asignaciónDeMateriasToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.asignaciónDeMateriasToolStripMenuItem.Tag = "com.td.asignación.de.materias";
             this.asignaciónDeMateriasToolStripMenuItem.Text = "Asignación de Materias";
             this.asignaciónDeMateriasToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeMateriasToolStripMenuItem_Click);
             // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.recalcularDVToolStripMenuItem,
-            this.restaurarBDToolStripMenuItem,
+            this.usuarioMenuItem,
+            this.permisoMenuITem,
             this.backupToolStripMenuItem,
             this.recalcularDígitosVerificadoresToolStripMenuItem,
             this.bitácoraToolStripMenuItem});
+            this.seguridadToolStripMenuItem.Enabled = false;
             this.seguridadToolStripMenuItem.Name = "seguridadToolStripMenuItem";
             this.seguridadToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.seguridadToolStripMenuItem.Tag = "com.td.seguridad";
             this.seguridadToolStripMenuItem.Text = "Seguridad";
             // 
-            // recalcularDVToolStripMenuItem
+            // usuarioMenuItem
             // 
-            this.recalcularDVToolStripMenuItem.Name = "recalcularDVToolStripMenuItem";
-            this.recalcularDVToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.recalcularDVToolStripMenuItem.Tag = "com.td.usuarios";
-            this.recalcularDVToolStripMenuItem.Text = "Usuarios";
-            this.recalcularDVToolStripMenuItem.Click += new System.EventHandler(this.recalcularDVToolStripMenuItem_Click);
+            this.usuarioMenuItem.Enabled = false;
+            this.usuarioMenuItem.Name = "usuarioMenuItem";
+            this.usuarioMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.usuarioMenuItem.Tag = "com.td.usuarios";
+            this.usuarioMenuItem.Text = "Usuarios";
+            this.usuarioMenuItem.Click += new System.EventHandler(this.recalcularDVToolStripMenuItem_Click);
             // 
-            // restaurarBDToolStripMenuItem
+            // permisoMenuITem
             // 
-            this.restaurarBDToolStripMenuItem.Name = "restaurarBDToolStripMenuItem";
-            this.restaurarBDToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.restaurarBDToolStripMenuItem.Tag = "com.td.permisos";
-            this.restaurarBDToolStripMenuItem.Text = "Permisos";
-            this.restaurarBDToolStripMenuItem.Click += new System.EventHandler(this.restaurarBDToolStripMenuItem_Click);
+            this.permisoMenuITem.Enabled = false;
+            this.permisoMenuITem.Name = "permisoMenuITem";
+            this.permisoMenuITem.Size = new System.Drawing.Size(238, 22);
+            this.permisoMenuITem.Tag = "com.td.permisos";
+            this.permisoMenuITem.Text = "Permisos";
+            this.permisoMenuITem.Click += new System.EventHandler(this.restaurarBDToolStripMenuItem_Click);
             // 
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.respaldarToolStripMenuItem,
             this.restaurarToolStripMenuItem});
+            this.backupToolStripMenuItem.Enabled = false;
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
             this.backupToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.backupToolStripMenuItem.Tag = "com.td.backup";
@@ -211,6 +225,7 @@
             // 
             // respaldarToolStripMenuItem
             // 
+            this.respaldarToolStripMenuItem.Enabled = false;
             this.respaldarToolStripMenuItem.Name = "respaldarToolStripMenuItem";
             this.respaldarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.respaldarToolStripMenuItem.Tag = "com.td.respaldar";
@@ -219,6 +234,7 @@
             // 
             // restaurarToolStripMenuItem
             // 
+            this.restaurarToolStripMenuItem.Enabled = false;
             this.restaurarToolStripMenuItem.Name = "restaurarToolStripMenuItem";
             this.restaurarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.restaurarToolStripMenuItem.Tag = "com.td.restaurar";
@@ -227,6 +243,7 @@
             // 
             // recalcularDígitosVerificadoresToolStripMenuItem
             // 
+            this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = false;
             this.recalcularDígitosVerificadoresToolStripMenuItem.Name = "recalcularDígitosVerificadoresToolStripMenuItem";
             this.recalcularDígitosVerificadoresToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.recalcularDígitosVerificadoresToolStripMenuItem.Tag = "com.td.recalcular.dígitos.verificadores";
@@ -235,6 +252,7 @@
             // 
             // bitácoraToolStripMenuItem
             // 
+            this.bitácoraToolStripMenuItem.Enabled = false;
             this.bitácoraToolStripMenuItem.Name = "bitácoraToolStripMenuItem";
             this.bitácoraToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.bitácoraToolStripMenuItem.Tag = "com.td.bitácora";
@@ -283,7 +301,7 @@
             // inglesToolStripMenuItem
             // 
             this.inglesToolStripMenuItem.Name = "inglesToolStripMenuItem";
-            this.inglesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.inglesToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.inglesToolStripMenuItem.Tag = "com.td.ingles";
             this.inglesToolStripMenuItem.Text = "Ingles";
             this.inglesToolStripMenuItem.Click += new System.EventHandler(this.inglesToolStripMenuItem_Click);
@@ -291,7 +309,7 @@
             // españolToolStripMenuItem
             // 
             this.españolToolStripMenuItem.Name = "españolToolStripMenuItem";
-            this.españolToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.españolToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.españolToolStripMenuItem.Tag = "com.td.español";
             this.españolToolStripMenuItem.Text = "Español";
             this.españolToolStripMenuItem.Click += new System.EventHandler(this.españolToolStripMenuItem_Click);
@@ -320,6 +338,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Menu";
+            this.Tag = "com.td.menu";
             this.Text = "Gestión Educativa";
             this.Load += new System.EventHandler(this.Menu_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -336,8 +355,8 @@
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seguridadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem recalcularDVToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem restaurarBDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuarioMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem permisoMenuITem;
         private System.Windows.Forms.ToolStripMenuItem alumnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem docenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notasToolStripMenuItem;

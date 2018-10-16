@@ -157,7 +157,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 16);
             this.label6.TabIndex = 11;
-            this.label6.Tag = "com.td.modulo";
+            this.label6.Tag = "com.td.módulo";
             this.label6.Text = "Módulo";
             // 
             // cbModulo

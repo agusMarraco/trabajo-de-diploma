@@ -18,8 +18,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
     public partial class AltaModificacionUsuario : Form
     {
         private ServicioSeguridad servicioSeguridad;
+        private Dictionary<string, string> traducciones;
         private FormUtils formUtils;
-        private Dictionary<String, String> mensajesDeValidacion = new Dictionary<string, string>();
+        
         private StringBuilder mensajesDeError = new StringBuilder();
         
         private Boolean isEdit;
@@ -132,7 +133,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             formUtils.process(tags, this, null, null);
             tags.Add("com.td.ingles");
             tags.Add("com.td.español");
-            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            tags.Add("com.td.completado");
+            tags.Add("com.td.permisos.esenciales");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             formUtils = new TraductorReal();
             formUtils.process(null, this, traducciones, null);
             formUtils = new TraductorIterador();
@@ -207,17 +210,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             mensajesDeError = new StringBuilder();
             Boolean hayErrores = false;
-            if (mensajesDeValidacion.Count == 0)
-            {
-                String[] array = { "com.td.validacion.alerta","com.td.validacion.error","com.td.error.generico","com.td.completado.generico" };
-                List<String> tags = new List<string>(array);
-                mensajesDeValidacion = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
-
-            }
-
-            mensajesDeError.Append(mensajesDeValidacion["com.td.validacion.alerta"]);
-            mensajesDeError.Append(Environment.NewLine);
-            if (String.IsNullOrEmpty(this.nombre.Text))
+                        if (String.IsNullOrEmpty(this.nombre.Text))
             {
                 mensajesDeError.Append(this.nombrelbl.Text);
                 mensajesDeError.Append(Environment.NewLine);
@@ -282,7 +275,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
             if (hayErrores)
             {
-                MessageBox.Show(mensajesDeError.ToString(), mensajesDeValidacion["com.td.validacion.error"], MessageBoxButtons.OK);
+                MessageBox.Show(mensajesDeError.ToString(), "", MessageBoxButtons.OK);
             }
             else
             {
@@ -310,13 +303,23 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     {
                         error = true;
                         StringBuilder sb = new StringBuilder();
-                        sb.Append(mensajesDeValidacion["com.td.error.generico"]);
-                        sb.Append(Environment.NewLine);
-                        sb.Append(exe.Message);
-                        MessageBox.Show(sb.ToString(), mensajesDeValidacion["com.td.validacion.error"], MessageBoxButtons.OK);
+                   
+                   
+                        if (exe.Message == "PERMISOS")
+                        {
+                            sb.Append(traducciones["com.td.permisos.esenciales"]);
+                        }
+                        else
+                        {
+                            sb.Append(exe.Message);
+                        }
+                        MessageBox.Show(sb.ToString(), "", MessageBoxButtons.OK);
                     }
                     if (!error)
-                        MessageBox.Show(mensajesDeValidacion["com.td.completado.generico"], mensajesDeValidacion["com.td.validacion.error"], MessageBoxButtons.OK);
+                    {
+                        MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
+                        this.Close();
+                    }
                   
                 }
                 else
@@ -341,14 +344,14 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     catch (Exception exe)
                     {
                         error = true;
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append(mensajesDeValidacion["com.td.error.generico"]);
-                        sb.Append(Environment.NewLine);
-                        sb.Append(exe.Message);
-                        MessageBox.Show(sb.ToString(), mensajesDeValidacion["com.td.validacion.error"], MessageBoxButtons.OK);
+
+                        MessageBox.Show(exe.Message, "", MessageBoxButtons.OK);
                     }
-                    if(!error)
-                    MessageBox.Show(mensajesDeValidacion["com.td.completado.generico"], mensajesDeValidacion["com.td.validacion.error"], MessageBoxButtons.OK);
+                    if (!error)
+                    {
+                        MessageBox.Show(traducciones["com.td.completado"],"", MessageBoxButtons.OK);
+                        this.Close();
+                    }
                 }
 
             }

@@ -66,16 +66,20 @@ namespace TrabajoDeCampo.Pantallas.Reports
         private void ReporteAmonestaciones_Load(object sender, EventArgs e)
         {
 
-
-                this.reportViewer1.Reset();
-                ReportDataSource source = new ReportDataSource("DataSet1", this.amonestaciones);
-                ReportDataSource source2 = new ReportDataSource("DataSet2", this.traducciones.Tables[0]);
-                this.reportViewer1.LocalReport.DataSources.Clear();
-                this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\Amonestaciones.rdlc";
-                this.reportViewer1.LocalReport.DataSources.Add(source);
-                this.reportViewer1.LocalReport.DataSources.Add(source2);
-                this.reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
-                this.reportViewer1.RefreshReport();
+            String code = TrabajoDeCampo.Properties.Settings.Default.Idioma;
+            this.Text = (code.Equals("es")) ? "Reporte" : "Report";
+            this.reportViewer1.Reset();
+            ReportDataSource source = new ReportDataSource("DataSet1", this.amonestaciones);
+            ReportDataSource source2 = new ReportDataSource("DataSet2", this.traducciones.Tables[0]);
+            DataTable table2 = (this.info as InfoColegio).DataTable1;
+            ReportDataSource source3 = new ReportDataSource("DataSet3", table2);
+            this.reportViewer1.LocalReport.DataSources.Clear();
+            this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\Amonestaciones.rdlc";
+            this.reportViewer1.LocalReport.DataSources.Add(source);
+            this.reportViewer1.LocalReport.DataSources.Add(source2);
+            this.reportViewer1.LocalReport.DataSources.Add(source3);
+            this.reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
+            this.reportViewer1.RefreshReport();
         }
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
@@ -88,6 +92,7 @@ namespace TrabajoDeCampo.Pantallas.Reports
                 List<Curso> cursos = new List<Curso>() { this.alumno.curso };
                 this.nivel.orientacionCodigo = this.alumno.orientacion.nombre;
                 List<Nivel> niveles = new List<Nivel>() { this.nivel };
+                
                 ReportDataSource source = new ReportDataSource("DataSet1", list);
                 DataTable table = (this.traducciones as Traducciones).DataTable1;
                 ReportDataSource source2 = new ReportDataSource("DataSet4", table);

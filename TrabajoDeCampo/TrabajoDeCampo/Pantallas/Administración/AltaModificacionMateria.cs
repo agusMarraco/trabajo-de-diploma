@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Administración
@@ -20,6 +21,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private Materia currentMateria = null;
         private Boolean valido = false;
         private Regex onlyLetters = new Regex("[a-zA-Z]");
+        private Dictionary<String, String> traducciones;
 
 
         private Materias callerForm = null;
@@ -61,6 +63,18 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.textBox1.KeyPress += TextBox1_KeyPress;
             this.textBox2.KeyPress += TextBox2_KeyPress;
             this.textBox2.KeyDown += TextBox2_KeyDown; ;
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.Add("com.td.complete.campos");
+            tags.Add("com.td.existe.materia");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
         }
 
         
@@ -74,7 +88,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             if(String.IsNullOrEmpty(nombreMateria.Trim()) || String.IsNullOrEmpty(descripcion.Trim()) || 
                 (!this.rbExtracurricular.Checked && !this.rbTroncal.Checked))
             {
-                MessageBox.Show("complete todos los campos.");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
             try
             {
@@ -111,7 +125,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
                 if(ex.Message == "EXISTE")
                 {
-                    MessageBox.Show("Existe la materia");
+                    MessageBox.Show(traducciones["com.td.existe.materia"]);
                 }
                 else
                 {

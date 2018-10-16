@@ -46,7 +46,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 16);
             this.label1.TabIndex = 0;
-            this.label1.Tag = "com.td.contraseña";
+            this.label1.Tag = "com.td.contraseña.actual";
             this.label1.Text = "Contraseña Actual";
             // 
             // actual
@@ -134,6 +134,7 @@
             this.Controls.Add(this.actual);
             this.Controls.Add(this.label1);
             this.Name = "CambiarContraseña";
+            this.Tag = "com.td.cambiar.contraseña";
             this.Text = "Cambiar Contraseña";
             this.Load += new System.EventHandler(this.CambiarContraseña_Load);
             this.ResumeLayout(false);

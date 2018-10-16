@@ -78,6 +78,25 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.dataGridView1.Columns[2].DataPropertyName = "dni";
             this.dataGridView1.Columns[3].DataPropertyName = "curso";
             listarAlumnos(null, null);
+            desbloquearControles();
+        }
+
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearAlumno.ToString());
+            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarAlumno.ToString());
+            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarAlumno.ToString());
+            
+            bool inasistencias = servicioSeguridad.tienePatente(id, EnumPatentes.RegistrarInasistencia.ToString());
+            bool amonestaciones = servicioSeguridad.tienePatente(id, EnumPatentes.RegistrarAmonestación.ToString());
+            bool repetir = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarAlumno.ToString());
+            this.btnRegistrar.Enabled = crear;
+            this.btnMod.Enabled = modificar;
+            this.btnDel.Enabled = borrar;
+            this.btnIna.Enabled = inasistencias;
+            this.btnAmon.Enabled = amonestaciones;
+            this.btnRepetir.Enabled = repetir;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -212,6 +231,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.servicioAlumnos.repetirAlumno(alumno);
                 this.listarAlumnos(null, null);
             }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

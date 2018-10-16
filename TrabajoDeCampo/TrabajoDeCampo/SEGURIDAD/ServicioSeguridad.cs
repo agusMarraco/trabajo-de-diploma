@@ -111,9 +111,18 @@ namespace TrabajoDeCampo.SERVICIO
             
         }
 
-        public void bloquearUsuario(long idUsuario) {
-            this.daoSeguridad.bloquearUsuario(idUsuario);
-                
+        public void bloquearUsuario(Usuario usu) {
+            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usu);
+            if (!errorEsenciales)
+            {
+                this.daoSeguridad.bloquearUsuario(usu.id);
+            }
+            else
+            {
+                throw new Exception("PERMISOS");
+            }
+
+
         }
         public void desbloquearUsuario(Usuario usuario) {
             this.regenerarContraseña(usuario);
@@ -144,13 +153,30 @@ namespace TrabajoDeCampo.SERVICIO
             return this.daoSeguridad.buscarUsuario(idUsuario);
         }
         public void modificarUsuario(Usuario usuario) {
-            //this.daoSeguridad.verificarPermisosEsenciales(usuario);
-            this.daoSeguridad.modificarUsuario(usuario);
+            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
+            if (!errorEsenciales)
+            {
+                this.daoSeguridad.modificarUsuario(usuario);
+            }
+            else
+            {
+                throw new Exception("PERMISOS");
+            }
+            
                 
         }
 
         public void borrarUsuario(Usuario usuario) {
-            this.daoSeguridad.borrarUsuario(usuario);
+            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
+            if (!errorEsenciales)
+            {
+                this.daoSeguridad.borrarUsuario(usuario);
+            }
+            else
+            {
+                throw new Exception("PERMISOS");
+            }
+            
         }
 
         public List<Usuario> listarUsuarios(String filtro, String valor, String orden)
@@ -188,19 +214,18 @@ namespace TrabajoDeCampo.SERVICIO
                 }
                 string idiomaId = TrabajoDeCampo.Properties.Settings.Default.Idioma;
                 List<String> tag = new List<string>();
-                String code = "";
+                String code = "com.td.completado";
                 tag.Add(code);
                 Dictionary<String,String> translation =  this.daoSeguridad.traerTraducciones(tag,idiomaId);
-               // MessageBox.Show(translation[code]);
+                MessageBox.Show(translation[code]);
             }
             catch (Exception ex)
             {
                 string idiomaId = TrabajoDeCampo.Properties.Settings.Default.Idioma;
                 List<String> tag = new List<string>();
-                String code = "";
-                tag.Add(code);
+                
                 Dictionary<String, String> translation = this.daoSeguridad.traerTraducciones(tag, idiomaId);
-               // MessageBox.Show(translation[code] + ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -210,55 +235,8 @@ namespace TrabajoDeCampo.SERVICIO
             String date = DateTime.Now.Date.ToShortDateString();
             date = date.Replace("/", "_");
             String nombreDelBack = "TRABAJO_DIPLOMA_" + date + "_";
-
-            //foreach (String item in Directory.GetFiles(directorio, nombreDelBack+"*"))
-            //{
-            //    File.Delete(item);
-            //}
-
-            //partes = partes==10 ? partes - 1 : partes;
             directorio += "//" + nombreDelBack; 
             this.daoSeguridad.realizarBackup(partes, directorio);
-            ////consulto filesize
-            //FileInfo informacionDelArchivo = new FileInfo(directorio + "\\tempBackup.bak");
-
-            //long size = informacionDelArchivo.Length;
-            ////calculo el max size por parte
-            //Double chunk = size / partes;
-
-            //byte[] buffer = new byte[(int)Math.Round(chunk)];
-
-
-            //string archivoTemporal = directorio + "\\tempBackup.bak";
-            //Stream tempBak = File.OpenRead(archivoTemporal);
-            //Stream destino;
-            //int index = 1;
-            //while (tempBak.Position < tempBak.Length)
-            //{
-            //    String nombreNuevo = nombreDelBack + index;
-            //    index++;
-            //    File.Create(directorio + "\\" + nombreNuevo + ".bak").Close();
-            //    destino = File.OpenWrite(directorio + "\\" + nombreNuevo +".bak");
-
-
-            //    while( destino.Position < chunk)
-            //    {
-            //        int leerHasta= (int)Math.Min(chunk, buffer.Length);
-            //        int cantidadLeida =  tempBak.Read(buffer, 0, leerHasta);
-            //        destino.Write(buffer, 0, cantidadLeida);
-
-            //        if (cantidadLeida < Math.Min(chunk, buffer.Length))
-            //            break;
-            //    }
-
-            //    destino.Close();
-
-
-            //}
-
-            //tempBak.Close();
-            //File.Delete(archivoTemporal);
-
 
         }
 
@@ -288,22 +266,8 @@ namespace TrabajoDeCampo.SERVICIO
                 }
 
             }
-            //String directorioTemporal = directorioActual + "tempRestoreFile.bak";
 
-            //Stream stream = File.Create(directorioTemporal);
-
-            //foreach (String archivo in todosLosArchivos)
-            //{
-            //    Stream parte = File.OpenRead(archivo);
-            //    parte.CopyTo(stream);
-            //    parte.Close();
-            //}
-
-            //stream.Close();
             daoSeguridad.realizarRestore(bs.ToString());
-
-            //File.Delete(directorioTemporal);
-
         }
 
         //IDIOMA

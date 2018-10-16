@@ -70,19 +70,22 @@ namespace TrabajoDeCampo.Pantallas.Reports
 
         private void ReporteInasistencias_Load(object sender, EventArgs e)
         {
+            String code = TrabajoDeCampo.Properties.Settings.Default.Idioma;
+            this.Text = (code.Equals("es")) ? "Reporte" : "Report";
 
             this.reportViewer1.Reset();
             ReportDataSource source = new ReportDataSource("DataSet1", this.inasistencias);
             DataTable dt = this.traducciones.DataTable1;
             ReportDataSource source2 = new ReportDataSource("DataSet2", dt);
+            DataTable table2 = (this.info as InfoColegio).DataTable1;
+            ReportDataSource source5 = new ReportDataSource("DataSet3", table2);
             this.reportViewer1.LocalReport.DataSources.Clear();
             this.reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\\Pantallas\\Reports\\Inasistencias.rdlc";
             this.reportViewer1.LocalReport.DataSources.Add(source);
             this.reportViewer1.LocalReport.DataSources.Add(source2);
+            this.reportViewer1.LocalReport.DataSources.Add(source5);
             this.reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
             this.reportViewer1.RefreshReport();
-
-
 
 
 

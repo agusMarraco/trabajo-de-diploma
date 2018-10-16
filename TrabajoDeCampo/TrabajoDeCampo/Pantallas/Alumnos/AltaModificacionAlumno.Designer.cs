@@ -146,7 +146,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 13);
             this.label7.TabIndex = 13;
-            this.label7.Tag = "com.td.orientacion";
+            this.label7.Tag = "com.td.orientación";
             this.label7.Text = "Orientación";
             // 
             // oricombo
@@ -208,7 +208,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 6;
-            this.label4.Tag = "com.td.d.n.i";
+            this.label4.Tag = "com.td.d.n.i.";
             this.label4.Text = "D.N.I.";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
@@ -293,6 +293,7 @@
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AltaModificacionAlumno
             // 
@@ -304,6 +305,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "AltaModificacionAlumno";
+            this.Tag = "com.td.alumno";
             this.Text = "Alumno";
             this.Load += new System.EventHandler(this.AltaModificacionAlumno_Load);
             this.groupBox1.ResumeLayout(false);

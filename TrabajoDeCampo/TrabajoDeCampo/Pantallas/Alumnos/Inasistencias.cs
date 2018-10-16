@@ -23,6 +23,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private InasistenciaAlumno current;
 
         private Alumno alumno;
+        private Dictionary<string, string> traducciones;
+
         public Inasistencias()
         {
             InitializeComponent();
@@ -66,8 +68,30 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.dataGridView1.Columns[0].DataPropertyName = "fecha";
             this.dataGridView1.Columns[1].DataPropertyName = "valor";
             this.dataGridView1.Columns[2].DataPropertyName = "justificada";
+            this.dataGridView1.Columns[0].Tag = "com.td.fecha";
+            this.dataGridView1.Columns[1].Tag= "com.td.valor";
+            this.dataGridView1.Columns[2].Tag= "com.td.justificada";
             listarInasistencias();
+            desbloquearControles();
 
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            tags.Add("com.td.completado");
+            tags.Add("com.td.fecha.ocupada");
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+
+        }
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool export = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarReportes.ToString());
+            this.btnExportar.Enabled = export;
         }
 
         public void listarInasistencias()
@@ -154,13 +178,13 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                     if (!repetidas)
                     {
                         this.servicioAlumnos.modificarInasistencia(this.current);
-                        MessageBox.Show("Inasistencia Modificada");
+                        MessageBox.Show(traducciones["com.td.completado"]);
                         this.limpiar();
                         this.listarInasistencias();
                     }
                     else
                     {
-                        MessageBox.Show("Ya registro una fecha en ese dia.");
+                        MessageBox.Show(traducciones["com.td.fecha.ocupada"]);
                     }
                  
                 }
@@ -182,13 +206,13 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                     if (!repetidas)
                     {
                         this.servicioAlumnos.guardarInasistencia(inas);
-                        MessageBox.Show("Inasistencia Guardada");
+                        MessageBox.Show(traducciones["com.td.completado"]);
                         this.limpiar();
                         this.listarInasistencias();
 
                     }else
                     {
-                        MessageBox.Show("Ya registro una fecha en ese dia.");
+                        MessageBox.Show(traducciones["com.td.fecha.ocupada"]);
                     }
                     
                 }

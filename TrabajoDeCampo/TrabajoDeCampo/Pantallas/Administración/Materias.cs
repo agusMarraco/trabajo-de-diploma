@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Administración
@@ -16,6 +17,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private ServicioSeguridad servicioSeguridad;
 
         private ServicioAdministracion servicioAdministracion;
+        private Dictionary<String, String> traducciones;
         public Materias()
         {
             InitializeComponent();
@@ -26,6 +28,10 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.dataGridView1.Columns[0].DataPropertyName = "nombre";
             this.dataGridView1.Columns[1].DataPropertyName = "tipo";
             this.dataGridView1.Columns[2].DataPropertyName = "descripcion";
+            this.dataGridView1.Columns[0].Tag = "com.td.nombre";
+            this.dataGridView1.Columns[1].Tag = "com.td.tipo";
+            this.dataGridView1.Columns[2].Tag = "com.td.descripción";
+
             this.dataGridView1.ColumnHeaderMouseClick += customSort;
         }
 
@@ -45,8 +51,34 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
                 MessageBox.Show(ex.Message);
             }
+            desbloquearControles();
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.Add("com.td.materia.asignada");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+
+        }
+
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearMateria.ToString());
+            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarMateria.ToString());
+            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarMateria.ToString());
+            
+
+            this.btnCrear.Enabled = crear;
+            this.btnMod.Enabled = modificar;
+            this.btnDel.Enabled = borrar;
             
         }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -86,7 +118,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
                     if(ex.Message == "ASIGNADA")
                     {
-                        MessageBox.Show("La materia esta asignada");
+                        MessageBox.Show(traducciones["com.td.materia.asignada"]);
                     }
                     else
                     {

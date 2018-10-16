@@ -37,8 +37,7 @@ namespace TrabajoDeCampo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=T" +
-            "rue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));
@@ -73,7 +72,7 @@ namespace TrabajoDeCampo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-SL9JPN8;Initial Catalog=master;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string MasterString {
             get {
                 return ((string)(this["MasterString"]));

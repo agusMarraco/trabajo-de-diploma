@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.Pantallas.Administración;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas
@@ -20,6 +21,7 @@ namespace TrabajoDeCampo.Pantallas
         private ServicioDocentes servicioDocentes;
         private Horario currentHorario;
         private Horarios parentForm;
+        private Dictionary<String, String> traducciones;
         public AltaModificacionHorario()
         {
             InitializeComponent();
@@ -85,7 +87,17 @@ namespace TrabajoDeCampo.Pantallas
             {
                 populateDataFromHorario(this.currentHorario);
             }
-            
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+
         }
 
 

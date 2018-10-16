@@ -9,6 +9,7 @@ using System.Data;
 using TrabajoDeCampo.Pantallas.Reports;
 using System.Reflection;
 using TrabajoDeCampo.Properties.DataSources;
+using TrabajoDeCampo.SEGURIDAD;
 
 namespace TrabajoDeCampo.SERVICIO
 {
@@ -36,31 +37,49 @@ namespace TrabajoDeCampo.SERVICIO
             String fullname = "TrabajoDeCampo.Pantallas.Reports." + nombreDelReporte;
             object tipo = Type.GetType(fullname).GetConstructor(new Type[0]).Invoke(null);
 
+            //traduccion
+            List<String> tags = new List<string>();
+            tags.AddRange(new string[] {
+                "com.td.justificada","com.td.fecha","com.td.tipo","com.td.motivo","com.td.descripción","com.td.faltas.totales","com.td.si","com.td.no",
+                "com.td.módulo", "com.td.criticidad",
+                "com.td.plan.estudios","com.td.cursos","com.td.amonestaciones","com.td.inasistencias","com.td.horarios","com.td.bitácora",
+                "com.td.lunes","com.td.martes","com.td.miercoles","com.td.jueves","com.td.viernes","com.td.desde","com.td.hasta",
+                "com.td.mensaje","com.td.nivel","com.td.excedido","com.td.disclaimer","com.td.maximo","com.td.actual",
+                "com.td.d.n.i.", "com.td.alias", "com.td.apellido", "com.td.nombre"});
+            Dictionary<string,string> traduccionesDeBase = new ServicioSeguridad().traerTraducciones(tags, Properties.Settings.Default.Idioma);
+      
+
+
             Traducciones traducciones = new Traducciones();
 
             DataRow row = traducciones.DataTable1.NewDataTable1Row();
-            row.SetField("justificadaLbl", "Justificada");
-            row.SetField("fechaLbl", "Fecha");
-            row.SetField("tipoLbl", "Tipo");
-            row.SetField("motivoLbl", "Motivo");
-            row.SetField("apellidoLbl", "Apellido");
-            row.SetField("nombreLbl", "Nombre");
-            row.SetField("dniLbl", "DNI");
-            row.SetField("faltasTotalesLbl", "Faltas Totales");
-            row.SetField("descripcionLbl", "Decripcion");
-            row.SetField("siLbl", "SI");
-            row.SetField("noLbl", "NO");
-            row.SetField("moduloLbl", "Modulo");
-            row.SetField("lunesLbl", "Lunes");
-            row.SetField("martesLbl", "Martes");
-            row.SetField("miercolesLbl", "Miercoles");
-            row.SetField("juevesLbl", "Jueves");
-            row.SetField("viernesLbl", "Viernes");
-            row.SetField("desdeLbl", "Desde");
-            row.SetField("hastaLbl", "Hasta");
-            row.SetField("criticidadLbl", "Criticidad");
-            row.SetField("usuarioLbl", "Usuario");
-            row.SetField("mensajeLbl", "Mensaje");
+            row.SetField("justificadaLbl", traduccionesDeBase["com.td.justificada"]);
+            row.SetField("fechaLbl", traduccionesDeBase["com.td.fecha"]);
+            row.SetField("tipoLbl", traduccionesDeBase["com.td.tipo"]);
+            row.SetField("motivoLbl", traduccionesDeBase["com.td.motivo"]);
+            row.SetField("apellidoLbl", traduccionesDeBase["com.td.apellido"]);
+            row.SetField("nombreLbl", traduccionesDeBase["com.td.nombre"]);
+            row.SetField("dniLbl", traduccionesDeBase["com.td.d.n.i."]);
+            row.SetField("faltasTotalesLbl", traduccionesDeBase["com.td.faltas.totales"]);
+            row.SetField("descripcionLbl", traduccionesDeBase["com.td.descripción"]);
+            row.SetField("siLbl", traduccionesDeBase["com.td.si"]);
+            row.SetField("noLbl", traduccionesDeBase["com.td.no"]);
+            row.SetField("moduloLbl", traduccionesDeBase["com.td.módulo"]);
+            row.SetField("lunesLbl", traduccionesDeBase["com.td.lunes"]);
+            row.SetField("martesLbl", traduccionesDeBase["com.td.martes"]);
+            row.SetField("miercolesLbl", traduccionesDeBase["com.td.miercoles"]);
+            row.SetField("juevesLbl", traduccionesDeBase["com.td.jueves"]);
+            row.SetField("viernesLbl", traduccionesDeBase["com.td.viernes"]);
+            row.SetField("desdeLbl", traduccionesDeBase["com.td.desde"]);
+            row.SetField("hastaLbl", traduccionesDeBase["com.td.hasta"]);
+            row.SetField("criticidadLbl", traduccionesDeBase["com.td.criticidad"]);
+            row.SetField("usuarioLbl", traduccionesDeBase["com.td.alias"]);
+            row.SetField("mensajeLbl", traduccionesDeBase["com.td.mensaje"]);
+            row.SetField("nivelLbl", traduccionesDeBase["com.td.nivel"]);
+            row.SetField("excedidoLbl", false);
+            row.SetField("disclaimerLbl", traduccionesDeBase["com.td.disclaimer"]);
+            row.SetField("maximoLbl", traduccionesDeBase["com.td.maximo"]);
+            row.SetField("actualLbl", traduccionesDeBase["com.td.actual"]);
             traducciones.DataTable1.Rows.Add(row);
 
             InfoColegio colegio = new InfoColegio();
@@ -76,7 +95,7 @@ namespace TrabajoDeCampo.SERVICIO
                 ReportePlanDeEstudios reporte = tipo as ReportePlanDeEstudios;
                 reporte.lista = objetos as List<Nivel>;
                 reporte.informacion = traducciones;
-                rowColegio.SetField("nombreReporte", "Plan de Estudios");
+                rowColegio.SetField("nombreReporte", traduccionesDeBase["com.td.plan.estudios"]);
                 reporte.colegio = colegio;
                 reporte.ShowDialog();
 
@@ -93,7 +112,7 @@ namespace TrabajoDeCampo.SERVICIO
                 {
                     faltas += item.valor;
                 }
-                rowColegio.SetField("nombreReporte", "Reporte de Inasistencias");
+                rowColegio.SetField("nombreReporte", traduccionesDeBase["com.td.inasistencias"]);
                 rowColegio.SetField("totalFaltas",faltas);
                 reporte.nivel = reporte.alumno.curso.nivel;
                 reporte.ShowDialog();
@@ -153,7 +172,7 @@ namespace TrabajoDeCampo.SERVICIO
                     temp.SetField("viernes", viernes);
                     datatable.Rows.Add(temp);
                 }
-                rowColegio.SetField("nombreReporte", "Reporte de Horarios");
+                rowColegio.SetField("nombreReporte", traduccionesDeBase["com.td.horarios"]);
                 horarios.traducciones = traducciones;
                 horarios.info = colegio;
                 horarios.horarios = datatable;
@@ -185,7 +204,7 @@ namespace TrabajoDeCampo.SERVICIO
 
                 bitacora.info = colegio;
                 bitacora.traducciones = traducciones;
-                rowColegio.SetField("nombreReporte", "Bitácora");
+                rowColegio.SetField("nombreReporte", traduccionesDeBase["com.td.bitácora"]);
                 rowColegio.SetField("totalFaltas", 0);
                 bitacora.ShowDialog();
 
@@ -198,12 +217,32 @@ namespace TrabajoDeCampo.SERVICIO
                 reporte.info = colegio;
                 reporte.traducciones = traducciones;
                 reporte.amonestaciones = reporte.alumno.amonestaciones;
-                rowColegio.SetField("nombreReporte", "Reporte de Amonestaciones");
-                rowColegio.SetField("totalFaltas", 0);
+                
+                rowColegio.SetField("nombreReporte", traduccionesDeBase["com.td.amonestaciones"]);
+                rowColegio.SetField("totalFaltas", 0.0);
                 reporte.nivel = reporte.alumno.curso.nivel;
                 reporte.ShowDialog();
             }
-            
+
+            else if (nombreDelReporte.Equals("ReporteCursos"))
+            {
+                ReporteCursos reporte = tipo as ReporteCursos;
+                List<Curso> cursos = objetos as List<Curso>;
+                reporte.info = colegio;
+                reporte.traducciones = traducciones;
+                List<Nivel> niveles = new List<Nivel>();
+                foreach (Curso item in cursos)
+                {
+                    if(!niveles.Any( niv => niv.id == item.nivel.id))
+                        niveles.Add(item.nivel);
+                }
+                reporte.niveles = niveles;
+                reporte.cursos = cursos;
+                rowColegio.SetField("nombreReporte", traduccionesDeBase["com.td.cursos"]);
+                rowColegio.SetField("totalFaltas", 0.0);
+                reporte.ShowDialog();
+            }
+
         }
     }
 }

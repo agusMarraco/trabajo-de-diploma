@@ -323,6 +323,16 @@ namespace TrabajoDeCampo.Properties.DataSources {
             
             private global::System.Data.DataColumn columnmensajeLbl;
             
+            private global::System.Data.DataColumn columnnivelLbl;
+            
+            private global::System.Data.DataColumn columnexcedidoLbl;
+            
+            private global::System.Data.DataColumn columndisclaimerLbl;
+            
+            private global::System.Data.DataColumn columnmaximoLbl;
+            
+            private global::System.Data.DataColumn columnactualLbl;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DataTable1DataTable() {
@@ -534,6 +544,46 @@ namespace TrabajoDeCampo.Properties.DataSources {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn nivelLblColumn {
+                get {
+                    return this.columnnivelLbl;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn excedidoLblColumn {
+                get {
+                    return this.columnexcedidoLbl;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn disclaimerLblColumn {
+                get {
+                    return this.columndisclaimerLbl;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn maximoLblColumn {
+                get {
+                    return this.columnmaximoLbl;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn actualLblColumn {
+                get {
+                    return this.columnactualLbl;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -591,7 +641,12 @@ namespace TrabajoDeCampo.Properties.DataSources {
                         string hastaLbl, 
                         string criticidadLbl, 
                         string usuarioLbl, 
-                        string mensajeLbl) {
+                        string mensajeLbl, 
+                        string nivelLbl, 
+                        string excedidoLbl, 
+                        string disclaimerLbl, 
+                        string maximoLbl, 
+                        string actualLbl) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         justificadaLbl,
@@ -615,7 +670,12 @@ namespace TrabajoDeCampo.Properties.DataSources {
                         hastaLbl,
                         criticidadLbl,
                         usuarioLbl,
-                        mensajeLbl};
+                        mensajeLbl,
+                        nivelLbl,
+                        excedidoLbl,
+                        disclaimerLbl,
+                        maximoLbl,
+                        actualLbl};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -660,6 +720,11 @@ namespace TrabajoDeCampo.Properties.DataSources {
                 this.columncriticidadLbl = base.Columns["criticidadLbl"];
                 this.columnusuarioLbl = base.Columns["usuarioLbl"];
                 this.columnmensajeLbl = base.Columns["mensajeLbl"];
+                this.columnnivelLbl = base.Columns["nivelLbl"];
+                this.columnexcedidoLbl = base.Columns["excedidoLbl"];
+                this.columndisclaimerLbl = base.Columns["disclaimerLbl"];
+                this.columnmaximoLbl = base.Columns["maximoLbl"];
+                this.columnactualLbl = base.Columns["actualLbl"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -709,6 +774,16 @@ namespace TrabajoDeCampo.Properties.DataSources {
                 base.Columns.Add(this.columnusuarioLbl);
                 this.columnmensajeLbl = new global::System.Data.DataColumn("mensajeLbl", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmensajeLbl);
+                this.columnnivelLbl = new global::System.Data.DataColumn("nivelLbl", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnivelLbl);
+                this.columnexcedidoLbl = new global::System.Data.DataColumn("excedidoLbl", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnexcedidoLbl);
+                this.columndisclaimerLbl = new global::System.Data.DataColumn("disclaimerLbl", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisclaimerLbl);
+                this.columnmaximoLbl = new global::System.Data.DataColumn("maximoLbl", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmaximoLbl);
+                this.columnactualLbl = new global::System.Data.DataColumn("actualLbl", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnactualLbl);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1203,6 +1278,86 @@ namespace TrabajoDeCampo.Properties.DataSources {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string nivelLbl {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.nivelLblColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nivelLbl\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.nivelLblColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string excedidoLbl {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.excedidoLblColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'excedidoLbl\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.excedidoLblColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string disclaimerLbl {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.disclaimerLblColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'disclaimerLbl\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.disclaimerLblColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string maximoLbl {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.maximoLblColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'maximoLbl\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.maximoLblColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string actualLbl {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.actualLblColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'actualLbl\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.actualLblColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsjustificadaLblNull() {
                 return this.IsNull(this.tableDataTable1.justificadaLblColumn);
             }
@@ -1463,6 +1618,66 @@ namespace TrabajoDeCampo.Properties.DataSources {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetmensajeLblNull() {
                 this[this.tableDataTable1.mensajeLblColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsnivelLblNull() {
+                return this.IsNull(this.tableDataTable1.nivelLblColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetnivelLblNull() {
+                this[this.tableDataTable1.nivelLblColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsexcedidoLblNull() {
+                return this.IsNull(this.tableDataTable1.excedidoLblColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetexcedidoLblNull() {
+                this[this.tableDataTable1.excedidoLblColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsdisclaimerLblNull() {
+                return this.IsNull(this.tableDataTable1.disclaimerLblColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetdisclaimerLblNull() {
+                this[this.tableDataTable1.disclaimerLblColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsmaximoLblNull() {
+                return this.IsNull(this.tableDataTable1.maximoLblColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetmaximoLblNull() {
+                this[this.tableDataTable1.maximoLblColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsactualLblNull() {
+                return this.IsNull(this.tableDataTable1.actualLblColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetactualLblNull() {
+                this[this.tableDataTable1.actualLblColumn] = global::System.Convert.DBNull;
             }
         }
         

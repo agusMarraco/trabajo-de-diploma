@@ -14,12 +14,14 @@ using TrabajoDeCampo.DAO;
 
 using System.Data.SqlClient;
 using TrabajoDeCampo.SERVICIO;
+using TrabajoDeCampo.SEGURIDAD;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class Respaldo_Base_de_Datos : Form
     {
         private ServicioSeguridad servicioSeguridad;
+        private Dictionary<string, string> traducciones;
 
         public Respaldo_Base_de_Datos()
         {
@@ -47,7 +49,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
             if (String.IsNullOrEmpty(this.pathtxt.Text))
             {
-                MessageBox.Show("Complete los campos requeridos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
                 return;
             }
             String path = this.pathtxt.Text;
@@ -56,25 +58,37 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 try
                 {
                     servicioSeguridad.realizarBackup((int)this.partesCB.SelectedItem, path);
-                    MessageBox.Show("Completado");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("String generico de mensaje de error , la excepcion es :" + ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
                
             }
             else
             {
-                MessageBox.Show("seleccione una ruta");
+                MessageBox.Show(traducciones["com.td.path"]);
             }
 
         }
 
         private void Respaldo_Base_de_Datos_Load(object sender, EventArgs e)
         {
-            
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.Add("com.td.complete.campos");
+            tags.Add("com.td.completado");
+            tags.Add("com.td.path");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

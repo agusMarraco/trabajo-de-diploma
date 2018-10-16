@@ -200,6 +200,7 @@
             this.groupBox1.Size = new System.Drawing.Size(672, 100);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "com.td.información";
             this.groupBox1.Text = "Información";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
@@ -220,6 +221,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ListarFamilias";
+            this.Tag = "com.td.familias";
             this.Text = "Familias";
             this.Load += new System.EventHandler(this.ListarFamilias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilia)).EndInit();

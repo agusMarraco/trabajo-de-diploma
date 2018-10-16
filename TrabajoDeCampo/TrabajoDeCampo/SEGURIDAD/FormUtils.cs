@@ -18,6 +18,7 @@ namespace TrabajoDeCampo.SEGURIDAD
 
         public override void process(List<String> tags, Form formToTranslate, Dictionary<String, String> traduciones, List<Control> controles)
         {
+            tags.Add(formToTranslate.Tag.ToString());
             //llamada de primer nivel, empiezo a recorrer el arbol
             foreach (Control control in formToTranslate.Controls)
             {
@@ -111,12 +112,26 @@ namespace TrabajoDeCampo.SEGURIDAD
                             tags.Add(((Label)item).Tag.ToString());
                         }
                     }
+                    else if (item.GetType() == typeof(CheckBox))
+                    {
+                        if (((CheckBox)item).Tag != null)
+                        {
+                            tags.Add(((CheckBox)item).Tag.ToString());
+                        }
+                    }
                     else if (item.GetType() == typeof(TabPage))
                     {
                         if (((TabPage)item).Tag != null)
                         {
                             tags.Add(((TabPage)item).Tag.ToString());
                             iterateControls(tags, ((TabPage)item).Controls);
+                        }
+                    }else if(item.GetType() == typeof(GroupBox))
+                    {
+                        if (((GroupBox)item).Tag != null)
+                        {
+                            tags.Add(((GroupBox)item).Tag.ToString());
+                            iterateControls(tags, ((GroupBox)item).Controls);
                         }
                     }
                 }
@@ -130,6 +145,7 @@ namespace TrabajoDeCampo.SEGURIDAD
     {
         public override void process(List<String> tags, Form formToTranslate, Dictionary<String, String> traduciones, List<Control> controles)
         {
+            formToTranslate.Text = traduciones[formToTranslate.Tag.ToString()];
             foreach (KeyValuePair<String, String> item in traduciones)
             {
                 //llamada de primer nivel, empiezo a recorrer el arbol
@@ -226,6 +242,13 @@ namespace TrabajoDeCampo.SEGURIDAD
                             ((Label)item).Text = kvPair.Value;
                         }
                     }
+                    else if (item.GetType() == typeof(CheckBox))
+                    {
+                        if (((CheckBox)item).Tag != null && ((CheckBox)item).Tag.ToString() == kvPair.Key)
+                        {
+                            ((CheckBox)item).Text = kvPair.Value;
+                        }
+                    }
                     else if (item.GetType() == typeof(TabPage))
                     {
                         if (((TabPage)item).Tag != null)
@@ -235,6 +258,18 @@ namespace TrabajoDeCampo.SEGURIDAD
                             }
                             
                             iterateControls(kvPair, ((TabPage)item).Controls);
+                        }
+                    }
+                    else if (item.GetType() == typeof(GroupBox))
+                    {
+                        if (((GroupBox)item).Tag != null)
+                        {
+                            if (((GroupBox)item).Tag.ToString() == kvPair.Key)
+                            {
+                                ((GroupBox)item).Text = kvPair.Value;
+                            }
+
+                            iterateControls(kvPair, ((GroupBox)item).Controls);
                         }
                     }
                 }

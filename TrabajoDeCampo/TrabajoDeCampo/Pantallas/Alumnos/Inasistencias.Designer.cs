@@ -105,7 +105,7 @@
             this.groupBox1.Size = new System.Drawing.Size(490, 241);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "com.td.informacion";
+            this.groupBox1.Tag = "com.td.información";
             this.groupBox1.Text = "Información";
             // 
             // btnGuardar
@@ -242,6 +242,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Inasistencias";
+            this.Tag = "com.td.inasistencias";
             this.Text = "Inasistencias";
             this.Load += new System.EventHandler(this.Inasistencias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

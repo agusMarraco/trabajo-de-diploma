@@ -20,18 +20,82 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         public Menu()
         {
             InitializeComponent();
-            traductor = new TraductorIterador();
             servicioSeguridad = new SERVICIO.ServicioSeguridad();
 
-            
-            //List<String> tags = new List<string>();
-            //long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-            //this.servicioSeguridad.cambiarIdioma(id, Properties.Settings.Default.Idioma);
-            //traductor.process(tags, this, null, null);
-            //Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
-            //traductor = new TraductorReal();
-            //traductor.process(null, this, traducciones, null);
-            //traductor = new TraductorIterador();
+
+            desbloquearControles();
+            traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.servicioSeguridad.cambiarIdioma(id, Properties.Settings.Default.Idioma);
+            traductor.process(tags, this, null, null);
+            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+        }
+
+        public void desbloquearControles()
+        {
+
+            Boolean sistemaBloqueado = TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1;
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+
+            if (!sistemaBloqueado)
+            {
+                bool verAlumnos = servicioSeguridad.tienePatente(id, EnumPatentes.ListadoAlumnos.ToString());
+                bool verTutores = servicioSeguridad.tienePatente(id, EnumPatentes.ListarTutores.ToString());
+                this.alumnosToolStripMenuItem1.Enabled = verAlumnos;
+                this.tutoresToolStripMenuItem.Enabled = verTutores;
+
+
+                if (verAlumnos || verTutores)
+                {
+                    this.alumnosToolStripMenuItem.Enabled = true;
+                }
+
+                bool verCursos = servicioSeguridad.tienePatente(id, EnumPatentes.ListarCursos.ToString());
+                bool verHorarios = servicioSeguridad.tienePatente(id, EnumPatentes.ListarHorarios.ToString());
+                bool verMaterias = servicioSeguridad.tienePatente(id, EnumPatentes.ListarMateria.ToString());
+                bool verPromociones = servicioSeguridad.tienePatente(id, EnumPatentes.PromocionarAlumnos.ToString());
+                bool verAsignacion = servicioSeguridad.tienePatente(id, EnumPatentes.AsignarMateriaNivel.ToString());
+                this.cursosToolStripMenuItem.Enabled = verCursos;
+                this.horariosToolStripMenuItem.Enabled = verHorarios;
+                this.materiasToolStripMenuItem.Enabled = verMaterias;
+                this.promociónDeAlumnosToolStripMenuItem.Enabled = verPromociones;
+                this.asignaciónDeMateriasToolStripMenuItem.Enabled = verAsignacion;
+
+                if (verCursos || verHorarios || verMaterias || verPromociones || verAsignacion)
+                    this.administraciónToolStripMenuItem.Enabled = true;
+
+                bool verUsuarios = servicioSeguridad.tienePatente(id, EnumPatentes.ListarUsuarios.ToString());
+                bool verPermisos = servicioSeguridad.tienePatente(id, EnumPatentes.ListarFamilias.ToString());
+                bool restore = servicioSeguridad.tienePatente(id, EnumPatentes.RestaurarBackup.ToString());
+                bool backup = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarBackups.ToString());
+                bool digitos = servicioSeguridad.tienePatente(id, EnumPatentes.RecalcularDígitosVerificadores.ToString());
+                bool bitacora = servicioSeguridad.tienePatente(id, EnumPatentes.VerBitácora.ToString());
+
+                this.usuarioMenuItem.Enabled = verUsuarios;
+                this.permisoMenuITem.Enabled = verPermisos;
+                this.restaurarToolStripMenuItem.Enabled = restore;
+                this.respaldarToolStripMenuItem.Enabled = backup;
+                this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = digitos;
+                this.bitácoraToolStripMenuItem.Enabled = bitacora;
+
+                if (verUsuarios || verPermisos || restore || backup || digitos || bitacora)
+                    this.seguridadToolStripMenuItem.Enabled = true;
+                if (restore || backup)
+                    this.backupToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.seguridadToolStripMenuItem.Enabled = true;
+                this.restaurarToolStripMenuItem.Enabled = true;
+                this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = true;
+                this.respaldarToolStripMenuItem.Enabled = true;
+                this.backupToolStripMenuItem.Enabled = true;    
+            }
+
         }
 
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)

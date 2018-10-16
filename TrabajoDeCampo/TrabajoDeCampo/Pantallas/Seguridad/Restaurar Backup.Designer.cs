@@ -110,6 +110,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Restaurar_Backup";
+            this.Tag = "com.td.restaurar.backup";
             this.Text = "Restaurar Backup";
             this.Load += new System.EventHandler(this.Restaurar_Backup_Load);
             this.groupBox1.ResumeLayout(false);

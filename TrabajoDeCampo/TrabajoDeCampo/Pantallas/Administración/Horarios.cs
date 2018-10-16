@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Administración
@@ -16,6 +17,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private ServicioSeguridad servicioSeguridad;
         private ServicioAdministracion servicioAdministracion;
         private List<Curso> cursos;
+        private Dictionary<String, String> traducciones;
         public Horarios()
         {
             InitializeComponent();
@@ -31,7 +33,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private void Horarios_Load(object sender, EventArgs e)
         {
             
-            this.listar(null, null);
+            
             this.cursos = servicioAdministracion.listarCursos(null, null, null);
             this.comboNivel.DataSource = null;
             List<Nivel> niveles = new List<Nivel>();
@@ -39,8 +41,43 @@ namespace TrabajoDeCampo.Pantallas.Administración
             niveles.AddRange(servicioAdministracion.listarNiveles(null, null, null));
             this.comboNivel.DataSource = niveles;
             this.comboNivel.DisplayMember = "codigo";
+            desbloquearControles();
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.Add("com.td.módulo");
+            tags.Add("com.td.lunes");
+            tags.Add("com.td.martes");
+            tags.Add("com.td.miercoles");
+            tags.Add("com.td.jueves");
+            tags.Add("com.td.viernes");
+            tags.Add("com.td.seleccione.horario");
+            tags.Add("com.td.falta.horario");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+            this.listar(null, null);
 
         }
+
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearHorario.ToString());
+            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarHorario.ToString());
+            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarHorario.ToString());
+            bool exportar = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarReportes.ToString());
+
+            this.btnCrear.Enabled = crear;
+            this.btnMod.Enabled = modificar;
+            this.btnDel.Enabled = borrar;
+            this.btnExpo.Enabled = exportar;
+        }
+
 
         public void listar(String filtro, String valor)
         {
@@ -62,6 +99,12 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.dataGridView1.Columns[4].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             this.dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridView1.Columns[5].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            this.dataGridView1.Columns[0].HeaderText = traducciones["com.td.módulo"];
+            this.dataGridView1.Columns[1].HeaderText = traducciones["com.td.lunes"];
+            this.dataGridView1.Columns[2].HeaderText = traducciones["com.td.martes"];
+            this.dataGridView1.Columns[3].HeaderText = traducciones["com.td.miercoles"];
+            this.dataGridView1.Columns[4].HeaderText = traducciones["com.td.jueves"];
+            this.dataGridView1.Columns[5].HeaderText = traducciones["com.td.viernes"];
         }
 
         public void cellFormat(object sender, DataGridViewCellFormattingEventArgs e)
@@ -94,10 +137,10 @@ namespace TrabajoDeCampo.Pantallas.Administración
             {
                 if(this.dataGridView1.CurrentCell.ColumnIndex == 0)
                 {
-                    MessageBox.Show("Seleccione un horario");
+                    MessageBox.Show(traducciones["com.td.seleccione.horario"]);
                 }else if(this.dataGridView1.CurrentCell.Value == null || this.dataGridView1.CurrentCell.Value == DBNull.Value)
                 {
-                    MessageBox.Show("No hay un horario");
+                    MessageBox.Show(traducciones["com.td.falta.horario"]);
                 }
                 else
                 {
@@ -120,11 +163,11 @@ namespace TrabajoDeCampo.Pantallas.Administración
             {
                 if (this.dataGridView1.CurrentCell.ColumnIndex == 0)
                 {
-                    MessageBox.Show("Seleccione un horario");
+                    MessageBox.Show(traducciones["com.td.seleccione.horario"]);
                 }
                 else if (this.dataGridView1.CurrentCell.Value == null || this.dataGridView1.CurrentCell.Value == DBNull.Value)
                 {
-                    MessageBox.Show("No hay un horario");
+                    MessageBox.Show(traducciones["com.td.falta.horario"]);
                 }
                 else
                 {

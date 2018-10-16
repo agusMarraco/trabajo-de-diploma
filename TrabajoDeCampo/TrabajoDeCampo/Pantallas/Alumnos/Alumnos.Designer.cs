@@ -38,13 +38,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnIna = new System.Windows.Forms.Button();
             this.btnRepetir = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnAmon = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
+            this.btnMod = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -134,7 +134,7 @@
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.btnRegistrar);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(14, 15);
@@ -154,17 +154,18 @@
             this.button8.Tag = "com.td.cancelar";
             this.button8.Text = "Cancelar";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // button2
+            // btnRegistrar
             // 
-            this.button2.Location = new System.Drawing.Point(561, 86);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(136, 34);
-            this.button2.TabIndex = 10;
-            this.button2.Tag = "com.td.registrar";
-            this.button2.Text = "Registrar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnRegistrar.Location = new System.Drawing.Point(561, 86);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(136, 34);
+            this.btnRegistrar.TabIndex = 10;
+            this.btnRegistrar.Tag = "com.td.registrar";
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -176,16 +177,16 @@
             this.label1.Tag = "com.td.filtrar.por";
             this.label1.Text = "Filtrar por:";
             // 
-            // button3
+            // btnIna
             // 
-            this.button3.Location = new System.Drawing.Point(306, 588);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(119, 34);
-            this.button3.TabIndex = 11;
-            this.button3.Tag = "com.td.inasistencias";
-            this.button3.Text = "Inasistencias";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnIna.Location = new System.Drawing.Point(306, 588);
+            this.btnIna.Name = "btnIna";
+            this.btnIna.Size = new System.Drawing.Size(119, 34);
+            this.btnIna.TabIndex = 11;
+            this.btnIna.Tag = "com.td.inasistencias";
+            this.btnIna.Text = "Inasistencias";
+            this.btnIna.UseVisualStyleBackColor = true;
+            this.btnIna.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnRepetir
             // 
@@ -198,53 +199,54 @@
             this.btnRepetir.UseVisualStyleBackColor = true;
             this.btnRepetir.Click += new System.EventHandler(this.btnRepetir_Click);
             // 
-            // button5
+            // btnAmon
             // 
-            this.button5.Location = new System.Drawing.Point(452, 588);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(119, 34);
-            this.button5.TabIndex = 13;
-            this.button5.Tag = "com.td.amonestaciones";
-            this.button5.Text = "Amonestaciones";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnAmon.Location = new System.Drawing.Point(452, 588);
+            this.btnAmon.Name = "btnAmon";
+            this.btnAmon.Size = new System.Drawing.Size(119, 34);
+            this.btnAmon.TabIndex = 13;
+            this.btnAmon.Tag = "com.td.amonestaciones";
+            this.btnAmon.Text = "Amonestaciones";
+            this.btnAmon.UseVisualStyleBackColor = true;
+            this.btnAmon.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // btnDel
             // 
-            this.button6.Location = new System.Drawing.Point(160, 588);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(119, 34);
-            this.button6.TabIndex = 14;
-            this.button6.Tag = "com.td.borrar";
-            this.button6.Text = "Borrar";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btnDel.Location = new System.Drawing.Point(160, 588);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(119, 34);
+            this.btnDel.TabIndex = 14;
+            this.btnDel.Tag = "com.td.borrar";
+            this.btnDel.Text = "Borrar";
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button7
+            // btnMod
             // 
-            this.button7.Location = new System.Drawing.Point(14, 588);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(119, 34);
-            this.button7.TabIndex = 15;
-            this.button7.Tag = "com.td.modificar";
-            this.button7.Text = "Modificar";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.btnMod.Location = new System.Drawing.Point(14, 588);
+            this.btnMod.Name = "btnMod";
+            this.btnMod.Size = new System.Drawing.Size(119, 34);
+            this.btnMod.TabIndex = 15;
+            this.btnMod.Tag = "com.td.modificar";
+            this.btnMod.Text = "Modificar";
+            this.btnMod.UseVisualStyleBackColor = true;
+            this.btnMod.Click += new System.EventHandler(this.button7_Click);
             // 
             // Alumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 634);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btnMod);
+            this.Controls.Add(this.btnDel);
+            this.Controls.Add(this.btnAmon);
             this.Controls.Add(this.btnRepetir);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnIna);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Alumnos";
+            this.Tag = "com.td.alumnos";
             this.Text = "Alumnos";
             this.Load += new System.EventHandler(this.Alumnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -262,12 +264,12 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.Button btnIna;
         private System.Windows.Forms.Button btnRepetir;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnAmon;
+        private System.Windows.Forms.Button btnDel;
+        private System.Windows.Forms.Button btnMod;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellido;

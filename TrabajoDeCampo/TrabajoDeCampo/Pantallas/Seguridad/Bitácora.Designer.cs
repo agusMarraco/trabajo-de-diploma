@@ -126,7 +126,7 @@
             this.groupBox1.Size = new System.Drawing.Size(834, 161);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "com.td.busqueda";
+            this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
@@ -137,6 +137,7 @@
             this.chUsuario.Name = "chUsuario";
             this.chUsuario.Size = new System.Drawing.Size(71, 20);
             this.chUsuario.TabIndex = 16;
+            this.chUsuario.Tag = "com.td.usuario";
             this.chUsuario.Text = "Usuario";
             this.chUsuario.UseVisualStyleBackColor = true;
             // 
@@ -182,6 +183,7 @@
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -275,6 +277,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Bitácora";
+            this.Tag = "com.td.bitácora";
             this.Text = "Bitácora";
             this.Load += new System.EventHandler(this.Bitácora_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

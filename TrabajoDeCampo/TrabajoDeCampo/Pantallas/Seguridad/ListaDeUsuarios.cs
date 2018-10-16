@@ -15,7 +15,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
     public partial class ListaDeUsuarios : Form
     {
         private ServicioSeguridad servicioSeguridad;
-
+        private Dictionary<string, string> traducciones;
         private FormUtils formUtils;
         private Dictionary<String, String> mensajesDeValidacion = new Dictionary<string, string>();
 
@@ -33,7 +33,23 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.gwUsuarios.AutoGenerateColumns = false;
             this.gwUsuarios.CellFormatting += booleanFormatter;
             this.gwUsuarios.ColumnHeaderMouseClick += customSort;
-   
+            desbloquearControles();
+        }
+
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearFamilia.ToString());
+            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarFamilias.ToString());
+            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarFamilia.ToString());
+            bool regen = servicioSeguridad.tienePatente(id, EnumPatentes.RegenerarContraseña.ToString());
+            bool bloq = servicioSeguridad.tienePatente(id, EnumPatentes.BloquearUsuario.ToString());
+
+            this.btnCrear.Enabled = crear;
+            this.btnMod.Enabled = modificar;
+            this.btnDel.Enabled = borrar;
+            this.btnBloq.Enabled = bloq;
+            this.btnRegen.Enabled = regen;
         }
 
 
@@ -58,8 +74,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             formUtils = new TraductorIterador();
             List<String> tags = new List<string>();
             formUtils.process(tags, this, null, null);
-            tags.AddRange(new string[] {"com.td.d.n.i.","com.td.alias","com.td.apellido","com.td.nombre"});
-            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            tags.AddRange(new string[] {"com.td.d.n.i.","com.td.alias","com.td.apellido","com.td.nombre","com.td.si","com.td.no","com.td.permisos.esenciales"});
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             formUtils = new TraductorReal();
             formUtils.process(null, this, traducciones, null);
             formUtils = new TraductorIterador();
@@ -121,7 +137,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             if(e.ColumnIndex == 4)
             {
-                e.Value = (int)e.Value == 0 ? "NO" : "SI";
+                e.Value = (int)e.Value == 0 ? traducciones["com.td.no"] : traducciones["com.td.si"];
             }
         }
 
@@ -132,8 +148,27 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             {
                 Usuario usu = (Usuario)gwUsuarios.CurrentRow.DataBoundItem;
                 long id = usu.id;
-                if(id!=0)
-                servicioSeguridad.bloquearUsuario(id);
+                if (id != 0)
+                {
+                    try
+                    {
+                        servicioSeguridad.bloquearUsuario(usu);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        if (ex.Message == "PERMISOS")
+                        {
+                            MessageBox.Show(traducciones["com.td.permisos.esenciales"]);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    
+                }
+                
 
                 searchUsuarios(this.servicioSeguridad.listarUsuarios(null, null, null));
             }
@@ -155,7 +190,23 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             if (gwUsuarios.CurrentRow != null && gwUsuarios.CurrentRow.DataBoundItem != null)
             {
                 Usuario usu = (Usuario)gwUsuarios.CurrentRow.DataBoundItem;
-                servicioSeguridad.borrarUsuario(usu);
+                try
+                {
+                    servicioSeguridad.borrarUsuario(usu);
+                }
+                catch (Exception ex)
+                {
+
+                    if (ex.Message == "PERMISOS")
+                    {
+                        MessageBox.Show(traducciones["com.td.permisos.esenciales"]);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                
                 searchUsuarios(this.servicioSeguridad.listarUsuarios(null, null, null));
             }
         }
@@ -193,8 +244,6 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                
         }
 
-       
-
-
+      
     }
 }

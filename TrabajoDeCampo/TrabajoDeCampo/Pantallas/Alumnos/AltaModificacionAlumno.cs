@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Alumnos
@@ -25,6 +26,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Regex numbersRegex = new Regex("[0-9]");
         private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
         private Boolean valido = false;
+
+        public Dictionary<string, string> traducciones { get;  set; }
+
         public AltaModificacionAlumno()
         {
             InitializeComponent();
@@ -99,7 +103,15 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.dataGridView1.Columns[2].DataPropertyName = "dni";
             this.dataGridView1.Columns[3].DataPropertyName = "email";
             this.dataGridView1.Columns[4].DataPropertyName = "asignado";
+            this.dataGridView1.Columns[0].Tag = "com.td.nombre";
+            this.dataGridView1.Columns[1].Tag = "com.td.apellido";
+            this.dataGridView1.Columns[2].Tag = "com.td.d.n.i.";
+            this.dataGridView1.Columns[3].Tag = "com.td.mail";
+            this.dataGridView1.Columns[4].Tag = "com.td.asignado";
             this.dataGridView1.ColumnHeaderMouseClick += customSort;
+            this.groupBox1.Tag = "com.td.información";
+            this.groupBox2.Tag = "com.td.tutores";
+        
 
             if (this.currentAlumno != null)
             {
@@ -138,15 +150,27 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             }
             BindingList<Tutor> bind = new BindingList<Tutor>(tutores);
             this.dataGridView1.DataSource = bind;
+
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.AddRange(new String[] {"com.td.complete.campos","com.td.orientacion.incorrecta","com.td.tutor.requerido","com.td.completado","com.td.dni.repetido"});
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //validaciones
-            if(String.IsNullOrEmpty(this.nombretx.Text) || String.IsNullOrEmpty(this.apellidotx.Text) || String.IsNullOrEmpty(this.dnitx.Text) 
+            if (String.IsNullOrEmpty(this.nombretx.Text) || String.IsNullOrEmpty(this.apellidotx.Text) || String.IsNullOrEmpty(this.dnitx.Text)
                 || String.IsNullOrEmpty(this.domicilotx.Text))
             {
-                MessageBox.Show("complete los campos requeridos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
 
             Boolean hayQueValidarCursoOrientacion = false;
@@ -166,7 +190,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 {
                     if ((nivel.orientacion == null && ((Orientacion)this.oricombo.SelectedItem).codigo != "null") || nivel.orientacion.codigo != ((Orientacion)this.oricombo.SelectedItem).codigo)
                     {
-                        MessageBox.Show("La orientacion no corresponde con ese curso");
+                        MessageBox.Show(traducciones["com.td.orientacion.incorrecta"]);
                         return;
                     }
                 }
@@ -188,13 +212,13 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 }
                 if(currentAlumno.tutores.Count == 0)
                 {
-                    MessageBox.Show("Un Alumno tiene que tener al menos un tutor asignado");
+                    MessageBox.Show(traducciones["com.td.tutor.requerido"]);
                     return;
                 }
                 try
                 {
                     this.servicioAlumnos.actualizarAlumno(currentAlumno);
-                    MessageBox.Show(" Alumno actualizado con exito ");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                     this.parentForm.listarAlumnos(null, null);
                     this.Close();
                 }
@@ -202,7 +226,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 {
                     if (ex.Message.Equals("DNI"))
                     {
-                        MessageBox.Show("Dni Repetido");
+                        MessageBox.Show(traducciones["com.td.dni.repetido"]);
                     }
                     else
                     {
@@ -228,7 +252,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
                     if ((nivel.orientacion == null && ((Orientacion)this.oricombo.SelectedItem).codigo != "null") || nivel.orientacion.codigo != ((Orientacion)this.oricombo.SelectedItem).codigo)
                     {
-                        MessageBox.Show("La orientacion no corresponde con ese curso");
+                        MessageBox.Show(traducciones["com.td.orientacion.incorrecta"]);
                         return;
                     }
                 }
@@ -248,13 +272,13 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 }
                 if (nuevo.tutores.Count == 0)
                 {
-                    MessageBox.Show("Un Alumno tiene que tener al menos un tutor asignado");
+                    MessageBox.Show(traducciones["com.td.tutor.requerido"]);
                     return;
                 }
                 try
                 {
                     this.servicioAlumnos.guardarAlumno(nuevo);
-                    MessageBox.Show(" Alumno actualizado con exito ");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                     this.parentForm.listarAlumnos(null, null);
                     this.Close();
                 }
@@ -262,7 +286,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 {
                     if (ex.Message.Equals("DNI"))
                     {
-                        MessageBox.Show("Dni Repetido");
+                        MessageBox.Show(traducciones["com.td.dni.repetido"]);
                     }
                     else
                     {
@@ -362,6 +386,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                     valido = false;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

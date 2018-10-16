@@ -1044,7 +1044,11 @@ namespace TrabajoDeCampo.DAO
             sb.Append(" left join orientacion ori on ori.ori_codigo = alu.alu_orientacion ");
             sb.Append(" inner join curso cur on cur.cur_id = alu.alu_curso ");
             sb.Append(" inner join nivel niv  on cur.cur_nivel_id = niv.niv_id ");
-            sb.Append(" where alu.alu_borrado is null and " + queryAlumnosPromocionables);
+            sb.Append(" where alu.alu_borrado is null  ");
+            if(nivel is null)
+            {
+                sb.Append(" and " + queryAlumnosPromocionables);
+            }
             if(curso!= null)
                 sb.Append(" and alu.alu_curso = @curso ");
             connection.Open();

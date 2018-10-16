@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Alumnos
@@ -23,6 +24,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Regex lettersRegex = new Regex("[a-zA-z]");
         private Regex numbersRegex = new Regex("[0-9]");
         private Boolean valido = false;
+        private Dictionary<string, string> traducciones;
+
         public AltaModificacionTutor(){ }
 
         public AltaModificacionTutor(Tutor tutor, Tutores parentForm)
@@ -57,6 +60,18 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
 
             }
+
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            tags.AddRange(new String[] { "com.td.complete.campos", "com.td.mail.invalido", "com.td.completado" });
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
         }
 
         private void validarNumerosKD(object sender, KeyEventArgs e)
@@ -103,7 +118,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         {
             if(String.IsNullOrEmpty(this.txtNombre.Text.Trim()) || String.IsNullOrEmpty(this.txtApellido.Text.Trim()) || String.IsNullOrEmpty(this.txtDni.Text.Trim()) ||
                 String.IsNullOrEmpty(this.txtEmail.Text.Trim()) || String.IsNullOrEmpty(this.txtTel1.Text.Trim())){
-                MessageBox.Show("Complete los campos requeridos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
                 return;
             }
             var email = new EmailAddressAttribute();
@@ -111,7 +126,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             valid = email.IsValid(this.txtEmail.Text);
             if (!valid)
             {
-                MessageBox.Show("Formato de mail invalido");
+                MessageBox.Show(traducciones["com.td.mail.invalido"]);
                 return;
             }
             if(currentTutor != null)
@@ -125,7 +140,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 try
                 {
                     this.servicioAlumnos.modificarTutor(currentTutor);
-                    MessageBox.Show("Completado");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                     this.parentForm.buscarTutores(null, null);
                     this.Close();
                 }
@@ -147,7 +162,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 try
                 {
                     this.servicioAlumnos.guardarTutor(nuevoTutor);
-                    MessageBox.Show("Completado");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                     this.parentForm.buscarTutores(null, null);
                     this.Close();
                 }

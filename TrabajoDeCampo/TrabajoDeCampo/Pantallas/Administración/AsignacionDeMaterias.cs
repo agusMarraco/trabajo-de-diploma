@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Administración
@@ -19,6 +20,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private List<Materia> desasignadas = new List<Materia>();
         private List<Materia> asignadas = new List<Materia>();
         private Nivel currentNivel = null;
+        private Dictionary<String, String> traducciones;
 
         public AsignacionDeMaterias()
         {
@@ -45,6 +47,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
             this.dgMaterias.Columns[0].DataPropertyName = "nombre";
             this.dgAsignadas.Columns[0].DataPropertyName = "nombre";
+            this.dgMaterias.Columns[0].Tag   = "com.td.nombre";
+            this.dgAsignadas.Columns[0].Tag  = "com.td.nombre";
             this.dgMaterias.Columns[0].ReadOnly = true;
             this.dgAsignadas.Columns[0].ReadOnly = true;
             this.dgAsignadas.AutoGenerateColumns = false;
@@ -67,10 +71,29 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 MessageBox.Show(ex.Message);
             }
 
-     
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.Add("com.td.descartar");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+
 
 
         }
+
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool exportar = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarReportes.ToString());
+
+            this.btExport.Enabled = exportar;
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -80,7 +103,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 bool seguir = true;
                 if (seHicieronCambios)
                 {
-                    DialogResult result = MessageBox.Show("Tiene cambios sin guardar", "Cambios sin guardar", MessageBoxButtons.OKCancel);
+                    DialogResult result = MessageBox.Show(traducciones["com.td.descartar"], "", MessageBoxButtons.OKCancel);
                     if(result != DialogResult.OK)
                     {
                         seguir = false;
@@ -198,7 +221,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         {
             if (seHicieronCambios)
             {
-                DialogResult result = MessageBox.Show("Tiene cambios sin guardar", "Cambios sin guardar", MessageBoxButtons.OKCancel);
+                DialogResult result = MessageBox.Show(traducciones["com.td.descartar"], "", MessageBoxButtons.OKCancel);
                 if(result == DialogResult.OK)
                 {
                     this.seHicieronCambios = false;

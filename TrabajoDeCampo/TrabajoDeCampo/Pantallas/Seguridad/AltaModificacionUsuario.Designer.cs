@@ -124,7 +124,7 @@
             this.dnilbl.Name = "dnilbl";
             this.dnilbl.Size = new System.Drawing.Size(41, 16);
             this.dnilbl.TabIndex = 4;
-            this.dnilbl.Tag = "com.td.d.n.i";
+            this.dnilbl.Tag = "com.td.d.n.i.";
             this.dnilbl.Text = "D.N.I.";
             // 
             // direccion
@@ -162,7 +162,7 @@
             this.emaillbl.Name = "emaillbl";
             this.emaillbl.Size = new System.Drawing.Size(41, 16);
             this.emaillbl.TabIndex = 8;
-            this.emaillbl.Tag = "com.td.email";
+            this.emaillbl.Tag = "com.td.mail";
             this.emaillbl.Text = "Email";
             // 
             // alias
@@ -422,6 +422,7 @@
             this.Controls.Add(this.nombre);
             this.Controls.Add(this.nombrelbl);
             this.Name = "AltaModificacionUsuario";
+            this.Tag = "com.td.usuario";
             this.Text = "Usuario";
             this.Load += new System.EventHandler(this.AltaModificacionUsuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgfamilias)).EndInit();

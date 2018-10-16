@@ -21,6 +21,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private Regex lettersOnly = new Regex("[a-zA-z]");
         private Boolean valido = false;
+        private Dictionary<string, string> traducciones;
+
         public ListarFamilias()
         {
             InitializeComponent();
@@ -36,13 +38,28 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgPatentes.AutoGenerateColumns = false;
             this.dgPatentes.Columns[0].ReadOnly = true;
             this.dgPatentes.Columns[1].ReadOnly = true;
+            this.dgPatentes.Columns[0].Tag = "com.td.patente";
+            this.dgPatentes.Columns[1].Tag = "com.td.asignada";
             this.dgFamilia.ReadOnly = true;
             this.dgPatentes.Columns[0].DataPropertyName = "descripcion";
             this.dgFamilia.Columns[0].DataPropertyName = "nombre";
+            this.dgFamilia.Columns[0].Tag = "com.td.familia";
             this.txtNombre.KeyDown += TxtNombre_KeyDown;
             this.txtNombre.KeyPress += TxtNombre_KeyPress;
+            desbloquearControles();
 
+        }
 
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearFamilia.ToString());
+            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarFamilias.ToString());
+            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarFamilia.ToString());
+
+            this.btnCrear.Enabled = crear;
+            this.btnModificar.Enabled = modificar;
+            this.btnBorrar.Enabled = borrar;
         }
 
         private void TxtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -157,14 +174,25 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
 
             listarElementos();
-            
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            tags.Add("com.td.complete.campos");
+            traductor.process(tags, this, null, null);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(this.txtNombre.Text))
             {
-                MessageBox.Show("Complete los campos requeridos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
             String nombreFamilia = this.txtNombre.Text;
             Familia familia = currentFamilia;

@@ -6,7 +6,7 @@
       <Value Profile="(Default)">es</Value>
     </Setting>
     <Setting Name="ConnectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="Bloqueado" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -15,7 +15,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="MasterString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=DESKTOP-SL9JPN8;Initial Catalog=master;Integrated Security=True</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 namespace TrabajoDeCampo.Pantallas.Administración
 {
@@ -20,6 +21,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private Regex onlyNumbers = new Regex("[0-9]");
         private Regex onlyLetters = new Regex("[a-zA-Z]");
         private Boolean valido = false;
+        private Dictionary<String, String> traducciones;
         public AltaModificacionCurso()
         {
             InitializeComponent();
@@ -109,7 +111,16 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
         private void AltaModificacionCurso_Load(object sender, EventArgs e)
         {
-            
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.AddRange( new String[] {"com.td.completado","com.td.complete.campos" });
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
 
         }
 
@@ -118,7 +129,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
             if(String.IsNullOrEmpty(this.txtCapacidad.Text.Trim()) || String.IsNullOrEmpty(this.txtLetra.Text.Trim()))
             {
-                MessageBox.Show("Complete los campos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
                 return;
             }
             if(currentCurso != null)
@@ -133,7 +144,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 try
                 {
                     this.servicioAdministracion.actualizarCurso(currentCurso);
-                    MessageBox.Show("completado");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                     this.callerForm.cargarCursos(null, null, null);
                     this.Close();
                    
@@ -157,7 +168,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 try
                 {
                     this.servicioAdministracion.guardarCurso(curso);
-                    MessageBox.Show("completado");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                     this.callerForm.cargarCursos(null, null, null);
                     this.Close();
 

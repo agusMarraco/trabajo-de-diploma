@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Alumnos
@@ -15,14 +16,16 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
     {
         private ServicioSeguridad servicioSeguridad;
         private ServicioAlumnos servicioAlumnos;
+        private Dictionary<string, string> traducciones;
+
         public Tutores()
         {
             InitializeComponent();
             this.dataGridView1.Columns[0].Tag = "com.td.nombre";
             this.dataGridView1.Columns[1].Tag = "com.td.apellido";
-            this.dataGridView1.Columns[2].Tag = "com.td.d.n.i";
+            this.dataGridView1.Columns[2].Tag = "com.td.d.n.i.";
             this.dataGridView1.Columns[3].Tag = "com.td.mail";
-            this.dataGridView1.Columns[4].Tag = "com.td.telefonos";
+            this.dataGridView1.Columns[4].Tag = "com.td.teléfonos";
             this.dataGridView1.Columns[0].DataPropertyName = "nombre";
             this.dataGridView1.Columns[1].DataPropertyName = "apellido";
             this.dataGridView1.Columns[2].DataPropertyName = "dni";
@@ -36,9 +39,19 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.dataGridView1.DataSource = null;
             this.dataGridView1.AutoGenerateColumns = false;
             List<KeyValuePair<String, String>> comboOptions = new List<KeyValuePair<string, string>>();
-            comboOptions.Add(new KeyValuePair<string, string>("nombre", "nombre"));
-            comboOptions.Add(new KeyValuePair<string, string>("apellido", "apellido"));
-            comboOptions.Add(new KeyValuePair<string, string>("dni", "dni"));
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+            comboOptions.Add(new KeyValuePair<string, string>("nombre", traducciones["com.td.nombre"]));
+            comboOptions.Add(new KeyValuePair<string, string>("apellido", traducciones["com.td.apellido"]));
+            comboOptions.Add(new KeyValuePair<string, string>("dni", traducciones["com.td.d.n.i."]));
             this.comboBox2.DataSource = comboOptions;
             this.comboBox2.DisplayMember = "value";
 
@@ -53,6 +66,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private void Tutores_Load(object sender, EventArgs e)
         {
             buscarTutores(null, null);
+            desbloquearControles();
+
+
 
         }
 
@@ -69,6 +85,18 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
 
             }
+        }
+
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearTutor.ToString());
+            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarTutor.ToString());
+            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarTutor.ToString());
+
+            this.regiBtn.Enabled = crear;
+            this.modBtn.Enabled = modificar;
+            this.delBtn.Enabled = borrar;
         }
 
         private void button1_Click(object sender, EventArgs e)

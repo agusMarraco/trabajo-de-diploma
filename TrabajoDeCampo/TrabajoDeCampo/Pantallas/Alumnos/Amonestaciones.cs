@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Alumnos
@@ -17,6 +18,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private ServicioAlumnos servicioAlumnos;
         private Alumno alumno;
         private Boolean editando = false;
+        private Dictionary<string, string> traducciones;
+
         public Amonestaciones()
         {
             InitializeComponent();
@@ -37,10 +40,32 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.dateTimePicker1.MaxDate = DateTime.Now;
             this.dataGridView1.Columns[0].DataPropertyName = "fecha";
             this.dataGridView1.Columns[1].DataPropertyName = "motivo";
+            this.dataGridView1.Columns[0].Tag ="com.td.fecha";
+            this.dataGridView1.Columns[1].Tag= "com.td.motivo";
+
             listar();
-            this.groupBox1.Enabled = false; 
+            this.groupBox1.Enabled = false;
+            desbloquearControles();
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            tags.Add("com.td.completado");
+            tags.Add("com.td.fecha.ocupada");
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
         }
 
+        public void desbloquearControles()
+        {
+            long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            bool export = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarReportes.ToString());
+            this.button3.Enabled = export;
+        }
 
         public void listar()
         {
@@ -60,7 +85,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             {
                 if (String.IsNullOrEmpty(this.richTextBox1.Text))
                 {
-                    MessageBox.Show("Complete los campos requeridos");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                     return;
                 }
                 editando = false;
@@ -82,7 +107,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 {
                     if(ex.Message == "FECHA")
                     {
-                        MessageBox.Show("Ya registro una fecha en ese dia.");
+                        MessageBox.Show(traducciones["com.td.fecha.ocupada"]);
                     }
                     else
                     {

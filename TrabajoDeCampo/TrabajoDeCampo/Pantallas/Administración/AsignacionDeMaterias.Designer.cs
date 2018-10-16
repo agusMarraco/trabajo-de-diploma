@@ -144,7 +144,7 @@
             this.btAsignar.Name = "btAsignar";
             this.btAsignar.Size = new System.Drawing.Size(75, 23);
             this.btAsignar.TabIndex = 6;
-            this.btAsignar.Tag = "com.td.desasignar";
+            this.btAsignar.Tag = "com.td.asignar";
             this.btAsignar.Text = "Asignar";
             this.btAsignar.UseVisualStyleBackColor = true;
             this.btAsignar.Click += new System.EventHandler(this.button3_Click);
@@ -191,7 +191,7 @@
             this.groupBox1.Size = new System.Drawing.Size(665, 100);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "com.td.busqueda";
+            this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
             // btExport
@@ -231,7 +231,7 @@
             this.Controls.Add(this.dgMaterias);
             this.Controls.Add(this.dgAsignadas);
             this.Name = "AsignacionDeMaterias";
-            this.Tag = "com.td.asignacion.de.materia";
+            this.Tag = "com.td.asignación.de.materias";
             this.Text = "Asignación de Materias";
             this.Load += new System.EventHandler(this.AsignacionDeMaterias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgAsignadas)).EndInit();

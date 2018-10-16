@@ -12,7 +12,8 @@ namespace TrabajoDeCampo.DAO
         private static SqlConnection _conexion;
 
         private static SqlConnection constructor() {
-            return new SqlConnection (TrabajoDeCampo.Properties.Settings.Default.ConnectionString);
+            String cs = Encoding.UTF8.GetString(Convert.FromBase64String(TrabajoDeCampo.Properties.Settings.Default.ConnectionString));
+            return new SqlConnection (cs);
         }
 
         public static SqlConnection obtenerConexion()

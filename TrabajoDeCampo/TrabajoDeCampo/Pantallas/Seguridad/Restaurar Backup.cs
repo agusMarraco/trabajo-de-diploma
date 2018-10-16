@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using TrabajoDeCampo.DAO;
 using TrabajoDeCampo.SERVICIO;
+using TrabajoDeCampo.SEGURIDAD;
+
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class Restaurar_Backup : Form
@@ -18,6 +20,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         String usersFilePath = null;
 
         private ServicioSeguridad servicioSeguridad;
+        private Dictionary<string, string> traducciones;
+
         public Restaurar_Backup()
         {
             InitializeComponent();
@@ -30,7 +34,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
             if (String.IsNullOrEmpty(this.usersFilePath))
             {
-                MessageBox.Show("Complete los campos requeridos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
                 return;
             }
             if (usersFilePath != null){
@@ -39,12 +43,12 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 {
                     servicioSeguridad.realizarRestore(usersFilePath);
 
-                    MessageBox.Show("Backup Completado");
+                    MessageBox.Show(traducciones["com.td.completado"]);
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Ocurrio un error :" + ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
                
 
@@ -66,7 +70,19 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void Restaurar_Backup_Load(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = true;
-            
+
+            //traduccion
+            FormUtils traductor = new TraductorIterador();
+            List<String> tags = new List<string>();
+            long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            traductor.process(tags, this, null, null);
+            tags.Add("com.td.complete.campos");
+            tags.Add("com.td.completado");
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traductor = new TraductorReal();
+            traductor.process(null, this, traducciones, null);
+            traductor = new TraductorIterador();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
