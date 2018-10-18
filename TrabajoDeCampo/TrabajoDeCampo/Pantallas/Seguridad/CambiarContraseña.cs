@@ -46,6 +46,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             tags.Add("com.td.pass.no.coinciden");
             tags.Add("com.td.pass.iguales");
             tags.Add("com.td.complete.campos");
+            tags.Add("com.td.completado");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -94,6 +95,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     {
                         long usuario = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
                         this.servicioSeguridad.cambiarContraseña(usuario, this.nueva.Text);
+                        MessageBox.Show("com.td.completado");
                         this.Close();
                     }
                     else

@@ -245,12 +245,20 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.servicioSeguridad.grabarBitacora(usu, "El usuario cerró sesión", CriticidadEnum.BAJA);
+
             Login login = new Login();
             login.Show();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.servicioSeguridad.grabarBitacora(usu, "El usuario salio de la aplicación", CriticidadEnum.BAJA);
+            
             Application.Exit();
         }
     }

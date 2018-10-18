@@ -42,12 +42,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 try
                 {
                     servicioSeguridad.realizarRestore(usersFilePath);
-
                     MessageBox.Show(traducciones["com.td.completado"]);
                 }
                 catch (Exception ex)
                 {
-
                     MessageBox.Show(ex.Message);
                 }
                

@@ -123,8 +123,18 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             if (this.chUsuario.Checked)
             {
                 if (sb.Length > 0)
+                {
                     sb.Append(" AND ");
-                sb.Append(" USU_ALIAS = '" + userText + "'");
+                }
+                if (String.IsNullOrEmpty(userText))
+                {
+                    sb.Append(" USU_ALIAS  is null");
+                }
+                else
+                {
+                    sb.Append(" USU_ALIAS = '" + userText+ "'");
+                }
+
             }
 
                 table.DefaultView.RowFilter = sb.ToString();

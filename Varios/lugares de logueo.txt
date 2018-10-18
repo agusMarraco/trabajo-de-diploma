@@ -1,0 +1,25 @@
+cambio de contraseña
+cerrar sesion
+salir
+restore
+backup
+recalcular digitos
+verificar digitos
+falla de digitos
+alta familia
+baja familia
+modificacion familia
+alta usu
+mod usu
+bloq usu
+borrar usu
+regenerar pass
+promocion alumno
+borrar curso
+borrar materia
+save the mod materia
+abm horario
+borrar alumno
+save amon
+save edit inasistencia
+reg delete tutor

@@ -176,6 +176,30 @@ namespace TrabajoDeCampo.DAO
                     {
                         this.recalcularDigitoVertical("USUARIO");
                     }
+                    Usuario usu = null;
+                    switch (e.Message)
+                    {
+                        case "ALIAS":
+                            this.grabarBitacora(usu, "Alguien se intento loguear con un alias incorrecto " + user, CriticidadEnum.MEDIA);
+                            break;
+                        case "PASS":
+                           usu = new Usuario();
+                            usu.id = idUsuario;
+                            this.grabarBitacora(usu, "Alguien se intento loguear con un pass incorrecto " + user, CriticidadEnum.BAJA);
+                            break;
+                        case "BLOQUEADO":
+                            usu = new Usuario();
+                            usu.id = idUsuario;
+                            this.grabarBitacora(usu, "Un usuario bloqueado se intento loguear  " + user, CriticidadEnum.ALTA);
+                            break;
+                        case "PERMISOS":
+                            usu = new Usuario();
+                            usu.id = idUsuario;
+                            this.grabarBitacora(usu, "Alguien se intento loguear estando el sistema bloqueado" + user, CriticidadEnum.ALTA);
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 else{
                     try
@@ -201,6 +225,9 @@ namespace TrabajoDeCampo.DAO
             finally{
                 connection.Close();
                   this.recalcularDigitoVertical("USUARIO");
+                  Usuario usu = new Usuario();
+                  usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                  this.grabarBitacora(usu, "El usuario se logueo exitosamente", CriticidadEnum.BAJA);
             }
             
         }
@@ -469,6 +496,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!ModificarUsuario && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ModificarUsuario;
                 reader = cmd.ExecuteReader();
@@ -487,6 +515,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!ListarUsuarios && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ListarUsuarios;
                 reader = cmd.ExecuteReader();
@@ -504,6 +533,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!GenerarBackups && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.GenerarBackups;
                 reader = cmd.ExecuteReader();
@@ -521,6 +551,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!RestaurarBackup && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.RestaurarBackup;
                 reader = cmd.ExecuteReader();
@@ -538,6 +569,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!RecalcularDígitosVerificadores && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.RecalcularDígitosVerificadores;
                 reader = cmd.ExecuteReader();
@@ -555,6 +587,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!ModificarFamilias && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ModificarFamilias;
                 reader = cmd.ExecuteReader();
@@ -572,6 +605,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!ListarFamilias && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ListarFamilias;
                 reader = cmd.ExecuteReader();
@@ -590,6 +624,7 @@ namespace TrabajoDeCampo.DAO
             }
             if (!CrearFamilia && seguirBuscando)
             {
+                cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = usuario.id;
                 cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.CrearFamilia;
                 reader = cmd.ExecuteReader();
@@ -675,7 +710,9 @@ namespace TrabajoDeCampo.DAO
             this.recalcularDigitoVertical("FAMILIA");
             this.recalcularDigitoVertical("FAMILIA_PATENTE");
 
-
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.grabarBitacora(usu, "Se creó una familia", CriticidadEnum.ALTA);
 
 
         }
@@ -739,7 +776,9 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 this.recalcularDigitoVertical("FAMILIA");
                 this.recalcularDigitoVertical("FAMILIA_PATENTE");
-
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Se modificó una familia ", CriticidadEnum.ALTA);
             }
 
         }
@@ -783,7 +822,9 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 this.recalcularDigitoVertical("FAMILIA");
                 this.recalcularDigitoVertical("FAMILIA_PATENTE");
-
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Se borró una familia ", CriticidadEnum.ALTA);
             }
 
         }
@@ -980,7 +1021,9 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 throw ex;
             }
-            
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.grabarBitacora(usu, "Cambio de contraseña", CriticidadEnum.BAJA);
             this.recalcularDigitoVertical("USUARIO");
         }
 
@@ -1122,6 +1165,9 @@ namespace TrabajoDeCampo.DAO
             {
                 connection.Close();
             }
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.grabarBitacora(usu, "Se regeneró una contraseña", CriticidadEnum.BAJA);
             this.recalcularDigitoVertical("USUARIO");
             desbloquearUsuario(idUsuario);
 
@@ -1280,6 +1326,9 @@ namespace TrabajoDeCampo.DAO
             finally
             {
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Se bloquea un usuario ", CriticidadEnum.MEDIA);
                 this.recalcularDigitoVertical("USUARIO");
             }
 
@@ -1346,7 +1395,11 @@ namespace TrabajoDeCampo.DAO
             finally
             {
                 connection.Close();
+
             }
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.grabarBitacora(usu, "Se desbloquea un usuario ", CriticidadEnum.MEDIA);
             this.recalcularDigitoVertical("USUARIO");
         }
 
@@ -1388,6 +1441,9 @@ namespace TrabajoDeCampo.DAO
                 reader.Close();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Crear usuario", CriticidadEnum.MEDIA);
             }
             catch (Exception exe)
             {
@@ -1402,7 +1458,8 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 throw exe;
             }
-
+            this.recalcularDigitoVertical("USUARIO");
+            actualizarPermisosUsuario(usuario, usuario.componentePermisos);
         }
 
         public void modificarUsuario(Usuario usuario) {
@@ -1459,6 +1516,9 @@ namespace TrabajoDeCampo.DAO
                 int resultados = query.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Se modificó un usuario", CriticidadEnum.MEDIA);
             }
             catch (Exception exe)
             {
@@ -1728,14 +1788,18 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 throw;
             }
-
             foreach (DataRow item in set.Tables[0].Rows)
             {
-                String usuario = SeguridadUtiles.desencriptarAES(item.ItemArray[1].ToString());
-                item.BeginEdit();
-                item.ItemArray[1] = usuario;
-                item.SetField(1, usuario);
-                item.EndEdit();
+    
+                if(!item.ItemArray[1].GetType().Equals(typeof(DBNull)))
+                {
+                    String usuario = SeguridadUtiles.desencriptarAES(item.ItemArray[1].ToString());
+                    item.BeginEdit();
+                    item.ItemArray[1] = usuario;
+                    item.SetField(1, usuario);
+                    item.EndEdit();
+                }
+                
             }
 
 
@@ -1795,6 +1859,8 @@ namespace TrabajoDeCampo.DAO
                     long id = (long) reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en usuario", CriticidadEnum.ALTA);
+
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1831,6 +1897,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en patente", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1867,6 +1934,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en bitácora", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1906,6 +1974,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en planilla", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1946,6 +2015,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en familia", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -1982,6 +2052,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en inasistencia alumno", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -2016,6 +2087,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en amonestación", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -2050,6 +2122,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en usuario familia", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -2085,6 +2158,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en usuario patente", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -2118,6 +2192,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(0);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en familia patente", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -2149,6 +2224,7 @@ namespace TrabajoDeCampo.DAO
                     reader.GetValue(1);
                     reader.Close();
                     connection.Close();
+                    this.grabarBitacora(null, "Falló la integridad de datos en dígito vertical", CriticidadEnum.ALTA);
                     throw new Exception("fallo la integridad de datos");
                 }
 
@@ -2303,6 +2379,10 @@ namespace TrabajoDeCampo.DAO
 
             tx.Commit();
             connection.Close();
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.grabarBitacora(usu, "Se recalcularon los dígitos verificadores ", CriticidadEnum.ALTA);
+
         }
 
 
@@ -2416,9 +2496,16 @@ namespace TrabajoDeCampo.DAO
             {
                 query.ExecuteNonQuery();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Se realizó un backup", CriticidadEnum.MEDIA);
+
             }
             catch (Exception e)
             {
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Falló un backup", CriticidadEnum.ALTA);
 
                 connection.Close();
                 throw e;
@@ -2449,9 +2536,18 @@ namespace TrabajoDeCampo.DAO
             catch (Exception e)
             {
 
+                Usuario usuario = new Usuario();
+                usuario.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usuario, "Falló un restore", CriticidadEnum.ALTA);
+
                 connection.Close();
                 throw e;
             }
+
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            this.grabarBitacora(usu, "Se realizó un restore", CriticidadEnum.ALTA);
+
         }
 
 

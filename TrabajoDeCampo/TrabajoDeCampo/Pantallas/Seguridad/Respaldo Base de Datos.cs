@@ -62,7 +62,6 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 }
                 catch (Exception ex)
                 {
-
                     MessageBox.Show(ex.Message);
                 }
                

@@ -8,6 +8,9 @@ SE PASO DE DATE A DATE TIME EL CAMPO FECHA EN BITACORA MODIFICAR EL DC
 Notas de sobre las conversaciones con carlos
 	
 
+agrege la clase enum Criticidad
+
+
 AGREGE USUARIO COMO ELEMENTO DE LA FIRMA DE VERIFICAR PERMISOS ESENCIALES.
 
 agregue un string como parametro al regenerar contraseña en daoSeguridad,

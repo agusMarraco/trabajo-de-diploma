@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrabajoDeCampo.SEGURIDAD;
 
 namespace TrabajoDeCampo.DAO
 {
@@ -217,6 +218,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se creó un horario", CriticidadEnum.BAJA);
             }
             catch (Exception ex)
             {
@@ -251,6 +255,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se modificó un horario", CriticidadEnum.BAJA);
             }
             catch (Exception ex)
             {
@@ -275,6 +282,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se borró un horario", CriticidadEnum.MEDIA);
             }
             catch (Exception ex)
             {
@@ -454,6 +464,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se borró un curso", CriticidadEnum.MEDIA);
             }
             catch (Exception ex)
             {
@@ -662,6 +675,9 @@ namespace TrabajoDeCampo.DAO
                 command.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se actualizaron las materias de un nivel", CriticidadEnum.ALTA);
             }
             catch (Exception ex)
             {
@@ -831,6 +847,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se borró una materia", CriticidadEnum.ALTA);
             }
             catch (Exception ex)
             {
@@ -1130,7 +1149,9 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 throw;
             }
-
+            Usuario usu = new Usuario();
+            usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+            new DAOSeguridad().grabarBitacora(usu, "Se promocionó un alumno", CriticidadEnum.MEDIA);
 
         }
 

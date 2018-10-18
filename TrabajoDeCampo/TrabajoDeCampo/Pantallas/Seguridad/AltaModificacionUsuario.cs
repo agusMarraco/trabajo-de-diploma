@@ -22,7 +22,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private FormUtils formUtils;
         
         private StringBuilder mensajesDeError = new StringBuilder();
-        
+        private ListaDeUsuarios parentForm;
         private Boolean isEdit;
         private Usuario currentUsuario;
 
@@ -36,10 +36,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         
         }
 
-        public AltaModificacionUsuario(Boolean isEdit, Usuario usuario)
+        public AltaModificacionUsuario(Boolean isEdit, Usuario usuario, ListaDeUsuarios parentForm)
         {
             InitializeComponent();
-
+            this.parentForm = parentForm;
             //inicializando propiedades
             this.KeyPreview = true;
             this.servicioSeguridad = new ServicioSeguridad();
@@ -135,6 +135,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             tags.Add("com.td.español");
             tags.Add("com.td.completado");
             tags.Add("com.td.permisos.esenciales");
+            tags.Add("com.td.permisos.esenciales");
+            tags.Add("com.td.complete.campos");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             formUtils = new TraductorReal();
             formUtils.process(null, this, traducciones, null);
@@ -209,6 +211,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         public Boolean validateInputs()
         {
             mensajesDeError = new StringBuilder();
+            mensajesDeError.Append(traducciones["com.td.complete.campos"]).Append(Environment.NewLine);
             Boolean hayErrores = false;
                         if (String.IsNullOrEmpty(this.nombre.Text))
             {
@@ -318,6 +321,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     if (!error)
                     {
                         MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
+                        this.parentForm.listarDefault();
                         this.Close();
                     }
                   
@@ -350,6 +354,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     if (!error)
                     {
                         MessageBox.Show(traducciones["com.td.completado"],"", MessageBoxButtons.OK);
+                        this.parentForm.listarDefault();
                         this.Close();
                     }
                 }

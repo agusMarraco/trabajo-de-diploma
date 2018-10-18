@@ -59,7 +59,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             if(this.gwUsuarios.CurrentRow.DataBoundItem != null)
             {
                 Usuario usu = (Usuario)this.gwUsuarios.CurrentRow.DataBoundItem;
-                AltaModificacionUsuario user = new AltaModificacionUsuario(true,usu);
+                AltaModificacionUsuario user = new AltaModificacionUsuario(true,usu,this);
                 user.Show();
             }
             else
@@ -115,7 +115,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void button6_Click(object sender, EventArgs e)
         {
-            AltaModificacionUsuario user = new AltaModificacionUsuario(false, null);
+            AltaModificacionUsuario user = new AltaModificacionUsuario(false, null,this);
             user.Show();
         }
 
@@ -242,6 +242,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             }
             
                
+        }
+        public void  listarDefault()
+        {
+            searchUsuarios(this.servicioSeguridad.listarUsuarios(null, null, null));
         }
 
       

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using TrabajoDeCampo.SEGURIDAD;
 
 namespace TrabajoDeCampo.DAO
 {
@@ -246,6 +247,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se borró alumno", CriticidadEnum.ALTA);
             }
             catch (Exception ex)
             {
@@ -464,6 +468,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se registro una amonestación", CriticidadEnum.MEDIA);
             }
             catch (Exception)
             {
@@ -543,6 +550,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se guardó una inasistencia", CriticidadEnum.BAJA);
                 new DAOSeguridad().recalcularDigitoVertical("INASISTENCIA_DE_ALUMNO");
             }
             catch (Exception)
@@ -574,6 +584,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se modificó una inasistencia", CriticidadEnum.BAJA);
                 new DAOSeguridad().recalcularDigitoVertical("INASISTENCIA_DE_ALUMNO");
             }
             catch (Exception)
@@ -665,6 +678,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se creó un tutor", CriticidadEnum.BAJA);
 
             }
             catch (Exception ex)
@@ -816,7 +832,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
-
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se borró un tutor", CriticidadEnum.MEDIA);
             }
             catch (Exception ex)
             {
