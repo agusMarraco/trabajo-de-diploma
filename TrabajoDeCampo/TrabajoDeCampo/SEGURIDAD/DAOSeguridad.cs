@@ -224,10 +224,14 @@ namespace TrabajoDeCampo.DAO
             }
             finally{
                 connection.Close();
-                  this.recalcularDigitoVertical("USUARIO");
+                this.recalcularDigitoVertical("USUARIO");
+                if(TrabajoDeCampo.Properties.Settings.Default.SessionUser != 0)
+                {
                   Usuario usu = new Usuario();
                   usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
                   this.grabarBitacora(usu, "El usuario se logueo exitosamente", CriticidadEnum.BAJA);
+
+                }
             }
             
         }
@@ -1681,7 +1685,7 @@ namespace TrabajoDeCampo.DAO
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
-
+            mensaje = SeguridadUtiles.encriptarAES(mensaje);
             StringBuilder builder = new StringBuilder(" INSERT INTO BITACORA  (");
             if (usuario != null)
             {
@@ -1791,14 +1795,16 @@ namespace TrabajoDeCampo.DAO
             foreach (DataRow item in set.Tables[0].Rows)
             {
     
+                    item.BeginEdit();
+                
                 if(!item.ItemArray[1].GetType().Equals(typeof(DBNull)))
                 {
                     String usuario = SeguridadUtiles.desencriptarAES(item.ItemArray[1].ToString());
-                    item.BeginEdit();
                     item.ItemArray[1] = usuario;
                     item.SetField(1, usuario);
-                    item.EndEdit();
                 }
+                item.SetField(3, SeguridadUtiles.desencriptarAES(item.ItemArray[3].ToString()));
+                item.EndEdit();
                 
             }
 

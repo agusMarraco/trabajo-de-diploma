@@ -12,7 +12,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="SessionUser" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="MasterString" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
