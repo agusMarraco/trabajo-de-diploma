@@ -75,7 +75,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void Respaldo_Base_de_Datos_Load(object sender, EventArgs e)
         {
-
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Backup.htm" : "BackupEN.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();

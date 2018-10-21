@@ -28,7 +28,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void Login_Load(object sender, EventArgs e)
         {
-            if(TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1)
+            this.helpProvider1.SetHelpKeyword(this, "LoginES.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
+            if (TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1)
             {
                 this.label3.Visible = true;
             }

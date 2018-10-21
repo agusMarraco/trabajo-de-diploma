@@ -112,6 +112,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private void AltaModificacionCurso_Load(object sender, EventArgs e)
         {
             //traduccion
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Cursos.htm" : "Courses.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;

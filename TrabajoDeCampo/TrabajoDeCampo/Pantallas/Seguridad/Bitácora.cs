@@ -66,7 +66,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
 
 
-
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Bitácora.htm" : "Audits.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();

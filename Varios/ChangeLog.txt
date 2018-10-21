@@ -61,3 +61,61 @@ patentes interfaz usuario
 agregar una columna mas sacar la tabla al pedo de la solapa de patenes en el alta de usuario.
 
 Cambiar en la carpeta la parte de backup y restore para dejarla actualizada.	
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+agrege la clase enum Criticidad
+agregue el enum de patentes, agregar al diagrama de clases.
+
+agregue el metodo generarPlanillas(Alumno alumno)
+en el administracionDAO ds, diagrama diccionario
+se llama en el promocionar alumno
+
+AGREGE USUARIO COMO ELEMENTO DE LA FIRMA DE VERIFICAR PERMISOS ESENCIALES.
+
+agregue un string como parametro al regenerar contraseña en daoSeguridad,
+cambiar en el diccionario de datos y el retorno tambien, es al pedo.
+cambiar el parametro del mismo metodo en el servicio y pasarle un usuario, por el tema del nombre e idioma.
+
+
+ahora el calcular digito horizontal devuelve un string, hacer la modificacion en el diccionario de datos.
+
+agregue un parametro 
+chequearCodigoUnico(String codigoCurso,long cursoId) admin dao, curso id
+
+cambiar el parametro que recibe servicio borrar ususario/bloquear usuario
+
+cambie el listarhorarios del servicio devuelve una datatable;
+
+
+
+agregue un parametro 
+verificarDNI(String dni, String tipo)  alumno dao, entity id
+
+cambiar el retorno de los metodos de bitacora en el diccionario de datos
+
+hacer que el btn cancelar de cada uno cierre el form.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+SE PASO DE DATE A DATE TIME EL CAMPO FECHA EN BITACORA MODIFICAR EL DC
+
+agregue asignada como propiedad a la patente para un workaround en dgv de usuarios
+agregue la propiedad la componente permiso al usuario, tengo que actualizar el diagrama de clases
+pero safo del diccionario de datos porque las entidades no van.
+
+a materia le faltaba el nombre,agregar diagrama de clases.
+
+agregue el orientacion string a nivel por el tema del reporte
+
+agregue la propiedad asignado al tutor
+	agregar al diagrama de clases.
+
+hacer con dataset por el tema de reporte
+	cambiar los retornos de los metodos en el diagrama de clases.
+	listado de cursos, alumnos, plan de estudios(nivel)
+	horario y bitacora

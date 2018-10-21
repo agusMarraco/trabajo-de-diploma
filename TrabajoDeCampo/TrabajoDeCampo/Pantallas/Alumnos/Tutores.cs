@@ -65,6 +65,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void Tutores_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Tutores.htm" : "Tutors.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             buscarTutores(null, null);
             desbloquearControles();
 

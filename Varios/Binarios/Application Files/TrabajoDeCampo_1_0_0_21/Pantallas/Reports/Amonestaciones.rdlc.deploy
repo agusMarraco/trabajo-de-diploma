@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Subreport Name="Subreport2">
+        <ReportName>DetallesAlumno</ReportName>
+        <Parameters>
+          <Parameter Name="mostrarfaltas">
+            <Value>false</Value>
+          </Parameter>
+        </Parameters>
+        <Height>1.17708in</Height>
+        <Width>18cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
+      <Tablix Name="Tablix1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>7.08661in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.53in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Rectangle Name="Rectangle1">
+                      <ReportItems>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!motivo.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Left>2.1141in</Left>
+                          <Height>0.53in</Height>
+                          <Width>12.63019cm</Width>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=CDate(Fields!fecha.Value).ToShortDateString()</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Height>0.53in</Height>
+                          <Width>5.3698cm</Width>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </ReportItems>
+                      <KeepTogether>true</KeepTogether>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Rectangle>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSet1</DataSetName>
+        <Top>1.4675in</Top>
+        <Height>0.53in</Height>
+        <Width>7.08661in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="Textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!fechaLbl.Value, "DataSet2")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>1.17708in</Top>
+        <Left>0in</Left>
+        <Height>0.29042in</Height>
+        <Width>5.36979cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!motivoLbl.Value, "DataSet2")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>1.17708in</Top>
+        <Left>2.1141in</Left>
+        <Height>0.29042in</Height>
+        <Width>12.63019cm</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>2.10639in</Height>
+    <Style />
+  </Body>
+  <Width>18.00002cm</Width>
+  <Page>
+    <PageHeader>
+      <Height>2cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Rectangle Name="Rectangle2">
+          <ReportItems>
+            <Rectangle Name="Rectangle5">
+              <ReportItems>
+                <Image Name="Image1">
+                  <Source>Embedded</Source>
+                  <Value>LOGO</Value>
+                  <Sizing>Fit</Sizing>
+                  <Top>0.08379in</Top>
+                  <Left>0.54042in</Left>
+                  <Height>0.63417in</Height>
+                  <Width>0.69792in</Width>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Image>
+              </ReportItems>
+              <KeepTogether>true</KeepTogether>
+              <Height>0.7874in</Height>
+              <Width>5cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <RightBorder>
+                  <Style>Solid</Style>
+                </RightBorder>
+              </Style>
+            </Rectangle>
+            <Rectangle Name="Rectangle6">
+              <ReportItems>
+                <Textbox Name="Textbox5">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=First(Fields!nombreReporte.Value, "DataSet3")</Value>
+                          <Style />
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox5</rd:DefaultName>
+                  <Height>0.33254in</Height>
+                  <Width>6.5cm</Width>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <TopBorder>
+                      <Style>Solid</Style>
+                    </TopBorder>
+                    <RightBorder>
+                      <Style>Solid</Style>
+                    </RightBorder>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="Textbox6">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=First(Fields!fecha.Value, "DataSet3")</Value>
+                          <Style />
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox5</rd:DefaultName>
+                  <Left>2.55906in</Left>
+                  <Height>0.33254in</Height>
+                  <Width>6.5cm</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <TopBorder>
+                      <Style>Solid</Style>
+                    </TopBorder>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <KeepTogether>true</KeepTogether>
+              <Top>0.45486in</Top>
+              <Left>1.9685in</Left>
+              <Height>0.33254in</Height>
+              <Width>13cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Rectangle>
+            <Textbox Name="Textbox7">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!nombreColegio.Value, "DataSet3")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox7</rd:DefaultName>
+              <Top>0.11333in</Top>
+              <Left>3.22792in</Left>
+              <Height>0.34153in</Height>
+              <Width>2.47917in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <KeepTogether>true</KeepTogether>
+          <Height>2cm</Height>
+          <Width>18cm</Width>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Rectangle>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>0.67028cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!PageNumber.ToString() + "/" + Globals.TotalPages.ToString()</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox8</rd:DefaultName>
+          <Top>0.01389in</Top>
+          <Left>0in</Left>
+          <Height>0.25in</Height>
+          <Width>7.08662in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="TrabajoDeCampo">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>a6b95635-e4de-4aa2-8d15-eed3693b6cec</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="Traducciones">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>94feb3b2-db2e-4e2d-88a3-e9099fa1dd53</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="InfoColegio">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>4f0af25d-4642-4197-8975-098ddf51faa7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>TrabajoDeCampo</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="alumno">
+          <DataField>alumno</DataField>
+          <rd:TypeName>TrabajoDeCampo.Alumno</rd:TypeName>
+        </Field>
+        <Field Name="fecha">
+          <DataField>fecha</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="motivo">
+          <DataField>motivo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>TrabajoDeCampo</rd:DataSetName>
+        <rd:TableName>Alumno</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>amonestaciones</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceType>TrabajoDeCampo.Alumno, TrabajoDeCampo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=404a0cd63fbff1b5</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>Traducciones</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="justificadaLbl">
+          <DataField>justificadaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fechaLbl">
+          <DataField>fechaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tipoLbl">
+          <DataField>tipoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="motivoLbl">
+          <DataField>motivoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="apellidoLbl">
+          <DataField>apellidoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nombreLbl">
+          <DataField>nombreLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dniLbl">
+          <DataField>dniLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="faltasTotalesLbl">
+          <DataField>faltasTotalesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="descripcionLbl">
+          <DataField>descripcionLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="siLbl">
+          <DataField>siLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="noLbl">
+          <DataField>noLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="moduloLbl">
+          <DataField>moduloLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="lunesLbl">
+          <DataField>lunesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="martesLbl">
+          <DataField>martesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="miercolesLbl">
+          <DataField>miercolesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="juevesLbl">
+          <DataField>juevesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="viernesLbl">
+          <DataField>viernesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Traducciones</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Agustin\Documents\Trabajo-De-Campo\trabajo-de-diploma\TrabajoDeCampo\TrabajoDeCampo\Properties\DataSources\Traducciones.xsd</rd:SchemaPath>
+        <rd:TableName>DataTable1</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet3">
+      <Query>
+        <DataSourceName>InfoColegio</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="nombreReporte">
+          <DataField>nombreReporte</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nombreColegio">
+          <DataField>nombreColegio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fecha">
+          <DataField>fecha</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="totalFaltas">
+          <DataField>totalFaltas</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>InfoColegio</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Agustin\Documents\Trabajo-De-Campo\trabajo-de-diploma\TrabajoDeCampo\TrabajoDeCampo\Properties\DataSources\InfoColegio.xsd</rd:SchemaPath>
+        <rd:TableName>DataTable1</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <EmbeddedImages>
+    <EmbeddedImage Name="LOGO">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>313e6099-1c88-4cac-8a2f-665d78b89b62</rd:ReportID>
+</Report>

@@ -36,6 +36,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void Amonestaciones_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Alumnos.htm" : "Students.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.dataGridView1.AutoGenerateColumns = false;
             this.dateTimePicker1.MaxDate = DateTime.Now;
             this.dataGridView1.Columns[0].DataPropertyName = "fecha";

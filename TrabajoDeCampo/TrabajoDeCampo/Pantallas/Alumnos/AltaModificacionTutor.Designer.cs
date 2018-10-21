@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AltaModificacionTutor));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -215,8 +217,11 @@
             this.ClientSize = new System.Drawing.Size(634, 214);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AltaModificacionTutor";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.tutor";
             this.Text = "Tutor";
             this.Load += new System.EventHandler(this.AltaModificacionTutor_Load);
@@ -243,5 +248,6 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

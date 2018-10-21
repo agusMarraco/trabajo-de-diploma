@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Amonestaciones));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,6 +40,7 @@
             this.cancelar = new System.Windows.Forms.Button();
             this.registrar = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -170,7 +172,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.registrar);
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Amonestaciones";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.amonestaciones";
             this.Text = "Amonestaciones";
             this.Load += new System.EventHandler(this.Amonestaciones_Load);
@@ -194,5 +199,6 @@
         private System.Windows.Forms.Button cancelar;
         private System.Windows.Forms.Button registrar;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

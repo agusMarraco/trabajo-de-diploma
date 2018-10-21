@@ -18,6 +18,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private Boolean valido = false;
         public FalloConexión()
         {
+            System.Diagnostics.Debugger.Launch();
             InitializeComponent();
             this.textBox1.KeyPress += validateKP;
             this.textBox1.KeyDown += validateKD;
@@ -50,7 +51,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void FalloConexión_Load(object sender, EventArgs e)
         {
-            
+            this.helpProvider1.SetHelpKeyword(this, "Fallo_Conexión.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,10 +65,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             {
                 if(!String.IsNullOrEmpty(this.textBox2.Text) && !String.IsNullOrEmpty(this.textBox3.Text))
                 {
-                    String prevConnectionString = TrabajoDeCampo.Properties.Settings.Default.ConnectionString;
+                    String prevConnectionString = TrabajoDeCampo.Properties.Settings.Default.ConnectionString; // encriptado
                     String connectionString = "Data Source = "  + this.textBox1.Text + "; Initial Catalog = TRABAJO_DIPLOMA; User ID = " + this.textBox2.Text + " ; Password = " + this.textBox3.Text;
-                    TrabajoDeCampo.Properties.Settings.Default.ConnectionString = connectionString;
-                    TrabajoDeCampo.Properties.Settings.Default.MasterString = connectionString.Replace("TRABAJO_DIPLOMA","master");
+
+                    TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(connectionString));
+                    TrabajoDeCampo.Properties.Settings.Default.MasterString =     Convert.ToBase64String(Encoding.UTF8.GetBytes(connectionString.Replace("TRABAJO_DIPLOMA", "master"))); 
                     ServicioSeguridad servicioSeguridad = new ServicioSeguridad();
 
                     Boolean  conecto = servicioSeguridad.probarConexion();
@@ -87,10 +90,12 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 else
                 {
 
-                    String prevConnectionString = TrabajoDeCampo.Properties.Settings.Default.ConnectionString;
-                    
-                    TrabajoDeCampo.Properties.Settings.Default.ConnectionString = "Data Source = " + this.textBox1.Text + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
-                    TrabajoDeCampo.Properties.Settings.Default.MasterString = "Data Source = " + this.textBox1.Text + " ; Initial Catalog = master ; Integrated Security = True";
+                    String prevConnectionString = TrabajoDeCampo.Properties.Settings.Default.ConnectionString; // encriptado
+
+                    String cs = "Data Source = " + this.textBox1.Text + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
+                    String mcs = "Data Source = " + this.textBox1.Text + " ; Initial Catalog = master ; Integrated Security = True";
+                    TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(cs));
+                    TrabajoDeCampo.Properties.Settings.Default.MasterString = Convert.ToBase64String(Encoding.UTF8.GetBytes(mcs));
 
                     ServicioSeguridad servicioSeguridad = new ServicioSeguridad();
 

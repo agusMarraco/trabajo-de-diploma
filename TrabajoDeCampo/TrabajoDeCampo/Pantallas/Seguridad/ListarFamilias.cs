@@ -172,7 +172,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void ListarFamilias_Load(object sender, EventArgs e)
         {
-
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Permisos.htm" : "Permissions.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             listarElementos();
 
             //traduccion

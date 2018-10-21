@@ -39,7 +39,17 @@ namespace TrabajoDeCampo.SERVICIO
 
 
         public Boolean probarConexion() {
-            return this.daoSeguridad.probarConexion();
+            Boolean conectado = true;
+            try
+            {
+                conectado = this.daoSeguridad.probarConexion();
+            }
+            catch (Exception)
+            {
+                conectado = false;
+
+            }
+            return conectado;
         }
 
 

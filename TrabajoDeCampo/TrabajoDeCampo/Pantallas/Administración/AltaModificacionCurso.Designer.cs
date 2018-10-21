@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AltaModificacionCurso));
             this.txtCapacidad = new System.Windows.Forms.TextBox();
             this.txtLetra = new System.Windows.Forms.TextBox();
             this.comboNiveles = new System.Windows.Forms.ComboBox();
@@ -39,6 +40,7 @@
             this.rbTurnoTarde = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,6 +157,11 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "C:\\Users\\Agustin\\Documents\\Trabajo-De-Campo\\trabajo-de-diploma\\Varios\\DocumentsDe" +
+    "Ayuda.chm";
+            // 
             // AltaModificacionCurso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,7 +176,10 @@
             this.Controls.Add(this.comboNiveles);
             this.Controls.Add(this.txtLetra);
             this.Controls.Add(this.txtCapacidad);
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AltaModificacionCurso";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.curso";
             this.Text = "Curso ";
             this.Load += new System.EventHandler(this.AltaModificacionCurso_Load);
@@ -192,5 +202,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RadioButton rbTurnoMañana;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bitácora));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +48,7 @@
             this.fromDatepicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -275,8 +277,11 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Bitácora";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.bitácora";
             this.Text = "Bitácora";
             this.Load += new System.EventHandler(this.Bitácora_Load);
@@ -308,5 +313,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn USU_ALIAS;
         private System.Windows.Forms.DataGridViewTextBoxColumn BIT_CRITICIDAD_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn BIT_MENSAJE;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Horarios));
             this.label1 = new System.Windows.Forms.Label();
             this.comboNivel = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -40,6 +41,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnExpo = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -203,8 +205,11 @@
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Horarios";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.horarios";
             this.Text = "Horarios";
             this.Load += new System.EventHandler(this.Horarios_Load);
@@ -229,5 +234,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnExpo;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

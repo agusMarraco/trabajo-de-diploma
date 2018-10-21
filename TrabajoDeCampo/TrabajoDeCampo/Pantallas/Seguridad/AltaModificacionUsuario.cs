@@ -112,6 +112,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void AltaModificacionUsuario_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Usuarios.htm" : "Users.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             //inicializo propiedades
             this.dgfamilias.Columns[0].Tag = "com.td.familia";
             this.dgfamilias.Columns[0].ReadOnly = true;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Respaldo_Base_de_Datos));
             this.label1 = new System.Windows.Forms.Label();
             this.pathtxt = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.btnExaminar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnRespaldar = new System.Windows.Forms.Button();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,7 +135,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 273);
             this.Controls.Add(this.groupBox1);
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Respaldo_Base_de_Datos";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.generate.respaldo";
             this.Text = "Respaldo Base de Datos";
             this.Load += new System.EventHandler(this.Respaldo_Base_de_Datos_Load);
@@ -153,5 +158,6 @@
         private System.Windows.Forms.Button btnExaminar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnRespaldar;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

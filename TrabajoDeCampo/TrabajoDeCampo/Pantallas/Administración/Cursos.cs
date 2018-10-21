@@ -60,6 +60,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
         private void Cursos_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Cursos.htm" : "Courses.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.dataGridView1.DataSource = null;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.Columns[0].DataPropertyName = "nivel";

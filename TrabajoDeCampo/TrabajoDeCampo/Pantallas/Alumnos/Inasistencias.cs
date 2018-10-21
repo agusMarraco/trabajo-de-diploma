@@ -59,6 +59,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void Inasistencias_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Alumnos.htm" : "Students.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             utils = new Bloqueador();
             this.dateTimePicker1.MaxDate = DateTime.Now;
             List<Control> controles = new List<Control>() { this.groupBox1 };

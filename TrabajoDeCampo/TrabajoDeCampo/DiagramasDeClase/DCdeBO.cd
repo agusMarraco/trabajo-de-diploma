@@ -67,7 +67,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TrabajoDeCampo.Horario">
-    <Position X="8.75" Y="3.5" Width="1.75" />
+    <Position X="8.75" Y="3" Width="1.75" />
     <Members>
       <Field Name="_curso" Hidden="true" />
       <Field Name="_dia" Hidden="true" />
@@ -75,9 +75,10 @@
       <Field Name="_id" Hidden="true" />
       <Field Name="_materia" Hidden="true" />
       <Field Name="_modulo" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>BIAAAAAAACAAAAEAAABABAEAAAAAQAAACAAgAAAAAgg=</HashCode>
+      <HashCode>BIAAAAAAACAAAAEEAABABAEAAAAAQAAACAAgAAAAAgg=</HashCode>
       <FileName>BO\Horario.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -100,10 +101,11 @@
       <Field Name="_descripcion" Hidden="true" />
       <Field Name="_id" Hidden="true" />
       <Field Name="_nivel" Hidden="true" />
+      <Field Name="_nombre" Hidden="true" />
       <Field Name="_tipo" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAEBAAAAAAAAAAEAAFAAAAAAAABAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAEBAAAAAAAAACEAAFAAAAAAAABAAAAAAAAAAIAAgA=</HashCode>
       <FileName>BO\Materia.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -113,14 +115,15 @@
       <Field Name="_horaFin" Hidden="true" />
       <Field Name="_horaInicio" Hidden="true" />
       <Field Name="_id" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAgAQAAAAAAAAAAABAAAAAAAAABCAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAgAQAAAAAAAAEAABAAAAAAAAABCAAAAAAAAAAAgA=</HashCode>
       <FileName>BO\Modulo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrabajoDeCampo.Nivel">
-    <Position X="10.75" Y="5.25" Width="2" />
+    <Position X="10.75" Y="6" Width="2" />
     <Members>
       <Field Name="_codigo" Hidden="true" />
       <Field Name="_cursos" Hidden="true" />
@@ -128,9 +131,10 @@
       <Field Name="_id" Hidden="true" />
       <Field Name="_materias" Hidden="true" />
       <Field Name="_orientacion" Hidden="true" />
+      <Field Name="_orientacionCodigo" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAABEAAAAAAQIAEEAAFABCAAAAAAAAAACAAAAAAAAgA=</HashCode>
+      <HashCode>AAABEAAAAAAQIAEEAAFABCAAAAAAAAAAGAAAAAAAAgA=</HashCode>
       <FileName>BO\Nivel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -139,9 +143,10 @@
     <Members>
       <Field Name="_codigo" Hidden="true" />
       <Field Name="_nombre" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAQAACAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAQAACEAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>BO\Orientacion.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -167,6 +172,7 @@
     <Position X="0.5" Y="5.75" Width="1.5" />
     <Members>
       <Field Name="_apellido" Hidden="true" />
+      <Field Name="_asignado" Hidden="true" />
       <Field Name="_dni" Hidden="true" />
       <Field Name="_email" Hidden="true" />
       <Field Name="_id" Hidden="true" />
@@ -175,7 +181,7 @@
       <Field Name="_telefono2" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAABSAQAAASgAABAAQAAAAAAAAAAAAAAAAIAAgM=</HashCode>
+      <HashCode>AAAAAAABSAQAAASgAABABQAAAAAAAAAAAAAAAAIAIgM=</HashCode>
       <FileName>BO\Tutor.cs</FileName>
     </TypeIdentifier>
   </Class>

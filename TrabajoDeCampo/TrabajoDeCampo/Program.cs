@@ -18,7 +18,7 @@ namespace TrabajoDeCampo
         [STAThreadAttribute]
         public static void Main(string[] args)
         {
-
+            System.Diagnostics.Debugger.Launch();
             String machineName = (Environment.UserName == "Navegador") ? Environment.UserDomainName + @"\" + "SQL14_UAI" : Environment.MachineName;
             String connection = "Data Source = " + machineName + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
             TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(connection));
@@ -27,18 +27,16 @@ namespace TrabajoDeCampo
           
 
             Boolean seConecto = true;
-            try
-            {
-                servicioSeguridad.probarConexion();
-            }
-            catch (Exception )
+           
+            bool probarConexion = servicioSeguridad.probarConexion();
+           
+            if(!probarConexion)
             {
                 //no se puedo conectar a la base, muestro falla de conexion.
                 FalloConexión conexión = new FalloConexión();
                 conexión.ShowDialog();
                 seConecto = false;  
             }
-
             if (seConecto)
             {
                 try

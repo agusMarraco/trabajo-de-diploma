@@ -38,7 +38,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         }
         private void AltaModificacionTutor_Load(object sender, EventArgs e)
         {
-            if(currentTutor != null)
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Tutores.htm" : "Tutors.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
+            if (currentTutor != null)
             {
                 this.txtNombre.Text = currentTutor.nombre;
                 this.txtApellido.Text = currentTutor.apellido;

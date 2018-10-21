@@ -76,6 +76,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void AltaModificacionAlumno_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Alumnos.htm" : "Students.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             List<Curso> cursos = servicioAdministracion.listarCursos(null, null, null);
             List<Orientacion> orientaciones = servicioAlumnos.listarOrientacion();
             Orientacion fake = new Orientacion();

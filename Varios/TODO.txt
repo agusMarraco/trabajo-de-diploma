@@ -1,60 +1,5 @@
 ﻿preguntas para carlos
 
-consultar sobre la pantalla de falla de conexion por la autenticacion por windows.
-preguntar sobre los permisos de sql server para la creacion de bckp
-
-SE PASO DE DATE A DATE TIME EL CAMPO FECHA EN BITACORA MODIFICAR EL DC
-
-Notas de sobre las conversaciones con carlos
-	
-
-agrege la clase enum Criticidad
-
-
-AGREGE USUARIO COMO ELEMENTO DE LA FIRMA DE VERIFICAR PERMISOS ESENCIALES.
-
-agregue un string como parametro al regenerar contraseña en daoSeguridad,
-cambiar en el diccionario de datos y el retorno tambien, es al pedo.
-cambiar el parametro del mismo metodo en el servicio y pasarle un usuario, por el tema del nombre e idioma.
-
-agregue asignada como propiedad a la patente para un workaround en dgv de usuarios
-agregue la propiedad la componente permiso al usuario, tengo que actualizar el diagrama de clases
-pero safo del diccionario de datos porque las entidades no van.
-
-agregue el enum de patentes, agregar al diagrama de clases.
-ahora el calcular digito horizontal devuelve un string, hacer la modificacion en el diccionario de datos.
-
-a materia le faltaba el nombre,agregar diagrama de clases.
-
-agregue el orientacion string a nivel por el tema del reporte
-
-agregue un parametro 
-chequearCodigoUnico(String codigoCurso,long cursoId) admin dao, curso id
-
-agregue la propiedad asignado al tutor
-	agregar al diagrama de clases.
-
-cambiar el parametro que recibe servicio borrar ususario/bloquear usuario
-
-agregue el metodo generarPlanillas(Alumno alumno)
-en el administracionDAO ds, diagrama diccionario
-se llama en el promocionar alumno
-
-agregue un parametro 
-verificarDNI(String dni, String tipo)  alumno dao, entity id
-
-cambie el listarhorarios del servicio devuelve una datatable;
-
-
---lo hice voy a tener que implementar un custom sort en las datatables y saque los filtrar por asc desc de las paginas porque voy
-a usar el sorting de la datatable
-	agregar el icono de filtro en las tablas porque queda el asc desc segun el filtro.
-	Permitir el multifiltro en la bitacora
-
-hacer con dataset por el tema de reporte
-	cambiar los retornos de los metodos en el diagrama de clases.
-	listado de cursos, alumnos, plan de estudios(nivel)
-	horario y bitacora
 
 change log
 ------------------------CAMINIO CRITICO---------------------
@@ -71,28 +16,7 @@ change log
 --revisar 0 las interfaces para ver el manejo de errores, limites de campos, etc. (andando)
 --comparar los flujos de datos contra los diagramas  de secuencia para si hay que hacer cambios.
 
-cambiar el retorno de los metodos de bitacora en el diccionario de datos
-	Data Source=DESKTOP-SL9JPN8;Initial Catalog=TRABAJO_DIPLOMA;Integrated Security=True
-
-	hacer que el btn cancelar de cada uno cierre el form.
-
-	reportes
-		agregar los botones para 
-		Cursos: informando la situación de los distintos cursos, mostrando los alumnos
-		inscriptos y si el mismo esta excedido de capacidad.
-		Alumnos: en base a las amonestaciones o faltas de un alumno en particular.
-		Plan de estudios: este reporte apuntara a mostrar que materias están
-		asignadas a los distintos niveles.
-		Horario: es un reporte que indica el estado de los horarios ordenados por curso
-		y día.
-
-		Bitácora
-
 	Ver de agregarle iconos a los botones
-
-	normalizar el crear/registrar
-
-
 pegarle una revisada al diagrama de componentes y a el diagrama de navegación
 
 
@@ -100,10 +24,6 @@ llamadas agregadas que no estan en los ds
 	-traerdraccucciones en servicio seguridad se llama en grabar mail
 	-encriptar aes se llama en el alta de usuario
 	-encriptar aes se llama en el chequeo de repetidos del usuario.
-
-agregue la clase idiomas enum 
-	agregar al diagrama de clases y al diccionario de datos.
-	sobrecargo el constructor de idiomas
 
 revisar el sql de creacion
 
@@ -119,46 +39,4 @@ los metodos en el diccionario de datos
 
 
 
-
-
-
-
-
-
-
-Action required to load native assemblies
-To deploy an application that uses spatial data types to a machine that does not have 'System CLR Types for SQL Server' installed you also need to deploy the native assembly SqlServerSpatial140.dll. Both x86 (32 bit) and x64 (64 bit) versions of this assembly have been added to your project under the SqlServerTypes\x86 and SqlServerTypes\x64 subdirectories. The native assembly msvcr120.dll is also included in case the C++ runtime is not installed. 
-
-You need to add code to load the correct one of these assemblies at runtime (depending on the current architecture). 
-
-ASP.NET Web Sites
-For ASP.NET Web Sites, add the following block of code to the code behind file of the Web Form where you have added Report Viewer Control: 
-
-    Default.aspx.cs:
-        
-    public partial class _Default : System.Web.UI.Page
-    {
-        static bool _isSqlTypesLoaded = false;
-
-        public _Default()
-        {
-            if (!_isSqlTypesLoaded)
-            {
-                SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~"));
-                _isSqlTypesLoaded = true;
-            }
-            
-        }
-    }
-
-
-ASP.NET Web Applications
-For ASP.NET Web Applications, add the following line of code to the Application_Start method in Global.asax.cs: 
-
-    SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
-
-Desktop Applications
-For desktop applications, add the following line of code to run before any spatial operations are performed: 
-
-    SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 

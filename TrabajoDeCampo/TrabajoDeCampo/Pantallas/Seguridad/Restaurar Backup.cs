@@ -67,6 +67,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void Restaurar_Backup_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Backup.htm" : "BackupEN.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.textBox1.ReadOnly = true;
 
             //traduccion
