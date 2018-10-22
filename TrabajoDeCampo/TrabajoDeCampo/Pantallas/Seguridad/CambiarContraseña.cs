@@ -97,7 +97,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     {
                         long usuario = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
                         this.servicioSeguridad.cambiarContraseña(usuario, this.nueva.Text);
-                        MessageBox.Show("com.td.completado");
+                        MessageBox.Show(traducciones["com.td.completado"]);
                         this.Close();
                     }
                     else

@@ -35,6 +35,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
             this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Horarios.htm" : "Schedules.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
+
             this.cursos = servicioAdministracion.listarCursos(null, null, null);
             this.comboNivel.DataSource = null;
             List<Nivel> niveles = new List<Nivel>();

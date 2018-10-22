@@ -79,6 +79,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             tags.Add("com.td.descartar");
+            tags.Add("com.td.completado");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -248,12 +249,14 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     this.seHicieronCambios = false;
                         List<Materia> materias = this.asignadas;
                         this.administracion.actualizarMateriasAsignadas(nivelSeleccionado, materias);
-                    }
+                        MessageBox.Show(traducciones["com.td.completado"]);
+                      }
                     catch (Exception ex)
                     {
 
                         MessageBox.Show(ex.Message);
                     }
+               
 
             }
         }

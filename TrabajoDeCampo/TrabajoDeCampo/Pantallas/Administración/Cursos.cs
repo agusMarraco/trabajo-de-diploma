@@ -78,6 +78,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
+            tags.Add("com.td.curso.tiene.alumnos");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -138,7 +139,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message.Equals("TIENE ALUMNOS")  ? traducciones["com.td.curso.tiene.alumnos"] : ex.Message);
                 }
             }
 

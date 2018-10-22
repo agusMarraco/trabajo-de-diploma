@@ -93,6 +93,8 @@ namespace TrabajoDeCampo.Pantallas
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
+            tags.Add("com.td.complete.campos");
+            tags.Add("com.td.horario.no.disponible");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -126,21 +128,21 @@ namespace TrabajoDeCampo.Pantallas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(this.cbCurso.SelectedItem!= null && this.cbNivel.SelectedItem != null
+            if (this.cbCurso.SelectedItem != null && this.cbNivel.SelectedItem != null
                 && this.cbDocente.SelectedItem != null && this.cbMateria.SelectedItem != null
-                && this.cbDia.SelectedItem != null  && this.cbModulo.SelectedItem != null
+                && this.cbDia.SelectedItem != null && this.cbModulo.SelectedItem != null
                 )
             {
-            if(this.currentHorario == null)
-            {
-                Horario hor = new Horario();
-                hor.dia = ((KeyValuePair<int, string>)cbDia.SelectedItem).Key;
-                Modulo mod = new Modulo();
-                mod.id = ((KeyValuePair<long, string>)cbModulo.SelectedItem).Key;
-                hor.modulo = mod;
-                hor.curso = (Curso)this.cbCurso.SelectedItem;
-                hor.docente = (Docente)this.cbDocente.SelectedItem;
-                hor.materia = (Materia)this.cbMateria.SelectedItem;
+                if (this.currentHorario == null)
+                {
+                    Horario hor = new Horario();
+                    hor.dia = ((KeyValuePair<int, string>)cbDia.SelectedItem).Key;
+                    Modulo mod = new Modulo();
+                    mod.id = ((KeyValuePair<long, string>)cbModulo.SelectedItem).Key;
+                    hor.modulo = mod;
+                    hor.curso = (Curso)this.cbCurso.SelectedItem;
+                    hor.docente = (Docente)this.cbDocente.SelectedItem;
+                    hor.materia = (Materia)this.cbMateria.SelectedItem;
                     try
                     {
                         this.administracion.guardarHorario(hor);
@@ -149,19 +151,20 @@ namespace TrabajoDeCampo.Pantallas
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+
+                        MessageBox.Show(ex.Message.Equals("Horario No Disponible") ? traducciones["com.td.horario.no.disponible"] : ex.Message );
                     }
-             
-            }
-            else
-            {
-                currentHorario.dia = ((KeyValuePair<int, string>)cbDia.SelectedItem).Key;
-                Modulo mod = new Modulo();
-                mod.id = ((KeyValuePair<long, string>)cbModulo.SelectedItem).Key;
-                currentHorario.modulo = mod;
-                currentHorario.curso = (Curso)this.cbCurso.SelectedItem;
-                currentHorario.docente = (Docente)this.cbDocente.SelectedItem;
-                currentHorario.materia = (Materia)this.cbMateria.SelectedItem;
+
+                }
+                else
+                {
+                    currentHorario.dia = ((KeyValuePair<int, string>)cbDia.SelectedItem).Key;
+                    Modulo mod = new Modulo();
+                    mod.id = ((KeyValuePair<long, string>)cbModulo.SelectedItem).Key;
+                    currentHorario.modulo = mod;
+                    currentHorario.curso = (Curso)this.cbCurso.SelectedItem;
+                    currentHorario.docente = (Docente)this.cbDocente.SelectedItem;
+                    currentHorario.materia = (Materia)this.cbMateria.SelectedItem;
                     try
                     {
                         this.administracion.actualizarHorario(currentHorario);
@@ -170,17 +173,17 @@ namespace TrabajoDeCampo.Pantallas
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message.Equals("Horario No Disponible") ? traducciones["com.td.horario.no.disponible"] : ex.Message);
                     }
-               
-            }
 
-           
+                }
+
+
 
             }
             else
             {
-                MessageBox.Show("Seleccione todos los items");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
         }
         public void displayCursos(long nivelId)

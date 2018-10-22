@@ -54,6 +54,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             List<String> tags = new List<string>();
             tags.Add("com.td.completado");
             tags.Add("com.td.fecha.ocupada");
+            tags.Add("com.td.guardar");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -80,7 +81,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             if (!editando)
             {
                 editando = true;
-                this.registrar.Text = "Guardar";
+                this.registrar.Text = traducciones["com.td.guardar"];
                 this.groupBox1.Enabled = true;
             }
             else
@@ -130,8 +131,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 editando = false;
                 this.groupBox1.Enabled = false;
                 this.richTextBox1.Text = "";
-                this.dateTimePicker1.Value = DateTime.Now;
-                this.registrar.Text = "Registrar";
+                this.dateTimePicker1.Value = this.dateTimePicker1.MaxDate;
+                this.registrar.Text = traducciones["com.td.registrar"];
             }
             else
             {

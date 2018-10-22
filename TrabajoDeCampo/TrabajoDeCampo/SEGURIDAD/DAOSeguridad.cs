@@ -243,13 +243,12 @@ namespace TrabajoDeCampo.DAO
         public Boolean probarConexion() {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             Boolean sePudoConectar = false;
-                connection.Open();
+            connection.Open();
                 SqlCommand query = new SqlCommand(" SELECT * FROM USUARIO", connection);
                 query.ExecuteReader();
                 connection.Close();
-                sePudoConectar = true;  
-            
-
+                sePudoConectar = true;
+                
             return sePudoConectar;
           
 
@@ -419,6 +418,10 @@ namespace TrabajoDeCampo.DAO
 
                     }
                 }
+            }
+            if(negadas.Count == 0)
+            {
+                filtradas.AddRange(patentes);
             }
             // que patentes esenciales va a tener
             bool CrearUsuario = false;
@@ -756,8 +759,39 @@ namespace TrabajoDeCampo.DAO
                     query.ExecuteNonQuery();
                 }
 
-                tx.Commit();
 
+                //chequeando los permisos esenciales
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(PAT_ID) FROM PERMISOS_USUARIO WHERE PAT_ID IN ( " + EnumPatentes.CrearUsuario + ", " + EnumPatentes.ModificarUsuario + ", " +
+                    EnumPatentes.ListarUsuarios + ", " + EnumPatentes.GenerarBackups + ", " + EnumPatentes.RestaurarBackup + ", " + EnumPatentes.RecalcularDígitosVerificadores + ", " + EnumPatentes.ModificarFamilias
+                    + ", " + EnumPatentes.CrearFamilia + ", " + EnumPatentes.ListarFamilias + ")  GROUP BY USU_ID ");
+                cmd.Connection = connection;
+                cmd.Transaction = tx;
+                SqlDataReader reader;
+                int cantidad = 0;
+                Boolean errorEsenciales = false;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    cantidad = (int)reader.GetValue(0);
+                    if (cantidad != 9)
+                    {
+                        errorEsenciales = true;
+                    }
+                }
+                reader.Close();
+                if (errorEsenciales || cantidad == 0)
+                {
+                    throw new Exception("PERMISOS");
+                }
+                tx.Commit();
+                connection.Close();
+
+                this.recalcularDigitoVertical("FAMILIA");
+                this.recalcularDigitoVertical("FAMILIA_PATENTE");
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                this.grabarBitacora(usu, "Se modificó una familia ", CriticidadEnum.ALTA);
+              
             }
             catch (Exception ex)
             {
@@ -777,12 +811,8 @@ namespace TrabajoDeCampo.DAO
             }
             finally
             {
-                connection.Close();
-                this.recalcularDigitoVertical("FAMILIA");
-                this.recalcularDigitoVertical("FAMILIA_PATENTE");
-                Usuario usu = new Usuario();
-                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-                this.grabarBitacora(usu, "Se modificó una familia ", CriticidadEnum.ALTA);
+              
+              
             }
 
         }
@@ -1171,7 +1201,7 @@ namespace TrabajoDeCampo.DAO
             }
             Usuario usu = new Usuario();
             usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-            this.grabarBitacora(usu, "Se regeneró una contraseña", CriticidadEnum.BAJA);
+            this.grabarBitacora(usu, "Se regeneró una contraseña", CriticidadEnum.MEDIA);
             this.recalcularDigitoVertical("USUARIO");
             desbloquearUsuario(idUsuario);
 
@@ -1332,7 +1362,7 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 Usuario usu = new Usuario();
                 usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-                this.grabarBitacora(usu, "Se bloquea un usuario ", CriticidadEnum.MEDIA);
+                this.grabarBitacora(usu, "Se bloquea un usuario ", CriticidadEnum.ALTA);
                 this.recalcularDigitoVertical("USUARIO");
             }
 
@@ -1403,7 +1433,7 @@ namespace TrabajoDeCampo.DAO
             }
             Usuario usu = new Usuario();
             usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-            this.grabarBitacora(usu, "Se desbloquea un usuario ", CriticidadEnum.MEDIA);
+            this.grabarBitacora(usu, "Se desbloquea un usuario ", CriticidadEnum.ALTA);
             this.recalcularDigitoVertical("USUARIO");
         }
 
@@ -1447,7 +1477,7 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 Usuario usu = new Usuario();
                 usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-                this.grabarBitacora(usu, "Crear usuario", CriticidadEnum.MEDIA);
+                this.grabarBitacora(usu, "Crear usuario", CriticidadEnum.ALTA);
             }
             catch (Exception exe)
             {

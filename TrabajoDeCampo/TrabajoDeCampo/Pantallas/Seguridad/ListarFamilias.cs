@@ -130,7 +130,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message.Equals("ASIGNADA") ? traducciones["com.td.asignada"] : ex.Message);
                 }
                 
                 listarElementos();
@@ -181,6 +181,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             List<String> tags = new List<string>();
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             tags.Add("com.td.complete.campos");
+            tags.Add("com.td.familia.existe");
+            tags.Add("com.td.asignada");
+            tags.Add("com.td.permisos.esenciales");
+            
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
@@ -194,6 +198,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             if (String.IsNullOrEmpty(this.txtNombre.Text))
             {
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
+                return;
             }
             String nombreFamilia = this.txtNombre.Text;
             Familia familia = currentFamilia;
@@ -217,11 +222,44 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             }
             if(currentFamilia == null)
             {
-                this.servicioSeguridad.crearFamilia(familia);
+                bool existe = nombreExiste(familia);
+                if (!existe)
+                {
+                    this.servicioSeguridad.crearFamilia(familia);
+                }
+                else
+                {
+                    MessageBox.Show(traducciones["com.td.familia.existe"]);
+                }
+                
             }
             else
             {
-                this.servicioSeguridad.modificarFamilia(familia);
+                bool existe = nombreExiste(familia);
+                if (!existe)
+                {
+                    try
+                    {
+                        this.servicioSeguridad.modificarFamilia(familia);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.Equals("PERMISOS"))
+                        {
+                            MessageBox.Show(traducciones["com.td.permisos.esenciales"]);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show(traducciones["com.td.familia.existe"]);
+                }
+                
             }
             currentFamilia = null;
             this.dgPatentes.Columns[1].ReadOnly = true;
@@ -272,6 +310,22 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 ((DataGridViewCheckBoxCell)item.Cells[1]).Value = false;
             }
 
+        }
+        
+        private Boolean nombreExiste(Familia familia)
+        {
+            Boolean existe = false;
+            List<Familia> familias = this.dgFamilia.DataSource as List<Familia>;
+            foreach (Familia fam in familias)
+            {
+                if(fam.nombre.Equals(familia.nombre,StringComparison.InvariantCultureIgnoreCase) && fam.id != familia.id)
+                {
+                    existe = true;
+                    break;
+                }
+            }
+
+            return existe;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

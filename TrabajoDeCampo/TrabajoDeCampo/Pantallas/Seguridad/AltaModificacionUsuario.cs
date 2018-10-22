@@ -137,7 +137,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             tags.Add("com.td.español");
             tags.Add("com.td.completado");
             tags.Add("com.td.permisos.esenciales");
-            tags.Add("com.td.permisos.esenciales");
+            tags.Add("com.td.repetidos");
             tags.Add("com.td.complete.campos");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             formUtils = new TraductorReal();
@@ -314,6 +314,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                         {
                             sb.Append(traducciones["com.td.permisos.esenciales"]);
                         }
+                        else if (exe.Message == "REPETIDOS")
+                        {
+                            sb.Append(traducciones["com.td.repetidos"]);
+                        }
                         else
                         {
                             sb.Append(exe.Message);
@@ -350,8 +354,22 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     catch (Exception exe)
                     {
                         error = true;
+                        StringBuilder sb = new StringBuilder();
 
-                        MessageBox.Show(exe.Message, "", MessageBoxButtons.OK);
+
+                        if (exe.Message == "PERMISOS")
+                        {
+                            sb.Append(traducciones["com.td.permisos.esenciales"]);
+                        }
+                        else if (exe.Message == "REPETIDOS")
+                        {
+                            sb.Append(traducciones["com.td.repetidos"]);
+                        }
+                        else
+                        {
+                            sb.Append(exe.Message);
+                        }
+                        MessageBox.Show(sb.ToString(), "", MessageBoxButtons.OK);
                     }
                     if (!error)
                     {

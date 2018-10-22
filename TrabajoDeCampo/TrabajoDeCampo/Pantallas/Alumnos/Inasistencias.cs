@@ -81,6 +81,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             List<String> tags = new List<string>();
             tags.Add("com.td.completado");
             tags.Add("com.td.fecha.ocupada");
+            tags.Add("com.td.complete.campos");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -157,9 +158,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
-            if((!this.completa.Checked && !this.media.Checked))
+            if ((!this.completa.Checked && !this.media.Checked))
             {
-                MessageBox.Show("Complete los campos requeridos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
             if(this.current != null)
             {

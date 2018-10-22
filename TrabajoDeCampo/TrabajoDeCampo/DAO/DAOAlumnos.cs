@@ -167,6 +167,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se creó alumno", CriticidadEnum.MEDIA);
                 new DAOAdministracion().generarPlanillasDeEvaluacion(alumno);
             }
             catch (Exception ex)
@@ -225,6 +228,9 @@ namespace TrabajoDeCampo.DAO
                     cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se modificó un alumno", CriticidadEnum.MEDIA);
             }
             catch (Exception ex)
             {
@@ -290,6 +296,9 @@ namespace TrabajoDeCampo.DAO
                 DAOSeguridad dao = new DAOSeguridad();
                 dao.recalcularDigitoVertical("PLANILLA_DE_EVALUACION");
                 dao.recalcularDigitoVertical("INASISTENCIA_DE_ALUMNO");
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se marcó un alumno como repetidor", CriticidadEnum.ALTA);
             }
             catch (Exception ex)
             {
@@ -680,7 +689,7 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 Usuario usu = new Usuario();
                 usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-                new DAOSeguridad().grabarBitacora(usu, "Se creó un tutor", CriticidadEnum.BAJA);
+                new DAOSeguridad().grabarBitacora(usu, "Se creó un tutor", CriticidadEnum.MEDIA);
 
             }
             catch (Exception ex)
@@ -725,6 +734,9 @@ namespace TrabajoDeCampo.DAO
                 cmd.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
+                Usuario usu = new Usuario();
+                usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                new DAOSeguridad().grabarBitacora(usu, "Se modificó un tutor", CriticidadEnum.BAJA);
 
             }
             catch (Exception ex)

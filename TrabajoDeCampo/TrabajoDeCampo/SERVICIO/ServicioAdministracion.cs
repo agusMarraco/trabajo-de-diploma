@@ -184,7 +184,7 @@ namespace TrabajoDeCampo.SERVICIO
                 this.daoAdministracion.borrarCurso(curso);
             }else
             {
-               // throw new Exception("TIENE ALUMNOS");
+                throw new Exception("TIENE ALUMNOS");
             }
         }
 

@@ -43,6 +43,8 @@ namespace TrabajoDeCampo.SERVICIO
             try
             {
                 conectado = this.daoSeguridad.probarConexion();
+                this.grabarBitacora(null, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
+
             }
             catch (Exception)
             {
@@ -85,7 +87,7 @@ namespace TrabajoDeCampo.SERVICIO
             }
             else
             {
-                throw new Exception("La familia esta asignada.");
+                throw new Exception("ASIGNADA");
             }
             
         }
@@ -153,7 +155,7 @@ namespace TrabajoDeCampo.SERVICIO
             }
             else
             {
-                throw new Exception("El usuario tiene campos repetidos. Puede ser su email, dni o alias");
+                throw new Exception("REPETIDOS");
             }
 
             
@@ -164,9 +166,18 @@ namespace TrabajoDeCampo.SERVICIO
         }
         public void modificarUsuario(Usuario usuario) {
             Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
+            bool hayRepetidos = this.daoSeguridad.chequearCamposUnicos(usuario);
             if (!errorEsenciales)
             {
-                this.daoSeguridad.modificarUsuario(usuario);
+                if (!hayRepetidos)
+                {
+                    this.daoSeguridad.modificarUsuario(usuario);
+                }
+                else
+                {
+                    throw new Exception("REPETIDOS");
+                }
+
             }
             else
             {

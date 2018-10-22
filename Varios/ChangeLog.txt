@@ -118,4 +118,4 @@ agregue la propiedad asignado al tutor
 hacer con dataset por el tema de reporte
 	cambiar los retornos de los metodos en el diagrama de clases.
 	listado de cursos, alumnos, plan de estudios(nivel)
-	horario y bitacora
+	horario y bitacora  ---> solo tuve que cambiar el generar reportes del servicio reportes

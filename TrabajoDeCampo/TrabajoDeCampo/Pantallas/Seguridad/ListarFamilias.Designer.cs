@@ -187,7 +187,7 @@
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(105, 28);
             this.btnGuardar.TabIndex = 11;
-            this.btnGuardar.Tag = "com.td.modificar";
+            this.btnGuardar.Tag = "com.td.guardar";
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
