@@ -58,6 +58,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             tags.Add("com.td.viernes");
             tags.Add("com.td.seleccione.horario");
             tags.Add("com.td.falta.horario");
+            tags.Add("com.td.seguro");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -146,6 +147,11 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 }
                 else
                 {
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"],"",MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
                     Horario hor = (Horario)this.dataGridView1.CurrentCell.Value;
                     this.servicioAdministracion.borrarHorario(hor);
                     this.listar(null, null);

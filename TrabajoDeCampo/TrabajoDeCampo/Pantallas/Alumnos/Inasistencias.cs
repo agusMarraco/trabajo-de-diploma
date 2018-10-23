@@ -82,6 +82,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             tags.Add("com.td.completado");
             tags.Add("com.td.fecha.ocupada");
             tags.Add("com.td.complete.campos");
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -162,7 +163,13 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             {
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
-            if(this.current != null)
+
+            DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+            if (!result.Equals(DialogResult.OK))
+            {
+                return;
+            }
+            if (this.current != null)
             {
                 this.current.fecha = this.dateTimePicker1.Value;
                 if (this.completa.Checked)
@@ -177,6 +184,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.current.Alumno = alumno;
                 try
                 {
+
                     bool repetidas = verificarFechasRepetidas(this.current);
                     if (!repetidas)
                     {

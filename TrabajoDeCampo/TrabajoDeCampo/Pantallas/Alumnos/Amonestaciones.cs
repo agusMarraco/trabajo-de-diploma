@@ -104,6 +104,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.dateTimePicker1.Value = this.dateTimePicker1.MaxDate;
                 try
                 {
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
                     this.servicioAlumnos.guardarAmonestacion(amonestacion);
                 }
                 catch (Exception ex)

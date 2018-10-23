@@ -17,6 +17,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
     {
         private ServicioSeguridad servicioSeguridad;
         private FormUtils traductor;
+        private Dictionary<String, String> traducciones = new Dictionary<string, string>();
         public Menu()
         {
             InitializeComponent();
@@ -26,10 +27,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             desbloquearControles();
             traductor = new TraductorIterador();
             List<String> tags = new List<string>();
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             this.servicioSeguridad.cambiarIdioma(id, Properties.Settings.Default.Idioma);
             traductor.process(tags, this, null, null);
-            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
@@ -204,10 +206,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             Properties.Settings.Default.Idioma = "en";
             List<String> tags = new List<string>();
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             this.servicioSeguridad.cambiarIdioma(id, "en");
             traductor.process(tags, this, null, null);
-            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
@@ -218,10 +221,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             Properties.Settings.Default.Idioma = "es";
             List<String> tags = new List<string>();
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             this.servicioSeguridad.cambiarIdioma(id, "es");
             traductor.process(tags, this, null, null);
-            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
@@ -245,6 +249,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+            if (!result.Equals(DialogResult.OK))
+            {
+                return;
+            }
             this.Close();
             Usuario usu = new Usuario();
             usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
@@ -256,6 +265,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+            if (!result.Equals(DialogResult.OK))
+            {
+                return;
+            }
             Usuario usu = new Usuario();
             usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             this.servicioSeguridad.grabarBitacora(usu, "El usuario salio de la aplicación", CriticidadEnum.BAJA);

@@ -79,6 +79,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
             tags.Add("com.td.curso.tiene.alumnos");
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -132,8 +133,13 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 Curso curso = (Curso)this.dataGridView1.CurrentRow.DataBoundItem;
                 try
                 {
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
 
-                this.servicioAdministracion.borrarCurso(curso);
+                    this.servicioAdministracion.borrarCurso(curso);
                 this.cargarCursos(null, null, null);
                 }
                 catch (Exception ex)

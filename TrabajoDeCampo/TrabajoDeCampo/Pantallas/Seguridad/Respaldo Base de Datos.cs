@@ -45,7 +45,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void btnRespaldar_Click(object sender, EventArgs e)
         {
-
+            DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+            if (!result.Equals(DialogResult.OK))
+            {
+                return;
+            }
 
             if (String.IsNullOrEmpty(this.pathtxt.Text))
             {
@@ -85,6 +89,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             tags.Add("com.td.complete.campos");
             tags.Add("com.td.completado");
             tags.Add("com.td.path");
+            tags.Add("com.td.seguro");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);

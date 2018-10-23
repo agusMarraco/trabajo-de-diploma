@@ -43,6 +43,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
+            tags.Add("com.td.seguro");
+            tags.Add("com.td.tutor.asignado");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -141,6 +143,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         {
             if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.DataBoundItem != null)
             {
+                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                if (!result.Equals(DialogResult.OK))
+                {
+                    return;
+                }
                 Tutor tutorParaBorrar = (Tutor)dataGridView1.CurrentRow.DataBoundItem;
                 try
                 {
@@ -150,7 +157,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message.Equals("TUTOR ASIGNADO") ? traducciones["com.td.tutor.asignado"] : ex.Message);
                 }
                 
             }
