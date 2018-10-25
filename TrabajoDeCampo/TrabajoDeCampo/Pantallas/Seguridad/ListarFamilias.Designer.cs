@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListarFamilias));
             this.dgFamilia = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCrear = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.dgFamilia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPatentes)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -185,7 +187,7 @@
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(105, 28);
             this.btnGuardar.TabIndex = 11;
-            this.btnGuardar.Tag = "com.td.modificar";
+            this.btnGuardar.Tag = "com.td.guardar";
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -219,8 +221,11 @@
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.dgFamilia);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ListarFamilias";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.familias";
             this.Text = "Familias";
             this.Load += new System.EventHandler(this.ListarFamilias_Load);
@@ -250,5 +255,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

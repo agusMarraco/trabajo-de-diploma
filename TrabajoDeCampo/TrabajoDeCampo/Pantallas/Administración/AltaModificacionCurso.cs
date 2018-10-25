@@ -112,11 +112,13 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private void AltaModificacionCurso_Load(object sender, EventArgs e)
         {
             //traduccion
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Cursos.htm" : "Courses.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
-            tags.AddRange( new String[] {"com.td.completado","com.td.complete.campos" });
+            tags.AddRange( new String[] {"com.td.completado","com.td.complete.campos", "com.td.curso.codigo.existe" });
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -153,7 +155,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message.Equals("CODIGO REPETIDO") ? traducciones["com.td.curso.codigo.existe"] : ex.Message);
                 }
             }
             else
@@ -176,7 +178,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message.Equals("CODIGO REPETIDO") ? traducciones["com.td.curso.codigo.existe"] : ex.Message);
                 }
             }
 

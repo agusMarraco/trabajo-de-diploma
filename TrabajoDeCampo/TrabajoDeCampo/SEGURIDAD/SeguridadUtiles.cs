@@ -44,34 +44,42 @@ namespace TrabajoDeCampo
             return Convert.ToBase64String(resultadoCombinado);
         }
         public static String desencriptarAES(String stringADesencriptar) {
-
+            String resultado = "";
             String key = TrabajoDeCampo.Properties.Resources.key;
+
+            try
+            {
+                byte[] bytesADesencriptar = Convert.FromBase64String(stringADesencriptar);
+                Aes aesProvider = Aes.Create();
+                //obtengo el block size y inicializo los arrays
+                byte[] IvGuardado = new byte[aesProvider.BlockSize / 8];
+                byte[] datosPuros = new byte[bytesADesencriptar.Length - IvGuardado.Length];
+                Array.Copy(bytesADesencriptar, IvGuardado, IvGuardado.Length);
+                Array.Copy(bytesADesencriptar, IvGuardado.Length, datosPuros, 0, datosPuros.Length);
+
+                aesProvider.Key = Encoding.UTF8.GetBytes(key);
+                aesProvider.Mode = CipherMode.CBC;
+                aesProvider.Padding = PaddingMode.PKCS7;
+
+                aesProvider.IV = IvGuardado;
+
+                //desencripto
+                MemoryStream ms = new MemoryStream(datosPuros);
+                ICryptoTransform decryptor = aesProvider.CreateDecryptor();
+                CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
+                StreamReader sw = new StreamReader(cs);
+                resultado = sw.ReadToEnd();
+                sw.Close();
+                cs.Close();
+                ms.Close();
+
+            }
+            catch (Exception ex)
+            {
+                resultado = "#ERROR";
+
+            }
             //reconvierte desde base 64
-            byte[] bytesADesencriptar = Convert.FromBase64String(stringADesencriptar);
-            
-            
-            Aes aesProvider = Aes.Create();
-            //obtengo el block size y inicializo los arrays
-            byte[] IvGuardado = new byte[aesProvider.BlockSize / 8];
-            byte[] datosPuros = new byte[bytesADesencriptar.Length - IvGuardado.Length];
-            Array.Copy(bytesADesencriptar, IvGuardado, IvGuardado.Length);
-            Array.Copy(bytesADesencriptar, IvGuardado.Length, datosPuros, 0, datosPuros.Length);
-    
-            aesProvider.Key = Encoding.UTF8.GetBytes(key);
-            aesProvider.Mode = CipherMode.CBC;
-            aesProvider.Padding = PaddingMode.PKCS7;
-
-            aesProvider.IV = IvGuardado;
-
-            //desencripto
-            MemoryStream ms = new MemoryStream(datosPuros);
-            ICryptoTransform decryptor =  aesProvider.CreateDecryptor();
-            CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
-            StreamReader sw = new StreamReader(cs);
-             String resultado = sw.ReadToEnd();
-            sw.Close();
-            cs.Close();
-            ms.Close();
             return resultado;
         }
 

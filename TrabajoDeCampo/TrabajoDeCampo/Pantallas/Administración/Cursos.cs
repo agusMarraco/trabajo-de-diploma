@@ -60,6 +60,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
         private void Cursos_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Cursos.htm" : "Courses.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.dataGridView1.DataSource = null;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.Columns[0].DataPropertyName = "nivel";
@@ -76,6 +78,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
+            tags.Add("com.td.curso.tiene.alumnos");
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -129,14 +133,19 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 Curso curso = (Curso)this.dataGridView1.CurrentRow.DataBoundItem;
                 try
                 {
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
 
-                this.servicioAdministracion.borrarCurso(curso);
+                    this.servicioAdministracion.borrarCurso(curso);
                 this.cargarCursos(null, null, null);
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message.Equals("TIENE ALUMNOS")  ? traducciones["com.td.curso.tiene.alumnos"] : ex.Message);
                 }
             }
 

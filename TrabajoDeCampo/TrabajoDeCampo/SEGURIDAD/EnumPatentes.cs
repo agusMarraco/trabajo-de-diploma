@@ -10,11 +10,12 @@ namespace TrabajoDeCampo.SEGURIDAD
     {
         //esenciales 
         public static readonly long CrearUsuario = 11;
-        public static readonly long GenerarBackups = 16;
-        public static readonly long ListarUsuarios = 14;
         public static readonly long ModificarUsuario = 12;
-        public static readonly long RecalcularDígitosVerificadores = 18;
+        public static readonly long ListarUsuarios = 14;
+        public static readonly long GenerarBackups = 16;
         public static readonly long RestaurarBackup = 17;
+        public static readonly long RecalcularDígitosVerificadores = 18;
+        public static long VerBitácora = 19;
         public static readonly long ModificarFamilias = 21;
         public static readonly long ListarFamilias = 22;
         public static readonly long CrearFamilia = 23;
@@ -32,7 +33,6 @@ namespace TrabajoDeCampo.SEGURIDAD
         public static long ListarTutores = 10;
         public static long BorrarUsuario = 13;
         public static long RegenerarContraseña = 15;
-        public static long VerBitácora = 19;
         public static long BloquearUsuario = 20;
         public static long BorrarFamilia = 24;
         public static long CrearHorario = 25;

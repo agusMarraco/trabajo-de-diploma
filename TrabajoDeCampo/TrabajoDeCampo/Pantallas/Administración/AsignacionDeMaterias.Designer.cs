@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AsignacionDeMaterias));
             this.comboNiveles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgAsignadas = new System.Windows.Forms.DataGridView();
@@ -43,6 +44,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btExport = new System.Windows.Forms.Button();
             this.btCancelar = new System.Windows.Forms.Button();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.dgAsignadas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgMaterias)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -182,7 +184,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btExport);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboNiveles);
             this.groupBox1.Controls.Add(this.button1);
@@ -196,7 +197,7 @@
             // 
             // btExport
             // 
-            this.btExport.Location = new System.Drawing.Point(584, 34);
+            this.btExport.Location = new System.Drawing.Point(15, 118);
             this.btExport.Name = "btExport";
             this.btExport.Size = new System.Drawing.Size(75, 23);
             this.btExport.TabIndex = 5;
@@ -221,6 +222,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 450);
+            this.Controls.Add(this.btExport);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btGuardar);
@@ -230,7 +232,10 @@
             this.Controls.Add(this.btDesasignar);
             this.Controls.Add(this.dgMaterias);
             this.Controls.Add(this.dgAsignadas);
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AsignacionDeMaterias";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.asignación.de.materias";
             this.Text = "Asignación de Materias";
             this.Load += new System.EventHandler(this.AsignacionDeMaterias_Load);
@@ -260,5 +265,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btCancelar;
         private System.Windows.Forms.Button btExport;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

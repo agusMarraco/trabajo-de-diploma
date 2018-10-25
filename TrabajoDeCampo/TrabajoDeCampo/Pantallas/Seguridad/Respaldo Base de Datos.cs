@@ -45,7 +45,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void btnRespaldar_Click(object sender, EventArgs e)
         {
-
+            DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+            if (!result.Equals(DialogResult.OK))
+            {
+                return;
+            }
 
             if (String.IsNullOrEmpty(this.pathtxt.Text))
             {
@@ -75,7 +79,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void Respaldo_Base_de_Datos_Load(object sender, EventArgs e)
         {
-
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Backup.htm" : "BackupEN.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
@@ -84,6 +89,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             tags.Add("com.td.complete.campos");
             tags.Add("com.td.completado");
             tags.Add("com.td.path");
+            tags.Add("com.td.seguro");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);

@@ -36,6 +36,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void Amonestaciones_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Alumnos.htm" : "Students.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.dataGridView1.AutoGenerateColumns = false;
             this.dateTimePicker1.MaxDate = DateTime.Now;
             this.dataGridView1.Columns[0].DataPropertyName = "fecha";
@@ -52,6 +54,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             List<String> tags = new List<string>();
             tags.Add("com.td.completado");
             tags.Add("com.td.fecha.ocupada");
+            tags.Add("com.td.guardar");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -78,7 +81,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             if (!editando)
             {
                 editando = true;
-                this.registrar.Text = "Guardar";
+                this.registrar.Text = traducciones["com.td.guardar"];
                 this.groupBox1.Enabled = true;
             }
             else
@@ -101,6 +104,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.dateTimePicker1.Value = this.dateTimePicker1.MaxDate;
                 try
                 {
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
                     this.servicioAlumnos.guardarAmonestacion(amonestacion);
                 }
                 catch (Exception ex)
@@ -128,8 +136,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 editando = false;
                 this.groupBox1.Enabled = false;
                 this.richTextBox1.Text = "";
-                this.dateTimePicker1.Value = DateTime.Now;
-                this.registrar.Text = "Registrar";
+                this.dateTimePicker1.Value = this.dateTimePicker1.MaxDate;
+                this.registrar.Text = traducciones["com.td.registrar"];
             }
             else
             {

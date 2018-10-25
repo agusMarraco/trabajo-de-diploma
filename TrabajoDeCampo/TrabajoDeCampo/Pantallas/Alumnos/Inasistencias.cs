@@ -59,6 +59,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void Inasistencias_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Alumnos.htm" : "Students.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             utils = new Bloqueador();
             this.dateTimePicker1.MaxDate = DateTime.Now;
             List<Control> controles = new List<Control>() { this.groupBox1 };
@@ -79,6 +81,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             List<String> tags = new List<string>();
             tags.Add("com.td.completado");
             tags.Add("com.td.fecha.ocupada");
+            tags.Add("com.td.complete.campos");
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -155,11 +159,17 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
-            if((!this.completa.Checked && !this.media.Checked))
+            if ((!this.completa.Checked && !this.media.Checked))
             {
-                MessageBox.Show("Complete los campos requeridos");
+                MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
-            if(this.current != null)
+
+            DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+            if (!result.Equals(DialogResult.OK))
+            {
+                return;
+            }
+            if (this.current != null)
             {
                 this.current.fecha = this.dateTimePicker1.Value;
                 if (this.completa.Checked)
@@ -174,6 +184,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.current.Alumno = alumno;
                 try
                 {
+
                     bool repetidas = verificarFechasRepetidas(this.current);
                     if (!repetidas)
                     {

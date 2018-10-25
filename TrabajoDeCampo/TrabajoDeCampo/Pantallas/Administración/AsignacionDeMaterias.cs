@@ -38,6 +38,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
         private void AsignacionDeMaterias_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Asignacion_de_Materias.htm" : "Class_Assigment.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.servicioSeguridad = new ServicioSeguridad();
             this.administracion = new ServicioAdministracion();
 
@@ -77,6 +79,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             tags.Add("com.td.descartar");
+            tags.Add("com.td.completado");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -246,12 +249,14 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     this.seHicieronCambios = false;
                         List<Materia> materias = this.asignadas;
                         this.administracion.actualizarMateriasAsignadas(nivelSeleccionado, materias);
-                    }
+                        MessageBox.Show(traducciones["com.td.completado"]);
+                      }
                     catch (Exception ex)
                     {
 
                         MessageBox.Show(ex.Message);
                     }
+               
 
             }
         }

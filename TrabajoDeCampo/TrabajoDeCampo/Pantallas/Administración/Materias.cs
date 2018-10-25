@@ -42,6 +42,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
         private void Materias_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "MAterias.htm" : "Classes.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             try
             {
                 actualizarLista();

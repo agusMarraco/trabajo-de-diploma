@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AltaModificacionHorario));
             this.cbCurso = new System.Windows.Forms.ComboBox();
             this.cbNivel = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@
             this.cbModulo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.SuspendLayout();
             // 
             // cbCurso
@@ -211,8 +213,11 @@
             this.Controls.Add(this.cbNivel);
             this.Controls.Add(this.cbCurso);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AltaModificacionHorario";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.horario";
             this.Text = "Horario";
             this.Load += new System.EventHandler(this.AltaModificacionHorario_Load);
@@ -237,5 +242,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox cbDocente;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

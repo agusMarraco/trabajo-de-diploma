@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AltaModificacionUsuario));
             this.nombrelbl = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.apellido = new System.Windows.Forms.TextBox();
@@ -61,6 +62,7 @@
             this.negada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.dgfamilias)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -421,7 +423,10 @@
             this.Controls.Add(this.apellidolbl);
             this.Controls.Add(this.nombre);
             this.Controls.Add(this.nombrelbl);
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AltaModificacionUsuario";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.usuario";
             this.Text = "Usuario";
             this.Load += new System.EventHandler(this.AltaModificacionUsuario_Load);
@@ -474,5 +479,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;
         private System.Windows.Forms.DataGridViewCheckBoxColumn asignada;
         private System.Windows.Forms.DataGridViewCheckBoxColumn negada;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

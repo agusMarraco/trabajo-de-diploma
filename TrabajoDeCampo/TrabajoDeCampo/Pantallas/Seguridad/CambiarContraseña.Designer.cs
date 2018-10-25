@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CambiarContraseña));
             this.label1 = new System.Windows.Forms.Label();
             this.actual = new System.Windows.Forms.TextBox();
             this.nueva = new System.Windows.Forms.TextBox();
@@ -36,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nuevaRepetido = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.SuspendLayout();
             // 
             // label1
@@ -133,7 +135,10 @@
             this.Controls.Add(this.nueva);
             this.Controls.Add(this.actual);
             this.Controls.Add(this.label1);
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CambiarContraseña";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = "com.td.cambiar.contraseña";
             this.Text = "Cambiar Contraseña";
             this.Load += new System.EventHandler(this.CambiarContraseña_Load);
@@ -152,5 +157,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox nuevaRepetido;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

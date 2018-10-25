@@ -30,6 +30,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void CambiarContraseña_Load(object sender, EventArgs e)
         {
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Opciones.htm" : "Options.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.actual.KeyDown += validarAlphaKD;
             this.actual.KeyPress += validarAlphaKP;
             this.nueva.KeyDown += validarAlphaKD;
@@ -95,7 +97,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     {
                         long usuario = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
                         this.servicioSeguridad.cambiarContraseña(usuario, this.nueva.Text);
-                        MessageBox.Show("com.td.completado");
+                        MessageBox.Show(traducciones["com.td.completado"]);
                         this.Close();
                     }
                     else

@@ -39,7 +39,19 @@ namespace TrabajoDeCampo.SERVICIO
 
 
         public Boolean probarConexion() {
-            return this.daoSeguridad.probarConexion();
+            Boolean conectado = true;
+            try
+            {
+                conectado = this.daoSeguridad.probarConexion();
+                
+
+            }
+            catch (Exception)
+            {
+                conectado = false;
+
+            }
+            return conectado;
         }
 
 
@@ -75,7 +87,7 @@ namespace TrabajoDeCampo.SERVICIO
             }
             else
             {
-                throw new Exception("La familia esta asignada.");
+                throw new Exception("ASIGNADA");
             }
             
         }
@@ -112,7 +124,10 @@ namespace TrabajoDeCampo.SERVICIO
         }
 
         public void bloquearUsuario(Usuario usu) {
-            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usu);
+            Usuario usuario = new Usuario();
+            usuario.id = usu.id;
+            usuario.componentePermisos = new List<ComponentePermiso>();
+            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
             if (!errorEsenciales)
             {
                 this.daoSeguridad.bloquearUsuario(usu.id);
@@ -143,7 +158,7 @@ namespace TrabajoDeCampo.SERVICIO
             }
             else
             {
-                throw new Exception("El usuario tiene campos repetidos. Puede ser su email, dni o alias");
+                throw new Exception("REPETIDOS");
             }
 
             
@@ -154,9 +169,18 @@ namespace TrabajoDeCampo.SERVICIO
         }
         public void modificarUsuario(Usuario usuario) {
             Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
+            bool hayRepetidos = this.daoSeguridad.chequearCamposUnicos(usuario);
             if (!errorEsenciales)
             {
-                this.daoSeguridad.modificarUsuario(usuario);
+                if (!hayRepetidos)
+                {
+                    this.daoSeguridad.modificarUsuario(usuario);
+                }
+                else
+                {
+                    throw new Exception("REPETIDOS");
+                }
+
             }
             else
             {
@@ -167,7 +191,10 @@ namespace TrabajoDeCampo.SERVICIO
         }
 
         public void borrarUsuario(Usuario usuario) {
-            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
+            Usuario usu = new Usuario();
+            usu.id = usuario.id;
+            usu.componentePermisos = new List<ComponentePermiso>();
+            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usu);
             if (!errorEsenciales)
             {
                 this.daoSeguridad.borrarUsuario(usuario);

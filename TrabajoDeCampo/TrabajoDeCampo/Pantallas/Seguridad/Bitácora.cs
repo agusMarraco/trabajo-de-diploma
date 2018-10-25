@@ -66,7 +66,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
 
 
-
+            this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Bitácora.htm" : "Audits.htm");
+            this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
@@ -253,8 +254,22 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             DataTable datatable = this.dataGridView1.DataSource as DataTable;
             DataTable view = datatable.DefaultView.ToTable();
-            String desde = "";
-            String hasta = "";
+                DateTime minDate = (DateTime)datatable.Rows[0].ItemArray[0];
+                DateTime maxDate = (DateTime)datatable.Rows[0].ItemArray[0];
+            foreach (DataRow Row in datatable.Rows)
+            {
+               if(minDate > (DateTime) Row.ItemArray[0])
+                {
+                    minDate = (DateTime)Row.ItemArray[0];
+                }
+                if (maxDate < (DateTime)Row.ItemArray[0])
+                {
+                    maxDate = (DateTime)Row.ItemArray[0];
+                }
+            }
+
+            String desde = minDate.ToShortDateString();
+            String hasta = maxDate.ToShortDateString();
             if (this.seBuscoForFecha)
             {
                 desde = this.fromDatepicker.Value.ToShortDateString();
