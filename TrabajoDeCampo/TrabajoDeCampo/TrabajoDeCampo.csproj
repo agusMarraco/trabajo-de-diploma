@@ -13,7 +13,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>C:\Users\Agustin\Documents\Trabajo-De-Campo\trabajo-de-diploma\Varios\Binarios\</PublishUrl>
+    <PublishUrl>C:\Users\Agustin\Desktop\bin2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,7 +26,7 @@
     <ProductName>Gestion de Alumnado</ProductName>
     <PublisherName>Agustin Marraco</PublisherName>
     <SuiteName>Aplicacion Diploma</SuiteName>
-    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -574,7 +574,9 @@
     <None Include="TrabajoDeCampo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlScripts\createDB.sql" />
