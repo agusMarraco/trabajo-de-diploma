@@ -95,7 +95,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 this.restaurarToolStripMenuItem.Enabled = true;
                 this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = true;
                 this.respaldarToolStripMenuItem.Enabled = true;
-                this.backupToolStripMenuItem.Enabled = true;    
+                this.backupToolStripMenuItem.Enabled = true;
+                this.bitácoraToolStripMenuItem.Enabled = true;
             }
 
         }

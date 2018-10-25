@@ -355,6 +355,7 @@ namespace TrabajoDeCampo.DAO
             {
 
                 deleteQuery.ExecuteNonQuery();
+                if(usuario.componentePermisos.Count > 0)
                 query.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
@@ -1874,7 +1875,8 @@ namespace TrabajoDeCampo.DAO
 
             StringBuilder stringParaDVH = new StringBuilder();
             StringBuilder builder = new StringBuilder();
-
+            List<String> mensajesDeError = new List<string>(); // la lista en donde voy a cargar todos los mensajes de error
+            //por validacion de digitos verificadores.
             //usuario
             String query = "SELECT USU_ID,USU_ALIAS,USU_PASS,USU_INTENTOS,USU_DNI,USU_DVH FROM USUARIO ";
             cmd.CommandText = query;
@@ -1893,11 +1895,7 @@ namespace TrabajoDeCampo.DAO
                 if (!md5.Equals(usuDVH))
                 {
                     long id = (long) reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en usuario", CriticidadEnum.ALTA);
-
-                    throw new Exception("fallo la integridad de datos");
+                    mensajesDeError.Add("Falló la integridad de datos en usuario en el id " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -1930,11 +1928,9 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en patente", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id =  (long)reader.GetValue(0);
+                    mensajesDeError.Add("Falló la integridad de datos en patente en el id " + id.ToString());
+
                 }
 
                 stringParaDVH.Append(md5);
@@ -1967,11 +1963,9 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en bitácora", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long) reader.GetValue(0);
+                    mensajesDeError.Add("Falló la integridad de datos en bitácora en el id " + id.ToString());
+                    
                 }
 
                 stringParaDVH.Append(md5);
@@ -2007,11 +2001,8 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en planilla", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long)reader.GetValue(0);
+                    mensajesDeError.Add("Falló la integridad de datos en planilla en el id " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -2048,11 +2039,8 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en familia", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long)reader.GetValue(0);
+                    mensajesDeError.Add("Falló la integridad de datos en familia en el id " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -2067,7 +2055,7 @@ namespace TrabajoDeCampo.DAO
             //mapeoTablaCampo.Add("INASISTENCIA_DE_ALUMNO", new KeyValuePair<String, String[]>("INA_DVH", new String[] { "INA_ALUMNO_ID", "INA_FECHA", "INA_VALOR", "INA_JUSTIFICADA" }));
 
 
-            query = "SELECT INA_ALUMNO_ID, INA_FECHA, INA_DVH FROM INASISTENCIA_DE_ALUMNO ";
+            query = "SELECT INA_ALUMNO_ID, INA_FECHA, INA_DVH , ROW_NUMBER() over ( order by (select 1)) as rowid FROM INASISTENCIA_DE_ALUMNO ";
 
             cmd.CommandText = query;
             builder = new StringBuilder();
@@ -2085,11 +2073,8 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en inasistencia alumno", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long) reader["rowid"];
+                    mensajesDeError.Add("Falló la integridad de datos en inasistencia alumno en el row " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -2101,7 +2086,7 @@ namespace TrabajoDeCampo.DAO
 
             //mapeoTablaCampo.Add("AMONESTACION", new KeyValuePair<String, String[]>("AMON_DVH", new String[] { "AMON_ALUMNO_ID", "AMON_FECHA", "AMON_MOTIVO" }));
 
-            query = "SELECT AMON_ALUMNO_ID, AMON_FECHA,AMON_DVH FROM AMONESTACION ";
+            query = "SELECT AMON_ALUMNO_ID, AMON_FECHA,AMON_DVH, ROW_NUMBER() over ( order by (select 1)) as rowid  FROM AMONESTACION ";
 
             cmd.CommandText = query;
             builder = new StringBuilder();
@@ -2120,11 +2105,8 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en amonestación", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long)reader["rowid"];
+                    mensajesDeError.Add("Falló la integridad de datos en amonestacion en el row " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -2136,7 +2118,7 @@ namespace TrabajoDeCampo.DAO
             //mapeoTablaCampo.Add("USUARIO_FAMILIA", new KeyValuePair<String, String[]>("UF_DVH", new String[] { "UF_USUARIO_ID", "UF_FAMILIA_ID" }));
 
 
-            query = "SELECT UF_FAMILIA_ID, UF_USUARIO_ID, UF_DVH FROM USUARIO_FAMILIA ";
+            query = "SELECT UF_FAMILIA_ID, UF_USUARIO_ID, UF_DVH, ROW_NUMBER() over ( order by (select 1)) as rowid  FROM USUARIO_FAMILIA ";
 
             cmd.CommandText = query;
             builder = new StringBuilder();
@@ -2155,11 +2137,8 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en usuario familia", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long)reader["rowid"];
+                    mensajesDeError.Add("Falló la integridad de datos en unsuario familia en el row " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -2171,7 +2150,7 @@ namespace TrabajoDeCampo.DAO
             //mapeoTablaCampo.Add("USUARIO_PATENTE", new KeyValuePair<String, String[]>("UP_DVH", new String[] { "UP_USUARIO_ID", "UP_PATENTE_ID", "UP_BLOQUEADA" }));
 
 
-            query = "SELECT UP_USUARIO_ID, UP_PATENTE_ID,UP_BLOQUEADA,UP_DVH FROM USUARIO_PATENTE ";
+            query = "SELECT UP_USUARIO_ID, UP_PATENTE_ID,UP_BLOQUEADA,UP_DVH, ROW_NUMBER() over ( order by (select 1)) as rowid  FROM USUARIO_PATENTE ";
 
             cmd.CommandText = query;
             builder = new StringBuilder();
@@ -2191,11 +2170,8 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en usuario patente", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long)reader["rowid"];
+                    mensajesDeError.Add("Falló la integridad de datos en usuario_patente en el row " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -2206,7 +2182,7 @@ namespace TrabajoDeCampo.DAO
             stringParaDVH.Clear();
             //mapeoTablaCampo.Add("FAMILIA_PATENTE", new KeyValuePair<String, String[]>("FP_DVH", new String[] { "FP_PATENTE_ID", "FP_FAMILIA_ID" }));
 
-            query = "SELECT FP_FAMILIA_ID, FP_PATENTE_ID,FP_DVH FROM FAMILIA_PATENTE ";
+            query = "SELECT FP_FAMILIA_ID, FP_PATENTE_ID,FP_DVH, ROW_NUMBER() over ( order by (select 1)) as rowid  FROM FAMILIA_PATENTE ";
 
             cmd.CommandText = query;
             builder = new StringBuilder();
@@ -2225,11 +2201,8 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5.Equals(patDVH))
                 {
-                    reader.GetValue(0);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en familia patente", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long)reader["rowid"];
+                    mensajesDeError.Add("Falló la integridad de datos en familia patente en el row " + id.ToString());
                 }
 
                 stringParaDVH.Append(md5);
@@ -2240,7 +2213,7 @@ namespace TrabajoDeCampo.DAO
             reader.Close();
             stringParaDVH.Clear();
 
-            query = " SELECT DV_NOMBRE_TABLA,DV_DIGITO_CALCULADO FROM DIGITO_VERTICAL ";
+            query = " SELECT DV_NOMBRE_TABLA,DV_DIGITO_CALCULADO,dv_id FROM DIGITO_VERTICAL ";
 
             cmd.CommandText = query;
            
@@ -2257,16 +2230,24 @@ namespace TrabajoDeCampo.DAO
 
                 if (!md5Base.Equals(md5Calculado))
                 {
-                    reader.GetValue(1);
-                    reader.Close();
-                    connection.Close();
-                    this.grabarBitacora(null, "Falló la integridad de datos en dígito vertical", CriticidadEnum.ALTA);
-                    throw new Exception("fallo la integridad de datos");
+                    long id = (long) reader.GetValue(2);
+                    mensajesDeError.Add("Falló la integridad de datos en digito vertical en el row " + id.ToString());
                 }
 
             }
             reader.Close();
             connection.Close();
+
+            //chequeo si hubo errores, si los hubo tiro la excepcion y logueo todo
+
+            if(mensajesDeError.Count > 0)
+            {
+                foreach (String item in mensajesDeError)
+                {
+                    this.grabarBitacora(null, item, CriticidadEnum.ALTA);
+                }
+                throw new Exception("Falló la integridad de datos.");
+            }
         }
 
 

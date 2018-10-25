@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -73,10 +74,16 @@ namespace TrabajoDeCampo.Pantallas.Reports
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("nombreDelColegio",table.Rows[0].ItemArray[1].ToString()));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("fecha", table.Rows[0].ItemArray[2].ToString()));
             this.reportViewer1.RefreshReport();
-            
-            
-          
-            
+            PageSettings set = this.reportViewer1.GetPageSettings();
+            set.Margins = new Margins(100, 0, 100, 100);
+            set.PaperSize.RawKind = (int)PaperKind.A4;
+            this.reportViewer1.SetPageSettings(set);
+            this.reportViewer1.RefreshReport();
+
+
+
+
+
 
         }
 

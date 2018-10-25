@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
@@ -80,6 +81,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     else
                     {
                         MessageBox.Show("Conexión exitosa");
+                        servicioSeguridad.grabarBitacora(null, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
                         Login login = new Login();
 
                         login.ShowDialog();
@@ -109,6 +111,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     {
                         MessageBox.Show("Conexión exitosa");
                         Login login = new Login();
+                        servicioSeguridad.grabarBitacora(null, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
 
                         login.ShowDialog();
                         this.Close();

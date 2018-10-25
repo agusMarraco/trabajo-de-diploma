@@ -43,7 +43,7 @@ namespace TrabajoDeCampo.SERVICIO
             try
             {
                 conectado = this.daoSeguridad.probarConexion();
-                this.grabarBitacora(null, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
+                
 
             }
             catch (Exception)
