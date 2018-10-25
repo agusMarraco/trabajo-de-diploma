@@ -216,7 +216,6 @@
                               </Style>
                             </Textbox>
                           </ReportItems>
-                          <KeepTogether>true</KeepTogether>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -434,6 +433,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0cm</Top>
               <Height>1cm</Height>
               <Width>7.08661in</Width>
               <Style>
