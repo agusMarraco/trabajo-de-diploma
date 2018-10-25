@@ -124,7 +124,10 @@ namespace TrabajoDeCampo.SERVICIO
         }
 
         public void bloquearUsuario(Usuario usu) {
-            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usu);
+            Usuario usuario = new Usuario();
+            usuario.id = usu.id;
+            usuario.componentePermisos = new List<ComponentePermiso>();
+            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
             if (!errorEsenciales)
             {
                 this.daoSeguridad.bloquearUsuario(usu.id);
@@ -188,7 +191,10 @@ namespace TrabajoDeCampo.SERVICIO
         }
 
         public void borrarUsuario(Usuario usuario) {
-            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usuario);
+            Usuario usu = new Usuario();
+            usu.id = usuario.id;
+            usu.componentePermisos = new List<ComponentePermiso>();
+            Boolean errorEsenciales = this.daoSeguridad.verificarPermisosEsenciales(usu);
             if (!errorEsenciales)
             {
                 this.daoSeguridad.borrarUsuario(usuario);
