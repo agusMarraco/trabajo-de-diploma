@@ -1,4 +1,5 @@
-﻿preguntas para carlos
+﻿
+revisar las posibles diferencias en las interfaces de usuario
 
 
 change log

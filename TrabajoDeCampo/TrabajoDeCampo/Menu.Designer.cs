@@ -49,7 +49,6 @@
             this.restaurarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recalcularDígitosVerificadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bitácoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarIdiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +68,6 @@
             this.notasToolStripMenuItem,
             this.administraciónToolStripMenuItem,
             this.seguridadToolStripMenuItem,
-            this.ayudaToolStripMenuItem,
             this.opcionesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -261,14 +259,6 @@
             this.bitácoraToolStripMenuItem.Text = "Bitácora";
             this.bitácoraToolStripMenuItem.Click += new System.EventHandler(this.bitácoraToolStripMenuItem_Click);
             // 
-            // ayudaToolStripMenuItem
-            // 
-            this.ayudaToolStripMenuItem.Enabled = false;
-            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.ayudaToolStripMenuItem.Tag = "com.td.ayuda";
-            this.ayudaToolStripMenuItem.Text = "Ayuda";
-            // 
             // opcionesToolStripMenuItem
             // 
             this.opcionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -373,7 +363,6 @@
         private System.Windows.Forms.ToolStripMenuItem docenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administraciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem respaldarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restaurarToolStripMenuItem;
