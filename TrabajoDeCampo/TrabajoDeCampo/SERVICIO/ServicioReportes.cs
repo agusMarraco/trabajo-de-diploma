@@ -42,6 +42,7 @@ namespace TrabajoDeCampo.SERVICIO
             tags.AddRange(new string[] {
                 "com.td.justificada","com.td.fecha","com.td.tipo","com.td.motivo","com.td.descripción","com.td.faltas.totales","com.td.si","com.td.no",
                 "com.td.módulo", "com.td.criticidad",
+                "com.td.criticidad.alta", "com.td.criticidad.media", "com.td.criticidad.baja",
                 "com.td.plan.estudios","com.td.cursos","com.td.amonestaciones","com.td.inasistencias","com.td.horarios","com.td.bitácora",
                 "com.td.lunes","com.td.martes","com.td.miercoles","com.td.jueves","com.td.viernes","com.td.desde","com.td.hasta",
                 "com.td.mensaje","com.td.nivel","com.td.excedido","com.td.disclaimer","com.td.maximo","com.td.actual",
@@ -80,6 +81,9 @@ namespace TrabajoDeCampo.SERVICIO
             row.SetField("disclaimerLbl", traduccionesDeBase["com.td.disclaimer"]);
             row.SetField("maximoLbl", traduccionesDeBase["com.td.maximo"]);
             row.SetField("actualLbl", traduccionesDeBase["com.td.actual"]);
+            row.SetField("criticidadAltaLbl", traduccionesDeBase["com.td.criticidad.alta"]);
+            row.SetField("criticidadMediaLbl", traduccionesDeBase["com.td.criticidad.media"]);
+            row.SetField("criticidadBajaLbl", traduccionesDeBase["com.td.criticidad.baja"]);
             traducciones.DataTable1.Rows.Add(row);
 
             InfoColegio colegio = new InfoColegio();
