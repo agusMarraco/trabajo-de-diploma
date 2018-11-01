@@ -38,6 +38,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         }
         private void AltaModificacionTutor_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Tutores.htm" : "Tutors.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             if (currentTutor != null)

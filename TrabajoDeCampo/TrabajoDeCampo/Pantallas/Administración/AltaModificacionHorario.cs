@@ -44,6 +44,9 @@ namespace TrabajoDeCampo.Pantallas
 
         private void AltaModificacionHorario_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Horarios.htm" : "Schedules.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             List <Nivel> niveles = administracion.listarNiveles(null, null, null);

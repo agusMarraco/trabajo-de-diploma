@@ -56,6 +56,9 @@ namespace TrabajoDeCampo.Pantallas.Reports
 
         private void ReportePlanDeEstudios_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             String code = TrabajoDeCampo.Properties.Settings.Default.Idioma;
             this.Text = (code.Equals("es")) ? "Reporte" : "Report";
 

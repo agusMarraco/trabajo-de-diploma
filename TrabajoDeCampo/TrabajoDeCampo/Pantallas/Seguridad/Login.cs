@@ -26,6 +26,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void Login_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.helpProvider1.SetHelpKeyword(this, "LoginES.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             if (TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1)

@@ -36,6 +36,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void Amonestaciones_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Alumnos.htm" : "Students.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.dataGridView1.AutoGenerateColumns = false;
