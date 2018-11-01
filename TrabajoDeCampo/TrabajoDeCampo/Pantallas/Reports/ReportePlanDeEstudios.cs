@@ -74,9 +74,13 @@ namespace TrabajoDeCampo.Pantallas.Reports
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("nombreDelColegio",table.Rows[0].ItemArray[1].ToString()));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("fecha", table.Rows[0].ItemArray[2].ToString()));
             this.reportViewer1.RefreshReport();
+
             PageSettings set = this.reportViewer1.GetPageSettings();
-            set.Margins = new Margins(100, 0, 100, 100);
-            set.PaperSize.RawKind = (int)PaperKind.A4;
+            set.Margins = new Margins(200, 0, 0, 0);
+            set.PaperSize.RawKind = (int) PaperKind.Letter;
+            set.Landscape = true;
+            //set.Landscape = true;
+            
             this.reportViewer1.SetPageSettings(set);
             this.reportViewer1.RefreshReport();
 
@@ -84,8 +88,8 @@ namespace TrabajoDeCampo.Pantallas.Reports
 
 
 
-
         }
+        
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
         {
@@ -100,6 +104,7 @@ namespace TrabajoDeCampo.Pantallas.Reports
                 e.DataSources.Clear();
                 e.DataSources.Add(source);
                 e.DataSources.Add(source2);
+
             }
 
         }
