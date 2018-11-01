@@ -19,6 +19,7 @@ namespace TrabajoDeCampo.Pantallas
         private ServicioAdministracion administracion;
         private List<Curso> cursos;
         private ServicioDocentes servicioDocentes;
+        private List<Materia> materias;
         private Horario currentHorario;
         private Horarios parentForm;
         private Dictionary<String, String> traducciones;
@@ -48,7 +49,6 @@ namespace TrabajoDeCampo.Pantallas
             List <Nivel> niveles = administracion.listarNiveles(null, null, null);
             cursos = administracion.listarCursos(null, null, null);
             List<Docente> docentes = servicioDocentes.listarDocentes(null, null, null);
-            List<Materia> materias = administracion.listarMaterias(null, null, null);
             Dictionary<long, String> modulos = new Dictionary<long, string>();
             modulos.Add(1, "8am / 10am");
             modulos.Add(2, "10am / 12pm");
@@ -56,7 +56,7 @@ namespace TrabajoDeCampo.Pantallas
             modulos.Add(4, "14pm / 16pm");
             modulos.Add(5, "16pm / 18pm");
             
-            this.cbModulo.DataSource = modulos.ToList(); ;
+            this.cbModulo.DataSource = modulos.ToList();
             this.cbModulo.DisplayMember = "value";
 
             Dictionary<int, String> dias = new Dictionary<int, string>();
@@ -74,7 +74,7 @@ namespace TrabajoDeCampo.Pantallas
 
             this.cbDocente.DataSource = docentes;
 
-            this.cbMateria.DataSource = materias;
+            this.cbMateria.DataSource = null;
             this.cbMateria.DisplayMember = "nombre";
 
             this.cbDocente.Format += ComboBoxFormat;
@@ -82,8 +82,7 @@ namespace TrabajoDeCampo.Pantallas
             if (cbNivel.SelectedItem != null)
             {
                 long nivelId = ((Nivel)cbNivel.SelectedItem).id;
-                this.displayCursos(nivelId);
-                displayCursos(nivelId);
+                this.displayCursosYMaterias(nivelId);
             }
             if(this.currentHorario!= null)
             {
@@ -117,7 +116,7 @@ namespace TrabajoDeCampo.Pantallas
             if(combo.SelectedItem != null)
             {
                 long nivelId = ((Nivel)combo.SelectedItem).id;
-                this.displayCursos(nivelId);
+                this.displayCursosYMaterias(nivelId);
             }
         }
 
@@ -186,10 +185,10 @@ namespace TrabajoDeCampo.Pantallas
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
             }
         }
-        public void displayCursos(long nivelId)
+        public void displayCursosYMaterias(long nivelId)
         {
             List<Curso> cursosSeleccionados = new List<Curso>();
-
+            
             foreach (Curso curso in cursos)
             {
                 if (curso.nivel.id == nivelId)
@@ -197,7 +196,12 @@ namespace TrabajoDeCampo.Pantallas
                     cursosSeleccionados.Add(curso);
                 }
             }
-
+            Nivel niv = new Nivel();
+            niv.id = nivelId;
+            materias = this.administracion.traerMateriasPorNivel(niv);
+            this.cbMateria.DataSource = null;
+            this.cbMateria.DisplayMember = "nombre";
+            this.cbMateria.DataSource = materias;
             this.cbCurso.DataSource = null;
             this.cbCurso.DataSource = cursosSeleccionados;
             this.cbCurso.DisplayMember = "codigo";

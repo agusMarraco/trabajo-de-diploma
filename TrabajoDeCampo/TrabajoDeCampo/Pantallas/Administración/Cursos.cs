@@ -19,7 +19,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private ServicioSeguridad servicioSeguridad;
         private ServicioAdministracion servicioAdministracion;
         private Boolean valido  = false;
-        private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
         private Dictionary<String, String> traducciones;
         public Cursos()
         {
@@ -27,29 +27,21 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.servicioSeguridad = new ServicioSeguridad();
             this.servicioAdministracion = new ServicioAdministracion();
             this.dataGridView1.ColumnHeaderMouseClick += customSort;
-            this.textBox1.KeyDown += TextBox1_KeyDown;
+
             this.textBox1.KeyPress += TextBox1_KeyPress;
         }
 
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {

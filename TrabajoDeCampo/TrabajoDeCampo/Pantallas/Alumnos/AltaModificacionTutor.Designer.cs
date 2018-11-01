@@ -98,7 +98,7 @@
             // txtTel1
             // 
             this.txtTel1.Location = new System.Drawing.Point(402, 71);
-            this.txtTel1.Mask = "0000-0000";
+            this.txtTel1.Mask = "00-0000-0000";
             this.txtTel1.Name = "txtTel1";
             this.txtTel1.Size = new System.Drawing.Size(202, 22);
             this.txtTel1.TabIndex = 4;
@@ -106,7 +106,7 @@
             // txtTel2
             // 
             this.txtTel2.Location = new System.Drawing.Point(402, 101);
-            this.txtTel2.Mask = "0000-0000";
+            this.txtTel2.Mask = "00-0000-0000";
             this.txtTel2.Name = "txtTel2";
             this.txtTel2.Size = new System.Drawing.Size(202, 22);
             this.txtTel2.TabIndex = 5;

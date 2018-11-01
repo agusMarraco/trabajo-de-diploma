@@ -14,15 +14,13 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class Login : Form
     {
-        private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
         private Boolean valido = false;
         public Login()
         {
             InitializeComponent();
-            this.txtUsername.KeyDown += TxtUsername_KeyDown;
             this.txtUsername.KeyPress += TxtUsername_KeyPress;
             this.txtPassword.KeyPress += TxtPassword_KeyPress;
-            this.txtPassword.KeyDown += TxtPassword_KeyDown;
         }
 
 
@@ -93,44 +91,28 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         }
 
 
-        private void TxtPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if(!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
-                {
-                    valido = false;
-                }
-            }
-        }
 
         private void TxtPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void TxtUsername_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void TxtUsername_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
+
     }
 }

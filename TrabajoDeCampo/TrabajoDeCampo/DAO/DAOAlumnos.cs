@@ -243,7 +243,7 @@ namespace TrabajoDeCampo.DAO
         public void borrarAlumno(Alumno alumno) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
 
-            String deleteQuery = " update alumno set alu_borrado = 1 where alu_legajo = @id ";
+            String deleteQuery = " update alumno set alu_borrado = 1 where alu_legajo = @id delete alumno_tutor where at_alumno_id = @id";
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
             SqlCommand cmd = new SqlCommand(deleteQuery, connection, tx);

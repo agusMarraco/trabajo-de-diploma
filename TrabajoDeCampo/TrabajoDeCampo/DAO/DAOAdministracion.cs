@@ -1063,7 +1063,9 @@ namespace TrabajoDeCampo.DAO
         public List<Alumno> listarAlumnosPorCursoYNivel(Nivel nivel, Curso curso) {
             List<Alumno> alumnos = new List<Alumno>();
             SqlConnection connection = ConexionSingleton.obtenerConexion();
-            String queryAlumnosPromocionables = " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_condicion = 0) < 3 ";
+            
+            String queryAlumnosPromocionables = " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_condicion = 0) < 3 " +
+                " and (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_nota_final = null) = 0 ";
             StringBuilder sb = new StringBuilder();
             sb.Append(" select alu.alu_legajo, alu.alu_apellido, alu.alu_nombre, alu.alu_dni, alu.alu_curso, " +
                 " alu.alu_orientacion, " +

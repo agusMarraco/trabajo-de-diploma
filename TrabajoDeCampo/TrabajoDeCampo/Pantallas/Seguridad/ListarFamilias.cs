@@ -19,7 +19,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         FormUtils utils;
         private Familia currentFamilia;
 
-        private Regex lettersOnly = new Regex("[a-zA-z]");
+        private Regex lettersOnly = new Regex("^[a-zA-Z]+$");
         private Boolean valido = false;
         private Dictionary<string, string> traducciones;
 
@@ -44,7 +44,6 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgPatentes.Columns[0].DataPropertyName = "descripcion";
             this.dgFamilia.Columns[0].DataPropertyName = "nombre";
             this.dgFamilia.Columns[0].Tag = "com.td.familia";
-            this.txtNombre.KeyDown += TxtNombre_KeyDown;
             this.txtNombre.KeyPress += TxtNombre_KeyPress;
             desbloquearControles();
 
@@ -65,20 +64,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void TxtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void TxtNombre_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!lettersOnly.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!lettersOnly.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }

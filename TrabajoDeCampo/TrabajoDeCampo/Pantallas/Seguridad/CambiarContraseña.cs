@@ -16,7 +16,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
     public partial class CambiarContraseña : Form
     {
         private ServicioSeguridad servicioSeguridad;
-        private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
         private Boolean valido = false;
         private Dictionary<string, string> traducciones;
 
@@ -32,11 +32,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         {
             this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Opciones.htm" : "Options.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
-            this.actual.KeyDown += validarAlphaKD;
             this.actual.KeyPress += validarAlphaKP;
-            this.nueva.KeyDown += validarAlphaKD;
             this.nueva.KeyPress += validarAlphaKP;
-            this.nuevaRepetido.KeyDown += validarAlphaKD;
             this.nuevaRepetido.KeyPress += validarAlphaKP;
 
             //traduccion
@@ -58,24 +55,16 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void validarAlphaKP(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-
-        }
-
-        private void validarAlphaKD(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
+
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

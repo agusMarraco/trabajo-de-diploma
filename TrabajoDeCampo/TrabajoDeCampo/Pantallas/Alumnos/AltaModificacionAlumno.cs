@@ -22,9 +22,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Alumno currentAlumno = null;
         private Alumnos parentForm = null;
 
-        private Regex lettersRegex = new Regex("[a-zA-z]");
-        private Regex numbersRegex = new Regex("[0-9]");
-        private Regex alphanumericRegex = new Regex("[0-9a-zA-z]");
+        private Regex lettersRegex = new Regex("^[a-zA-Z]+$");
+        private Regex numbersRegex = new Regex("^[0-9]+$");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
         private Boolean valido = false;
 
         public Dictionary<string, string> traducciones { get;  set; }
@@ -47,14 +47,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             {
                 this.currentAlumno = alumno;
             }
-            this.nombretx.KeyDown += validarLetrasKeyDown;
             this.nombretx.KeyPress += validarLetrasKeyPress;
-            this.apellidotx.KeyDown += validarLetrasKeyDown;
             this.apellidotx.KeyPress += validarLetrasKeyPress;
-            this.dnitx.KeyDown += Dnitx_KeyDown;
             this.dnitx.KeyPress += Dnitx_KeyPress;
             this.domicilotx.KeyPress += Domicilotx_KeyPress;
-            this.domicilotx.KeyDown += Domicilotx_KeyDown;
+
         }
 
         
@@ -329,66 +326,42 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         }
 
 
-        //validaciones 
-        private void Domicilotx_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
-                {
-                    valido = false;
-                }
-            }
-        }
+
 
         private void Domicilotx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void Dnitx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void Dnitx_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!numbersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!numbersRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
+
 
         private void validarLetrasKeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void validarLetrasKeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!lettersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {

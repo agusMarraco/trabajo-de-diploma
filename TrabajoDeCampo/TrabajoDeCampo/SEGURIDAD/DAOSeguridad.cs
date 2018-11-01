@@ -762,24 +762,187 @@ namespace TrabajoDeCampo.DAO
 
 
                 //chequeando los permisos esenciales
-                SqlCommand cmd = new SqlCommand("SELECT COUNT(PAT_ID) FROM PERMISOS_USUARIO WHERE PAT_ID IN ( " + EnumPatentes.CrearUsuario + ", " + EnumPatentes.ModificarUsuario + ", " +
-                    EnumPatentes.ListarUsuarios + ", " + EnumPatentes.GenerarBackups + ", " + EnumPatentes.RestaurarBackup + ", " + EnumPatentes.RecalcularDígitosVerificadores + ", " + EnumPatentes.ModificarFamilias
-                    + ", " + EnumPatentes.CrearFamilia + ", " + EnumPatentes.ListarFamilias + ")  GROUP BY USU_ID ");
+                //SqlCommand cmd = new SqlCommand("SELECT COUNT(PAT_ID) FROM PERMISOS_USUARIO WHERE PAT_ID IN ( " + EnumPatentes.CrearUsuario + ", " + EnumPatentes.ModificarUsuario + ", " +
+                //    EnumPatentes.ListarUsuarios + ", " + EnumPatentes.GenerarBackups + ", " + EnumPatentes.RestaurarBackup + ", " + EnumPatentes.RecalcularDígitosVerificadores + ", " + EnumPatentes.ModificarFamilias
+                //    + ", " + EnumPatentes.CrearFamilia + ", " + EnumPatentes.ListarFamilias + ")  GROUP BY USU_ID ");
+                //cmd.Connection = connection;
+                //cmd.Transaction = tx;
+                //SqlDataReader reader;
+                //int cantidad = 0;
+                //Boolean errorEsenciales = false;
+                //reader = cmd.ExecuteReader();
+                //while (reader.Read())
+                //{
+                //    cantidad = (int)reader.GetValue(0);
+                //    if (cantidad != 9)
+                //    {
+                //        errorEsenciales = true;
+                //    }
+                //}
+                //reader.Close();
+                SqlCommand cmd = new SqlCommand("SELECT count(*) FROM PERMISOS_USUARIO WHERE PAT_ID = @PAT ");
+
                 cmd.Connection = connection;
                 cmd.Transaction = tx;
                 SqlDataReader reader;
+                Boolean seguirBuscando = true;
                 int cantidad = 0;
                 Boolean errorEsenciales = false;
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (seguirBuscando)
                 {
-                    cantidad = (int)reader.GetValue(0);
-                    if (cantidad != 9)
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.CrearUsuario;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        errorEsenciales = true;
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
                     }
+                    reader.Close();
                 }
-                reader.Close();
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ModificarUsuario;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+
+                }
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ListarUsuarios;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad=(int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+                }
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.GenerarBackups;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+                }
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.RestaurarBackup;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+                }
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.RecalcularDígitosVerificadores;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+                }
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ModificarFamilias;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+                }
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.ListarFamilias;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+
+                }
+                if (seguirBuscando)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@PAT", System.Data.SqlDbType.BigInt)).Value = EnumPatentes.CrearFamilia;
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cantidad = (int)reader.GetValue(0);
+                        if (cantidad == 0)
+                        {
+                            errorEsenciales = true;
+                            seguirBuscando = false;
+
+                        }
+                    }
+                    reader.Close();
+
+                }
                 if (errorEsenciales || cantidad == 0)
                 {
                     throw new Exception("PERMISOS");
@@ -982,7 +1145,7 @@ namespace TrabajoDeCampo.DAO
 
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" SELECT COUNT(*) FROM USUARIO_FAMILIA WHERE UF_FAMILIA_ID = @IDFAMILIA ");
+            sb.Append(" SELECT COUNT(*) FROM USUARIO_FAMILIA inner join USUARIO USU ON USU.USU_ID = UF_USUARIO_ID WHERE UF_FAMILIA_ID = @IDFAMILIA  AND USU.USU_BAJA = 0");
 
             SqlCommand query = new SqlCommand(sb.ToString(), connection);
             query.Parameters.Add(new SqlParameter("@IDFAMILIA", System.Data.SqlDbType.BigInt)).Value = idFamilia;
@@ -1454,7 +1617,7 @@ namespace TrabajoDeCampo.DAO
 
             query.Parameters.Add(new SqlParameter("@dni", System.Data.SqlDbType.VarChar)).Value = usuario.dni;
             query.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = usuario.email;
-            string pass = SeguridadUtiles.encriptarMD5(usuario.pass);
+            string pass = usuario.pass;
             string alias = SeguridadUtiles.encriptarAES(usuario.alias);
             query.Parameters.Add(new SqlParameter("@pass", System.Data.SqlDbType.VarChar)).Value = pass;
             query.Parameters.Add(new SqlParameter("@alias", System.Data.SqlDbType.NVarChar)).Value = alias;
@@ -1577,7 +1740,7 @@ namespace TrabajoDeCampo.DAO
         {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" UPDATE  USUARIO SET USU_BAJA = 1 WHERE USU_ID = @ID");
+            sb.Append(" UPDATE  USUARIO SET USU_BAJA = 1 WHERE USU_ID = @ID DELETE FROM USUARIO_FAMILIA WHERE UF_USUARIO_ID =  @ID");
 
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
@@ -1610,6 +1773,7 @@ namespace TrabajoDeCampo.DAO
             {
                 connection.Close();
             }
+            this.recalcularDigitoVertical("USUARIO_FAMILIA");
 
         }
 

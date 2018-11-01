@@ -20,7 +20,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private bool esEdit = false;
         private Materia currentMateria = null;
         private Boolean valido = false;
-        private Regex onlyLetters = new Regex("[a-zA-Z]");
+        private Regex onlyLetters = new Regex("^[a-zA-Z]+$");
         private Dictionary<String, String> traducciones;
 
 
@@ -61,10 +61,10 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
             this.servicioSeguridad = new ServicioSeguridad();
             this.administracion = new ServicioAdministracion();
-            this.textBox1.KeyDown += TextBox1_KeyDown;
+
             this.textBox1.KeyPress += TextBox1_KeyPress;
             this.textBox2.KeyPress += TextBox2_KeyPress;
-            this.textBox2.KeyDown += TextBox2_KeyDown; ;
+
 
             //traduccion
             FormUtils traductor = new TraductorIterador();
@@ -91,6 +91,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 (!this.rbExtracurricular.Checked && !this.rbTroncal.Checked))
             {
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
+                return;
             }
             try
             {
@@ -144,44 +145,26 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.Close();
         }
 
-        //validaciones de ingreso
-        private void TextBox2_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!onlyLetters.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
-                {
-                    valido = false;
-                }
-            }
-        }
 
 
         private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
+                if (!onlyLetters.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!onlyLetters.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!onlyLetters.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }

@@ -52,9 +52,10 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             //traduccion
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
-            tags.Add("com.td.completado");
+            tags.Add("com.td.complete.campos");
             tags.Add("com.td.fecha.ocupada");
             tags.Add("com.td.guardar");
+            tags.Add("com.td.seguro");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -88,7 +89,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             {
                 if (String.IsNullOrEmpty(this.richTextBox1.Text))
                 {
-                    MessageBox.Show(traducciones["com.td.completado"]);
+                    MessageBox.Show(traducciones["com.td.complete.campos"]);
                     return;
                 }
                 editando = false;

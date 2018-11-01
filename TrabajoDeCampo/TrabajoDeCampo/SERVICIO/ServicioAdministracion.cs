@@ -132,8 +132,9 @@ namespace TrabajoDeCampo.SERVICIO
         }
 
         public void actualizarHorario(Horario horario) {
-            Boolean disponible = this.daoAdministracion.verificarRestricciones(horario.curso.id, horario.materia.id, horario.docente.legajo, 
-                horario.dia, horario.modulo.id,horario.id);
+            //long idCurso, long idMateria, long dia, long idDocente, long idModulo,long idHorario
+            Boolean disponible = this.daoAdministracion.verificarRestricciones(horario.curso.id, horario.materia.id, horario.dia ,horario.docente.legajo, 
+               horario.modulo.id,horario.id);
             if (disponible)
             {
                 this.daoAdministracion.actualizarHorario(horario);

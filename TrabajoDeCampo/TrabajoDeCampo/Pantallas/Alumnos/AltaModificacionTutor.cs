@@ -21,8 +21,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Tutores parentForm;
         private Tutor currentTutor = null;
 
-        private Regex lettersRegex = new Regex("[a-zA-z]");
-        private Regex numbersRegex = new Regex("[0-9]");
+        private Regex lettersRegex = new Regex("^[a-zA-Z]+$");
+        private Regex numbersRegex = new Regex("^[0-9]+$");
         private Boolean valido = false;
         private Dictionary<string, string> traducciones;
 
@@ -50,15 +50,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.txtTel2.Text = currentTutor.telefono2;
 
                 this.txtNombre.KeyPress += validarLetrasKP;
-                this.txtNombre.KeyDown += validarLetrasKD;
                 this.txtApellido.KeyPress += validarLetrasKP;
-                this.txtApellido.KeyDown += validarLetrasKD;
                 this.txtDni.KeyPress += validarNumerosKP;
-                this.txtDni.KeyDown += validarNumerosKD;
                 this.txtTel1.KeyPress += validarNumerosKP;
-                this.txtTel1.KeyDown += validarNumerosKD;
                 this.txtTel2.KeyPress += validarNumerosKP;
-                this.txtTel2.KeyDown += validarNumerosKD;
+
 
 
             }
@@ -76,50 +72,34 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             traductor = new TraductorIterador();
         }
 
-        private void validarNumerosKD(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!numbersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
-                {
-                    valido = false;
-                }
-            }
-        }
-
         private void validarNumerosKP(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void validarLetrasKD(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!lettersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!numbersRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
 
         private void validarLetrasKP(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
+                if (!lettersRegex.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if(String.IsNullOrEmpty(this.txtNombre.Text.Trim()) || String.IsNullOrEmpty(this.txtApellido.Text.Trim()) || String.IsNullOrEmpty(this.txtDni.Text.Trim()) ||
-                String.IsNullOrEmpty(this.txtEmail.Text.Trim()) || String.IsNullOrEmpty(this.txtTel1.Text.Trim())){
+                String.IsNullOrEmpty(this.txtEmail.Text.Trim()) || String.IsNullOrEmpty(this.txtTel1.Text.Trim())
+                || !this.txtTel1.MaskCompleted
+                ){
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
                 return;
             }

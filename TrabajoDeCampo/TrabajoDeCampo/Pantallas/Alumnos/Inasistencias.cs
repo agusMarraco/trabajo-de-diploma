@@ -83,6 +83,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             tags.Add("com.td.fecha.ocupada");
             tags.Add("com.td.complete.campos");
             tags.Add("com.td.seguro");
+            tags.Add("com.td.si");
+            tags.Add("com.td.no");
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
@@ -251,10 +253,10 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         {
             if (ev.ColumnIndex == 2)
             {
-                ev.Value = ((Boolean)ev.Value) ? "SI" : "NO";
+                ev.Value = ((Boolean)ev.Value) ? traducciones["com.td.si"] : traducciones["com.td.no"];
             }else if (ev.ColumnIndex == 1)
             {
-                ev.Value = ((Double)ev.Value) == 0.5 ? "MEDIA" : "COMPLETA";
+                ev.Value = ((Double)ev.Value) == 0.5 ? traducciones["com.td.media"] : traducciones["com.td.completa"];
             }
         }
 

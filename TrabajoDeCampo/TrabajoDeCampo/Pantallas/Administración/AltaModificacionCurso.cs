@@ -18,60 +18,42 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private ServicioAdministracion servicioAdministracion;
         private Curso currentCurso;
         private Cursos callerForm;
-        private Regex onlyNumbers = new Regex("[0-9]");
-        private Regex onlyLetters = new Regex("[a-zA-Z]");
-        private Boolean valido = false;
+        private Regex onlyNumbers = new Regex("^[0-9]+$");
+        private Regex onlyLetters = new Regex("^[a-zA-Z]+$");
+        
         private Dictionary<String, String> traducciones;
         public AltaModificacionCurso()
         {
             InitializeComponent();
             this.servicioSeguridad = new ServicioSeguridad();
             this.servicioAdministracion = new ServicioAdministracion();
-            this.txtCapacidad.KeyDown += TxtCapacidad_KeyDown;
-            this.txtCapacidad.KeyPress += TxtCapacidad_KeyPress;
-            this.txtLetra.KeyPress += TxtLetra_KeyPress;
-            this.txtLetra.KeyDown += TxtLetra_KeyDown;
+           
         }
 
-        private void TxtLetra_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!onlyLetters.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
-                {
-                    valido = false;
-                }
-            }
-        }
-
+      
         private void TxtLetra_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
+                if (!onlyLetters.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void TxtCapacidad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void TxtCapacidad_KeyDown(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!onlyNumbers.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!onlyNumbers.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
+
+     
 
         public AltaModificacionCurso(Curso curso, Cursos callerForm)
         {
@@ -84,6 +66,10 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.comboNiveles.DataSource = niveles;
             this.currentCurso = curso;
             this.callerForm = callerForm;
+
+            this.txtCapacidad.KeyPress += TxtCapacidad_KeyPress;
+            this.txtLetra.KeyPress += TxtLetra_KeyPress;
+
             if (currentCurso != null)
             {
                 this.txtCapacidad.Text = currentCurso.capacidad.ToString();

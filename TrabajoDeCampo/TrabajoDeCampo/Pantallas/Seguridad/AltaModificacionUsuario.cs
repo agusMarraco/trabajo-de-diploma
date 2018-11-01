@@ -26,9 +26,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private Boolean isEdit;
         private Usuario currentUsuario;
 
-        private Regex lettersRegex = new Regex("[a-zA-z]");
-        private Regex numbersRegex = new Regex("[0-9]");
-        private Regex alphanumericRegex = new Regex("[a-zA-Z0-9]");
+        private Regex lettersRegex = new Regex("^[a-zA-Z]+$");
+        private Regex numbersRegex = new Regex("^[0-9]+$");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
 
         private Boolean valido = false;
         public AltaModificacionUsuario()
@@ -47,18 +47,12 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.dgfamilias.DataSource = null;
             this.dgpatentes.DataSource = null;
 
-            this.nombre.KeyDown += validarLetrasKD;
             this.nombre.KeyPress += validarLetrasKP;
-            this.apellido.KeyDown += validarLetrasKD;
             this.apellido.KeyPress += validarLetrasKP;
             this.dni.KeyPress += validarNumerosKP;
-            this.dni.KeyDown += validarNumerosKD;
             this.direccion.KeyPress += validarAlphaKP;
-            this.direccion.KeyDown += validarAlphaKD;
             this.alias.KeyPress += validarAlphaKP;
-            this.alias.KeyDown += validarAlphaKD;
             this.telefono.KeyPress += validarNumerosKP;
-            this.telefono.KeyDown += validarNumerosKD;
 
             this.dgfamiliapatente.AutoGenerateColumns = false ;
             this.dgfamilias.AutoGenerateColumns = false;
@@ -388,14 +382,18 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         /// </summary>
         public void mostrarPatentesDeFamilia()
         {
-            List<Patente> currentPatentes = new List<Patente>();
-            (this.dgfamilias.CurrentRow.DataBoundItem as Familia).patentes.ForEach(x => {
-                ComponentePermiso per = x;
-                currentPatentes.Add((Patente)per);
+            if(this.dgfamilias.CurrentRow != null)
+            {
+                List<Patente> currentPatentes = new List<Patente>();
+                (this.dgfamilias.CurrentRow.DataBoundItem as Familia).patentes.ForEach(x => {
+                    ComponentePermiso per = x;
+                    currentPatentes.Add((Patente)per);
 
-            });
-            this.dgfamiliapatente.DataSource = null;
-            this.dgfamiliapatente.DataSource = currentPatentes;
+                });
+                this.dgfamiliapatente.DataSource = null;
+                this.dgfamiliapatente.DataSource = currentPatentes;
+
+            }
 
         }
 
@@ -502,65 +500,43 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         }
 
 
-        private void validarNumerosKD(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!numbersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
-                {
-                    valido = false;
-                }
-            }
-        }
-
+    
         private void validarNumerosKP(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void validarAlphaKD(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!alphanumericRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!numbersRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
+
+    
 
         private void validarAlphaKP(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void validarLetrasKP(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
-            }
-        }
-
-        private void validarLetrasKD(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!lettersRegex.IsMatch(e.KeyData.ToString()) || e.KeyData.ToString().Contains("Oem"))
+                if (!lettersRegex.IsMatch(e.KeyChar.ToString()))
                 {
-                    valido = false;
+                    e.Handled = true;
                 }
             }
         }
+
+   
     }
 
     

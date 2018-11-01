@@ -22,31 +22,20 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             System.Diagnostics.Debugger.Launch();
             InitializeComponent();
             this.textBox1.KeyPress += validateKP;
-            this.textBox1.KeyDown += validateKD;
             this.textBox2.KeyPress += validateKP;
-            this.textBox2.KeyDown += validateKD;
             this.textBox3.KeyPress += validateKP;
-            this.textBox3.KeyDown += validateKD;
 
         }
 
-        private void validateKD(object sender, KeyEventArgs e)
-        {
-            valido = true;
-            if (!e.KeyValue.Equals(8))//tecla borrar
-            {
-                if (!regex.IsMatch(e.KeyData.ToString()) || (e.KeyData.ToString().Contains("Oem") && !e.KeyData.ToString().Contains("OemMinus")))
-                {
-                    valido = false;
-                }
-
-            }
-        }
+    
         private void validateKP(object sender, KeyPressEventArgs e)
         {
-            if (!valido)
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                e.Handled = true;
+                if (!regex.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
