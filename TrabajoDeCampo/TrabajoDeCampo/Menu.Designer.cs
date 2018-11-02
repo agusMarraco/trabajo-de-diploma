@@ -227,7 +227,7 @@
             // 
             this.respaldarToolStripMenuItem.Enabled = false;
             this.respaldarToolStripMenuItem.Name = "respaldarToolStripMenuItem";
-            this.respaldarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.respaldarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.respaldarToolStripMenuItem.Tag = "com.td.respaldar";
             this.respaldarToolStripMenuItem.Text = "Respaldar";
             this.respaldarToolStripMenuItem.Click += new System.EventHandler(this.respaldarToolStripMenuItem_Click);
@@ -236,7 +236,7 @@
             // 
             this.restaurarToolStripMenuItem.Enabled = false;
             this.restaurarToolStripMenuItem.Name = "restaurarToolStripMenuItem";
-            this.restaurarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.restaurarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restaurarToolStripMenuItem.Tag = "com.td.restaurar";
             this.restaurarToolStripMenuItem.Text = "Restaurar";
             this.restaurarToolStripMenuItem.Click += new System.EventHandler(this.restaurarToolStripMenuItem_Click);

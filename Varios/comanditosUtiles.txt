@@ -1,0 +1,12 @@
+DBCC CHECKIDENT ('[TestTable]', RESEED, 0);
+GO
+
+ALTER DATABASE dbName
+SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+Try to rename the database:
+
+ALTER DATABASE dbName MODIFY NAME = NewName
+Set the database to Multiuser mode:
+
+ALTER DATABASE NewName
+SET MULTI_USER WITH ROLLBACK IMMEDIATE

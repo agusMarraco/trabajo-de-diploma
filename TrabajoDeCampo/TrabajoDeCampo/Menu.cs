@@ -92,11 +92,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             else
             {
                 this.seguridadToolStripMenuItem.Enabled = true;
-                this.restaurarToolStripMenuItem.Enabled = true;
-                this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = true;
-                this.respaldarToolStripMenuItem.Enabled = true;
+                this.restaurarToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.RestaurarBackup.ToString());
+                this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.RecalcularDígitosVerificadores.ToString());
+                this.respaldarToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarBackups.ToString());
                 this.backupToolStripMenuItem.Enabled = true;
-                this.bitácoraToolStripMenuItem.Enabled = true;
+                this.bitácoraToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.VerBitácora.ToString()); ;
             }
 
         }
@@ -280,5 +280,6 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             
             Application.Exit();
         }
+
     }
 }

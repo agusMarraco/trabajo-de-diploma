@@ -18,7 +18,10 @@ namespace TrabajoDeCampo
         [STAThreadAttribute]
         public static void Main(string[] args)
         {
-            System.Diagnostics.Debugger.Launch();
+            
+
+            //contemplando el string de conexión de la uai y de la maquina host X. En el caso de que no se pueda generar
+            //se usa el fallo de conexion
             String machineName = (Environment.UserName == "Navegador") ? Environment.UserDomainName + @"\" + "SQL14_UAI" : Environment.MachineName;
             String connection = "Data Source = " + machineName + " ; Initial Catalog = TRABAJO_DIPLOMA ; Integrated Security = True";
             TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(connection));
@@ -27,7 +30,8 @@ namespace TrabajoDeCampo
           
 
             Boolean seConecto = true;
-           
+            
+            //testeo la conexion, se maneja la excepcion y devuelve si pudo conectarse o no
             bool probarConexion = servicioSeguridad.probarConexion();
            
             if(!probarConexion)
@@ -41,60 +45,26 @@ namespace TrabajoDeCampo
             {
                 try
                 {
+                    // chequeo de integridad
                    servicioSeguridad.verificarDigitosVerificadores();
-                    TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 0;
+                   TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 0;
                 }
                 catch (Exception ex)
                 {
+                    //manejo excepciones no contempladas
                     MessageBox.Show(ex.Message);
                     TrabajoDeCampo.Properties.Settings.Default.Bloqueado = 1;
                 }
 
                 Login login = new Login();
                 login.Show();
-                //Pantallas.Seguridad.Menu menu = new Pantallas.Seguridad.Menu();
-                //new Pantallas.Seguridad.Menu().Show();
-
             }
 
             Application.Run();
                 
         }
 
-        public static void mostrarTodasLasPantallas()
-        {
-            List<Form> pantallas = new List<Form>();
-            pantallas.Add(new AltaModificacionCurso());
-            pantallas.Add(new AltaModificacionHorario());
-            pantallas.Add(new AltaModificacionMateria());
-            pantallas.Add(new AsignacionDeMaterias());
-            pantallas.Add(new Cursos());
-            pantallas.Add(new Horarios());
-            pantallas.Add(new Materias());
-            pantallas.Add(new PromocionDeAlumnos());
-            pantallas.Add(new AltaModificacionAlumno());
-            pantallas.Add(new AltaModificacionTutor());
-            pantallas.Add(new Alumnos());
-            pantallas.Add(new Amonestaciones());
-            pantallas.Add(new Inasistencias());
-            pantallas.Add(new Tutores());
-            pantallas.Add(new AltaModificacionUsuario());
-            pantallas.Add(new Bitácora());
-            pantallas.Add(new CambiarContraseña());
-            pantallas.Add(new FalloConexión());
-            pantallas.Add(new ListaDeUsuarios());
-            pantallas.Add(new ListarFamilias());
-            pantallas.Add(new Login());
-            pantallas.Add(new Respaldo_Base_de_Datos());
-            pantallas.Add(new Restaurar_Backup());
-            pantallas.Add(new Pantallas.Seguridad.Menu());
-
-            foreach (Form item in pantallas)
-            {
-                item.Show();
-            }
-        }
-
+       
         public static void insertsDePatentes()
         {
             
