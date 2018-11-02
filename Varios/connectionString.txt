@@ -1,0 +1,1 @@
+Data Source=DESKTOP-P2NMPG5;Initial Catalog=TRABAJO_DIPLOM;User ID=sa;Password=1234

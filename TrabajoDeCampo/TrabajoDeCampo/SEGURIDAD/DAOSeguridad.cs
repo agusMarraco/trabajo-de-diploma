@@ -142,7 +142,9 @@ namespace TrabajoDeCampo.DAO
                     }
                     permisosEsencialesCount = readerReturn;
                 }
-                if (intentos == 3 && permisosEsencialesCount != 4)
+
+                // intentos de usuario bloqueado
+                if (intentos == 3)
                     throw new Exception("BLOQUEADO");
 
 

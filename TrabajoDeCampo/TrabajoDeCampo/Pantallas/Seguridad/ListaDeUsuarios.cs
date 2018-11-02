@@ -79,7 +79,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             formUtils = new TraductorIterador();
             List<String> tags = new List<string>();
             formUtils.process(tags, this, null, null);
-            tags.AddRange(new string[] {"com.td.d.n.i.","com.td.alias","com.td.apellido","com.td.nombre","com.td.si","com.td.no","com.td.permisos.esenciales"});
+            tags.AddRange(new string[] {"com.td.d.n.i.","com.td.alias","com.td.apellido","com.td.nombre","com.td.si","com.td.no","com.td.permisos.esenciales","com.td.mismo.usuario"});
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             formUtils = new TraductorReal();
             formUtils.process(null, this, traducciones, null);
@@ -153,6 +153,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             {
                 Usuario usu = (Usuario)gwUsuarios.CurrentRow.DataBoundItem;
                 long id = usu.id;
+                if (usu.id.Equals(TrabajoDeCampo.Properties.Settings.Default.SessionUser))
+                {
+                    MessageBox.Show(traducciones["com.td.mismo.usuario"]);
+                    return;
+                }
                 if (id != 0)
                 {
                     try
@@ -195,6 +200,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             if (gwUsuarios.CurrentRow != null && gwUsuarios.CurrentRow.DataBoundItem != null)
             {
                 Usuario usu = (Usuario)gwUsuarios.CurrentRow.DataBoundItem;
+                if (usu.id.Equals(TrabajoDeCampo.Properties.Settings.Default.SessionUser))
+                {
+                    MessageBox.Show(traducciones["com.td.mismo.usuario"]);
+                    return;
+                }
                 try
                 {
                     servicioSeguridad.borrarUsuario(usu);
