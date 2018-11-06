@@ -172,7 +172,8 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.repetidos
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.familia.existe',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'El nombre de la familia existe')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.seguro',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'¿Está seguro?')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.tutor.asignado',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'El tutor esta asignado')
-
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.mismo.usuario',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'No puede borrarse o bloquearse a si mismo')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'La capacidad del curso fue excedida')
 
 
 -- Ingles
@@ -349,3 +350,5 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.repetidos
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.familia.existe',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'The family name already exists')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.seguro',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Are you sure?')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.tutor.asignado',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'The tutor is assigned')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.mismo.usuario',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'You can´t delete or block yourself')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'The course capacity is over the limit')
