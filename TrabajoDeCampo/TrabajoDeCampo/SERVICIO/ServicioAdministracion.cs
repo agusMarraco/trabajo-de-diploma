@@ -255,8 +255,9 @@ namespace TrabajoDeCampo.SERVICIO
             return daoAdministracion.listarAlumnosPorCursoYNivel(nivel,curso);
         }
 
-        public void promocionarAlumno(Alumno alumno, Curso curso) {
+        public Boolean promocionarAlumno(Alumno alumno, Curso curso) {
             this.daoAdministracion.promocionarAlumno(alumno, curso);
+            return this.daoAdministracion.chequearCantidadCurso(curso);
         }
 
 

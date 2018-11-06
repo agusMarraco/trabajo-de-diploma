@@ -41,6 +41,11 @@ namespace TrabajoDeCampo.Pantallas.Administración
             DataGridView view = sender as DataGridView;
             if(view.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1)
             {
+                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                if (!result.Equals(DialogResult.OK))
+                {
+                    return;
+                }
                 string tag = view.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag.ToString();
                 if (tag.Equals("Promocionar"))
                 {
@@ -50,7 +55,12 @@ namespace TrabajoDeCampo.Pantallas.Administración
                         Alumno alu = this.dataGridView1.CurrentRow.DataBoundItem as Alumno;
                         try
                         {
-                            this.administracion.promocionarAlumno(alu, curso);
+                            Boolean excedido =  this.administracion.promocionarAlumno(alu, curso);
+                            if (excedido)
+                            {
+                                MessageBox.Show(traducciones["com.td.excedido"], "", MessageBoxButtons.OK);
+                            }
+                            MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                             this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, null);
 
                         }
@@ -68,6 +78,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     try
                     {
                         this.servicioAlumnos.borrarAlumno(alu);
+                        MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                         this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, null);
 
                     }
@@ -121,6 +132,9 @@ namespace TrabajoDeCampo.Pantallas.Administración
             tags.Add("com.td.egresar");
             tags.Add("com.td.promocionar");
             tags.Add("com.td.seleccione.busqueda");
+            tags.Add("com.td.seguro");
+            tags.Add("com.td.completado");
+            tags.Add("com.td.excedido");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);

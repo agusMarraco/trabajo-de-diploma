@@ -547,7 +547,7 @@ namespace TrabajoDeCampo.DAO
                 while (reader.Read())
                 {
                     int cantidad = (int)reader.GetValue(0);
-                    if (cantidad > 40)
+                    if (cantidad > curso.capacidad)
                     {
                         excedido = true;
                     }

@@ -15,7 +15,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
     public partial class Login : Form
     {
         private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
-        private Boolean valido = false;
+        
         public Login()
         {
             InitializeComponent();

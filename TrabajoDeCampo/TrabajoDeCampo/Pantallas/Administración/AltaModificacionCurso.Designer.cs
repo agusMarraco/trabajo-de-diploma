@@ -49,6 +49,7 @@
             this.txtCapacidad.Location = new System.Drawing.Point(82, 23);
             this.txtCapacidad.MaxLength = 2;
             this.txtCapacidad.Name = "txtCapacidad";
+            this.txtCapacidad.ShortcutsEnabled = false;
             this.txtCapacidad.Size = new System.Drawing.Size(44, 20);
             this.txtCapacidad.TabIndex = 1;
             // 
@@ -57,6 +58,7 @@
             this.txtLetra.Location = new System.Drawing.Point(199, 23);
             this.txtLetra.MaxLength = 1;
             this.txtLetra.Name = "txtLetra";
+            this.txtLetra.ShortcutsEnabled = false;
             this.txtLetra.Size = new System.Drawing.Size(49, 20);
             this.txtLetra.TabIndex = 2;
             // 

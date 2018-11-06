@@ -5,7 +5,7 @@ FEATURES IMPLEMENTADAS
 --algoritmos de traduccion
 
 cambiar el security utils el nombre del parametro que recibe el metodo de md5 en el codigo en el dd y en el diagrama de clases.(no hacia falta)
------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------01----------------------------------
 CAMBIOS POR LA IMPLEMENTACION DE LA ENCRIPTACIÓN
 	LUGARES DONDE IMPACTA
 		dd	
@@ -63,7 +63,7 @@ agregar una columna mas sacar la tabla al pedo de la solapa de patenes en el alt
 Cambiar en la carpeta la parte de backup y restore para dejarla actualizada.	
 
 
--------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------02-------------------------------------------------------------------------
 agrege la clase enum Criticidad
 agregue el enum de patentes, agregar al diagrama de clases.
 
@@ -98,7 +98,7 @@ hacer que el btn cancelar de cada uno cierre el form.
 
 
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------03-----------------------------------------------------------------------------------
 
 
 
@@ -119,3 +119,20 @@ hacer con dataset por el tema de reporte
 	cambiar los retornos de los metodos en el diagrama de clases.
 	listado de cursos, alumnos, plan de estudios(nivel)
 	horario y bitacora  ---> solo tuve que cambiar el generar reportes del servicio reportes
+
+
+
+	-----------------------------------------------------------------------04------------------------------------------------------------------------------
+
+	-se bajo una capa el encriptar aes en el alta/modificacion usuario, fue al dao se toco ds;
+	-desencriptar aes se llama en el chequeo de repetidos del usuario se toco ds
+	-agregar en el dao de familiasypatentes la llamada a los listados de familias y patentes se toco ds
+	-cu alta horario y modificar horario agregar el listar cursos y modificar materias se toco ds
+	-cu listar cursos sacar el listar niveles porque ya vienen dentro del curso se toco ds y cu
+
+	-cu registrar/modificar alumno agregar el listar orientacion en el ds.
+	-cu modificar alumno sacar el buscar alumno del ds.
+	-cu desbloquear usuario, cambiar el cu por un regenerar en vez de desbloquear, el servicio tambien, eliminar el desbloquear a nivel del dao en el diagrama de secuencia
+	-cambiar la descripcion del cu de promocionar a se informa si el curso esta excedido.
+	-cu promocionar alumno agregar el curso alternativo de el borrado si es egresado en el diagrama de secuencia y el caso de uso.
+	se cambio el retorno de promocionar alumno en el servicio y se actualizo el diccionario de datos.

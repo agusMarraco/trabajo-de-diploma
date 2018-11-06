@@ -76,6 +76,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
             traductor.process(tags, this, null, null);
             tags.Add("com.td.complete.campos");
             tags.Add("com.td.existe.materia");
+            tags.Add("com.td.completado");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -105,6 +106,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     mat.tipo = esTroncal ? "1" : "0";
                     mat.descripcion = descripcion;
                     this.administracion.guardarMateria(mat);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                     this.textBox1.Text = "";
                     this.rbExtracurricular.Checked = false;
                     this.rbTroncal.Checked = false;
@@ -118,6 +120,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     currentMateria.tipo = esTroncal ? "1" : "0";
                     currentMateria.descripcion = descripcion;
                     this.administracion.actualizarMateria(currentMateria);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                     this.textBox1.Text = "";
                     this.rbExtracurricular.Checked = false;
                     this.rbTroncal.Checked = false;

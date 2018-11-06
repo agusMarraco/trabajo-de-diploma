@@ -88,6 +88,7 @@
             this.nombre.Location = new System.Drawing.Point(84, 9);
             this.nombre.MaxLength = 20;
             this.nombre.Name = "nombre";
+            this.nombre.ShortcutsEnabled = false;
             this.nombre.Size = new System.Drawing.Size(296, 20);
             this.nombre.TabIndex = 1;
             // 
@@ -96,6 +97,7 @@
             this.apellido.Location = new System.Drawing.Point(84, 35);
             this.apellido.MaxLength = 20;
             this.apellido.Name = "apellido";
+            this.apellido.ShortcutsEnabled = false;
             this.apellido.Size = new System.Drawing.Size(296, 20);
             this.apellido.TabIndex = 3;
             // 
@@ -115,6 +117,7 @@
             this.dni.Location = new System.Drawing.Point(84, 61);
             this.dni.MaxLength = 20;
             this.dni.Name = "dni";
+            this.dni.ShortcutsEnabled = false;
             this.dni.Size = new System.Drawing.Size(296, 20);
             this.dni.TabIndex = 5;
             // 
@@ -134,6 +137,7 @@
             this.direccion.Location = new System.Drawing.Point(84, 87);
             this.direccion.MaxLength = 50;
             this.direccion.Name = "direccion";
+            this.direccion.ShortcutsEnabled = false;
             this.direccion.Size = new System.Drawing.Size(296, 20);
             this.direccion.TabIndex = 7;
             // 
@@ -153,6 +157,7 @@
             this.email.Location = new System.Drawing.Point(466, 36);
             this.email.MaxLength = 50;
             this.email.Name = "email";
+            this.email.ShortcutsEnabled = false;
             this.email.Size = new System.Drawing.Size(300, 20);
             this.email.TabIndex = 9;
             // 
@@ -172,6 +177,7 @@
             this.alias.Location = new System.Drawing.Point(466, 9);
             this.alias.MaxLength = 50;
             this.alias.Name = "alias";
+            this.alias.ShortcutsEnabled = false;
             this.alias.Size = new System.Drawing.Size(300, 20);
             this.alias.TabIndex = 11;
             // 
@@ -202,6 +208,7 @@
             this.telefono.Location = new System.Drawing.Point(84, 110);
             this.telefono.Mask = "00-0000-0000";
             this.telefono.Name = "telefono";
+            this.telefono.ShortcutsEnabled = false;
             this.telefono.Size = new System.Drawing.Size(296, 20);
             this.telefono.TabIndex = 15;
             // 

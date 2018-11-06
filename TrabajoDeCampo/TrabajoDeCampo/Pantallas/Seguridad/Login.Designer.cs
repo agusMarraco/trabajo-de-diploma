@@ -57,6 +57,7 @@
             this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUsername.MaxLength = 50;
             this.txtUsername.Name = "txtUsername";
+            this.txtUsername.ShortcutsEnabled = false;
             this.txtUsername.Size = new System.Drawing.Size(233, 22);
             this.txtUsername.TabIndex = 3;
             // 
@@ -67,6 +68,7 @@
             this.txtPassword.MaxLength = 50;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
+            this.txtPassword.ShortcutsEnabled = false;
             this.txtPassword.Size = new System.Drawing.Size(233, 22);
             this.txtPassword.TabIndex = 4;
             // 

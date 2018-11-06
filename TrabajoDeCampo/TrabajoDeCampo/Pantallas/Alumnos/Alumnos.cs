@@ -16,6 +16,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
     {
         private ServicioSeguridad servicioSeguridad;
         private ServicioAlumnos servicioAlumnos;
+        private Dictionary<String, String> traducciones;
+
 
         public Alumnos()
         {
@@ -63,8 +65,10 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.dataGridView1.Columns[3].Tag = "com.td.curso";
             FormUtils traductor = new TraductorIterador();
             List<String> tags = new List<string>();
+            tags.Add("com.td.seguro");
+            tags.Add("com.td.completado");
             traductor.process(tags, this, null, null);
-            Dictionary<String, String> traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
+            traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
@@ -146,7 +150,13 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         {
             if (this.dataGridView1.CurrentRow != null && this.dataGridView1.CurrentRow.DataBoundItem != null)
             {
+                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                if (!result.Equals(DialogResult.OK))
+                {
+                    return;
+                }
                 this.servicioAlumnos.borrarAlumno((Alumno)this.dataGridView1.CurrentRow.DataBoundItem);
+                MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                 this.listarAlumnos(null, null);
             }
         }
@@ -233,7 +243,13 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             if(this.dataGridView1.CurrentRow != null && this.dataGridView1.CurrentRow.DataBoundItem != null)
             {
                 Alumno alumno = dataGridView1.CurrentRow.DataBoundItem as Alumno;
+                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                if (!result.Equals(DialogResult.OK))
+                {
+                    return;
+                }
                 this.servicioAlumnos.repetirAlumno(alumno);
+                MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                 this.listarAlumnos(null, null);
             }
         }

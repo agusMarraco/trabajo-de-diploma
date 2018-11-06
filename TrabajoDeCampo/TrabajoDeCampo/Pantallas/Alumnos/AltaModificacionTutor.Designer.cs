@@ -80,6 +80,7 @@
             this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtEmail.MaxLength = 30;
             this.txtEmail.Name = "txtEmail";
+            this.txtEmail.ShortcutsEnabled = false;
             this.txtEmail.Size = new System.Drawing.Size(202, 22);
             this.txtEmail.TabIndex = 3;
             // 
@@ -100,6 +101,7 @@
             this.txtTel1.Location = new System.Drawing.Point(402, 71);
             this.txtTel1.Mask = "00-0000-0000";
             this.txtTel1.Name = "txtTel1";
+            this.txtTel1.ShortcutsEnabled = false;
             this.txtTel1.Size = new System.Drawing.Size(202, 22);
             this.txtTel1.TabIndex = 4;
             // 
@@ -108,6 +110,7 @@
             this.txtTel2.Location = new System.Drawing.Point(402, 101);
             this.txtTel2.Mask = "00-0000-0000";
             this.txtTel2.Name = "txtTel2";
+            this.txtTel2.ShortcutsEnabled = false;
             this.txtTel2.Size = new System.Drawing.Size(202, 22);
             this.txtTel2.TabIndex = 5;
             // 
@@ -157,6 +160,7 @@
             this.txtApellido.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtApellido.MaxLength = 30;
             this.txtApellido.Name = "txtApellido";
+            this.txtApellido.ShortcutsEnabled = false;
             this.txtApellido.Size = new System.Drawing.Size(182, 22);
             this.txtApellido.TabIndex = 1;
             // 
@@ -176,6 +180,7 @@
             this.txtDni.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDni.MaxLength = 30;
             this.txtDni.Name = "txtDni";
+            this.txtDni.ShortcutsEnabled = false;
             this.txtDni.Size = new System.Drawing.Size(182, 22);
             this.txtDni.TabIndex = 2;
             // 
@@ -207,6 +212,7 @@
             this.txtNombre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNombre.MaxLength = 30;
             this.txtNombre.Name = "txtNombre";
+            this.txtNombre.ShortcutsEnabled = false;
             this.txtNombre.Size = new System.Drawing.Size(182, 22);
             this.txtNombre.TabIndex = 0;
             // 

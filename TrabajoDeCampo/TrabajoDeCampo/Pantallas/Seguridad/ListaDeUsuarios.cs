@@ -80,6 +80,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             List<String> tags = new List<string>();
             formUtils.process(tags, this, null, null);
             tags.AddRange(new string[] {"com.td.d.n.i.","com.td.alias","com.td.apellido","com.td.nombre","com.td.si","com.td.no","com.td.permisos.esenciales","com.td.mismo.usuario"});
+            tags.Add("com.td.seguro");
+            tags.Add("com.td.completado");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             formUtils = new TraductorReal();
             formUtils.process(null, this, traducciones, null);
@@ -162,7 +164,14 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 {
                     try
                     {
+                        DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                        if (!result.Equals(DialogResult.OK))
+                        {
+                            return;
+                        }
                         servicioSeguridad.bloquearUsuario(usu);
+                        MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
+
                     }
                     catch (Exception ex)
                     {
@@ -189,8 +198,21 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             //regenerar password
             if (gwUsuarios.CurrentRow != null && gwUsuarios.CurrentRow.DataBoundItem != null)
             {
+                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                if (!result.Equals(DialogResult.OK))
+                {
+                    return;
+                }
                 Usuario usu = (Usuario)gwUsuarios.CurrentRow.DataBoundItem;
-                servicioSeguridad.regenerarContraseña(usu);
+                try
+                {
+                    servicioSeguridad.regenerarContraseña(usu);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 searchUsuarios(this.servicioSeguridad.listarUsuarios(null, null, null));
             }
         }
@@ -207,7 +229,14 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 }
                 try
                 {
+
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
                     servicioSeguridad.borrarUsuario(usu);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)
                 {

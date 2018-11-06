@@ -97,6 +97,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(6, 46);
             this.richTextBox1.MaxLength = 300;
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ShortcutsEnabled = false;
             this.richTextBox1.Size = new System.Drawing.Size(499, 130);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";

@@ -63,6 +63,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
             tags.Add("com.td.materia.asignada");
+            tags.Add("com.td.seguro");
+            tags.Add("com.td.completado");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -113,9 +115,15 @@ namespace TrabajoDeCampo.Pantallas.Administración
             if (this.dataGridView1.Rows.Count > 0 && this.dataGridView1.CurrentRow.DataBoundItem != null)
             {
                 Materia materiaAModificar = (Materia)this.dataGridView1.CurrentRow.DataBoundItem;
+                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                if (!result.Equals(DialogResult.OK))
+                {
+                    return;
+                }
                 try
                 {
                     servicioAdministracion.borrarMateria(materiaAModificar);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                     this.actualizarLista();
                 }
                 catch (Exception ex)

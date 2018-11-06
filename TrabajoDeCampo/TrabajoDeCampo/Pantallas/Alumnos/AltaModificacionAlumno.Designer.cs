@@ -74,6 +74,7 @@
             this.nombretx.Location = new System.Drawing.Point(63, 34);
             this.nombretx.MaxLength = 30;
             this.nombretx.Name = "nombretx";
+            this.nombretx.ShortcutsEnabled = false;
             this.nombretx.Size = new System.Drawing.Size(289, 20);
             this.nombretx.TabIndex = 0;
             // 
@@ -82,6 +83,7 @@
             this.domicilotx.Location = new System.Drawing.Point(63, 112);
             this.domicilotx.MaxLength = 30;
             this.domicilotx.Name = "domicilotx";
+            this.domicilotx.ShortcutsEnabled = false;
             this.domicilotx.Size = new System.Drawing.Size(289, 20);
             this.domicilotx.TabIndex = 4;
             // 
@@ -100,6 +102,7 @@
             this.dnitx.Location = new System.Drawing.Point(63, 86);
             this.dnitx.MaxLength = 30;
             this.dnitx.Name = "dnitx";
+            this.dnitx.ShortcutsEnabled = false;
             this.dnitx.Size = new System.Drawing.Size(289, 20);
             this.dnitx.TabIndex = 3;
             this.dnitx.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
@@ -109,6 +112,7 @@
             this.apellidotx.Location = new System.Drawing.Point(63, 60);
             this.apellidotx.MaxLength = 30;
             this.apellidotx.Name = "apellidotx";
+            this.apellidotx.ShortcutsEnabled = false;
             this.apellidotx.Size = new System.Drawing.Size(289, 20);
             this.apellidotx.TabIndex = 2;
             // 

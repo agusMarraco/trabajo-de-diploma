@@ -115,7 +115,13 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 Familia fami = (Familia)dgFamilia.CurrentRow.DataBoundItem;
                 try
                 {
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
                     this.servicioSeguridad.borrarFamilia(fami.id);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)
                 {
@@ -177,7 +183,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             tags.Add("com.td.familia.existe");
             tags.Add("com.td.asignada");
             tags.Add("com.td.permisos.esenciales");
-            
+            tags.Add("com.td.completado");
+            tags.Add("com.td.seguro");
+
             traductor.process(tags, this, null, null);
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
@@ -219,6 +227,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 if (!existe)
                 {
                     this.servicioSeguridad.crearFamilia(familia);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
+
                 }
                 else
                 {
@@ -234,6 +244,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     try
                     {
                         this.servicioSeguridad.modificarFamilia(familia);
+                        MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
                     }
                     catch (Exception ex)
                     {

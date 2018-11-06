@@ -17,43 +17,29 @@ change log
 --revisar 0 las interfaces para ver el manejo de errores, limites de campos, etc. (andando)
 --comparar los flujos de datos contra los diagramas  de secuencia para si hay que hacer cambios.
 
-	Ver de agregarle iconos a los botones
+Ver de agregarle iconos a los botones
 pegarle una revisada al diagrama de componentes y a el diagrama de navegación
-
-
-llamadas agregadas que no estan en los ds
-	-traerdraccucciones en servicio seguridad se llama en grabar mail
-	-encriptar aes se llama en el alta de usuario
-	-encriptar aes se llama en el chequeo de repetidos del usuario.
 
 revisar el sql de creacion
 
-agregar en el dao de familiasypatentes la llamada a los listados de familias y patentes;
+llamadas agregadas que no estan en los ds
+	-traerdraccucciones en servicio seguridad se llama en grabar mail - desestimado, no me parece importante
 
 una vez terminado el codigo revisar los diagramas de clases de cada caso de uso, para que balanceen con los retornos que dan
 los metodos en el diccionario de datos
 
 --- TODO DE MENSAJES ----
 
-cu listar niveles agregar la llamada a cursos.
-cu alta horario y modificar horario agregar el listar cursos.
-cu alta  y modificacion materia falta mensaje completado
-cu borrado materia  falta pedir confirmacion e informar el completado
-cu listar cursos sacar el listar niveles porque ya vienen dentro del curso.
-cu promocionar pedir  confirmacion, informar la capacidad del curso despues del save, mostrar completado.
-cu promocionar alumno agregar el curso alternativo de el borrado si es egresado en el diagrama de secuencia y el caso de uso.
-cu registrar/modificar alumno agregar el listar orientacion en el ds.
-cu modificar alumno sacar el buscar alumno.
-cu borrar alumno pedir confirmacion y agregar el mensaje de completado.
-cu repetir alumno pedir confirmacion e informar el completado.
-cu borrar usuario perdir confirmacion y mostrar completado
-cu bloquear usuario perdir confirmacion y mostar completado
-cu desbloquear usuario, cambiar el cu por un regenerar en vez de desbloquear, el servicio tambien, eliminar el desbloquear a nivel del dao en el diagrama de secuencia
-mostar mensaje de completado.
-cu alta mod familias mostrar el completado
-cu borrar falta completado y confirmacion
 
 ----mensajes metidos
+cu alta mod familias mostrar el completado
+mostar mensaje de completado y confirmacion desbloquear usuario
+cu bloquear usuario perdir confirmacion y mostar completado
+cu borrar usuario perdir confirmacion y mostrar completado
+cu borrar alumno pedir confirmacion y agregar el mensaje de completado.
+cu promocionar pedir  confirmacion, informar la capacidad del curso despues del save, mostrar completado.
+cu borrado materia  falta pedir confirmacion e informar el completado
+cu alta  y modificacion materia falta mensaje completado
 cu backup falta confirmacion
 cu restore falta confirmacion
 cu borrar horario agregar pedido de confirmacion
@@ -63,14 +49,8 @@ cu registar/modificar inasistencia inasistencia pedir confirmacion
 cu borrar tutor pedir confirmacion.
 borrar tutor mejore mensaje de excepcion
 cu log out pedir confirmacion
-
-
-
-
-
-
-
-
+cu repetir alumno pedir confirmacion e informar el completado.
+cu borrar familia falta completado y confirmacion
 
 
 
