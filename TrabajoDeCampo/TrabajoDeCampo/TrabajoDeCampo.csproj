@@ -587,6 +587,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlScripts\10_traducciones.sql" />
+    <Content Include="SqlScripts\11_Admin_inserts.sql" />
     <Content Include="SqlScripts\1_create_db.sql" />
     <Content Include="SqlScripts\2_vista_permisos.sql" />
     <Content Include="SqlScripts\3_vista_bitacora.sql" />
