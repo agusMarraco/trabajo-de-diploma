@@ -30,10 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bitácora));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BIT_CRITICIDAD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BIT_MENSAJE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chUsuario = new System.Windows.Forms.CheckBox();
             this.chCriticidad = new System.Windows.Forms.CheckBox();
@@ -49,6 +45,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_CRITICIDAD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_MENSAJE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -72,38 +72,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(834, 248);
+            this.dataGridView1.Size = new System.Drawing.Size(1044, 292);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // BIT_FECHA
-            // 
-            this.BIT_FECHA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BIT_FECHA.HeaderText = "Fecha";
-            this.BIT_FECHA.Name = "BIT_FECHA";
-            this.BIT_FECHA.ReadOnly = true;
-            this.BIT_FECHA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // USU_ALIAS
-            // 
-            this.USU_ALIAS.HeaderText = "Usuario";
-            this.USU_ALIAS.Name = "USU_ALIAS";
-            this.USU_ALIAS.ReadOnly = true;
-            this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // BIT_CRITICIDAD_ID
-            // 
-            this.BIT_CRITICIDAD_ID.HeaderText = "Criticidad";
-            this.BIT_CRITICIDAD_ID.Name = "BIT_CRITICIDAD_ID";
-            this.BIT_CRITICIDAD_ID.ReadOnly = true;
-            this.BIT_CRITICIDAD_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // BIT_MENSAJE
-            // 
-            this.BIT_MENSAJE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BIT_MENSAJE.HeaderText = "Descripción";
-            this.BIT_MENSAJE.Name = "BIT_MENSAJE";
-            this.BIT_MENSAJE.ReadOnly = true;
-            this.BIT_MENSAJE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // groupBox1
             // 
@@ -125,7 +95,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(834, 161);
+            this.groupBox1.Size = new System.Drawing.Size(1044, 161);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "com.td.búsqueda";
@@ -167,7 +137,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(724, 68);
+            this.button3.Location = new System.Drawing.Point(934, 68);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(104, 33);
             this.button3.TabIndex = 2;
@@ -178,7 +148,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(724, 123);
+            this.button2.Location = new System.Drawing.Point(934, 123);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 31);
             this.button2.TabIndex = 13;
@@ -190,7 +160,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(339, 96);
+            this.label3.Location = new System.Drawing.Point(593, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 16);
             this.label3.TabIndex = 12;
@@ -220,7 +190,7 @@
             // 
             this.toDatepicker.CustomFormat = "";
             this.toDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.toDatepicker.Location = new System.Drawing.Point(414, 93);
+            this.toDatepicker.Location = new System.Drawing.Point(668, 63);
             this.toDatepicker.MaxDate = new System.DateTime(2018, 9, 19, 0, 0, 0, 0);
             this.toDatepicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.toDatepicker.Name = "toDatepicker";
@@ -231,7 +201,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(724, 19);
+            this.button1.Location = new System.Drawing.Point(934, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 31);
             this.button1.TabIndex = 5;
@@ -269,11 +239,42 @@
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 1;
             // 
+            // BIT_FECHA
+            // 
+            this.BIT_FECHA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.BIT_FECHA.HeaderText = "Fecha";
+            this.BIT_FECHA.Name = "BIT_FECHA";
+            this.BIT_FECHA.ReadOnly = true;
+            this.BIT_FECHA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.BIT_FECHA.Width = 200;
+            // 
+            // USU_ALIAS
+            // 
+            this.USU_ALIAS.HeaderText = "Usuario";
+            this.USU_ALIAS.Name = "USU_ALIAS";
+            this.USU_ALIAS.ReadOnly = true;
+            this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_CRITICIDAD_ID
+            // 
+            this.BIT_CRITICIDAD_ID.HeaderText = "Criticidad";
+            this.BIT_CRITICIDAD_ID.Name = "BIT_CRITICIDAD_ID";
+            this.BIT_CRITICIDAD_ID.ReadOnly = true;
+            this.BIT_CRITICIDAD_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_MENSAJE
+            // 
+            this.BIT_MENSAJE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BIT_MENSAJE.HeaderText = "Descripción";
+            this.BIT_MENSAJE.Name = "BIT_MENSAJE";
+            this.BIT_MENSAJE.ReadOnly = true;
+            this.BIT_MENSAJE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
             // Bitácora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 453);
+            this.ClientSize = new System.Drawing.Size(1068, 497);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -309,10 +310,10 @@
         private System.Windows.Forms.CheckBox chUsuario;
         private System.Windows.Forms.CheckBox chCriticidad;
         private System.Windows.Forms.CheckBox chFecha;
+        private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.DataGridViewTextBoxColumn BIT_FECHA;
         private System.Windows.Forms.DataGridViewTextBoxColumn USU_ALIAS;
         private System.Windows.Forms.DataGridViewTextBoxColumn BIT_CRITICIDAD_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn BIT_MENSAJE;
-        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

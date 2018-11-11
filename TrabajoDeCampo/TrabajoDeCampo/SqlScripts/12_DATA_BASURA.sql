@@ -15,6 +15,7 @@ INSERT INTO MATERIA (MAT_NOMBRE,MAT_DESCRIPCION,MAT_TIPO) VALUES
 
 -- MATERIA NIVEL
 INSERT INTO MATERIA_NIVEL (MN_MATERIA_ID,MN_NIVEL_ID)
+values
 (1,3),
 (2,3),
 (3,3),
@@ -35,7 +36,7 @@ INSERT INTO ALUMNO([alu_apellido],[alu_nombre],[alu_fecha_nacimiento],[alu_domic
 
 
 --INSERT INTO ALUMNO TUTOR
-INSERT INTO ALUMNO_TUTOR (AT_ALUMNO_ID,AT_TUTOR_ID)
+INSERT INTO ALUMNO_TUTOR (AT_ALUMNO_ID,AT_TUTOR_ID) values
 (1,1),
 (2,1),
 (3,1),
@@ -275,23 +276,23 @@ VALUES
 insert into inasistencia_de_alumno
 (ina_alumno_id,ina_fecha,ina_valor,ina_dvh,ina_justificada)
 values(1,GETDATE(),1,'',0),
-values(1,GETDATE()-1,1,'',0),
-values(1,GETDATE()-2,1,'',0),
-values(1,GETDATE()-3,1,'',0),
-values(1,GETDATE()-4,1,'',0),
-values(1,GETDATE()-5,1,'',0),
-values(1,GETDATE()-6,1,'',0),
-values(1,GETDATE()-7,1,'',0),
-values(1,GETDATE()-8,1,'',0),
-values(1,GETDATE()-9,1,'',0),
-values(1,GETDATE()-10,1,'',0),
-values(1,GETDATE()-11,1,'',0),
-values(1,GETDATE()-12,1,'',0),
-values(1,GETDATE()-13,1,'',0),
-values(1,GETDATE()-14,1,'',0),
-values(1,GETDATE()-15,1,'',0),
-values(1,GETDATE()-16,1,'',0),
-values(1,GETDATE()-17,1,'',0),
-values(1,GETDATE()-18,1,'',0);
-values(1,GETDATE()-19,1,'',0);
-values(1,GETDATE()-20,1,'',0);
+(1,GETDATE()-1,1,'',0),
+(1,GETDATE()-2,1,'',0),
+(1,GETDATE()-3,1,'',0),
+(1,GETDATE()-4,1,'',0),
+(1,GETDATE()-5,1,'',0),
+(1,GETDATE()-6,1,'',0),
+(1,GETDATE()-7,1,'',0),
+(1,GETDATE()-8,1,'',0),
+(1,GETDATE()-9,1,'',0),
+(1,GETDATE()-10,1,'',0),
+(1,GETDATE()-11,1,'',0),
+(1,GETDATE()-12,1,'',0),
+(1,GETDATE()-13,1,'',0),
+(1,GETDATE()-14,1,'',0),
+(1,GETDATE()-15,1,'',0),
+(1,GETDATE()-16,1,'',0),
+(1,GETDATE()-17,1,'',0),
+(1,GETDATE()-18,1,'',0),
+(1,GETDATE()-19,1,'',0),
+(1,GETDATE()-20,1,'',0);
