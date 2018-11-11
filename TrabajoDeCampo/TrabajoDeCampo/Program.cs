@@ -19,7 +19,8 @@ namespace TrabajoDeCampo
         [STAThreadAttribute]
         public static void Main(string[] args)
         {
-
+            //manejadores globales de excepciones
+            Application.ThreadException += exceptionGenericHandler;
             AppDomain domain = AppDomain.CurrentDomain;
             domain.UnhandledException += handler;
             //contemplando el string de conexión de la uai y de la maquina host X. En el caso de que no se pueda generar
@@ -65,6 +66,11 @@ namespace TrabajoDeCampo
 
             Application.Run();
                 
+        }
+
+        private static void exceptionGenericHandler(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message, "ERROR", MessageBoxButtons.OK);
         }
 
         private static void handler(object sender, UnhandledExceptionEventArgs e)
