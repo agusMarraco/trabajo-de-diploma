@@ -104,6 +104,94 @@
           <DataField>noLbl</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="moduloLbl">
+          <DataField>moduloLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="lunesLbl">
+          <DataField>lunesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="martesLbl">
+          <DataField>martesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="miercolesLbl">
+          <DataField>miercolesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="juevesLbl">
+          <DataField>juevesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="viernesLbl">
+          <DataField>viernesLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="desdeLbl">
+          <DataField>desdeLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="hastaLbl">
+          <DataField>hastaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="criticidadLbl">
+          <DataField>criticidadLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="usuarioLbl">
+          <DataField>usuarioLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="mensajeLbl">
+          <DataField>mensajeLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nivelLbl">
+          <DataField>nivelLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="excedidoLbl">
+          <DataField>excedidoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="disclaimerLbl">
+          <DataField>disclaimerLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="maximoLbl">
+          <DataField>maximoLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="actualLbl">
+          <DataField>actualLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="criticidadAltaLbl">
+          <DataField>criticidadAltaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="criticidadMediaLbl">
+          <DataField>criticidadMediaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="criticidadBajaLbl">
+          <DataField>criticidadBajaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="mediaLbl">
+          <DataField>mediaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="completaLbl">
+          <DataField>completaLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="valorLbl">
+          <DataField>valorLbl</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>Traducciones</rd:DataSetName>
@@ -253,7 +341,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!valor.Value</Value>
+                                      <Value>=IIf(Fields!valor.Value=1,First(Fields!completaLbl.Value, "DataSet2"),First(Fields!mediaLbl.Value, "DataSet2"))</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -387,7 +475,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!tipoLbl.Value, "DataSet2")</Value>
+                    <Value>=First(Fields!valorLbl.Value, "DataSet2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>

@@ -139,6 +139,8 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                         break;
                     }
                 }
+                //no te deja cambiar el curso una vez seteado, solo por promocion.
+                this.cursocombo.Enabled = false;
                 foreach (Tutor tut in tutores)
                 {
                     foreach (Tutor tut2 in currentAlumno.tutores)
