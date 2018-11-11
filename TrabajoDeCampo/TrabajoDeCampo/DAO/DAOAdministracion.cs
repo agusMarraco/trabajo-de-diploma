@@ -997,7 +997,11 @@ namespace TrabajoDeCampo.DAO
         }
 
         //Alumnos
-
+        /// <summary>
+        /// este metodo cubre la falta del modulo de notas, no esta registrado porque, si 
+        /// estuviese todo el sistema junto, este metodo no existiria.
+        /// </summary>
+        /// <param name="alumno"></param>
         public void generarPlanillasDeEvaluacion(Alumno alumno)
         {
             Nivel nivel = alumno.curso.nivel;

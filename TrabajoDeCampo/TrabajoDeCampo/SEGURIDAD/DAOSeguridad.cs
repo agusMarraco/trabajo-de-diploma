@@ -2771,6 +2771,8 @@ namespace TrabajoDeCampo.DAO
             //FROM  DISK = '" + directorio + "' WITH REPLACE");
             queryText.Append(directorio);
             queryText.Append(" WITH REPLACE ");
+            queryText.Append(" alter database [TRABAJO_DIPLOMA]  ");
+            queryText.Append(" set online with rollback immediate ");
             SqlCommand query = new SqlCommand(queryText.ToString(), connection);
             try
             {
