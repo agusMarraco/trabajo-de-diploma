@@ -32,11 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaDeUsuarios));
             this.gwUsuarios = new System.Windows.Forms.DataGridView();
-            this.alias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.baja = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnBloq = new System.Windows.Forms.Button();
             this.btnMod = new System.Windows.Forms.Button();
             this.btnRegen = new System.Windows.Forms.Button();
@@ -49,6 +44,11 @@
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.alias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.baja = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gwUsuarios)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -90,45 +90,8 @@
             this.gwUsuarios.Name = "gwUsuarios";
             this.gwUsuarios.ReadOnly = true;
             this.gwUsuarios.ShowEditingIcon = false;
-            this.gwUsuarios.Size = new System.Drawing.Size(704, 196);
+            this.gwUsuarios.Size = new System.Drawing.Size(879, 196);
             this.gwUsuarios.TabIndex = 0;
-            // 
-            // alias
-            // 
-            this.alias.HeaderText = "Alias";
-            this.alias.Name = "alias";
-            this.alias.ReadOnly = true;
-            this.alias.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // apellido
-            // 
-            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.apellido.HeaderText = "Apellido";
-            this.apellido.Name = "apellido";
-            this.apellido.ReadOnly = true;
-            this.apellido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // nombre
-            // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // dni
-            // 
-            this.dni.HeaderText = "DNI";
-            this.dni.Name = "dni";
-            this.dni.ReadOnly = true;
-            this.dni.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // baja
-            // 
-            this.baja.HeaderText = "Bloqueado";
-            this.baja.Name = "baja";
-            this.baja.ReadOnly = true;
-            this.baja.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // btnBloq
             // 
@@ -156,7 +119,7 @@
             // 
             // btnRegen
             // 
-            this.btnRegen.Location = new System.Drawing.Point(540, 416);
+            this.btnRegen.Location = new System.Drawing.Point(715, 416);
             this.btnRegen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRegen.Name = "btnRegen";
             this.btnRegen.Size = new System.Drawing.Size(176, 28);
@@ -180,11 +143,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(312, 32);
+            this.textBox1.Location = new System.Drawing.Point(286, 32);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.MaxLength = 50;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(234, 22);
+            this.textBox1.Size = new System.Drawing.Size(418, 22);
             this.textBox1.TabIndex = 6;
             // 
             // label1
@@ -200,7 +163,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(598, 32);
+            this.button5.Location = new System.Drawing.Point(773, 32);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 28);
@@ -212,7 +175,7 @@
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(598, 84);
+            this.btnCrear.Location = new System.Drawing.Point(773, 84);
             this.btnCrear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(100, 28);
@@ -234,7 +197,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(598, 137);
+            this.button7.Location = new System.Drawing.Point(773, 137);
             this.button7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 28);
@@ -254,17 +217,55 @@
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(704, 172);
+            this.groupBox1.Size = new System.Drawing.Size(879, 172);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
+            // alias
+            // 
+            this.alias.HeaderText = "Alias";
+            this.alias.Name = "alias";
+            this.alias.ReadOnly = true;
+            this.alias.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // apellido
+            // 
+            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.apellido.HeaderText = "Apellido";
+            this.apellido.Name = "apellido";
+            this.apellido.ReadOnly = true;
+            this.apellido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dni
+            // 
+            this.dni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dni.HeaderText = "DNI";
+            this.dni.Name = "dni";
+            this.dni.ReadOnly = true;
+            this.dni.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // baja
+            // 
+            this.baja.HeaderText = "Bloqueado";
+            this.baja.Name = "baja";
+            this.baja.ReadOnly = true;
+            this.baja.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
             // ListaDeUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(733, 457);
+            this.ClientSize = new System.Drawing.Size(903, 457);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnRegen);
@@ -301,11 +302,11 @@
         private System.Windows.Forms.ComboBox comboFiltro;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.DataGridViewTextBoxColumn alias;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn baja;
-        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

@@ -26,9 +26,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private Boolean isEdit;
         private Usuario currentUsuario;
 
-        private Regex lettersRegex = new Regex("^[a-zA-Z]+$");
+        private Regex lettersRegex = new Regex("^[a-zA-Z ]+$");
         private Regex numbersRegex = new Regex("^[0-9]+$");
-        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9 ]+$");
 
         private Boolean valido = false;
         public AltaModificacionUsuario()

@@ -1069,7 +1069,11 @@ namespace TrabajoDeCampo.DAO
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             
             String queryAlumnosPromocionables = " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_condicion = 0) < 3 " +
-                " and (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_nota_final = null) = 0 ";
+                //que el alumno tenga menos de 2 planillas desaprobadas
+                " and (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_nota_final = null and pde_nivel_id = niv.niv_id) = 0 " +
+                //que el alumno no tenga ninguna planilla del lvl actual sin nota final
+                " and (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_nivel_id = niv.niv_id) > 0";
+                 // y que tenga planillas en el nivel actual
             StringBuilder sb = new StringBuilder();
             sb.Append(" select alu.alu_legajo, alu.alu_apellido, alu.alu_nombre, alu.alu_dni, alu.alu_curso, " +
                 " alu.alu_orientacion, " +
@@ -1079,7 +1083,7 @@ namespace TrabajoDeCampo.DAO
             sb.Append(" inner join curso cur on cur.cur_id = alu.alu_curso ");
             sb.Append(" inner join nivel niv  on cur.cur_nivel_id = niv.niv_id ");
             sb.Append(" where alu.alu_borrado is null  ");
-            if(nivel is null)
+            if(nivel is null) // viene null solo cuando viene desde promocion de alumnos
             {
                 sb.Append(" and " + queryAlumnosPromocionables);
             }

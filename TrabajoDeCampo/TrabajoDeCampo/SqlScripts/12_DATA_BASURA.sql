@@ -20,7 +20,13 @@ values
 (2,3),
 (3,3),
 (4,3),
-(5,3)
+(5,3),
+(1,8),
+(2,8),
+(3,8),
+(4,8),
+(5,8)
+
 
 --TUTOR
 INSERT INTO TUTOR (TUT_NOMBRE,TUT_APELLIDO,TUT_TELEFONO_PRIMARIO,TUT_DNI,TUT_EMAIL)
@@ -29,11 +35,13 @@ VALUES('Esteban','Perez','mz+eYcY4K6kiUwE4rE/V18I8TzQDoxoF/FEuX733S08=','5566448
 --CURSOS
 INSERT INTO CURSO(CUR_NIVEL_ID,CUR_CAPACIDAD,CUR_CODIGO,CUR_TURNO,CUR_LETRA)
 VALUES (3,10,'3ESBMA','M','A')
+INSERT INTO CURSO(CUR_NIVEL_ID,CUR_CAPACIDAD,CUR_CODIGO,CUR_TURNO,CUR_LETRA)
+VALUES (8,2,'6ESBNMA','M','A')
 --ALUMNOS
 INSERT INTO ALUMNO([alu_apellido],[alu_nombre],[alu_fecha_nacimiento],[alu_domicilio],[alu_curso],[ALU_DNI]) VALUES('Cote','Mariam','2005-11-22','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'12297867'),('Flynn','Aquila','2008-01-10','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'49677262'),('Dixon','Dustin','2006-05-03','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'15757163'),('Mcgee','Amelia','2007-08-09','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'22587121'),('Sparks','Camilla','2005-05-04','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'35611827'),('Bell','Xenos','2008-10-15','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'6134011'),('Webster','Abel','2006-05-07','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'35558854'),('Thompson','Hadassah','2007-12-09','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'32832521'),('Saunders','Kameko','2007-03-23','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'23863579'),('Bond','Avye','2008-07-19','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'13973511');
 INSERT INTO ALUMNO([alu_apellido],[alu_nombre],[alu_fecha_nacimiento],[alu_domicilio],[alu_curso],[ALU_DNI]) VALUES('Figueroa','Dieter','2008-02-10','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'24728340'),('Lindsay','Oliver','2005-06-26','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'10895226'),('Larsen','Ronan','2005-05-04','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'45944715'),('Hall','Preston','2007-05-07','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'47895899'),('Bennett','Adele','2006-07-18','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'20200543'),('Bernard','Harrison','2006-03-04','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'42786127'),('Kim','Lucius','2006-10-27','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'32071794'),('Mckay','Leila','2006-01-15','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'36481331'),('Hampton','Alvin','2005-09-01','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'11989060'),('Davidson','Cody','2006-03-11','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'18505753'),
-('Charlotte','Cannigia','2006-03-11','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'123456788');
-
+('Charlotte','Cannigia','2006-03-11','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',1,'123456788'),
+('Stann','Lee','1995-03-11','rAsYNCowFc+3VntxSh0+jTr02cIDIffnbo+UeOsuqZQ=',2,'123456788')
 
 --INSERT INTO ALUMNO TUTOR
 INSERT INTO ALUMNO_TUTOR (AT_ALUMNO_ID,AT_TUTOR_ID) values
@@ -269,6 +277,16 @@ VALUES
 (21,3,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',0,'',3),
 (21,3,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',0,'',4),
 (21,3,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',0,'',5)
+
+--ALUMNO 22 EGRESAR
+insert into planilla_de_evaluacion 
+(pde_alumno_id,pde_nivel_id,pde_trimestre_1,pde_trimestre_2,pde_trimestre_3,pde_nota_final,pde_condicion,pde_dvh,pde_materia_id)
+VALUES
+(22,8,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',1,'',1),
+(22,8,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',1,'',2),
+(22,8,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',1,'',3),
+(22,8,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',1,'',4),
+(22,8,'gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=','gwA3JRcXygziOugkhtQUgBFEuyzgoRmhfj6RkKKTyWE=',1,'',5)
 
 
 

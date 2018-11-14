@@ -1289,7 +1289,7 @@ namespace TrabajoDeCampo.DAO
 
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" SELECT USU.USU_EMAIL , USU.USU_DNI, USU.USU_ALIAS ,USU.USU_ID FROM USUARIO USU ");
+            sb.Append(" SELECT USU.USU_EMAIL , USU.USU_DNI, USU.USU_ALIAS ,USU.USU_ID FROM USUARIO USU WHERE USU_BAJA <> 1");
            
             SqlCommand query = new SqlCommand(sb.ToString(), connection);
             SqlDataReader reader = null;

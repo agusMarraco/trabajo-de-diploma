@@ -22,9 +22,9 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Alumno currentAlumno = null;
         private Alumnos parentForm = null;
 
-        private Regex lettersRegex = new Regex("^[a-zA-Z]+$");
+        private Regex lettersRegex = new Regex("^[a-zA-Z ]+$");
         private Regex numbersRegex = new Regex("^[0-9]+$");
-        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9 ]+$");
         private Boolean valido = false;
 
         public Dictionary<string, string> traducciones { get;  set; }
@@ -175,6 +175,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 || String.IsNullOrEmpty(this.domicilotx.Text))
             {
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
+                return;
             }
 
             Boolean hayQueValidarCursoOrientacion = false;
