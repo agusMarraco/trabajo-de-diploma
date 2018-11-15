@@ -19,7 +19,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private Curso currentCurso;
         private Cursos callerForm;
         private Regex onlyNumbers = new Regex("^[0-9]+$");
-        private Regex onlyLetters = new Regex("^[a-zA-Z]+$");
+        private Regex onlyLetters = new Regex("^[a-zA-Z ]+$");
         
         private Dictionary<String, String> traducciones;
         public AltaModificacionCurso()
@@ -72,6 +72,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
 
             if (currentCurso != null)
             {
+                this.comboNiveles.Enabled = false;
                 this.txtCapacidad.Text = currentCurso.capacidad.ToString();
                 if(currentCurso.turno == "M")
                 {

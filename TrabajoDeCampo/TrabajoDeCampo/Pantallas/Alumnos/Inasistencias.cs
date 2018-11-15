@@ -167,6 +167,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             if ((!this.completa.Checked && !this.media.Checked))
             {
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
+                return;
             }
 
             DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);

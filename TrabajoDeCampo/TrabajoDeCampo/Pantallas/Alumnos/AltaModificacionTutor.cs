@@ -21,7 +21,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Tutores parentForm;
         private Tutor currentTutor = null;
 
-        private Regex lettersRegex = new Regex("^[a-zA-Z]+$");
+        private Regex lettersRegex = new Regex("^[a-zA-Z ]+$");
         private Regex numbersRegex = new Regex("^[0-9]+$");
         private Boolean valido = false;
         private Dictionary<string, string> traducciones;
@@ -43,6 +43,11 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Tutores.htm" : "Tutors.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
+            this.txtNombre.KeyPress += validarLetrasKP;
+            this.txtApellido.KeyPress += validarLetrasKP;
+            this.txtDni.KeyPress += validarNumerosKP;
+            this.txtTel1.KeyPress += validarNumerosKP;
+            this.txtTel2.KeyPress += validarNumerosKP;
             if (currentTutor != null)
             {
                 this.txtNombre.Text = currentTutor.nombre;
@@ -51,15 +56,6 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
                 this.txtEmail.Text = currentTutor.email;
                 this.txtTel1.Text = currentTutor.telefono1;
                 this.txtTel2.Text = currentTutor.telefono2;
-
-                this.txtNombre.KeyPress += validarLetrasKP;
-                this.txtApellido.KeyPress += validarLetrasKP;
-                this.txtDni.KeyPress += validarNumerosKP;
-                this.txtTel1.KeyPress += validarNumerosKP;
-                this.txtTel2.KeyPress += validarNumerosKP;
-
-
-
             }
 
 

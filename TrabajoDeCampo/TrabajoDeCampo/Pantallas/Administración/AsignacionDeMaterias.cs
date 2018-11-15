@@ -113,6 +113,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     if(result != DialogResult.OK)
                     {
                         seguir = false;
+                        seHicieronCambios = false;
                     }
                     
                 }

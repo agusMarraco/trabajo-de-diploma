@@ -52,7 +52,13 @@ namespace TrabajoDeCampo.DAO
 
             queryLoginExitoso.CommandText = " UPDATE USUARIO SET USU_INTENTOS = 0 where usu_id = @ID ";
             queryBloqueado.CommandText = " SELECT USU_INTENTOS FROM USUARIO WHERE USU_ID = @ID ";
-
+            //que tenga , para entrar con el sistema bloqueado, los permisos de 
+            /*
+             *  GenerarBackups = 16;
+                RestaurarBackup = 17;
+                RecalcularDígitosVerificadores = 18;
+                VerBitácora = 19;
+             */
             queryPermisos.CommandText = "Select count(*) from PERMISOS_USUARIO WHERE USU_ID = @ID AND PAT_ID IN (16,17,18,19)";
             SqlDataReader reader = null;
             
@@ -65,7 +71,7 @@ namespace TrabajoDeCampo.DAO
                 //alias
                 while (reader.Read())
                 {
-                    
+                    //tengo que levantar los usuarios de la base por la forma en la cual manejo el AES, es mas seguro, pero menos performante
                     if(!reader.IsDBNull(1) && SeguridadUtiles.desencriptarAES(reader.GetValue(1).ToString()).Equals(user))
                     {
                         existe = true;
@@ -137,7 +143,7 @@ namespace TrabajoDeCampo.DAO
                     }
                     reader.Close();
                     if(readerReturn != 4)
-                    {
+                    {//SI NO TIENE LOS PERMISOS MINIMOS NO ENTRA.
                         throw new Exception("PERMISOS");
                     }
                     permisosEsencialesCount = readerReturn;
@@ -151,7 +157,7 @@ namespace TrabajoDeCampo.DAO
                 queryLoginExitoso.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
                 if (intentos != 0)
                 {
-                    
+                    //SI ENTRA OK LE RESETEO EL CONTADOR
                     queryLoginExitoso.ExecuteNonQuery();
                     intentos = 0;
                 }
@@ -168,7 +174,7 @@ namespace TrabajoDeCampo.DAO
             catch (Exception e)
             {
 
-
+                //MANEJO DE EXCEPCIONES
                 reader.Close();
                 if(e.Message == "ALIAS" || e.Message == "PASS" || e.Message == "BLOQUEADO" || e.Message == "PERMISOS")
                 {
@@ -229,6 +235,7 @@ namespace TrabajoDeCampo.DAO
                 this.recalcularDigitoVertical("USUARIO");
                 if(TrabajoDeCampo.Properties.Settings.Default.SessionUser != 0)
                 {
+                    //AL EJECUTARSE EN UN FINALLY TENGO QUE VERIFICAR QUE EL ID DE USUARIO EXISTA, ES DECIR != 0
                   Usuario usu = new Usuario();
                   usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
                   this.grabarBitacora(usu, "El usuario se logueo exitosamente", CriticidadEnum.BAJA);
@@ -237,11 +244,17 @@ namespace TrabajoDeCampo.DAO
             }
             
         }
-
+        /// <summary>
+        /// FLAG QUE SE SETEA AL INICIO DE SESION
+        /// </summary>
+        /// <returns></returns>
         public Boolean chequearSistemaBloqueado() {
             return TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1;
         }
-
+        /// <summary>
+        /// QUERY PARA PROBAR QUE LA CONEXION ESTE OK, LE EXCEPCION SE AGARRA MAS ARRIBA
+        /// </summary>
+        /// <returns></returns>
         public Boolean probarConexion() {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             Boolean sePudoConectar = false;
@@ -271,8 +284,13 @@ namespace TrabajoDeCampo.DAO
 
         }
 
-        public void actualizarFamiliaPantente(List<Patente> pantentes, Familia familia) { }
-
+        public void actualizarFamiliaPantente(List<Patente> pantentes, Familia familia) { } //deprecado
+        /// <summary>
+        /// Se usa para chequear los permisos a la hora de habilitar controles, vista dinamica en base de datos.
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="codigoPantente"></param>
+        /// <returns></returns>
         public Boolean tienePatente(long idUsuario, String codigoPantente)
         {
 
@@ -322,7 +340,7 @@ namespace TrabajoDeCampo.DAO
             // query
             StringBuilder sb = new StringBuilder();
 
-            // para inserts de permisos
+            // para inserts de permisos en las tablas intermedias
             int i = 0;
             foreach(ComponentePermiso item in usuario.componentePermisos)
             {
@@ -347,18 +365,17 @@ namespace TrabajoDeCampo.DAO
             query.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.BigInt)).Value = usuario.id;
 
             query.CommandText = sb.ToString();
-          
-
 
             SqlTransaction tx = connection.BeginTransaction();
             query.Transaction = tx;
             deleteQuery.Transaction = tx;
             try
             {
-
+                //borro las relaciones viejas
                 deleteQuery.ExecuteNonQuery();
-                if(usuario.componentePermisos.Count > 0)
-                query.ExecuteNonQuery();
+                //inserto las nuevas si corresponse
+                if (usuario.componentePermisos.Count > 0)
+                    query.ExecuteNonQuery();
                 tx.Commit();
                 connection.Close();
                 this.recalcularDigitoVertical("USUARIO_FAMILIA");
@@ -366,7 +383,7 @@ namespace TrabajoDeCampo.DAO
             }
             catch (Exception exe)
             {
-                     tx.Rollback();
+                    tx.Rollback();
                     connection.Close();
                     throw exe;
                 
@@ -486,6 +503,7 @@ namespace TrabajoDeCampo.DAO
             connection.Open();
             Boolean seguirBuscando = true;
             Boolean errorEsenciales = false;
+            //va por cada permiso hasta que encuentro una falla o llego al final
             if (!CrearUsuario && seguirBuscando)
             {
                 
@@ -658,7 +676,10 @@ namespace TrabajoDeCampo.DAO
         }
 
         public Boolean chequearNegada(long idUsuario, String codigoPatente) { return true; } //deprecado se usa la vista.
-
+        /// <summary>
+        /// creacion de familia
+        /// </summary>
+        /// <param name="familia"></param>
         public void crearFamilia(Familia familia) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
@@ -726,7 +747,10 @@ namespace TrabajoDeCampo.DAO
 
 
         }
-
+        /// <summary>
+        /// modificacion de familia con chequeo de permisos esenciales.
+        /// </summary>
+        /// <param name="familia"></param>
         public void modificarFamilia(Familia familia) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
@@ -740,7 +764,8 @@ namespace TrabajoDeCampo.DAO
             query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = familia.id;
             query.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { nombreAES, familia.bloqueada.ToString() });
 
-
+            //hago todo dentro la misma transaccion, si encuentro que 
+            //hay problemas con los permisos esenciales, la cancelo
             try
             {
                 query.ExecuteNonQuery();
@@ -761,27 +786,6 @@ namespace TrabajoDeCampo.DAO
                     query.Parameters.Add(new SqlParameter("@DVH", System.Data.SqlDbType.NVarChar)).Value = this.recalcularDigitoHorizontal(new String[] { familia.id.ToString(), item.id.ToString() });
                     query.ExecuteNonQuery();
                 }
-
-
-                //chequeando los permisos esenciales
-                //SqlCommand cmd = new SqlCommand("SELECT COUNT(PAT_ID) FROM PERMISOS_USUARIO WHERE PAT_ID IN ( " + EnumPatentes.CrearUsuario + ", " + EnumPatentes.ModificarUsuario + ", " +
-                //    EnumPatentes.ListarUsuarios + ", " + EnumPatentes.GenerarBackups + ", " + EnumPatentes.RestaurarBackup + ", " + EnumPatentes.RecalcularDígitosVerificadores + ", " + EnumPatentes.ModificarFamilias
-                //    + ", " + EnumPatentes.CrearFamilia + ", " + EnumPatentes.ListarFamilias + ")  GROUP BY USU_ID ");
-                //cmd.Connection = connection;
-                //cmd.Transaction = tx;
-                //SqlDataReader reader;
-                //int cantidad = 0;
-                //Boolean errorEsenciales = false;
-                //reader = cmd.ExecuteReader();
-                //while (reader.Read())
-                //{
-                //    cantidad = (int)reader.GetValue(0);
-                //    if (cantidad != 9)
-                //    {
-                //        errorEsenciales = true;
-                //    }
-                //}
-                //reader.Close();
                 SqlCommand cmd = new SqlCommand("SELECT count(*) FROM PERMISOS_USUARIO WHERE PAT_ID = @PAT ");
 
                 cmd.Connection = connection;
@@ -982,7 +986,10 @@ namespace TrabajoDeCampo.DAO
             }
 
         }
-
+        /// <summary>
+        /// borrado de familia
+        /// </summary>
+        /// <param name="IdFamilia"></param>
         public void borrarFamilia(long IdFamilia) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
@@ -1030,7 +1037,10 @@ namespace TrabajoDeCampo.DAO
         }
 
         public Familia buscarFamilia(long idFamilia) { return null; } //deprecado
-
+        /// <summary>
+        /// listado de familias
+        /// </summary>
+        /// <returns></returns>
         public List<Familia> listarFamilias() {
             
             List<Familia> familias = new List<Familia>();
@@ -1104,6 +1114,11 @@ namespace TrabajoDeCampo.DAO
 
             return familias;
         }
+
+        /// <summary>
+        /// listado de patentes
+        /// </summary>
+        /// <returns></returns>
         public List<Patente> listarPatentes() {
             List<Patente> patentes = new List<Patente>();
             SqlConnection connection = ConexionSingleton.obtenerConexion();
@@ -1141,6 +1156,11 @@ namespace TrabajoDeCampo.DAO
 
 
         }
+        /// <summary>
+        /// ver si la familia esta desasignada antes de borrarla.
+        /// </summary>
+        /// <param name="idFamilia"></param>
+        /// <returns></returns>
         public Boolean chequearFamiliaDesasignada(long idFamilia) {
 
             bool desasignada = false;
@@ -1176,7 +1196,7 @@ namespace TrabajoDeCampo.DAO
 
         }
         //USUARIOS
-
+        //cambio de contraseña
         public void cambiarContraseña(long idUsuario, String contraseñaNueva) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
@@ -1226,7 +1246,11 @@ namespace TrabajoDeCampo.DAO
             this.grabarBitacora(usu, "Cambio de contraseña", CriticidadEnum.BAJA);
             this.recalcularDigitoVertical("USUARIO");
         }
-
+        /// <summary>
+        /// cambio del idioma del usuario
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="codigoIdioma"></param>
         public void cambiarIdioma(long idUsuario, String codigoIdioma) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
@@ -1254,14 +1278,18 @@ namespace TrabajoDeCampo.DAO
             }
 
         }
-
-        public Boolean chequearCamposUnicos(Usuario usuario)// para chequear que no se repitan dni mail alias 
+        /// <summary>
+        /// chequeo de los campos unicos del usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public Boolean chequearCamposUnicos(Usuario usuario)
         {
             bool repetido = false;
 
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" SELECT USU.USU_EMAIL , USU.USU_DNI, USU.USU_ALIAS ,USU.USU_ID FROM USUARIO USU ");
+            sb.Append(" SELECT USU.USU_EMAIL , USU.USU_DNI, USU.USU_ALIAS ,USU.USU_ID FROM USUARIO USU WHERE USU_BAJA <> 1");
            
             SqlCommand query = new SqlCommand(sb.ToString(), connection);
             SqlDataReader reader = null;
@@ -1290,6 +1318,7 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 throw exe;
             }
+            //tengo que levantar los usuario por la manera en la que manejo aes, donde cada encriptacion es unica.
             foreach (Usuario item in usuarios)
             {
                 if((item.dni == usuario.dni && item.id != usuario.id) || (item.email == usuario.email && item.id != usuario.id) 
@@ -1302,7 +1331,11 @@ namespace TrabajoDeCampo.DAO
 
             return repetido;
         } 
-
+        /// <summary>
+        /// regenero contraseña y seteo el contador de bloqueo en 1.
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="passEncriptado"></param>
         public void regenerarContraseña(long idUsuario, string passEncriptado) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
@@ -1318,9 +1351,6 @@ namespace TrabajoDeCampo.DAO
             dataQuery.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = idUsuario;
 
             SqlDataReader reader;
-           
-
-
             try
             {
                 query.ExecuteNonQuery();
@@ -1415,7 +1445,7 @@ namespace TrabajoDeCampo.DAO
                 connection.Close();
                 throw ex;
             }
-
+            //traigo tambien los permisos del usuario.
             sb.Clear();
             sb.Append(" SELECT * FROM USUARIO_PATENTE UP INNER JOIN PATENTE PAT ON PAT.PAT_ID = UP.UP_PATENTE_ID WHERE UP.UP_USUARIO_ID = @ID ");
             query.CommandText = sb.ToString();
@@ -1468,6 +1498,7 @@ namespace TrabajoDeCampo.DAO
 
             return usu;
         }
+        // bloqueo un usuario en el sistema
         public void bloquearUsuario(long idUsuario)
         {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
@@ -1535,6 +1566,11 @@ namespace TrabajoDeCampo.DAO
 
 
         }
+
+        /// <summary>
+        /// desbloqueo un usuario, lo llamo despues del regenerar contraseña
+        /// </summary>
+        /// <param name="idUsuario"></param>
         public void desbloquearUsuario(long idUsuario) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
@@ -1603,6 +1639,10 @@ namespace TrabajoDeCampo.DAO
             this.recalcularDigitoVertical("USUARIO");
         }
 
+        /// <summary>
+        /// crear usuario
+        /// </summary>
+        /// <param name="usuario"></param>
         public void crearUsuario(ref Usuario usuario) {
             
             SqlConnection connection = ConexionSingleton.obtenerConexion();
@@ -1661,7 +1701,10 @@ namespace TrabajoDeCampo.DAO
             this.recalcularDigitoVertical("USUARIO");
             actualizarPermisosUsuario(usuario, usuario.componentePermisos);
         }
-
+        /// <summary>
+        /// modificacion de un usuario
+        /// </summary>
+        /// <param name="usuario"></param>
         public void modificarUsuario(Usuario usuario) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
@@ -1737,11 +1780,15 @@ namespace TrabajoDeCampo.DAO
             actualizarPermisosUsuario(usuario, usuario.componentePermisos);
 
         }
-
+        /// <summary>
+        /// borro un usuario del sistema.
+        /// </summary>
+        /// <param name="usuario"></param>
         public void borrarUsuario(Usuario usuario)
         {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             StringBuilder sb = new StringBuilder();
+            ///tengo que borrar los datos de la familia porque me bloquea el borrado de la familia, porque el delete de la familia no es logico, sino fisico.
             sb.Append(" UPDATE  USUARIO SET USU_BAJA = 1 WHERE USU_ID = @ID DELETE FROM USUARIO_FAMILIA WHERE UF_USUARIO_ID =  @ID");
 
             connection.Open();
@@ -1778,7 +1825,13 @@ namespace TrabajoDeCampo.DAO
             this.recalcularDigitoVertical("USUARIO_FAMILIA");
 
         }
-
+        /// <summary>
+        /// listado de usuario
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <param name="valor"></param>
+        /// <param name="orden"></param>
+        /// <returns></returns>
         public List<Usuario> listarUsuarios(String filtro, String valor, String orden)
         {   
             
@@ -1937,7 +1990,13 @@ namespace TrabajoDeCampo.DAO
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// listo las cosas de la bitacora
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <param name="valor"></param>
+        /// <param name="orden"></param>
+        /// <returns></returns>
         public DataSet listarBitacora(String filtro, String valor, String orden) {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
@@ -2029,7 +2088,9 @@ namespace TrabajoDeCampo.DAO
         }
 
         //DIGITOS VERIFICADORES
-
+        /// <summary>
+        /// verificar digitos verificadores en el startup de la applicacion.
+        /// </summary>
         public void verificarDigitosVerificadores() {
 
             SqlConnection connection = ConexionSingleton.obtenerConexion();
@@ -2419,6 +2480,7 @@ namespace TrabajoDeCampo.DAO
 
         /// <summary>
         /// recalcula todos los digitos que haya en la base de datos.
+        /// tengo 2 tipos de tablas , las que no tiene clave propia o son intermedias, y las que tienen id secuencial
         /// </summary>
         public void recalcularDigitosVerificadores() {
             SqlConnection connection = ConexionSingleton.obtenerConexion();
@@ -2512,7 +2574,7 @@ namespace TrabajoDeCampo.DAO
 
                             }
                         }
-
+                        //las tablas sin id las trato con procedures en base de datos.
                         if (tablaSinId)
                         {
                             switch (tabla)
@@ -2688,9 +2750,8 @@ namespace TrabajoDeCampo.DAO
             {
                 Usuario usu = new Usuario();
                 usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-                this.grabarBitacora(usu, "Falló un backup", CriticidadEnum.ALTA);
-
                 connection.Close();
+                this.grabarBitacora(usu, "Falló un backup", CriticidadEnum.ALTA);
                 throw e;
             }
         }
@@ -2710,6 +2771,8 @@ namespace TrabajoDeCampo.DAO
             //FROM  DISK = '" + directorio + "' WITH REPLACE");
             queryText.Append(directorio);
             queryText.Append(" WITH REPLACE ");
+            queryText.Append(" alter database [TRABAJO_DIPLOMA]  ");
+            queryText.Append(" set online with rollback immediate ");
             SqlCommand query = new SqlCommand(queryText.ToString(), connection);
             try
             {
@@ -2721,9 +2784,9 @@ namespace TrabajoDeCampo.DAO
 
                 Usuario usuario = new Usuario();
                 usuario.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-                this.grabarBitacora(usuario, "Falló un restore", CriticidadEnum.ALTA);
 
                 connection.Close();
+                this.grabarBitacora(usuario, "Falló un restore", CriticidadEnum.ALTA);
                 throw e;
             }
 
@@ -2787,7 +2850,7 @@ namespace TrabajoDeCampo.DAO
             return traducciones;
         }
 
-        public void actualizaConexión() // VER
+        public void actualizaConexión() // deprecado
         {
             throw new System.NotImplementedException();
         }

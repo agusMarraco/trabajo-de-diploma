@@ -157,19 +157,27 @@ namespace TrabajoDeCampo.Pantallas.Administración
             {
                 Alumno alu = this.dataGridView1.CurrentRow.DataBoundItem as Alumno;
                 int año = int.Parse(alu.curso.nivel.codigo.ElementAt(0).ToString()) ;
-                Nivel nivelSiguiente;
+                Nivel nivelSiguiente = null;
+                Nivel[] tempNivs = new Nivel[2];
                 this.comboBox3.DataSource = null;
                 if (año != 6){
                     if (alu.orientacion.codigo == "null")
                     {
-                        nivelSiguiente = niveles.Where(x => (x.codigo.Contains((año + 1).ToString()))).First();
+                        tempNivs = niveles.Where(x => (x.codigo.Contains((año + 1).ToString()))).ToArray();
                     }
                     else
                     {
                         nivelSiguiente = niveles.Where(x => (x.codigo.Contains((año + 1).ToString())) && (x.orientacion.codigo.Equals(alu.orientacion.codigo))).First();
                     }
                     this.comboBox3.DataSource = null;
-                    this.comboBox3.DataSource = cursos.Where(x => x.nivel.id.Equals(nivelSiguiente.id)).ToArray();
+                    if(nivelSiguiente != null)
+                    {
+                        this.comboBox3.DataSource = cursos.Where(x => x.nivel.id.Equals(nivelSiguiente.id)).ToArray();
+                    }
+                    else
+                    {
+                        this.comboBox3.DataSource = cursos.Where(x => x.nivel.id.Equals(tempNivs[0].id) || x.nivel.id.Equals(tempNivs[1].id)).ToArray();
+                    }
                 }
                
                 this.comboBox3.DisplayMember = "codigo";

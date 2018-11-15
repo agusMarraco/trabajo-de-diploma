@@ -41,7 +41,7 @@ namespace TrabajoDeCampo.SERVICIO
             List<String> tags = new List<string>();
             tags.AddRange(new string[] {
                 "com.td.justificada","com.td.fecha","com.td.tipo","com.td.motivo","com.td.descripción","com.td.faltas.totales","com.td.si","com.td.no",
-                "com.td.módulo", "com.td.criticidad",
+                "com.td.módulo", "com.td.criticidad","com.td.media","com.td.completa","com.td.valor",
                 "com.td.criticidad.alta", "com.td.criticidad.media", "com.td.criticidad.baja",
                 "com.td.plan.estudios","com.td.cursos","com.td.amonestaciones","com.td.inasistencias","com.td.horarios","com.td.bitácora",
                 "com.td.lunes","com.td.martes","com.td.miercoles","com.td.jueves","com.td.viernes","com.td.desde","com.td.hasta",
@@ -84,6 +84,9 @@ namespace TrabajoDeCampo.SERVICIO
             row.SetField("criticidadAltaLbl", traduccionesDeBase["com.td.criticidad.alta"]);
             row.SetField("criticidadMediaLbl", traduccionesDeBase["com.td.criticidad.media"]);
             row.SetField("criticidadBajaLbl", traduccionesDeBase["com.td.criticidad.baja"]);
+            row.SetField("mediaLbl", traduccionesDeBase["com.td.media"]);
+            row.SetField("completaLbl", traduccionesDeBase["com.td.completa"]);
+            row.SetField("valorLbl", traduccionesDeBase["com.td.valor"]);
             traducciones.DataTable1.Rows.Add(row);
 
             InfoColegio colegio = new InfoColegio();

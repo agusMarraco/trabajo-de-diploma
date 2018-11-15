@@ -20,7 +20,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private bool esEdit = false;
         private Materia currentMateria = null;
         private Boolean valido = false;
-        private Regex onlyLetters = new Regex("^[a-zA-Z]+$");
+        private Regex onlyLetters = new Regex("^[a-zA-Z ]+$");
         private Dictionary<String, String> traducciones;
 
 

@@ -19,7 +19,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         FormUtils utils;
         private Familia currentFamilia;
 
-        private Regex lettersOnly = new Regex("^[a-zA-Z]+$");
+        private Regex lettersOnly = new Regex("^[a-zA-Z ]+$");
         private Boolean valido = false;
         private Dictionary<string, string> traducciones;
 

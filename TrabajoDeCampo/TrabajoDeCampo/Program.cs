@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Text;
 using TrabajoDeCampo.DAO;
 using TrabajoDeCampo.SERVICIO;
+using System.IO;
 
 namespace TrabajoDeCampo
 {
@@ -18,8 +19,10 @@ namespace TrabajoDeCampo
         [STAThreadAttribute]
         public static void Main(string[] args)
         {
-            
-
+            //manejadores globales de excepciones
+            Application.ThreadException += exceptionGenericHandler;
+            AppDomain domain = AppDomain.CurrentDomain;
+            domain.UnhandledException += handler;
             //contemplando el string de conexión de la uai y de la maquina host X. En el caso de que no se pueda generar
             //se usa el fallo de conexion
             String machineName = (Environment.UserName == "Navegador") ? Environment.UserDomainName + @"\" + "SQL14_UAI" : Environment.MachineName;
@@ -27,7 +30,8 @@ namespace TrabajoDeCampo
             TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(connection));
             String master = "Data Source = " + machineName + " ; Initial Catalog = master ; Integrated Security = True";
             TrabajoDeCampo.Properties.Settings.Default.MasterString = Convert.ToBase64String(Encoding.UTF8.GetBytes(master));
-          
+            if (!File.Exists("exception.txt"))
+                File.Create("exception.txt");
 
             Boolean seConecto = true;
             
@@ -64,7 +68,26 @@ namespace TrabajoDeCampo
                 
         }
 
-       
+        private static void exceptionGenericHandler(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message, "ERROR", MessageBoxButtons.OK);
+        }
+
+        private static void handler(object sender, UnhandledExceptionEventArgs e)
+        {
+            
+            StreamWriter stream = new StreamWriter("exception.txt", true);
+            
+            stream.WriteLine(((Exception)e.ExceptionObject).Message + Environment.NewLine);
+            stream.Close();
+
+
+        }
+        public void dataEncriptada() {
+            Console.WriteLine(SeguridadUtiles.encriptarAES("Modificar Materia"));
+            Console.WriteLine(SeguridadUtiles.encriptarAES("Modificar Familias"));
+            Console.WriteLine(SeguridadUtiles.encriptarAES("Modificar Horario"));
+        }
         public static void insertsDePatentes()
         {
             
