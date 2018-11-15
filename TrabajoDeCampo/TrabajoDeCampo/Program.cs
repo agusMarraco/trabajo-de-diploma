@@ -143,58 +143,5 @@ namespace TrabajoDeCampo
             }
                 connection.Close();
         }
-
-        public static void encriptarUsuarios()
-        {
-            List<Usuario> usuarios = new List<Usuario>();
-            SqlConnection connection = ConexionSingleton.obtenerConexion();
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append(" SELECT usu_alias,usu_id, usu_pass FROM USUARIO  ");
-
-
-            SqlCommand query = new SqlCommand("", connection);
-
-            query.CommandText = sb.ToString();
-
-            connection.Open();
-            SqlDataReader reader;
-            Usuario usu;
-            try
-            {
-                reader = query.ExecuteReader();
-                while (reader.Read())
-                {
-                    usu = new Usuario();
-
-                    usu.alias = reader["USU_ALIAS"].ToString();
-                    usu.id = (long)reader["USU_ID"];
-                    usu.pass = reader["USU_PASS"].ToString();
-
-                    usuarios.Add(usu);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-
-            }
-            reader.Close();
-            foreach (Usuario item in usuarios)
-            {
-                SqlCommand query2 = new SqlCommand("UPDATE USUARIO SET USU_ALIAS = @ALIAS , USU_PASS=@PASS WHERE USU_ID = @ID", connection);
-                query2.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.BigInt)).Value = item.id;
-                query2.Parameters.Add(new SqlParameter("@PASS", System.Data.SqlDbType.VarChar)).Value = SeguridadUtiles.encriptarMD5(item.pass);
-                query2.Parameters.Add(new SqlParameter("@ALIAS", System.Data.SqlDbType.NVarChar)).Value = SeguridadUtiles.encriptarAES(item.alias);
-
-                query2.ExecuteNonQuery();
-            }
-
-            connection.Close();
-        }
     }
 }

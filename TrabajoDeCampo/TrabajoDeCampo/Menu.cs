@@ -25,6 +25,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
 
             desbloquearControles();
+
+            //traducciones
             traductor = new TraductorIterador();
             List<String> tags = new List<string>();
             tags.Add("com.td.seguro");
@@ -39,10 +41,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         public void desbloquearControles()
         {
-
+            // si esta bloqueado me cambia la logica de desbloqueo
             Boolean sistemaBloqueado = TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1;
             long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
 
+            //desbloqueo controles
             if (!sistemaBloqueado)
             {
                 bool verAlumnos = servicioSeguridad.tienePatente(id, EnumPatentes.ListadoAlumnos.ToString());
@@ -208,6 +211,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void inglesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //cambio de idioma
             Properties.Settings.Default.Idioma = "en";
             List<String> tags = new List<string>();
             tags.Add("com.td.seguro");
@@ -223,6 +227,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void españolToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //cambio de idioma
             Properties.Settings.Default.Idioma = "es";
             List<String> tags = new List<string>();
             tags.Add("com.td.seguro");
@@ -253,6 +258,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            //logout
             DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
             if (!result.Equals(DialogResult.OK))
             {
@@ -269,6 +276,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //close app
             DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
             if (!result.Equals(DialogResult.OK))
             {
