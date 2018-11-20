@@ -178,7 +178,7 @@
             // 
             this.txtDni.Location = new System.Drawing.Point(80, 101);
             this.txtDni.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtDni.MaxLength = 30;
+            this.txtDni.MaxLength = 9;
             this.txtDni.Name = "txtDni";
             this.txtDni.ShortcutsEnabled = false;
             this.txtDni.Size = new System.Drawing.Size(182, 22);

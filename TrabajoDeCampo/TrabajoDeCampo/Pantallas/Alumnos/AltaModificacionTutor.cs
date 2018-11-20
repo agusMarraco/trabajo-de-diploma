@@ -21,7 +21,7 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
         private Tutores parentForm;
         private Tutor currentTutor = null;
 
-        private Regex lettersRegex = new Regex("^[a-zA-Z ]+$");
+        private Regex lettersRegex = new Regex("^[a-zA-Z ñÑ]+$");
         private Regex numbersRegex = new Regex("^[0-9]+$");
         private Boolean valido = false;
         private Dictionary<string, string> traducciones;

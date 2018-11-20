@@ -50,5 +50,6 @@ namespace TrabajoDeCampo.SEGURIDAD
         public static long BorrarMateria = 37;
         public static long AsignarMateriaNivel = 38;
         public static long GenerarReportes = 39;
+        public static long DesbloquearUsuario = 40;
     }
 }

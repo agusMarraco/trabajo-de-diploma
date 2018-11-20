@@ -1,4 +1,18 @@
-﻿
+﻿--System
+insert into USUARIO (USU_DNI,USU_EMAIL,USU_PASS,USU_ALIAS,USU_INTENTOS,USU_BAJA,USU_NOMBRE,USU_APELLIDO,USU_DIRECCION,
+USU_TELEFONO,USU_DVH)
+values ('','','','rqW9nAKnU9uqjGhrH2qQl924By5hxMybxdgZaIYMhxo=',3,1,'','','','','')
+
+
+--Digitos verificadores
+insert into USUARIO (USU_DNI,USU_EMAIL,USU_PASS,USU_ALIAS,USU_INTENTOS,USU_BAJA,USU_NOMBRE,USU_APELLIDO,USU_DIRECCION,
+USU_TELEFONO,USU_DVH)
+values ('','','','b/52OwBAKceFR1M9z6jhua9W6KobTFraZ9aj/Lw94AQ=',3,1,'','','','','')
+
+
+
+
+
 insert into USUARIO (USU_DNI,USU_EMAIL,USU_PASS,USU_ALIAS,USU_INTENTOS,USU_BAJA,USU_NOMBRE,USU_APELLIDO,USU_DIRECCION,
 USU_TELEFONO,USU_DVH)
 values ('123123123','admin@mail.com','25F9E794323B453885F5181F1B624D0B','Eh1p04V0+BnS5eCYvaYDvv3Ncci1O2/YybG4v4rUzxk=',0,0,'Admin','Admin','Dirección','11-1111-1111','')
@@ -8,42 +22,43 @@ values ('123123123','admin@mail.com','25F9E794323B453885F5181F1B624D0B','Eh1p04V
 insert into USUARIO_PATENTE
 (UP_USUARIO_ID,UP_PATENTE_ID,UP_DVH,UP_BLOQUEADA)
 values
-(1,1,'',0),
-(1,2,'',0),
-(1,3,'',0),
-(1,4,'',0),
-(1,5,'',0),
-(1,6,'',0),
-(1,7,'',0),
-(1,8,'',0),
-(1,9,'',0),
-(1,10,'',0),
-(1,11,'',0),
-(1,12,'',0),
-(1,13,'',0),
-(1,14,'',0),
-(1,15,'',0),
-(1,16,'',0),
-(1,17,'',0),
-(1,18,'',0),
-(1,19,'',0),
-(1,20,'',0),
-(1,21,'',0),
-(1,22,'',0),
-(1,23,'',0),
-(1,24,'',0),
-(1,25,'',0),
-(1,26,'',0),
-(1,27,'',0),
-(1,28,'',0),
-(1,29,'',0),
-(1,30,'',0),
-(1,31,'',0),
-(1,32,'',0),
-(1,33,'',0),
-(1,34,'',0),
-(1,35,'',0),
-(1,36,'',0),
-(1,37,'',0),
-(1,38,'',0),
-(1,39,'',0)
+(3,1,'',0),
+(3,2,'',0),
+(3,3,'',0),
+(3,4,'',0),
+(3,5,'',0),
+(3,6,'',0),
+(3,7,'',0),
+(3,8,'',0),
+(3,9,'',0),
+(3,10,'',0),
+(3,11,'',0),
+(3,12,'',0),
+(3,13,'',0),
+(3,14,'',0),
+(3,15,'',0),
+(3,16,'',0),
+(3,17,'',0),
+(3,18,'',0),
+(3,19,'',0),
+(3,20,'',0),
+(3,21,'',0),
+(3,22,'',0),
+(3,23,'',0),
+(3,24,'',0),
+(3,25,'',0),
+(3,26,'',0),
+(3,27,'',0),
+(3,28,'',0),
+(3,29,'',0),
+(3,30,'',0),
+(3,31,'',0),
+(3,32,'',0),
+(3,33,'',0),
+(3,34,'',0),
+(3,35,'',0),
+(3,36,'',0),
+(3,37,'',0),
+(3,38,'',0),
+(3,39,'',0),
+(3,40,'',0)

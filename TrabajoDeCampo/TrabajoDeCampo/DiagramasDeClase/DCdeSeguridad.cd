@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="TrabajoDeCampo.Bitacora">
-    <Position X="4.75" Y="4" Width="1.5" />
+    <Position X="4.75" Y="5" Width="1.5" />
     <Members>
       <Field Name="_criticidad" Hidden="true" />
       <Field Name="_fecha" Hidden="true" />
@@ -30,13 +30,14 @@
   <Class Name="TrabajoDeCampo.Patente">
     <Position X="2.75" Y="2.75" Width="1.75" />
     <Members>
+      <Field Name="_asignada" Hidden="true" />
       <Field Name="_bloqueada" Hidden="true" />
       <Field Name="_descripcion" Hidden="true" />
       <Field Name="_familia" Hidden="true" />
       <Field Name="_id" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAgAAEAAFAAAAAABAAAAgAAAAAAAAIAgA=</HashCode>
+      <HashCode>EAAAAAAAAAAQgAAEAAFAAAAAABAAAAgAAAAAAAAIIgA=</HashCode>
       <FileName>SEGURIDAD\Patente.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -53,6 +54,7 @@
       <Field Name="_alias" Hidden="true" />
       <Field Name="_apellido" Hidden="true" />
       <Field Name="_baja" Hidden="true" />
+      <Field Name="_componentePermisos" Hidden="true" />
       <Field Name="_direccion" Hidden="true" />
       <Field Name="_dni" Hidden="true" />
       <Field Name="_email" Hidden="true" />
@@ -64,7 +66,7 @@
       <Field Name="_telefono" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAABgABAAQAIASkAABAAQABBAiAEAAAAAAAAEIQAgM=</HashCode>
+      <HashCode>AAAQBgABAAQAIASkAEBAAQABBAiAEAAIAAAAAEIQAgM=</HashCode>
       <FileName>SEGURIDAD\Usuario.cs</FileName>
     </TypeIdentifier>
   </Class>

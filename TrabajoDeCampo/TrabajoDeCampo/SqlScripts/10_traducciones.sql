@@ -67,6 +67,7 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.base.de.d
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.conectar',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Conectar')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.usuarios',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Usuarios ')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.bloquear',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Bloquear')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.desbloquear',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Desbloquear')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.regenerar.password',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Regenerar Password')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.patentes.asignadas',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Patentes Asignadas')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.respaldo.base.de.datos',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Respaldo Base de Datos')
@@ -173,6 +174,7 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.seguro',(
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.tutor.asignado',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'El tutor esta asignado')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.mismo.usuario',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'No puede borrarse o bloquearse a si mismo')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'La capacidad del curso fue excedida')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.rango.fecha.invalido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Rango de fechas inválido')
 
 
 -- Ingles
@@ -244,6 +246,7 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.base.de.d
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.conectar',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Connect')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.usuarios',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Users')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.bloquear',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Block')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.desbloquear',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Unlock')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.regenerar.password',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Regenerate password')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.patentes.asignadas',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Assigned Patents')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.respaldo.base.de.datos',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Database backup')
@@ -350,3 +353,4 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.seguro',(
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.tutor.asignado',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'The tutor is assigned')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.mismo.usuario',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'You can´t delete or block yourself')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'The course capacity is over the limit')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.rango.fecha.invalido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Invalid Date Range')

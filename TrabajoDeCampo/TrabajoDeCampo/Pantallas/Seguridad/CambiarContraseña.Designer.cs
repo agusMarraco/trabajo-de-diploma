@@ -47,7 +47,7 @@
             this.label1.Location = new System.Drawing.Point(12, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 16);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 5;
             this.label1.Tag = "com.td.contraseña.actual";
             this.label1.Text = "Contraseña Actual";
             // 
@@ -58,7 +58,7 @@
             this.actual.Name = "actual";
             this.actual.PasswordChar = '*';
             this.actual.Size = new System.Drawing.Size(292, 20);
-            this.actual.TabIndex = 1;
+            this.actual.TabIndex = 0;
             // 
             // nueva
             // 
@@ -67,7 +67,7 @@
             this.nueva.Name = "nueva";
             this.nueva.PasswordChar = '*';
             this.nueva.Size = new System.Drawing.Size(292, 20);
-            this.nueva.TabIndex = 2;
+            this.nueva.TabIndex = 1;
             // 
             // button1
             // 
@@ -87,7 +87,7 @@
             this.label2.Location = new System.Drawing.Point(12, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(189, 16);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 7;
             this.label2.Tag = "com.td.reingrese.su.nueva.contraseña";
             this.label2.Text = "Reingrese su nueva contraseña";
             // 
@@ -98,7 +98,7 @@
             this.label3.Location = new System.Drawing.Point(12, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 16);
-            this.label3.TabIndex = 5;
+            this.label3.TabIndex = 6;
             this.label3.Tag = "com.td.nueva.contraseña";
             this.label3.Text = "Nueva Contraseña";
             // 
@@ -109,14 +109,14 @@
             this.nuevaRepetido.Name = "nuevaRepetido";
             this.nuevaRepetido.PasswordChar = '*';
             this.nuevaRepetido.Size = new System.Drawing.Size(292, 20);
-            this.nuevaRepetido.TabIndex = 6;
+            this.nuevaRepetido.TabIndex = 2;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(448, 174);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
+            this.button2.TabIndex = 4;
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;

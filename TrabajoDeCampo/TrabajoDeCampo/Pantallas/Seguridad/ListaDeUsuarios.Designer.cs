@@ -32,6 +32,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaDeUsuarios));
             this.gwUsuarios = new System.Windows.Forms.DataGridView();
+            this.alias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.baja = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnBloq = new System.Windows.Forms.Button();
             this.btnMod = new System.Windows.Forms.Button();
             this.btnRegen = new System.Windows.Forms.Button();
@@ -44,11 +49,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-            this.alias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.baja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDesbloquear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gwUsuarios)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -93,6 +94,44 @@
             this.gwUsuarios.Size = new System.Drawing.Size(879, 196);
             this.gwUsuarios.TabIndex = 0;
             // 
+            // alias
+            // 
+            this.alias.HeaderText = "Alias";
+            this.alias.Name = "alias";
+            this.alias.ReadOnly = true;
+            this.alias.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // apellido
+            // 
+            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.apellido.HeaderText = "Apellido";
+            this.apellido.Name = "apellido";
+            this.apellido.ReadOnly = true;
+            this.apellido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dni
+            // 
+            this.dni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dni.HeaderText = "DNI";
+            this.dni.Name = "dni";
+            this.dni.ReadOnly = true;
+            this.dni.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // baja
+            // 
+            this.baja.HeaderText = "Bloqueado";
+            this.baja.Name = "baja";
+            this.baja.ReadOnly = true;
+            this.baja.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
             // btnBloq
             // 
             this.btnBloq.Location = new System.Drawing.Point(238, 416);
@@ -119,10 +158,10 @@
             // 
             // btnRegen
             // 
-            this.btnRegen.Location = new System.Drawing.Point(715, 416);
+            this.btnRegen.Location = new System.Drawing.Point(722, 416);
             this.btnRegen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRegen.Name = "btnRegen";
-            this.btnRegen.Size = new System.Drawing.Size(176, 28);
+            this.btnRegen.Size = new System.Drawing.Size(169, 28);
             this.btnRegen.TabIndex = 3;
             this.btnRegen.Tag = "com.td.regenerar.password";
             this.btnRegen.Text = "Regenerar Password";
@@ -223,49 +262,24 @@
             this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
             // 
-            // alias
+            // btnDesbloquear
             // 
-            this.alias.HeaderText = "Alias";
-            this.alias.Name = "alias";
-            this.alias.ReadOnly = true;
-            this.alias.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // apellido
-            // 
-            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.apellido.HeaderText = "Apellido";
-            this.apellido.Name = "apellido";
-            this.apellido.ReadOnly = true;
-            this.apellido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // nombre
-            // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // dni
-            // 
-            this.dni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dni.HeaderText = "DNI";
-            this.dni.Name = "dni";
-            this.dni.ReadOnly = true;
-            this.dni.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // baja
-            // 
-            this.baja.HeaderText = "Bloqueado";
-            this.baja.Name = "baja";
-            this.baja.ReadOnly = true;
-            this.baja.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.btnDesbloquear.Location = new System.Drawing.Point(611, 416);
+            this.btnDesbloquear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDesbloquear.Name = "btnDesbloquear";
+            this.btnDesbloquear.Size = new System.Drawing.Size(105, 28);
+            this.btnDesbloquear.TabIndex = 16;
+            this.btnDesbloquear.Tag = "com.td.desbloquear";
+            this.btnDesbloquear.Text = "Desbloquear";
+            this.btnDesbloquear.UseVisualStyleBackColor = true;
+            this.btnDesbloquear.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // ListaDeUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(903, 457);
+            this.Controls.Add(this.btnDesbloquear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnRegen);
@@ -308,5 +322,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn baja;
+        private System.Windows.Forms.Button btnDesbloquear;
     }
 }

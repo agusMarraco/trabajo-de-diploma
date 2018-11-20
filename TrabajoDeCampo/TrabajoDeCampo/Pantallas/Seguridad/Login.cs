@@ -8,19 +8,24 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabajoDeCampo.SEGURIDAD;
 using TrabajoDeCampo.SERVICIO;
 
 namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class Login : Form
     {
-        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9ñÑ]+$");
         
         public Login()
         {
             InitializeComponent();
-            this.txtUsername.KeyPress += TxtUsername_KeyPress;
-            this.txtPassword.KeyPress += TxtPassword_KeyPress;
+            //this.txtUsername.KeyPress += TxtUsername_KeyPress;
+            //this.txtPassword.KeyPress += TxtPassword_KeyPress;
+            this.txtUsername.KeyPress += capturarEnter;
+            this.txtPassword.KeyPress += capturarEnter;
+            this.button1.KeyPress += capturarEnter;
+            this.button2.KeyPress += capturarEnter;
         }
 
 
@@ -31,9 +36,20 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.helpProvider1.SetHelpKeyword(this, "LoginES.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
-            if (TrabajoDeCampo.Properties.Settings.Default.Bloqueado == 1)
+            
+        }
+
+        private void capturarEnter(object sender, KeyPressEventArgs e)
+        {
+            bool esUnEnter = e.KeyChar.ToString().Equals("\r");
+            if (esUnEnter)
             {
-                this.label3.Visible = true;
+                if (this.button1.Focused)
+                    this.button1.PerformClick();
+                else if (this.button2.Focused)
+                    this.button2.PerformClick();
+                else
+                    this.button1.PerformClick();
             }
         }
 
@@ -49,7 +65,19 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             string pass = this.txtPassword.Text;
             if(String.IsNullOrEmpty(user) || String.IsNullOrEmpty(pass))
             {
+                Usuario usuario = new Usuario();
+                usuario.id = 1L;
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Alguien intentó ingresar sin completar los campos");
+                if(String.IsNullOrEmpty(user))
+                    sb.Append(", con este alias: " + user);
+                servicioSeguridad.grabarBitacora(usuario, sb.ToString(), CriticidadEnum.ALTA);
                 MessageBox.Show("Complete los campos requeridos");
+                return;
+            }
+            if (!alphanumericRegex.IsMatch(user) || !alphanumericRegex.IsMatch(pass))
+            {
+                MessageBox.Show("Los campos solo admiten letras y números");
                 return;
             }
             try

@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bitácora));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboUsuarios = new System.Windows.Forms.ComboBox();
             this.chUsuario = new System.Windows.Forms.CheckBox();
             this.chCriticidad = new System.Windows.Forms.CheckBox();
             this.chFecha = new System.Windows.Forms.CheckBox();
@@ -42,8 +43,6 @@
             this.toDatepicker = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.fromDatepicker = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +76,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboUsuarios);
             this.groupBox1.Controls.Add(this.chUsuario);
             this.groupBox1.Controls.Add(this.chCriticidad);
             this.groupBox1.Controls.Add(this.chFecha);
@@ -88,8 +88,6 @@
             this.groupBox1.Controls.Add(this.toDatepicker);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.fromDatepicker);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 13);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -102,21 +100,29 @@
             this.groupBox1.Text = "Búsqueda";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // comboUsuarios
+            // 
+            this.comboUsuarios.FormattingEnabled = true;
+            this.comboUsuarios.Location = new System.Drawing.Point(22, 63);
+            this.comboUsuarios.Name = "comboUsuarios";
+            this.comboUsuarios.Size = new System.Drawing.Size(232, 24);
+            this.comboUsuarios.TabIndex = 17;
+            // 
             // chUsuario
             // 
             this.chUsuario.AutoSize = true;
             this.chUsuario.Location = new System.Drawing.Point(22, 30);
             this.chUsuario.Name = "chUsuario";
-            this.chUsuario.Size = new System.Drawing.Size(71, 20);
+            this.chUsuario.Size = new System.Drawing.Size(56, 20);
             this.chUsuario.TabIndex = 16;
-            this.chUsuario.Tag = "com.td.usuario";
-            this.chUsuario.Text = "Usuario";
+            this.chUsuario.Tag = "com.td.alias";
+            this.chUsuario.Text = "Alias";
             this.chUsuario.UseVisualStyleBackColor = true;
             // 
             // chCriticidad
             // 
             this.chCriticidad.AutoSize = true;
-            this.chCriticidad.Location = new System.Drawing.Point(202, 30);
+            this.chCriticidad.Location = new System.Drawing.Point(278, 33);
             this.chCriticidad.Name = "chCriticidad";
             this.chCriticidad.Size = new System.Drawing.Size(81, 20);
             this.chCriticidad.TabIndex = 15;
@@ -127,7 +133,7 @@
             // chFecha
             // 
             this.chFecha.AutoSize = true;
-            this.chFecha.Location = new System.Drawing.Point(342, 30);
+            this.chFecha.Location = new System.Drawing.Point(418, 33);
             this.chFecha.Name = "chFecha";
             this.chFecha.Size = new System.Drawing.Size(63, 20);
             this.chFecha.TabIndex = 14;
@@ -160,7 +166,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(593, 66);
+            this.label3.Location = new System.Drawing.Point(669, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 16);
             this.label3.TabIndex = 12;
@@ -170,7 +176,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(339, 67);
+            this.label2.Location = new System.Drawing.Point(415, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 16);
             this.label2.TabIndex = 11;
@@ -181,7 +187,7 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(202, 60);
+            this.comboBox1.Location = new System.Drawing.Point(278, 63);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 10;
@@ -190,14 +196,14 @@
             // 
             this.toDatepicker.CustomFormat = "";
             this.toDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.toDatepicker.Location = new System.Drawing.Point(668, 63);
+            this.toDatepicker.Location = new System.Drawing.Point(744, 66);
             this.toDatepicker.MaxDate = new System.DateTime(2018, 9, 19, 0, 0, 0, 0);
             this.toDatepicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.toDatepicker.Name = "toDatepicker";
             this.toDatepicker.Size = new System.Drawing.Size(148, 22);
             this.toDatepicker.TabIndex = 6;
             this.toDatepicker.Value = new System.DateTime(2018, 9, 19, 0, 0, 0, 0);
-            this.toDatepicker.ValueChanged += new System.EventHandler(this.toDatepicker_ValueChanged);
+            
             // 
             // button1
             // 
@@ -214,30 +220,12 @@
             // 
             this.fromDatepicker.CustomFormat = "";
             this.fromDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fromDatepicker.Location = new System.Drawing.Point(414, 63);
+            this.fromDatepicker.Location = new System.Drawing.Point(490, 66);
             this.fromDatepicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.fromDatepicker.Name = "fromDatepicker";
             this.fromDatepicker.Size = new System.Drawing.Size(148, 22);
             this.fromDatepicker.TabIndex = 3;
-            this.fromDatepicker.ValueChanged += new System.EventHandler(this.fromDatepicker_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Contiene";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(84, 62);
-            this.textBox1.MaxLength = 30;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 1;
+            
             // 
             // BIT_FECHA
             // 
@@ -250,7 +238,7 @@
             // 
             // USU_ALIAS
             // 
-            this.USU_ALIAS.HeaderText = "Usuario";
+            this.USU_ALIAS.HeaderText = "Alias";
             this.USU_ALIAS.Name = "USU_ALIAS";
             this.USU_ALIAS.ReadOnly = true;
             this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -300,8 +288,6 @@
         private System.Windows.Forms.DateTimePicker toDatepicker;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DateTimePicker fromDatepicker;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -311,6 +297,7 @@
         private System.Windows.Forms.CheckBox chCriticidad;
         private System.Windows.Forms.CheckBox chFecha;
         private System.Windows.Forms.HelpProvider helpProvider1;
+        private System.Windows.Forms.ComboBox comboUsuarios;
         private System.Windows.Forms.DataGridViewTextBoxColumn BIT_FECHA;
         private System.Windows.Forms.DataGridViewTextBoxColumn USU_ALIAS;
         private System.Windows.Forms.DataGridViewTextBoxColumn BIT_CRITICIDAD_ID;

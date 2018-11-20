@@ -16,7 +16,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class FalloConexión : Form
     {
-        private Regex regex = new Regex("([A-Za-z0-9\\\\.-])");
+        private Regex regex = new Regex("([A-Za-z0-9\\\\.-ñÑ])");
         private Boolean valido = false;
         public FalloConexión()
         {
@@ -73,7 +73,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     else
                     {
                         MessageBox.Show("Conexión exitosa");
-                        servicioSeguridad.grabarBitacora(null, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
+                        //usuario sistema
+                        Usuario usu = new Usuario();
+                        usu.id = 1L;
+                        servicioSeguridad.grabarBitacora(usu, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
                         Login login = new Login();
 
                         this.Hide();
@@ -108,7 +111,9 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     {
                         MessageBox.Show("Conexión exitosa");
                         Login login = new Login();
-                        servicioSeguridad.grabarBitacora(null, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
+                        Usuario usu = new Usuario();
+                        usu.id = 1L;
+                        servicioSeguridad.grabarBitacora(usu, "Se regeneró el string de conexión", CriticidadEnum.ALTA);
                         this.Hide();
                         login.Show();
                         this.Close();

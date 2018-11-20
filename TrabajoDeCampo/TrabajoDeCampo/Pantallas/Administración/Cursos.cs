@@ -19,7 +19,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private ServicioSeguridad servicioSeguridad;
         private ServicioAdministracion servicioAdministracion;
         private Boolean valido  = false;
-        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9 ]+$");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9 ñÑ]+$");
         private Dictionary<String, String> traducciones;
         public Cursos()
         {
