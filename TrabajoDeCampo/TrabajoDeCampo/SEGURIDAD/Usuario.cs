@@ -117,7 +117,18 @@ namespace TrabajoDeCampo
         }
 
 
-
+        public String nombreCompleto
+        {
+            get { if (String.IsNullOrEmpty(this.apellido))
+                {
+                    return this.alias;
+                }
+                else
+                {
+                    return this.alias + ", " + this.apellido + " " + this.nombre;
+                }
+            }
+        }
 
 
 

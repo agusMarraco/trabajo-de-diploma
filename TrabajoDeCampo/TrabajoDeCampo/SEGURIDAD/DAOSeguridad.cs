@@ -188,6 +188,8 @@ namespace TrabajoDeCampo.DAO
                     switch (e.Message)
                     {
                         case "ALIAS":
+                            usu = new Usuario();
+                            usu.id = 1L;
                             this.grabarBitacora(usu, "Alguien se intento loguear con un alias incorrecto " + user, CriticidadEnum.MEDIA);
                             break;
                         case "PASS":
@@ -1399,7 +1401,8 @@ namespace TrabajoDeCampo.DAO
             usu.id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             this.grabarBitacora(usu, "Se regeneró una contraseña", CriticidadEnum.MEDIA);
             this.recalcularDigitoVertical("USUARIO");
-            desbloquearUsuario(idUsuario);
+            //La regeneracion de la contraseña no implica un desbloqueo del usuario
+            //desbloquearUsuario(idUsuario);
 
 
         }
@@ -2471,7 +2474,10 @@ namespace TrabajoDeCampo.DAO
             {
                 foreach (String item in mensajesDeError)
                 {
-                    this.grabarBitacora(null, item, CriticidadEnum.ALTA);
+                    //usuario custom para logueo de digitos verificadores
+                    Usuario usu = new Usuario();
+                    usu.id = 2L;
+                    this.grabarBitacora(usu, item, CriticidadEnum.ALTA);
                 }
                 throw new Exception("Falló la integridad de datos.");
             }

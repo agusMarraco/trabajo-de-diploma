@@ -39,17 +39,18 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         public void desbloquearControles()
         {
             long id = (long)TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearFamilia.ToString());
-            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarFamilias.ToString());
-            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarFamilia.ToString());
+            bool crear = servicioSeguridad.tienePatente(id, EnumPatentes.CrearUsuario.ToString());
+            bool modificar = servicioSeguridad.tienePatente(id, EnumPatentes.ModificarUsuario.ToString());
+            bool borrar = servicioSeguridad.tienePatente(id, EnumPatentes.BorrarUsuario.ToString());
             bool regen = servicioSeguridad.tienePatente(id, EnumPatentes.RegenerarContraseña.ToString());
             bool bloq = servicioSeguridad.tienePatente(id, EnumPatentes.BloquearUsuario.ToString());
-
+            bool unlock = servicioSeguridad.tienePatente(id, EnumPatentes.DesbloquearUsuario.ToString());
             this.btnCrear.Enabled = crear;
             this.btnMod.Enabled = modificar;
             this.btnDel.Enabled = borrar;
             this.btnBloq.Enabled = bloq;
             this.btnRegen.Enabled = regen;
+            this.btnDesbloquear.Enabled = unlock;
         }
 
 
@@ -292,6 +293,28 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             searchUsuarios(this.servicioSeguridad.listarUsuarios(null, null, null));
         }
 
-      
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //desbloquear usuario
+            if (gwUsuarios.CurrentRow != null && gwUsuarios.CurrentRow.DataBoundItem != null)
+            {
+                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                if (!result.Equals(DialogResult.OK))
+                {
+                    return;
+                }
+                Usuario usu = (Usuario)gwUsuarios.CurrentRow.DataBoundItem;
+                try
+                {
+                    servicioSeguridad.desbloquearUsuario(usu);
+                    MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                searchUsuarios(this.servicioSeguridad.listarUsuarios(null, null, null));
+            }
+        }
     }
 }

@@ -145,7 +145,7 @@ namespace TrabajoDeCampo.SERVICIO
 
         }
         public void desbloquearUsuario(Usuario usuario) {
-            this.regenerarContraseña(usuario);
+            this.daoSeguridad.desbloquearUsuario(usuario.id);
         }
 
         public void crearUsuario(Usuario usuario)
@@ -324,6 +324,9 @@ namespace TrabajoDeCampo.SERVICIO
             builder.Append(traducciones[codigos[0]]);
             builder.Append(Environment.NewLine);
             builder.Append(Environment.NewLine);
+            builder.Append(Environment.NewLine);
+            builder.Append("Alias: ");
+            builder.Append(usuario.alias);
             builder.Append(Environment.NewLine);
             builder.Append(traducciones[codigos[1]] + " ");
             builder.Append(password);

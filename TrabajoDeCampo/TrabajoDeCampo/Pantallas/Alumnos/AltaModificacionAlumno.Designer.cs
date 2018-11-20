@@ -100,7 +100,7 @@
             // dnitx
             // 
             this.dnitx.Location = new System.Drawing.Point(63, 86);
-            this.dnitx.MaxLength = 30;
+            this.dnitx.MaxLength = 9;
             this.dnitx.Name = "dnitx";
             this.dnitx.ShortcutsEnabled = false;
             this.dnitx.Size = new System.Drawing.Size(289, 20);

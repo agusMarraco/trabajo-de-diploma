@@ -115,7 +115,7 @@
             // dni
             // 
             this.dni.Location = new System.Drawing.Point(84, 61);
-            this.dni.MaxLength = 20;
+            this.dni.MaxLength = 9;
             this.dni.Name = "dni";
             this.dni.ShortcutsEnabled = false;
             this.dni.Size = new System.Drawing.Size(296, 20);

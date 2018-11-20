@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabajoDeCampo.Pantallas.Reports;
@@ -23,6 +24,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private DataGridViewColumn currentSort;
         private String currentSortMode = " ASC ";
         private Dictionary<string, string> traducciones;
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9 ñÑ]+$");
 
         public Bitácora()
         {
@@ -75,7 +77,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             List<String> tags = new List<string>();
             long id = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
             traductor.process(tags, this, null, null);
-            tags.AddRange(new string[] { "com.td.criticidad.alta", "com.td.criticidad.media", "com.td.criticidad.baja" });
+            tags.AddRange(new string[] { "com.td.criticidad.alta", "com.td.rango.fecha.invalido", "com.td.criticidad.media", "com.td.criticidad.baja" });
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -87,10 +89,26 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             criticidad.Add(new KeyValuePair<long, string>(3, traducciones["com.td.criticidad.baja"]));
             this.comboBox1.DisplayMember = "value";
 
+
+            this.comboUsuarios.KeyPress += validarAlphaKP;
+            //agregando la llamada a los usuarios
+            List<Usuario> usuarios = this.servicioSeguridad.listarUsuarios(null, null, null);
+
+            //agregando los 2 usuarios custom
+            Usuario usuSYS = new Usuario();
+            Usuario usuDV = new Usuario();
+            usuSYS.alias = "SYS";
+            usuDV.alias = "DV";
+            usuarios.Add(usuSYS);
+            usuarios.Add(usuDV);
+            this.comboUsuarios.DataSource = null;
+            this.comboUsuarios.ValueMember = "alias";
+            this.comboUsuarios.DisplayMember = "nombreCompleto";
+            this.comboUsuarios.DataSource = usuarios;
             this.comboBox1.DataSource = criticidad;
             this.comboBox1.SelectedItem = this.comboBox1.Items[0];
             this.toDatepicker.MaxDate = DateTime.Now.AddMilliseconds(5);
-            this.fromDatepicker.MaxDate = DateTime.Now.AddMilliseconds(5);
+            this.fromDatepicker.MaxDate = this.toDatepicker.MaxDate;
             this.toDatepicker.Value = this.toDatepicker.MaxDate;
             this.fromDatepicker.Value  = this.fromDatepicker.MaxDate;
 
@@ -105,7 +123,16 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             currentSortMode = " ASC ";
             DataSet response = new DataSet();
             DataTable table;
-            String userText = this.textBox1.Text.Trim().Replace(" ", "");
+            String userText = "";
+            
+            if(this.comboUsuarios.SelectedItem != null)
+            {
+                userText = this.comboUsuarios.SelectedValue.ToString();
+            }
+            else
+            {
+                userText = this.comboUsuarios.Text;
+            }
             response = this.servicioSeguridad.listarBitacora(null, null, null);
             table = response.Tables[0];
             StringBuilder sb = new StringBuilder();
@@ -116,6 +143,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             }
             if (this.chFecha.Checked)
             {
+                if (this.fromDatepicker.Value > this.toDatepicker.Value)
+                {
+                    MessageBox.Show(traducciones["com.td.rango.fecha.invalido"]);
+                    return;
+                }
                 seBuscoForFecha = true;
                 long id = ((KeyValuePair<long, String>)this.comboBox1.SelectedItem).Key;
                 if (sb.Length > 0)
@@ -144,16 +176,6 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 this.dataGridView1.DataSource = null;
                 this.dataGridView1.DataSource = table;
 
-        }
-
-        private void fromDatepicker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toDatepicker_ValueChanged(object sender, EventArgs e)
-        {
-            this.fromDatepicker.MaxDate = this.toDatepicker.Value;
         }
 
       
@@ -289,6 +311,17 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void validarAlphaKP(object sender, KeyPressEventArgs e)
+        {
+            if (!e.KeyChar.Equals('\b'))//tecla borrar
+            {
+                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
+                {
+                    e.Handled = true;
+                }
+            }
         }
     }
 }

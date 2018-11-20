@@ -16,7 +16,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
     public partial class CambiarContraseña : Form
     {
         private ServicioSeguridad servicioSeguridad;
-        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9]+$");
+        private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9ñÑ]+$");
         private Boolean valido = false;
         private Dictionary<string, string> traducciones;
 

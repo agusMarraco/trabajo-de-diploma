@@ -23,7 +23,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             InitializeComponent();
             servicioSeguridad = new SERVICIO.ServicioSeguridad();
 
-
+            this.GotFocus += correrValidaciones;
             desbloquearControles();
 
             //traducciones
@@ -37,6 +37,11 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
+        }
+
+        private void correrValidaciones(object sender, EventArgs e)
+        {
+            desbloquearControles();
         }
 
         public void desbloquearControles()
@@ -84,7 +89,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 this.permisoMenuITem.Enabled = verPermisos;
                 this.restaurarToolStripMenuItem.Enabled = restore;
                 this.respaldarToolStripMenuItem.Enabled = backup;
-                this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = digitos;
+                //Los digitos solo se van a habilitar si el sistema esta bloqueado.
+                //this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = digitos ;
                 this.bitácoraToolStripMenuItem.Enabled = bitacora;
 
                 if (verUsuarios || verPermisos || restore || backup || digitos || bitacora)
