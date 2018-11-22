@@ -22,7 +22,7 @@ namespace TrabajoDeCampo.DAO
         public List<PlanillaDeEvaluacion> listarPlanillas(String filtro, String valor, String orden) { return null; }
         public void CerrarTrimestre(long numeroTrimestre, PlanillaDeEvaluacion planilla) { }
 
-        public Boolean verificarCantidadDeNotas(long numeroTrimestre, PlanillaDeEvaluacion planilla) { return true; }
+        public Boolean verificarCantidadDeNotas(long trimestre, PlanillaDeEvaluacion planilla) { return true; }
         public void calcularNotaFinal(PlanillaDeEvaluacion planilla) { }
 
         public List<PlanillaDeEvaluacion> listarMateriasDesaprobadasPorAlumno(Alumno alumno) { return null; }

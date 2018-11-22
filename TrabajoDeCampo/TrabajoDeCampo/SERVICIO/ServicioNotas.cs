@@ -20,15 +20,15 @@ namespace TrabajoDeCampo.SERVICIO
 
         //notas de mesa
 
-        public List<NotaAbstracta> listarNotas(String filtro, String valor, String orden) { return null; }
+        public List<NotaAbstracta> listarNotas(String filtro, String valor, String orden, String tipoDeNota) { return null; }
 
 
         //notas regulares
         public List<Alumno> buscarAlumnosPorNivCurMat(long idNivel, long idCurso, long idMateria) { return null; }
 
-        public void guardarNota(Nota nota) { }
+        public void guardarNota(NotaAbstracta nota , String tipo) { }
 
-        public void modificarNota(Nota nota) { }
+        public void modificarNota(NotaAbstracta nota, String tipo) { }
 
 
         //planillas de evaluacion

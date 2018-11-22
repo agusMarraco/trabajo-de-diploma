@@ -2856,7 +2856,7 @@ namespace TrabajoDeCampo.DAO
             return traducciones;
         }
 
-        public void actualizaConexión() // deprecado
+        public Boolean actualizaConexión() // deprecado
         {
             throw new System.NotImplementedException();
         }

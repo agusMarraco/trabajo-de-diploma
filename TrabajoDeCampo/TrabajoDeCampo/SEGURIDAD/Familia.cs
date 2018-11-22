@@ -37,7 +37,7 @@ namespace TrabajoDeCampo
 
         public override void sacarComponente(ComponentePermiso componente) { }
 
-        public override String MostrarInformacion(ComponentePermiso componente)
+        public override String MostrarInformacion()
         {
             return "";
         }

@@ -65,7 +65,7 @@ namespace TrabajoDeCampo.SERVICIO
             return this.daoSeguridad.listarFamiliasYPatentes();
         }
 
-        public void actualizarFamiliaPatente(List<Patente> pantentes) { } //deprecado
+        public void actualizarFamiliaPatente(List<Patente> pantentes, Familia familia) { } //deprecado
 
         public Boolean tienePatente(long idUsuario, String codigoPantente) {
             return this.daoSeguridad.tienePatente(idUsuario, codigoPantente);

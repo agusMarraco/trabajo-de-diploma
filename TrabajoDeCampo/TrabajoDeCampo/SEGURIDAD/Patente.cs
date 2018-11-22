@@ -33,7 +33,7 @@ namespace TrabajoDeCampo
             set { _familia = value; }
         }
 
-        public override String MostrarInformacion(ComponentePermiso componente)
+        public override String MostrarInformacion()
         {
             return this.descripcion;
         }

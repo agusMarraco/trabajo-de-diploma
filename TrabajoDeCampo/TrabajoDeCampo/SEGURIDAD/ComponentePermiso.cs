@@ -12,7 +12,7 @@ namespace TrabajoDeCampo.BO
 
         public virtual void sacarComponente(ComponentePermiso componente) { }
 
-        public virtual String MostrarInformacion(ComponentePermiso componente) {
+        public virtual String MostrarInformacion() {
             return "";
         }
     }
