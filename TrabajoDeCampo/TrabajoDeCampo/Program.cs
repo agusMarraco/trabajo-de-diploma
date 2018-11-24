@@ -30,8 +30,7 @@ namespace TrabajoDeCampo
             TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(connection));
             String master = "Data Source = " + machineName + " ; Initial Catalog = master ; Integrated Security = True";
             TrabajoDeCampo.Properties.Settings.Default.MasterString = Convert.ToBase64String(Encoding.UTF8.GetBytes(master));
-            if (!File.Exists("exception.txt"))
-                File.Create("exception.txt");
+        
 
             Boolean seConecto = true;
             
@@ -76,11 +75,7 @@ namespace TrabajoDeCampo
         private static void handler(object sender, UnhandledExceptionEventArgs e)
         {
             
-            StreamWriter stream = new StreamWriter("exception.txt", true);
-            
-            stream.WriteLine(((Exception)e.ExceptionObject).Message + Environment.NewLine);
-            stream.Close();
-
+       
 
         }
         public void dataEncriptada() {

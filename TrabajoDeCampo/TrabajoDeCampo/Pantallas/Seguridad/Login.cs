@@ -69,7 +69,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 usuario.id = 1L;
                 StringBuilder sb = new StringBuilder();
                 sb.Append("Alguien intentó ingresar sin completar los campos");
-                if(String.IsNullOrEmpty(user))
+                if(!String.IsNullOrEmpty(user))
                     sb.Append(", con este alias: " + user);
                 servicioSeguridad.grabarBitacora(usuario, sb.ToString(), CriticidadEnum.ALTA);
                 MessageBox.Show("Complete los campos requeridos");

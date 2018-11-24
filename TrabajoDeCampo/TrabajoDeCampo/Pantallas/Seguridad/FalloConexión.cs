@@ -93,9 +93,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     String mcs = "Data Source=" + this.textBox1.Text + ";Initial Catalog=master;Integrated Security=True";
 
                     
-                    StreamWriter stream = new StreamWriter("exception.txt", true);
-                    stream.WriteLine(cs + Environment.NewLine);
-                    stream.Close();
+                
                     TrabajoDeCampo.Properties.Settings.Default.ConnectionString = Convert.ToBase64String(Encoding.UTF8.GetBytes(cs));
                     TrabajoDeCampo.Properties.Settings.Default.MasterString = Convert.ToBase64String(Encoding.UTF8.GetBytes(mcs));
 

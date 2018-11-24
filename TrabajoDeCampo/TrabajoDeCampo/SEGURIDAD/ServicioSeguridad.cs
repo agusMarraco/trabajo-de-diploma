@@ -48,10 +48,7 @@ namespace TrabajoDeCampo.SERVICIO
             }
             catch (Exception EX)
             {
-                
-                StreamWriter stream = new StreamWriter("exception.txt",true);
-                stream.WriteLine(EX.Message + Environment.NewLine);
-                stream.Close();
+         
                 
                 conectado = false;
 

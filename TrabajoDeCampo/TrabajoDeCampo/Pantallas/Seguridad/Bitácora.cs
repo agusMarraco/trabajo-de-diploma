@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -107,8 +108,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             this.comboUsuarios.DataSource = usuarios;
             this.comboBox1.DataSource = criticidad;
             this.comboBox1.SelectedItem = this.comboBox1.Items[0];
-            this.toDatepicker.MaxDate = DateTime.Now.AddMilliseconds(5);
-            this.fromDatepicker.MaxDate = this.toDatepicker.MaxDate;
+            this.toDatepicker.MaxDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
+            this.fromDatepicker.MaxDate = DateTime.Now.Date;
             this.toDatepicker.Value = this.toDatepicker.MaxDate;
             this.fromDatepicker.Value  = this.fromDatepicker.MaxDate;
 
@@ -149,11 +150,14 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     return;
                 }
                 seBuscoForFecha = true;
+                DateTime from = this.fromDatepicker.Value.Date;
+                DateTime to = new DateTime(this.toDatepicker.Value.Date.Year,
+                    this.toDatepicker.Value.Date.Month, this.toDatepicker.Value.Date.Day,23,59,59);
+                
                 long id = ((KeyValuePair<long, String>)this.comboBox1.SelectedItem).Key;
                 if (sb.Length > 0)
                     sb.Append(" AND ");
-
-                sb.Append(" BIT_FECHA > #" + this.fromDatepicker.Value + "# AND BIT_FECHA < #" + this.toDatepicker.Value+ "#");
+                sb.Append(" BIT_FECHA >= #" + from.ToString("MM/dd/yyyy HH:mm:ss") + "# AND BIT_FECHA <= #" + to.ToString("MM/dd/yyyy HH:mm:ss") + "#");
             }
             if (this.chUsuario.Checked)
             {
