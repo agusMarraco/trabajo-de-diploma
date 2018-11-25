@@ -170,9 +170,10 @@ namespace TrabajoDeCampo.Pantallas.Alumnos
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             //validaciones
             if (String.IsNullOrEmpty(this.nombretx.Text) || String.IsNullOrEmpty(this.apellidotx.Text) || String.IsNullOrEmpty(this.dnitx.Text)
-                || String.IsNullOrEmpty(this.domicilotx.Text))
+                || String.IsNullOrEmpty(this.domicilotx.Text) || cursocombo.SelectedItem == null)
             {
                 MessageBox.Show(traducciones["com.td.complete.campos"]);
                 return;

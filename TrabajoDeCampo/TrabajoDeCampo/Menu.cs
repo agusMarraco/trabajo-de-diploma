@@ -103,7 +103,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 this.seguridadToolStripMenuItem.Enabled = true;
                 this.restaurarToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.RestaurarBackup.ToString());
                 this.recalcularDígitosVerificadoresToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.RecalcularDígitosVerificadores.ToString());
-                this.respaldarToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarBackups.ToString());
+                //Deshabilito el boton de backup cuando el sistema esta bloqueado
+                //this.respaldarToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.GenerarBackups.ToString());
                 this.backupToolStripMenuItem.Enabled = true;
                 this.bitácoraToolStripMenuItem.Enabled = servicioSeguridad.tienePatente(id, EnumPatentes.VerBitácora.ToString()); ;
             }

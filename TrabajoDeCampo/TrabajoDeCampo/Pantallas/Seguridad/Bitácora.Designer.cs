@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bitácora));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_CRITICIDAD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BIT_MENSAJE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboUsuarios = new System.Windows.Forms.ComboBox();
             this.chUsuario = new System.Windows.Forms.CheckBox();
@@ -44,10 +48,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.fromDatepicker = new System.Windows.Forms.DateTimePicker();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-            this.BIT_FECHA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.USU_ALIAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BIT_CRITICIDAD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BIT_MENSAJE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +73,37 @@
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(1044, 292);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // BIT_FECHA
+            // 
+            this.BIT_FECHA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.BIT_FECHA.HeaderText = "Fecha";
+            this.BIT_FECHA.Name = "BIT_FECHA";
+            this.BIT_FECHA.ReadOnly = true;
+            this.BIT_FECHA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.BIT_FECHA.Width = 200;
+            // 
+            // USU_ALIAS
+            // 
+            this.USU_ALIAS.HeaderText = "Alias";
+            this.USU_ALIAS.Name = "USU_ALIAS";
+            this.USU_ALIAS.ReadOnly = true;
+            this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_CRITICIDAD_ID
+            // 
+            this.BIT_CRITICIDAD_ID.HeaderText = "Criticidad";
+            this.BIT_CRITICIDAD_ID.Name = "BIT_CRITICIDAD_ID";
+            this.BIT_CRITICIDAD_ID.ReadOnly = true;
+            this.BIT_CRITICIDAD_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // BIT_MENSAJE
+            // 
+            this.BIT_MENSAJE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BIT_MENSAJE.HeaderText = "Descripción";
+            this.BIT_MENSAJE.Name = "BIT_MENSAJE";
+            this.BIT_MENSAJE.ReadOnly = true;
+            this.BIT_MENSAJE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // groupBox1
             // 
@@ -203,7 +234,6 @@
             this.toDatepicker.Size = new System.Drawing.Size(148, 22);
             this.toDatepicker.TabIndex = 6;
             this.toDatepicker.Value = new System.DateTime(2018, 9, 19, 0, 0, 0, 0);
-            
             // 
             // button1
             // 
@@ -219,44 +249,12 @@
             // fromDatepicker
             // 
             this.fromDatepicker.CustomFormat = "";
-            this.fromDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.fromDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.fromDatepicker.Location = new System.Drawing.Point(490, 66);
             this.fromDatepicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.fromDatepicker.Name = "fromDatepicker";
             this.fromDatepicker.Size = new System.Drawing.Size(148, 22);
             this.fromDatepicker.TabIndex = 3;
-            
-            // 
-            // BIT_FECHA
-            // 
-            this.BIT_FECHA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.BIT_FECHA.HeaderText = "Fecha";
-            this.BIT_FECHA.Name = "BIT_FECHA";
-            this.BIT_FECHA.ReadOnly = true;
-            this.BIT_FECHA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.BIT_FECHA.Width = 200;
-            // 
-            // USU_ALIAS
-            // 
-            this.USU_ALIAS.HeaderText = "Alias";
-            this.USU_ALIAS.Name = "USU_ALIAS";
-            this.USU_ALIAS.ReadOnly = true;
-            this.USU_ALIAS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // BIT_CRITICIDAD_ID
-            // 
-            this.BIT_CRITICIDAD_ID.HeaderText = "Criticidad";
-            this.BIT_CRITICIDAD_ID.Name = "BIT_CRITICIDAD_ID";
-            this.BIT_CRITICIDAD_ID.ReadOnly = true;
-            this.BIT_CRITICIDAD_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // BIT_MENSAJE
-            // 
-            this.BIT_MENSAJE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BIT_MENSAJE.HeaderText = "Descripción";
-            this.BIT_MENSAJE.Name = "BIT_MENSAJE";
-            this.BIT_MENSAJE.ReadOnly = true;
-            this.BIT_MENSAJE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // Bitácora
             // 
