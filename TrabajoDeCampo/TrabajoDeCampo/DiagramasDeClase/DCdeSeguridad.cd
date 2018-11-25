@@ -103,6 +103,7 @@
     <Position X="10" Y="0.5" Width="2.75" />
     <Members>
       <Field Name="_daoSeguridad" Hidden="true" />
+      <Method Name="ServicioSeguridad" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>CMBAhAQEIIIhBAQgAAAgAAgAgYEAFAYgBAABAAEAAAA=</HashCode>
