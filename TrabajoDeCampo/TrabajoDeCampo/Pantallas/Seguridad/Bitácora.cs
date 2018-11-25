@@ -26,6 +26,8 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private String currentSortMode = " ASC ";
         private Dictionary<string, string> traducciones;
         private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9 ñÑ]+$");
+        private List<KeyValuePair<long, String>> criticidad;
+        List<Usuario> usuarios;
 
         public Bitácora()
         {
@@ -47,23 +49,61 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             DataTable table = set.Tables[0];
             this.dataGridView1.ColumnHeaderMouseClick += sorting;
             this.dataGridView1.DataMember = "";
-            this.dataGridView1.DataSource = table;
+            //this.dataGridView1.DataSource = table; deshabilito el default search
+            this.chUsuario.CheckedChanged += eventoCheckbox;
+            this.chFecha.CheckedChanged += eventoCheckbox;
+            this.chCriticidad.CheckedChanged += eventoCheckbox;
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void eventoCheckbox(object sender, EventArgs e)
         {
-           
+            String chName = ((CheckBox)sender).Name;
+            CheckBox check = ((CheckBox)sender);
+            if (chName.Equals("chUsuario"))
+            {
+                if (check.CheckState.Equals(CheckState.Checked)){
+                    this.comboUsuarios.Enabled = true;
+                    this.comboUsuarios.DataSource = null;
+                    this.comboUsuarios.ValueMember = "alias";
+                    this.comboUsuarios.DisplayMember = "nombreCompleto";
+                    this.comboUsuarios.DataSource = usuarios;
+                }
+                else
+                {
+                    this.comboUsuarios.Enabled = false;
+                    this.comboUsuarios.DataSource = null;
+                }
+            }
+            else if (chName.Equals("chCriticidad"))
+            {
+                if (check.CheckState.Equals(CheckState.Checked))
+                {
+                    this.comboBox1.Enabled = true;
+                    this.comboBox1.DataSource = criticidad;
+                    this.comboBox1.DisplayMember = "value";
+                    this.comboBox1.SelectedItem = this.comboBox1.Items[0];
+                }
+                else
+                {
+                    this.comboBox1.Enabled = false;
+                    this.comboBox1.DataSource = null;
+                }
+            }
+            else if (chName.Equals("chFecha"))
+            {
+                if (check.CheckState.Equals(CheckState.Checked))
+                {
+                    this.fromDatepicker.Enabled = true;
+                    this.toDatepicker.Enabled = true;
+                }
+                else
+                {
+                    this.fromDatepicker.Enabled = false;
+                    this.toDatepicker.Enabled = false;
+                }
+            }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Bitácora_Load(object sender, EventArgs e)
         {
@@ -83,17 +123,18 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
             traductor = new TraductorIterador();
-            List<KeyValuePair<long, String>> criticidad = new List<KeyValuePair<long, string>>();
 
+            //data del dropdown de seguridad
+            criticidad = new List<KeyValuePair<long, string>>();
             criticidad.Add(new KeyValuePair<long, string>(1, traducciones["com.td.criticidad.alta"]));
             criticidad.Add(new KeyValuePair<long, string>(2, traducciones["com.td.criticidad.media"]));
             criticidad.Add(new KeyValuePair<long, string>(3, traducciones["com.td.criticidad.baja"]));
-            this.comboBox1.DisplayMember = "value";
+
 
 
             this.comboUsuarios.KeyPress += validarAlphaKP;
             //agregando la llamada a los usuarios
-            List<Usuario> usuarios = this.servicioSeguridad.listarUsuarios(null, null, null);
+            usuarios = this.servicioSeguridad.listarUsuarios(null, null, null);
 
             //agregando los 2 usuarios custom
             Usuario usuSYS = new Usuario();
@@ -102,16 +143,17 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             usuDV.alias = "DV";
             usuarios.Add(usuSYS);
             usuarios.Add(usuDV);
-            this.comboUsuarios.DataSource = null;
-            this.comboUsuarios.ValueMember = "alias";
-            this.comboUsuarios.DisplayMember = "nombreCompleto";
-            this.comboUsuarios.DataSource = usuarios;
-            this.comboBox1.DataSource = criticidad;
-            this.comboBox1.SelectedItem = this.comboBox1.Items[0];
+
+            //end usuario
+            //data de los datepickers
             this.toDatepicker.MaxDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
             this.fromDatepicker.MaxDate = DateTime.Now.Date;
             this.toDatepicker.Value = this.toDatepicker.MaxDate;
             this.fromDatepicker.Value  = this.fromDatepicker.MaxDate;
+            this.comboUsuarios.Enabled = false;
+            this.comboBox1.Enabled = false;
+            this.fromDatepicker.Enabled = false;
+            this.toDatepicker.Enabled = false;
 
         }
 
@@ -153,8 +195,6 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 DateTime from = this.fromDatepicker.Value.Date;
                 DateTime to = new DateTime(this.toDatepicker.Value.Date.Year,
                     this.toDatepicker.Value.Date.Month, this.toDatepicker.Value.Date.Day,23,59,59);
-                
-                long id = ((KeyValuePair<long, String>)this.comboBox1.SelectedItem).Key;
                 if (sb.Length > 0)
                     sb.Append(" AND ");
                 sb.Append(" BIT_FECHA >= #" + from.ToString("MM/dd/yyyy HH:mm:ss") + "# AND BIT_FECHA <= #" + to.ToString("MM/dd/yyyy HH:mm:ss") + "#");

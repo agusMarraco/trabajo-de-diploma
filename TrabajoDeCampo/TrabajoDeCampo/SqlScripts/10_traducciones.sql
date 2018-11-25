@@ -38,7 +38,7 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.media',( 
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.justificada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Justificada')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.teléfonos',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Teléfonos')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.familia',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Familia')
-insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.bloqueada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Bloqueada')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.bloqueada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Negada')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.patente',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Patente')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.asignada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Asignada')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.dirección',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Dirección')
@@ -175,6 +175,8 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.tutor.asi
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.mismo.usuario',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'No puede borrarse o bloquearse a si mismo')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'La capacidad del curso fue excedida')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.rango.fecha.invalido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Rango de fechas inválido')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.header.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Se detectó actividad sospechosa en su cuenta')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.body.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Por seguridad, se generó esta nueva contraseña:')
 
 
 -- Ingles
@@ -217,7 +219,7 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.media',( 
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.justificada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Justified')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.teléfonos',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Telephones')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.familia',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Family')
-insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.bloqueada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Blocked')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.bloqueada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Denied')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.patente',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Patent')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.asignada',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Assigned')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.dirección',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Address')
@@ -354,3 +356,5 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.tutor.asi
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.mismo.usuario',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'You can´t delete or block yourself')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'The course capacity is over the limit')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.rango.fecha.invalido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Invalid Date Range')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.header.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Suspicious activity detected in your account')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.body.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'For security, this password was generated:')

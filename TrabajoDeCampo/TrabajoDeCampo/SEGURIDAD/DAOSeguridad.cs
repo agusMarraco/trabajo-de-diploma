@@ -200,7 +200,18 @@ namespace TrabajoDeCampo.DAO
                         case "BLOQUEADO":
                             usu = new Usuario();
                             usu.id = idUsuario;
+                            TrabajoDeCampo.Properties.Settings.Default.SessionUser = idUsuario;
                             this.grabarBitacora(usu, "Un usuario bloqueado se intento loguear  " + user, CriticidadEnum.ALTA);
+                            this.desbloquearUsuario(idUsuario);
+                            usu.idioma = new Idioma();
+                            usu.idioma.codigo = idioma;
+                            usu.alias = user;
+                            String passNuevo = SeguridadUtiles.generarPassword();
+                            String stringEncriptado = SeguridadUtiles.encriptarMD5(passNuevo);
+                            this.regenerarContraseña(idUsuario, stringEncriptado);
+                            new SERVICIO.ServicioSeguridad().enviarMail(passNuevo, usu,true);
+                            TrabajoDeCampo.Properties.Settings.Default.SessionUser = 0;
+                            this.grabarBitacora(usu, "Se mando una nueva contraseña al usuario  " + user, CriticidadEnum.ALTA);
                             break;
                         case "PERMISOS":
                             usu = new Usuario();
@@ -1334,7 +1345,7 @@ namespace TrabajoDeCampo.DAO
             return repetido;
         } 
         /// <summary>
-        /// regenero contraseña y seteo el contador de bloqueo en 1.
+        /// regenero contraseña 
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <param name="passEncriptado"></param>

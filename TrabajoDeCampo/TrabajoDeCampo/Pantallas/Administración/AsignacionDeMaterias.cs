@@ -254,6 +254,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
                         List<Materia> materias = this.asignadas;
                         this.administracion.actualizarMateriasAsignadas(nivelSeleccionado, materias);
                         MessageBox.Show(traducciones["com.td.completado"]);
+                        this.Close();
                       }
                     catch (Exception ex)
                     {

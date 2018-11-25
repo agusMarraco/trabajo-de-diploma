@@ -73,11 +73,17 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     sb.Append(", con este alias: " + user);
                 servicioSeguridad.grabarBitacora(usuario, sb.ToString(), CriticidadEnum.ALTA);
                 MessageBox.Show("Complete los campos requeridos");
+                this.txtUsername.Clear();
+                this.txtPassword.Clear();
+                this.txtUsername.Focus();
                 return;
             }
             if (!alphanumericRegex.IsMatch(user) || !alphanumericRegex.IsMatch(pass))
             {
                 MessageBox.Show("Los campos solo admiten letras y números");
+                this.txtUsername.Clear();
+                this.txtPassword.Clear();
+                this.txtUsername.Focus();
                 return;
             }
             try
@@ -94,21 +100,32 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 String mensaje = ex.Message;
                 if(mensaje == "ALIAS" || mensaje == "PASS")
                 {
-                    MessageBox.Show("Su usuario o contraseña son incorrectos: ");
+                    MessageBox.Show("Su usuario o contraseña son incorrectos");
+                    this.txtUsername.Clear();
+                    this.txtPassword.Clear();
+                    this.txtUsername.Focus();
                 }
                 else if(mensaje == "BLOQUEADO" )
                 {
-                    MessageBox.Show("su usuario se encuentra bloqueado, comuniquese con el administrador");
+                    MessageBox.Show("Su usuario se encuentra bloqueado, se ha restablecido su contraseña y enviado la misma a su mail");
+                    this.txtUsername.Clear();
+                    this.txtPassword.Clear();
+                    this.txtUsername.Focus();
                 }
                 else if (mensaje == "PERMISOS")
                 {
 
                  MessageBox.Show("El sistema se encuentra bloqueado, contacte al administrador");
+                    this.txtUsername.Clear();
+                    this.txtPassword.Clear();
+                    this.txtUsername.Focus();
                 }
                 else 
                 {
                     MessageBox.Show("A ocurrido un error inesperado: " + mensaje);
-
+                    this.txtUsername.Clear();
+                    this.txtPassword.Clear();
+                    this.txtUsername.Focus();
                 }
 
 

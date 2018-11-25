@@ -129,7 +129,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "com.td.búsqueda";
             this.groupBox1.Text = "Búsqueda";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // comboUsuarios
             // 

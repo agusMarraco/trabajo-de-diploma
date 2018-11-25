@@ -21,6 +21,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private List<Nivel> niveles;
         private List<Curso> cursos;
         private Dictionary<String, String> traducciones;
+        private Curso ultimoCursoSeleccionado = null;
         public PromocionDeAlumnos()
         {
             InitializeComponent();
@@ -41,16 +42,17 @@ namespace TrabajoDeCampo.Pantallas.Administración
             DataGridView view = sender as DataGridView;
             if(view.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1)
             {
-                DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
-                if (!result.Equals(DialogResult.OK))
-                {
-                    return;
-                }
+               
                 string tag = view.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag.ToString();
                 if (tag.Equals("Promocionar"))
                 {
                     if(this.comboBox3.SelectedItem != null)
                     {
+                        DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                        if (!result.Equals(DialogResult.OK))
+                        {
+                            return;
+                        }
                         Curso curso = this.comboBox3.SelectedItem as Curso;
                         Alumno alu = this.dataGridView1.CurrentRow.DataBoundItem as Alumno;
                         try
@@ -61,7 +63,14 @@ namespace TrabajoDeCampo.Pantallas.Administración
                                 MessageBox.Show(traducciones["com.td.excedido"], "", MessageBoxButtons.OK);
                             }
                             MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
-                            this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, null);
+                            if(ultimoCursoSeleccionado!= null)
+                            {
+                                this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, ultimoCursoSeleccionado);
+                            }
+                            else
+                            {
+                                this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, null);
+                            }
 
                         }
                         catch (Exception ex)
@@ -74,12 +83,25 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 }
                 else
                 {
+                    DialogResult result = MessageBox.Show(traducciones["com.td.seguro"], "", MessageBoxButtons.OKCancel);
+                    if (!result.Equals(DialogResult.OK))
+                    {
+                        return;
+                    }
                     Alumno alu = this.dataGridView1.CurrentRow.DataBoundItem as Alumno;
                     try
                     {
                         this.servicioAlumnos.borrarAlumno(alu);
                         MessageBox.Show(traducciones["com.td.completado"], "", MessageBoxButtons.OK);
-                        this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, null);
+                        if (ultimoCursoSeleccionado != null)
+                        {
+                            this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, ultimoCursoSeleccionado);
+                        }
+                        else
+                        {
+                            this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, null);
+                        }
+
 
                     }
                     catch (Exception ex)
@@ -103,7 +125,12 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.helpProvider1.SetHelpKeyword(this, Properties.Settings.Default.Idioma.Equals("es") ? "Promoción_de_Alumnos.htm" : "Student_Promotion.htm");
             this.helpProvider1.HelpNamespace = Application.StartupPath + @"\\DocumentsDeAyuda.chm";
-            niveles = administracion.listarNiveles(null, null, null);
+            niveles = new List<Nivel>();
+            Nivel fakeNivel = new Nivel();
+            fakeNivel.codigo = "";
+            niveles.Add(fakeNivel);
+            List<Nivel> tempo = administracion.listarNiveles(null, null, null);
+            niveles.AddRange(tempo);
             this.comboNivel.DataSource = niveles;
             this.comboNivel.DisplayMember = "codigo";
             cursos = administracion.listarCursos(null, null, null);
@@ -147,7 +174,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         {
             this.comboCurso.DataSource = null;
             this.comboCurso.DisplayMember = "codigo";
-            if(cursos!=null)
+            if(cursos!=null && this.comboNivel.SelectedItem != null)
                 this.comboCurso.DataSource = cursos.Where(x => x.nivel.id.Equals(((Nivel)this.comboNivel.SelectedItem).id)).ToArray();
         }
 
@@ -161,13 +188,23 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 Nivel[] tempNivs = new Nivel[2];
                 this.comboBox3.DataSource = null;
                 if (año != 6){
+                    // no es un egreso
                     if (alu.orientacion.codigo == "null")
                     {
-                        tempNivs = niveles.Where(x => (x.codigo.Contains((año + 1).ToString()))).ToArray();
+                        tempNivs = niveles.Where(x => (x.codigo.Contains((año + 1).ToString())) && x.materia != null).ToArray();
                     }
                     else
                     {
-                        nivelSiguiente = niveles.Where(x => (x.codigo.Contains((año + 1).ToString())) && (x.orientacion.codigo.Equals(alu.orientacion.codigo))).First();
+                        List<Nivel> temp = niveles.Where(x => (x.codigo.Contains((año + 1).ToString())) && (x.orientacion.codigo.Equals(alu.orientacion.codigo)) && x.materia != null).ToList();
+                        if(temp.Count > 0)
+                        {
+                            nivelSiguiente = temp.First();
+                        }
+                        else
+                        {
+                            nivelSiguiente = null;
+                        }
+                            
                     }
                     this.comboBox3.DataSource = null;
                     if(nivelSiguiente != null)
@@ -176,7 +213,8 @@ namespace TrabajoDeCampo.Pantallas.Administración
                     }
                     else
                     {
-                        this.comboBox3.DataSource = cursos.Where(x => x.nivel.id.Equals(tempNivs[0].id) || x.nivel.id.Equals(tempNivs[1].id)).ToArray();
+                        if(tempNivs != null && tempNivs.Length > 0 && tempNivs[0]!=null)
+                        this.comboBox3.DataSource = cursos.Where(x => (tempNivs.Length > 0 && x.nivel.id.Equals(tempNivs[0].id)) || (tempNivs.Length > 1 && x.nivel.id.Equals(tempNivs[1].id))).ToArray();
                     }
                 }
                
@@ -193,11 +231,14 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 if(nivel != null && curso != null)
                 {
                     this.dataGridView1.DataSource = null;
+                    ultimoCursoSeleccionado = curso;
                     this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, curso);
                 }
                 else
                 {
-                    MessageBox.Show(traducciones["com.td.seleccione.busqueda"]);
+                    this.ultimoCursoSeleccionado = null;
+                    this.dataGridView1.DataSource = null;
+                    this.dataGridView1.DataSource = this.administracion.listarAlumnosPorCursoYNivel(null, null);
                 }
                 
             }

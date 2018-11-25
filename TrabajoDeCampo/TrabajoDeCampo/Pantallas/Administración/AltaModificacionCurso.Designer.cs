@@ -55,6 +55,7 @@
             // 
             // txtLetra
             // 
+            this.txtLetra.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLetra.Location = new System.Drawing.Point(199, 23);
             this.txtLetra.MaxLength = 1;
             this.txtLetra.Name = "txtLetra";

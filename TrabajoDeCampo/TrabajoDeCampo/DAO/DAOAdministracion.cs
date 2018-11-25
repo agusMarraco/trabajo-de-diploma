@@ -953,7 +953,12 @@ namespace TrabajoDeCampo.DAO
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
-            SqlCommand cmd = new SqlCommand(" select * from nivel left join orientacion ori on ori.ORI_CODIGO = NIV_ORIENTACION ", connection, tx);
+            SqlCommand cmd = new SqlCommand(
+                " select *,( "+ 
+                " select count(*) from MATERIA_NIVEL where MN_NIVEL_ID = NIVEL.NIV_ID "+
+                " ) as materias "+
+                " from nivel left join orientacion ori on ori.ORI_CODIGO = NIV_ORIENTACION"
+                , connection, tx);
 
             try
             {
@@ -969,6 +974,10 @@ namespace TrabajoDeCampo.DAO
                         ori.codigo = reader.GetValue(3).ToString();
                         nivel.orientacion = ori;
                         ori.nombre = reader.GetValue(5).ToString();
+                    }
+                    if (0 != (int)reader["materias"])
+                    {
+                        nivel.materia = new List<Materia>();
                     }
                     else
                     {

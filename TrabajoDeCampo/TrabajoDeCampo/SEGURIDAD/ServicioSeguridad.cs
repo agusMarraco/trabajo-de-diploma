@@ -109,7 +109,7 @@ namespace TrabajoDeCampo.SERVICIO
             Usuario usu = daoSeguridad.buscarUsuario(idUsuario);
             String contraseñaEncriptada = SeguridadUtiles.encriptarMD5(contraseñaNueva);
             this.daoSeguridad.cambiarContraseña(idUsuario, contraseñaEncriptada);
-            enviarMail(contraseñaNueva, usu); 
+            enviarMail(contraseñaNueva, usu,false); 
         }
 
         public void cambiarIdioma(long idUsuario, String codigoIdioma) {
@@ -121,7 +121,7 @@ namespace TrabajoDeCampo.SERVICIO
             String nuevaContraseña = SeguridadUtiles.generarPassword();
             String passEncriptado = SeguridadUtiles.encriptarMD5(nuevaContraseña);
             this.daoSeguridad.regenerarContraseña(usuario.id, passEncriptado);
-            enviarMail(nuevaContraseña, usuario);
+            enviarMail(nuevaContraseña, usuario,false);
             
         }
 
@@ -155,7 +155,7 @@ namespace TrabajoDeCampo.SERVICIO
             if (!hayRepetidos)
             {
                 this.daoSeguridad.crearUsuario(ref usuario);
-                this.enviarMail(contraseña, usuario);
+                this.enviarMail(contraseña, usuario,false);
 
             }
             else
@@ -306,28 +306,40 @@ namespace TrabajoDeCampo.SERVICIO
         }
         
 
-        public void enviarMail(String password, Usuario usuario) {
-            List<String> codigos = new List<string> {"com.td.email.header", "com.td.email.body"};
+        public void enviarMail(String password, Usuario usuario,Boolean mailRecuperacion) {
+            List<String> codigos = new List<string> {"com.td.email.header", "com.td.email.body", "com.td.email.header.recover", "com.td.email.body.recover" };
 
             String disco = Path.GetPathRoot(Environment.CurrentDirectory);
             String currentUser = Environment.UserName;
 
             String desktopPath = disco + "Users\\" + currentUser + "\\Desktop\\pass.txt";
-            
+            usuario.idioma.codigo = "es";
             Dictionary<String, String> traducciones = this.daoSeguridad.traerTraducciones(codigos, usuario.idioma.codigo);
             StringBuilder builder = new StringBuilder();
-            builder.Append(usuario.apellido + " " + usuario.nombre);
-            builder.Append(Environment.NewLine);
-            builder.Append(traducciones[codigos[0]]);
-            builder.Append(Environment.NewLine);
-            builder.Append(Environment.NewLine);
-            builder.Append(Environment.NewLine);
-            builder.Append("Alias: ");
-            builder.Append(usuario.alias);
-            builder.Append(Environment.NewLine);
-            builder.Append(traducciones[codigos[1]] + " ");
-            builder.Append(password);
-            
+            if (!mailRecuperacion)
+            {
+                builder.Append(usuario.apellido + " " + usuario.nombre);
+                builder.Append(Environment.NewLine);
+                builder.Append(traducciones[codigos[0]]);
+                builder.Append(Environment.NewLine);
+                builder.Append(Environment.NewLine);
+                builder.Append(Environment.NewLine);
+                builder.Append("Alias: ");
+                builder.Append(usuario.alias);
+                builder.Append(Environment.NewLine);
+                builder.Append(traducciones[codigos[1]] + " ");
+                builder.Append(password);
+            }
+            else
+            {
+                builder.Append(usuario.alias);
+                builder.Append(Environment.NewLine);
+                builder.Append(traducciones[codigos[2]]);
+                builder.Append(Environment.NewLine);
+                builder.Append(traducciones[codigos[3]] + " ");
+                builder.Append(password);
+            }
+
             try
             {
                 FileStream mail = File.Create(desktopPath);
