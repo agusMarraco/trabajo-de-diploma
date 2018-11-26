@@ -72,6 +72,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 {
                     this.comboUsuarios.Enabled = false;
                     this.comboUsuarios.DataSource = null;
+                    this.comboUsuarios.Text = "";
                 }
             }
             else if (chName.Equals("chCriticidad"))
@@ -321,34 +322,37 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
         private void button3_Click(object sender, EventArgs e)
         {
             DataTable datatable = this.dataGridView1.DataSource as DataTable;
-            DataTable view = datatable.DefaultView.ToTable();
-                DateTime minDate = (DateTime)datatable.Rows[0].ItemArray[0];
-                DateTime maxDate = (DateTime)datatable.Rows[0].ItemArray[0];
-            foreach (DataRow Row in datatable.Rows)
+            if(datatable != null)
             {
-               if(minDate > (DateTime) Row.ItemArray[0])
+                DataTable view = datatable.DefaultView.ToTable();
+                    DateTime minDate = (DateTime)datatable.Rows[0].ItemArray[0];
+                    DateTime maxDate = (DateTime)datatable.Rows[0].ItemArray[0];
+                foreach (DataRow Row in datatable.Rows)
                 {
-                    minDate = (DateTime)Row.ItemArray[0];
+                   if(minDate > (DateTime) Row.ItemArray[0])
+                    {
+                        minDate = (DateTime)Row.ItemArray[0];
+                    }
+                    if (maxDate < (DateTime)Row.ItemArray[0])
+                    {
+                        maxDate = (DateTime)Row.ItemArray[0];
+                    }
                 }
-                if (maxDate < (DateTime)Row.ItemArray[0])
-                {
-                    maxDate = (DateTime)Row.ItemArray[0];
-                }
-            }
 
-            String desde = minDate.ToShortDateString();
-            String hasta = maxDate.ToShortDateString();
-            if (this.seBuscoForFecha)
-            {
-                desde = this.fromDatepicker.Value.ToShortDateString();
-                hasta = this.toDatepicker.Value.ToShortDateString();
-            }
+                String desde = minDate.ToShortDateString();
+                String hasta = maxDate.ToShortDateString();
+                if (this.seBuscoForFecha)
+                {
+                    desde = this.fromDatepicker.Value.ToShortDateString();
+                    hasta = this.toDatepicker.Value.ToShortDateString();
+                }
             
-            List<Object> objetos = new List<object>();
-            objetos.Add(view);
-            objetos.Add(desde);
-            objetos.Add(hasta);
-            new ServicioReportes().ejecutarReporte("ReporteBitacora", objetos);
+                List<Object> objetos = new List<object>();
+                objetos.Add(view);
+                objetos.Add(desde);
+                objetos.Add(hasta);
+                new ServicioReportes().ejecutarReporte("ReporteBitacora", objetos);
+            }
 
         }
 
