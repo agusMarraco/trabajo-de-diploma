@@ -16,7 +16,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
 {
     public partial class FalloConexión : Form
     {
-        private Regex regex = new Regex("([A-Za-z0-9\\\\.-ñÑ ])");
+        private Regex regex = new Regex("([A-Za-z0-9\\\\.ñÑ \\-\\/_])");
         private Boolean valido = false;
         public FalloConexión()
         {

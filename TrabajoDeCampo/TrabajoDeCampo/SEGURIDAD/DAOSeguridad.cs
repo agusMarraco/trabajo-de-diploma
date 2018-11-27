@@ -2016,7 +2016,7 @@ namespace TrabajoDeCampo.DAO
             connection.Open();
             SqlTransaction tx = connection.BeginTransaction();
             SqlCommand cmd = new SqlCommand("", connection, tx);
-            String query = " SELECT * FROM vistaBitacora";
+            String query = " SELECT * FROM vistaBitacora ";
             if(filtro != null)
             {
                 switch (filtro)
@@ -2033,7 +2033,7 @@ namespace TrabajoDeCampo.DAO
 
                 }
             }
-
+            query += " order by BIT_FECHA desc ";
             cmd.CommandText = query;
 
             

@@ -67,6 +67,10 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                     this.comboUsuarios.ValueMember = "alias";
                     this.comboUsuarios.DisplayMember = "nombreCompleto";
                     this.comboUsuarios.DataSource = usuarios;
+                    if(this.comboUsuarios.Items[0] != null)
+                    {
+                        this.comboUsuarios.SelectedItem = this.comboUsuarios.Items[0];
+                    }
                 }
                 else
                 {
