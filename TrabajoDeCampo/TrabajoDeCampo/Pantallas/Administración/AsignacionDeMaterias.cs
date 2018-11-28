@@ -276,7 +276,14 @@ namespace TrabajoDeCampo.Pantallas.Administración
                 nivel.id = iter.id;
                 nivel.descripcion = iter.descripcion;
                 nivel.orientacion = iter.orientacion;
-                nivel.orientacionCodigo = nivel.orientacion.nombre;
+                if (iter.orientacion != null && iter.orientacion.ToString()!= "")
+                {
+                    nivel.orientacionCodigo = iter.orientacion.nombre;
+                }
+                else
+                {
+                    nivel.orientacionCodigo = "";
+                }
                 nivel.codigo = iter.codigo;
                 List<Materia> materiasDelNivel = this.administracion.traerMateriasPorNivel(nivel);
                 nivel.materia = materiasDelNivel;

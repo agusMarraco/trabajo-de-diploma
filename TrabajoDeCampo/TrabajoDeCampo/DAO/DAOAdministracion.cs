@@ -975,16 +975,16 @@ namespace TrabajoDeCampo.DAO
                         nivel.orientacion = ori;
                         ori.nombre = reader.GetValue(5).ToString();
                     }
-                    if (0 != (int)reader["materias"])
-                    {
-                        nivel.materia = new List<Materia>();
-                    }
                     else
                     {
                         Orientacion ori = new Orientacion();
                         ori.codigo = "null";
                         ori.nombre = "";
                         nivel.orientacion = ori;
+                    }
+                    if (0 != (int)reader["materias"])
+                    {
+                        nivel.materia = new List<Materia>();
                     }
                     niveles.Add(nivel);
                     

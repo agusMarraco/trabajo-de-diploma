@@ -74,14 +74,16 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             if(this.actual.Text != null && this.nueva.Text != null && this.nuevaRepetido.Text != null)
             {
                 //verificacion de regex
-                if (this.actual.Text.Length < 8 && this.nueva.Text.Length < 8 && this.nuevaRepetido.Text.Length < 8)
+                if (this.actual.Text.Length < 8 || this.nueva.Text.Length < 8 || this.nuevaRepetido.Text.Length < 8)
                 {
                     MessageBox.Show(traducciones["com.td.char.count"]);
+                    return;
                 }
 
                     if (this.actual.Text.Equals(this.nueva))
                 {
                     MessageBox.Show(traducciones["com.td.pass.iguales"]);
+                    return;
                 }
                 else
                 {
