@@ -177,6 +177,7 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido'
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.rango.fecha.invalido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Rango de fechas inválido')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.header.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Se detectó actividad sospechosa en su cuenta')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.body.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'Por seguridad, se generó esta nueva contraseña:')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.contraseña.distinta',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'es'),'La contraseña ingresada como actual es incorrecta')
 
 
 -- Ingles
@@ -358,3 +359,5 @@ insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.excedido'
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.rango.fecha.invalido',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Invalid Date Range')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.header.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'Suspicious activity detected in your account')
 insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.email.body.recover',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'For security, this password was generated:')
+insert into MENSAJE(MSJ_CODIGO,MSJ_IDIOMA_ID,MSJ_TEXTO)values ('com.td.contraseña.distinta',( select idioma.IDI_ID from IDIOMA where IDI_CODIGO = 'en'),'The pass entered as actual is incorrect')
+

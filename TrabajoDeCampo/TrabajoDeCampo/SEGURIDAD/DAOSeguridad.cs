@@ -1450,6 +1450,7 @@ namespace TrabajoDeCampo.DAO
                     idi.id = (long)reader["IDI_ID"];
                     usu.idioma = idi;
                     usu.id = (long)reader["USU_ID"];
+                    usu.pass = reader["USU_PASS"] != null ? (String)reader["USU_PASS"] : "";
                     usu.componentePermisos = new List<ComponentePermiso>();
                 }
                 reader.Close();

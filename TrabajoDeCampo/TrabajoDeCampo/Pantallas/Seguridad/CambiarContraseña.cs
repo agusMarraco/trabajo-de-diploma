@@ -49,6 +49,7 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
             tags.Add("com.td.pass.iguales");
             tags.Add("com.td.complete.campos");
             tags.Add("com.td.completado");
+            tags.Add("com.td.contraseña.distinta");
             traducciones = servicioSeguridad.traerTraducciones(tags, Properties.Settings.Default.Idioma);
             traductor = new TraductorReal();
             traductor.process(null, this, traducciones, null);
@@ -89,10 +90,21 @@ namespace TrabajoDeCampo.Pantallas.Seguridad
                 {
                     if (this.nueva.Text.Equals(this.nuevaRepetido.Text))
                     {
-                        long usuario = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
-                        this.servicioSeguridad.cambiarContraseña(usuario, this.nueva.Text);
-                        MessageBox.Show(traducciones["com.td.completado"]);
-                        this.Close();
+                        try
+                        {
+                            long usuario = TrabajoDeCampo.Properties.Settings.Default.SessionUser;
+                            this.servicioSeguridad.cambiarContraseña(usuario, this.nueva.Text,this.actual.Text);
+                            MessageBox.Show(traducciones["com.td.completado"]);
+                            this.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex.Message.Equals("PASS"))
+                            {
+                                MessageBox.Show(traducciones["com.td.contraseña.distinta"]);
+                            }
+                            
+                        }
                     }
                     else
                     {

@@ -90,7 +90,7 @@
             this.nombre.Name = "nombre";
             this.nombre.ShortcutsEnabled = false;
             this.nombre.Size = new System.Drawing.Size(296, 20);
-            this.nombre.TabIndex = 1;
+            this.nombre.TabIndex = 0;
             // 
             // apellido
             // 
@@ -99,7 +99,7 @@
             this.apellido.Name = "apellido";
             this.apellido.ShortcutsEnabled = false;
             this.apellido.Size = new System.Drawing.Size(296, 20);
-            this.apellido.TabIndex = 3;
+            this.apellido.TabIndex = 1;
             // 
             // apellidolbl
             // 
@@ -119,7 +119,7 @@
             this.dni.Name = "dni";
             this.dni.ShortcutsEnabled = false;
             this.dni.Size = new System.Drawing.Size(296, 20);
-            this.dni.TabIndex = 5;
+            this.dni.TabIndex = 2;
             // 
             // dnilbl
             // 
@@ -139,7 +139,7 @@
             this.direccion.Name = "direccion";
             this.direccion.ShortcutsEnabled = false;
             this.direccion.Size = new System.Drawing.Size(296, 20);
-            this.direccion.TabIndex = 7;
+            this.direccion.TabIndex = 3;
             // 
             // direccionlbl
             // 
@@ -159,7 +159,7 @@
             this.email.Name = "email";
             this.email.ShortcutsEnabled = false;
             this.email.Size = new System.Drawing.Size(300, 20);
-            this.email.TabIndex = 9;
+            this.email.TabIndex = 6;
             // 
             // emaillbl
             // 
@@ -179,7 +179,7 @@
             this.alias.Name = "alias";
             this.alias.ShortcutsEnabled = false;
             this.alias.Size = new System.Drawing.Size(300, 20);
-            this.alias.TabIndex = 11;
+            this.alias.TabIndex = 5;
             // 
             // aliaslbl
             // 
@@ -210,7 +210,7 @@
             this.telefono.Name = "telefono";
             this.telefono.ShortcutsEnabled = false;
             this.telefono.Size = new System.Drawing.Size(296, 20);
-            this.telefono.TabIndex = 15;
+            this.telefono.TabIndex = 4;
             // 
             // button1
             // 
@@ -405,7 +405,7 @@
             this.comboBox1.Location = new System.Drawing.Point(55, 32);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(148, 21);
-            this.comboBox1.TabIndex = 27;
+            this.comboBox1.TabIndex = 7;
             // 
             // AltaModificacionUsuario
             // 

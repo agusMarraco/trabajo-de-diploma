@@ -54,7 +54,7 @@
             this.cbCurso.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbCurso.Name = "cbCurso";
             this.cbCurso.Size = new System.Drawing.Size(140, 24);
-            this.cbCurso.TabIndex = 0;
+            this.cbCurso.TabIndex = 1;
             // 
             // cbNivel
             // 
@@ -64,7 +64,7 @@
             this.cbNivel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbNivel.Name = "cbNivel";
             this.cbNivel.Size = new System.Drawing.Size(140, 24);
-            this.cbNivel.TabIndex = 1;
+            this.cbNivel.TabIndex = 0;
             this.cbNivel.SelectedIndexChanged += new System.EventHandler(this.cbNivel_SelectedIndexChanged);
             // 
             // label1
@@ -119,7 +119,7 @@
             this.cbMateria.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbMateria.Name = "cbMateria";
             this.cbMateria.Size = new System.Drawing.Size(140, 24);
-            this.cbMateria.TabIndex = 6;
+            this.cbMateria.TabIndex = 3;
             // 
             // cbDocente
             // 
@@ -129,7 +129,7 @@
             this.cbDocente.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbDocente.Name = "cbDocente";
             this.cbDocente.Size = new System.Drawing.Size(140, 24);
-            this.cbDocente.TabIndex = 7;
+            this.cbDocente.TabIndex = 2;
             // 
             // cbDia
             // 
@@ -138,7 +138,7 @@
             this.cbDia.Location = new System.Drawing.Point(53, 110);
             this.cbDia.Name = "cbDia";
             this.cbDia.Size = new System.Drawing.Size(140, 24);
-            this.cbDia.TabIndex = 8;
+            this.cbDia.TabIndex = 4;
             // 
             // label5
             // 
@@ -169,14 +169,14 @@
             this.cbModulo.Location = new System.Drawing.Point(258, 110);
             this.cbModulo.Name = "cbModulo";
             this.cbModulo.Size = new System.Drawing.Size(140, 24);
-            this.cbModulo.TabIndex = 10;
+            this.cbModulo.TabIndex = 5;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(15, 201);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 6;
             this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
@@ -187,7 +187,7 @@
             this.button2.Location = new System.Drawing.Point(746, 201);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 13;
+            this.button2.TabIndex = 7;
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;

@@ -105,9 +105,13 @@ namespace TrabajoDeCampo.SERVICIO
         }
         //USUARIOS
 
-        public void cambiarContraseña(long idUsuario, String contraseñaNueva) {
+        public void cambiarContraseña(long idUsuario, String contraseñaNueva,String contraseñaVieja) {
             Usuario usu = daoSeguridad.buscarUsuario(idUsuario);
             String contraseñaEncriptada = SeguridadUtiles.encriptarMD5(contraseñaNueva);
+            if (!SeguridadUtiles.encriptarMD5(contraseñaVieja).Equals(usu.pass))
+            {
+                throw new Exception("PASS");
+            }
             this.daoSeguridad.cambiarContraseña(idUsuario, contraseñaEncriptada);
             enviarMail(contraseñaNueva, usu,false); 
         }

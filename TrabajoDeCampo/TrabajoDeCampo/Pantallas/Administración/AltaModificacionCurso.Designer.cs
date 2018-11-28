@@ -51,7 +51,7 @@
             this.txtCapacidad.Name = "txtCapacidad";
             this.txtCapacidad.ShortcutsEnabled = false;
             this.txtCapacidad.Size = new System.Drawing.Size(44, 20);
-            this.txtCapacidad.TabIndex = 1;
+            this.txtCapacidad.TabIndex = 0;
             // 
             // txtLetra
             // 
@@ -61,7 +61,7 @@
             this.txtLetra.Name = "txtLetra";
             this.txtLetra.ShortcutsEnabled = false;
             this.txtLetra.Size = new System.Drawing.Size(49, 20);
-            this.txtLetra.TabIndex = 2;
+            this.txtLetra.TabIndex = 1;
             // 
             // comboNiveles
             // 
@@ -70,7 +70,7 @@
             this.comboNiveles.Location = new System.Drawing.Point(324, 22);
             this.comboNiveles.Name = "comboNiveles";
             this.comboNiveles.Size = new System.Drawing.Size(161, 21);
-            this.comboNiveles.TabIndex = 3;
+            this.comboNiveles.TabIndex = 2;
             // 
             // label1
             // 
@@ -107,7 +107,7 @@
             this.button1.Location = new System.Drawing.Point(21, 197);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
+            this.button1.TabIndex = 5;
             this.button1.Tag = "com.td.guardar";
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
@@ -119,7 +119,7 @@
             this.rbTurnoMañana.Location = new System.Drawing.Point(6, 29);
             this.rbTurnoMañana.Name = "rbTurnoMañana";
             this.rbTurnoMañana.Size = new System.Drawing.Size(64, 17);
-            this.rbTurnoMañana.TabIndex = 9;
+            this.rbTurnoMañana.TabIndex = 3;
             this.rbTurnoMañana.TabStop = true;
             this.rbTurnoMañana.Tag = "com.td.mañana";
             this.rbTurnoMañana.Text = "Mañana";
@@ -131,7 +131,7 @@
             this.rbTurnoTarde.Location = new System.Drawing.Point(6, 64);
             this.rbTurnoTarde.Name = "rbTurnoTarde";
             this.rbTurnoTarde.Size = new System.Drawing.Size(53, 17);
-            this.rbTurnoTarde.TabIndex = 10;
+            this.rbTurnoTarde.TabIndex = 4;
             this.rbTurnoTarde.TabStop = true;
             this.rbTurnoTarde.Tag = "com.td.tarde";
             this.rbTurnoTarde.Text = "Tarde";
@@ -154,7 +154,7 @@
             this.button2.Location = new System.Drawing.Point(410, 197);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 12;
+            this.button2.TabIndex = 6;
             this.button2.Tag = "com.td.cancelar";
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
