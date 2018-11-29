@@ -134,6 +134,7 @@
             // 
             this.comboUsuarios.FormattingEnabled = true;
             this.comboUsuarios.Location = new System.Drawing.Point(22, 63);
+            this.comboUsuarios.MaxLength = 50;
             this.comboUsuarios.Name = "comboUsuarios";
             this.comboUsuarios.Size = new System.Drawing.Size(232, 24);
             this.comboUsuarios.TabIndex = 17;

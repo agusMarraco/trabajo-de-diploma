@@ -1077,7 +1077,7 @@ namespace TrabajoDeCampo.DAO
             List<Alumno> alumnos = new List<Alumno>();
             SqlConnection connection = ConexionSingleton.obtenerConexion();
             
-            String queryAlumnosPromocionables = " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_condicion = 0) < 3 " +
+            String queryAlumnosPromocionables = " (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and (pde_condicion = 0 or PDE_CONDICION is null)) < 3 " +
                 //que el alumno tenga menos de 2 planillas desaprobadas
                 " and (select count(*) from planilla_de_evaluacion where pde_alumno_id = alu.alu_legajo and pde_nota_final = null and pde_nivel_id = niv.niv_id) = 0 " +
                 //que el alumno no tenga ninguna planilla del lvl actual sin nota final
