@@ -20,6 +20,7 @@ namespace TrabajoDeCampo.Pantallas.Administración
         private ServicioAdministracion servicioAdministracion;
         private Boolean valido  = false;
         private Regex alphanumericRegex = new Regex("^[a-zA-Z0-9 ñÑ]+$");
+        private Regex numericRegex = new Regex("^[0-9]+$");
         private Dictionary<String, String> traducciones;
         public Cursos()
         {
@@ -27,17 +28,32 @@ namespace TrabajoDeCampo.Pantallas.Administración
             this.servicioSeguridad = new ServicioSeguridad();
             this.servicioAdministracion = new ServicioAdministracion();
             this.dataGridView1.ColumnHeaderMouseClick += customSort;
-
+            this.comboBox1.SelectedIndexChanged += clearSearchText;
             this.textBox1.KeyPress += TextBox1_KeyPress;
+        }
+
+        private void clearSearchText(object sender, EventArgs e)
+        {
+            this.textBox1.Clear();
         }
 
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!e.KeyChar.Equals('\b'))//tecla borrar
             {
-                if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
+                if(((KeyValuePair<String, String>)this.comboBox1.SelectedItem).Key.Equals("capacidad"))
                 {
-                    e.Handled = true;
+                    if (!numericRegex.IsMatch(e.KeyChar.ToString()))
+                    {
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    if (!alphanumericRegex.IsMatch(e.KeyChar.ToString()))
+                    {
+                        e.Handled = true;
+                    }
                 }
             }
         }
